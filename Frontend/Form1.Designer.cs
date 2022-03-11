@@ -73,6 +73,8 @@
             this.romScore = new System.Windows.Forms.TextBox();
             this.label25 = new System.Windows.Forms.Label();
             this.romUniversalCodes = new System.Windows.Forms.ListView();
+            this.label11 = new System.Windows.Forms.Label();
+            this.romTrack = new System.Windows.Forms.TextBox();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.label8 = new System.Windows.Forms.Label();
             this.romPictureBox = new System.Windows.Forms.PictureBox();
@@ -118,14 +120,13 @@
             this.label10 = new System.Windows.Forms.Label();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAllROMsListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.findDuplicatesResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitIntoDirectoriesResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.label11 = new System.Windows.Forms.Label();
-            this.romTrack = new System.Windows.Forms.TextBox();
+            this.newItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -158,6 +159,7 @@
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // romsDirectoryTextBox
@@ -207,7 +209,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1394, 576);
+            this.groupBox1.Size = new System.Drawing.Size(1547, 576);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Results";
@@ -229,8 +231,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer2.Panel2MinSize = 400;
-            this.splitContainer2.Size = new System.Drawing.Size(1381, 474);
-            this.splitContainer2.SplitterDistance = 962;
+            this.splitContainer2.Size = new System.Drawing.Size(1534, 474);
+            this.splitContainer2.SplitterDistance = 1115;
             this.splitContainer2.TabIndex = 15;
             // 
             // splitContainer4
@@ -246,8 +248,8 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.splitContainer1);
-            this.splitContainer4.Size = new System.Drawing.Size(962, 474);
-            this.splitContainer4.SplitterDistance = 317;
+            this.splitContainer4.Size = new System.Drawing.Size(1115, 474);
+            this.splitContainer4.SplitterDistance = 367;
             this.splitContainer4.TabIndex = 15;
             // 
             // unprocessedROMsTreeview
@@ -255,7 +257,7 @@
             this.unprocessedROMsTreeview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unprocessedROMsTreeview.Location = new System.Drawing.Point(0, 0);
             this.unprocessedROMsTreeview.Name = "unprocessedROMsTreeview";
-            this.unprocessedROMsTreeview.Size = new System.Drawing.Size(317, 474);
+            this.unprocessedROMsTreeview.Size = new System.Drawing.Size(367, 474);
             this.unprocessedROMsTreeview.TabIndex = 0;
             this.unprocessedROMsTreeview.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.unprocessedROMsTreeView_AfterSelect);
             // 
@@ -272,8 +274,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.rightTreeView);
-            this.splitContainer1.Size = new System.Drawing.Size(641, 474);
-            this.splitContainer1.SplitterDistance = 321;
+            this.splitContainer1.Size = new System.Drawing.Size(744, 474);
+            this.splitContainer1.SplitterDistance = 372;
             this.splitContainer1.TabIndex = 14;
             // 
             // leftTreeView
@@ -281,7 +283,7 @@
             this.leftTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.leftTreeView.Location = new System.Drawing.Point(0, 0);
             this.leftTreeView.Name = "leftTreeView";
-            this.leftTreeView.Size = new System.Drawing.Size(321, 474);
+            this.leftTreeView.Size = new System.Drawing.Size(372, 474);
             this.leftTreeView.TabIndex = 15;
             this.leftTreeView.ScrollV += new devio.Windows.Controls.ScrollEventHandler(this.leftTreeView_ScrollV);
             this.leftTreeView.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.originalROMs_AfterCollapse);
@@ -293,7 +295,7 @@
             this.rightTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rightTreeView.Location = new System.Drawing.Point(0, 0);
             this.rightTreeView.Name = "rightTreeView";
-            this.rightTreeView.Size = new System.Drawing.Size(316, 474);
+            this.rightTreeView.Size = new System.Drawing.Size(368, 474);
             this.rightTreeView.TabIndex = 16;
             this.rightTreeView.ScrollV += new devio.Windows.Controls.ScrollEventHandler(this.rightTreeView_ScrollV);
             this.rightTreeView.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.processedROMsTreeView_AfterCollapse);
@@ -711,6 +713,25 @@
             this.romUniversalCodes.UseCompatibleStateImageBehavior = false;
             this.romUniversalCodes.View = System.Windows.Forms.View.List;
             // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(0, 295);
+            this.label11.Margin = new System.Windows.Forms.Padding(0);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(35, 13);
+            this.label11.TabIndex = 30;
+            this.label11.Text = "Track";
+            // 
+            // romTrack
+            // 
+            this.romTrack.Location = new System.Drawing.Point(99, 295);
+            this.romTrack.Margin = new System.Windows.Forms.Padding(0);
+            this.romTrack.Name = "romTrack";
+            this.romTrack.ReadOnly = true;
+            this.romTrack.Size = new System.Drawing.Size(171, 20);
+            this.romTrack.TabIndex = 31;
+            // 
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
@@ -953,7 +974,7 @@
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.logsListView);
-            this.splitContainer5.Size = new System.Drawing.Size(1394, 695);
+            this.splitContainer5.Size = new System.Drawing.Size(1547, 695);
             this.splitContainer5.SplitterDistance = 576;
             this.splitContainer5.TabIndex = 18;
             // 
@@ -965,7 +986,7 @@
             this.logsListView.HideSelection = false;
             this.logsListView.Location = new System.Drawing.Point(0, 0);
             this.logsListView.Name = "logsListView";
-            this.logsListView.Size = new System.Drawing.Size(1394, 115);
+            this.logsListView.Size = new System.Drawing.Size(1547, 115);
             this.logsListView.TabIndex = 0;
             this.logsListView.UseCompatibleStateImageBehavior = false;
             this.logsListView.View = System.Windows.Forms.View.Details;
@@ -985,7 +1006,7 @@
             this.panel5.Controls.Add(this.tableLayoutPanel4);
             this.panel5.Location = new System.Drawing.Point(12, 27);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1397, 184);
+            this.panel5.Size = new System.Drawing.Size(1550, 184);
             this.panel5.TabIndex = 19;
             // 
             // panel7
@@ -1006,7 +1027,7 @@
             this.seperator1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.seperator1.Location = new System.Drawing.Point(-3, 41);
             this.seperator1.Name = "seperator1";
-            this.seperator1.Size = new System.Drawing.Size(1400, 2);
+            this.seperator1.Size = new System.Drawing.Size(1553, 2);
             this.seperator1.TabIndex = 20;
             // 
             // panel6
@@ -1183,20 +1204,29 @@
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.exportToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1421, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1574, 24);
             this.menuStrip1.TabIndex = 19;
             this.menuStrip1.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.exportToolStripMenuItem,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
@@ -1206,7 +1236,7 @@
             this.findDuplicatesResultsToolStripMenuItem,
             this.splitIntoDirectoriesResultsToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // exportAllROMsListToolStripMenuItem
@@ -1235,37 +1265,17 @@
             this.splitIntoDirectoriesResultsToolStripMenuItem.Text = "Split Into Directories Results";
             this.splitIntoDirectoriesResultsToolStripMenuItem.Click += new System.EventHandler(this.splitIntoDirectoriesResultsToolStripMenuItem_Click);
             // 
-            // exitToolStripMenuItem
+            // newItemToolStripMenuItem
             // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(108, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(0, 295);
-            this.label11.Margin = new System.Windows.Forms.Padding(0);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(35, 13);
-            this.label11.TabIndex = 30;
-            this.label11.Text = "Track";
-            // 
-            // romTrack
-            // 
-            this.romTrack.Location = new System.Drawing.Point(99, 295);
-            this.romTrack.Margin = new System.Windows.Forms.Padding(0);
-            this.romTrack.Name = "romTrack";
-            this.romTrack.ReadOnly = true;
-            this.romTrack.Size = new System.Drawing.Size(171, 20);
-            this.romTrack.TabIndex = 31;
+            this.newItemToolStripMenuItem.Name = "newItemToolStripMenuItem";
+            this.newItemToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.newItemToolStripMenuItem.Text = "NewItem";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1421, 924);
+            this.ClientSize = new System.Drawing.Size(1574, 924);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.splitContainer5);
@@ -1308,6 +1318,8 @@
             this.panel6.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1413,6 +1425,7 @@
         private System.Windows.Forms.Button combineMultipleBinFilesToOneOperationButton;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox romTrack;
+        private System.Windows.Forms.ToolStripMenuItem newItemToolStripMenuItem;
     }
 }
 
