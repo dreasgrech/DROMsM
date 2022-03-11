@@ -357,14 +357,14 @@ namespace Frontend
             currentState = MainState.MoveAllROMsToRoot;
         }
 
-        public void ExecuteConvertMultipleBinsToOneOperation()
+        public void ExecuteConvertMultipleBinsToOneTool()
         {
             if (!romDirectoryAnalyzed)
             {
                 return;
             }
 
-            mainForm.OnFinishedCombineMultipleBinsIntoOneOperation();
+            mainForm.OnFinishedCombineMultipleBinsIntoOneTool();
 
             currentState = MainState.CombineMultipleBinsToOne;
         }

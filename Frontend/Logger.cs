@@ -81,7 +81,7 @@ namespace Frontend
 
             if (showMessageBox)
             {
-                MessageBox.Show(errorMessage, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBoxOperations.ShowError(errorMessage, "Error");
             }
         }
     }

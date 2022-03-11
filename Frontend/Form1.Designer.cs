@@ -127,6 +127,8 @@
             this.findDuplicatesResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitIntoDirectoriesResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.combineMultipleBinFilesToOneToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -1206,7 +1208,8 @@
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.exportToolStripMenuItem});
+            this.exportToolStripMenuItem,
+            this.toolsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1574, 24);
@@ -1270,6 +1273,21 @@
             this.newItemToolStripMenuItem.Name = "newItemToolStripMenuItem";
             this.newItemToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.newItemToolStripMenuItem.Text = "NewItem";
+            // 
+            // toolsToolStripMenuItem
+            // 
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.combineMultipleBinFilesToOneToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // combineMultipleBinFilesToOneToolStripMenuItem
+            // 
+            this.combineMultipleBinFilesToOneToolStripMenuItem.Name = "combineMultipleBinFilesToOneToolStripMenuItem";
+            this.combineMultipleBinFilesToOneToolStripMenuItem.Size = new System.Drawing.Size(251, 22);
+            this.combineMultipleBinFilesToOneToolStripMenuItem.Text = "Combine multiple bin files to one";
+            this.combineMultipleBinFilesToOneToolStripMenuItem.Click += new System.EventHandler(this.combineMultipleBinFilesToOneToolStripMenuItem_Click);
             // 
             // Form1
             // 
@@ -1426,6 +1444,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox romTrack;
         private System.Windows.Forms.ToolStripMenuItem newItemToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem combineMultipleBinFilesToOneToolStripMenuItem;
     }
 }
 

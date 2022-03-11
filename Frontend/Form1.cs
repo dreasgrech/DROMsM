@@ -233,8 +233,7 @@ namespace Frontend
 
         private void applyDuplicatesResultsButton_Click(object sender, EventArgs e)
         {
-            var confirmResult = MessageBox.Show("Are you sure you want to remove duplicate ROMs?", "Removing duplicate ROMs", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if (confirmResult != DialogResult.Yes)
+            if (!MessageBoxOperations.ShowConfirmation("Are you sure you want to remove duplicate ROMs?", "Removing duplicate ROMs"))
             {
                 return;
             }
@@ -243,14 +242,13 @@ namespace Frontend
             if (removedROMsGroup.TotalEntries > 0)
             {
                 var removedROMsCount = removedROMsGroup.TotalEntries;
-                MessageBox.Show($"Successfully moved {removedROMsCount} ROM{(removedROMsCount > 1 ? "s" : string.Empty)} to the Duplicates directory", "ROMS removed", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBoxOperations.ShowInformation($"Successfully moved {removedROMsCount} ROM{(removedROMsCount > 1 ? "s" : string.Empty)} to the Duplicates directory", "ROMS removed");
             }
         }
 
         private void applySplitResultsButton_Click(object sender, EventArgs e)
         {
-            var confirmResult = MessageBox.Show("Are you sure you want to group the ROMs into their own directory?", "Moving ROMs to their own directory", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if (confirmResult != DialogResult.Yes)
+            if (!MessageBoxOperations.ShowConfirmation("Are you sure you want to group the ROMs into their own directory?", "Moving ROMs to their own directory"))
             {
                 return;
             }
@@ -258,17 +256,16 @@ namespace Frontend
             var success = mainManager.ExecuteGroupIntoDirectoriesSubOperation();
             if (!success)
             {
-                MessageBox.Show("Unable to apply split", "Error applying split", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                MessageBoxOperations.ShowError("Unable to apply split", "Error applying split");
                 return;
             }
 
-            MessageBox.Show($"Successfully split the ROMs to new directories", "ROMS split", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBoxOperations.ShowInformation("Successfully split the ROMs to new directories", "ROMS split");
         }
 
         private void applyMoveAllROMsToRootButton_Click(object sender, EventArgs e)
         {
-            var confirmResult = MessageBox.Show("Are you sure you want to move all the ROMs to the root directory?", "Moving ROMs to the root directory", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if (confirmResult != DialogResult.Yes)
+            if (!MessageBoxOperations.ShowConfirmation("Are you sure you want to move all the ROMs to the root directory?", "Moving ROMs to the root directory"))
             {
                 return;
             }
@@ -276,11 +273,11 @@ namespace Frontend
             var success = mainManager.ExecuteMoveROMsToRootSubOperation();
             if (!success)
             {
-                MessageBox.Show("Unable to move all ROMs to the root directory", "Error moving ROMs", MessageBoxButtons.OK, MessageBoxIcon.Error, MessageBoxDefaultButton.Button1);
+                MessageBoxOperations.ShowError("Unable to move all ROMs to the root directory", "Error moving ROMs");
                 return;
             }
 
-            MessageBox.Show($"Successfully moved all ROMs to the root directory", "ROMS moved", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBoxOperations.ShowInformation("Successfully moved all ROMs to the root directory", "ROMS moved");
         }
 
         public void PopulateLeftTreeView(SingleGameROMGroupSet romSet, bool duplicatesOnly, bool focusTreeView)
@@ -697,15 +694,15 @@ namespace Frontend
             }
         }
 
-        public void OnFinishedCombineMultipleBinsIntoOneOperation()
+        public void OnFinishedCombineMultipleBinsIntoOneTool()
         {
-            ClearTotalsInfo();
-            DisableSubOperationsButtons();
-            treeviewsCurrentlyLinked = false;
+            //ClearTotalsInfo();
+            //DisableSubOperationsButtons();
+            //treeviewsCurrentlyLinked = false;
 
-            applyCombineMultipleBinFilesToOneButton.Enabled = true;
+            //applyCombineMultipleBinFilesToOneButton.Enabled = true;
 
-            ClearLeftTreeView();
+            //ClearLeftTreeView();
 
         }
 
@@ -999,8 +996,7 @@ namespace Frontend
 
         private void removeEmptyTopLevelDirectoriesSubOperationButton_Click(object sender, EventArgs e)
         {
-            var confirmResult = MessageBox.Show("Are you sure you want to delete all empty top-level directories in ROMs directory?", "Deleting empty top-level directories in the root directory", MessageBoxButtons.YesNo, MessageBoxIcon.Question, MessageBoxDefaultButton.Button2);
-            if (confirmResult != DialogResult.Yes)
+            if (!MessageBoxOperations.ShowConfirmation("Are you sure you want to delete all empty top-level directories in ROMs directory?", "Deleting empty top-level directories in the root directory"))
             {
                 return;
             }
@@ -1011,18 +1007,22 @@ namespace Frontend
                 return;
             }
 
-            MessageBox.Show($"Directories removed: {directoriesDeleted}.  Directories not removed: {directoriesNotDeleted}");
+            MessageBoxOperations.ShowInformation("Directories removed: {directoriesDeleted}.  Directories not removed: {directoriesNotDeleted}", "Directories removed");
         }
 
         private void combineMultipleBinFilesToOneOperationButton_Click(object sender, EventArgs e)
         {
-            mainManager.ExecuteConvertMultipleBinsToOneOperation();
+            mainManager.ExecuteConvertMultipleBinsToOneTool();
         }
-    }
 
-    public class OperationsOptions
-    {
-        public bool MatchUsingGameListXMLName { get; set; }
-        public bool AutoExpandAfterOperations { get; set; }
+        private void combineMultipleBinFilesToOneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!MessageBoxOperations.ShowConfirmation("Are you sure you want to convert multiple bin files into one?", "Converting multiple bin files into one"))
+            {
+                return;
+            }
+
+            mainManager.ExecuteConvertMultipleBinsToOneTool();
+        }
     }
 }

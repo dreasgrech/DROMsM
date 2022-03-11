@@ -17,7 +17,7 @@ namespace Frontend
 
             var ms = stopwatch.ElapsedMilliseconds;
             var seconds = ms * 0.001f;
-            MessageBox.Show($"{operation}: {ms.ToString(CultureInfo.InvariantCulture)}ms ({seconds.ToString(CultureInfo.InvariantCulture)}s)");
+            MessageBoxOperations.ShowInformation($"{operation}: {ms.ToString(CultureInfo.InvariantCulture)}ms ({seconds.ToString(CultureInfo.InvariantCulture)}s)", $"{operation} complete");
 
             stopwatch.Reset();
         }

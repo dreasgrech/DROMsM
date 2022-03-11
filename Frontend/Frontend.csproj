@@ -115,7 +115,9 @@
     </Compile>
     <Compile Include="Logger.cs" />
     <Compile Include="MainManager.cs" />
+    <Compile Include="MessageBoxOperations.cs" />
     <Compile Include="MultipleGameROMGroup.cs" />
+    <Compile Include="OperationsOptions.cs" />
     <Compile Include="OutputXMLWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectSettingsManager.cs" />
