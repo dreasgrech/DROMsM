@@ -14,7 +14,8 @@ namespace Frontend
             var fileExists = File.Exists(rbGameListFilePath);
             if (!fileExists)
             {
-                var fileDirectoryPath = Path.GetDirectoryName(rbGameListFilePath);
+                // var fileDirectoryPath = FileUtilities.GetDirectoryName(rbGameListFilePath);
+                var fileDirectoryPath = FileUtilities.GetDirectory(rbGameListFilePath);
                 if (string.IsNullOrEmpty(fileDirectoryPath))
                 {
                     return null;
@@ -47,7 +48,8 @@ namespace Frontend
             currentGameListFile = new RBGameListFile
             {
                 FilePath = rbGameListFilePath,
-                FileBaseDirectoryPath = Path.GetDirectoryName(rbGameListFilePath)
+                // FileBaseDirectoryPath = FileUtilities.GetDirectoryName(rbGameListFilePath)
+                FileBaseDirectoryPath = FileUtilities.GetDirectory(rbGameListFilePath)
             };
 
             using (var xml = XmlParser.ParseFile(rbGameListFilePath))
@@ -112,7 +114,7 @@ namespace Frontend
                 }
             }
 
-            rbGameListGame.Filename = Path.GetFileName(rbGameListGame.Path);
+            rbGameListGame.Filename = FileUtilities.GetFileName(rbGameListGame.Path);
 
             currentGameListFile.AddGame(rbGameListGame);
 

@@ -23,10 +23,16 @@ namespace Frontend
             return clone;
         }
 
-        public void Sort(IComparer<ROMEntry> comparer)
+        public void Sort(bool ignoreRelativeDirectory)
         {
+            var comparer = new SingleROMEntryComparer_ComparisonName {IgnoreRelativeDirectory = ignoreRelativeDirectory};
             Entries.Sort(comparer);
         }
+
+        //public void Sort(IComparer<ROMEntry> comparer)
+        //{
+        //    Entries.Sort(comparer);
+        //}
 
         //protected ROMGroup(List<SingleROMEntry> entries) : this()
         //{
@@ -133,7 +139,7 @@ namespace Frontend
             // Move all the roms to the new directory
             Parallel.ForEach(Entries, rom =>
             {
-                var currentFilePath = rom.FilePath;
+                var currentFilePath = rom.AbsoluteFilePath;
                 string newFilePath;
 
                 if (moveAlongWithParentDirectory)
@@ -141,7 +147,8 @@ namespace Frontend
                     newFilePath = FileUtilities.CombinePath(destinationDirectory, rom.RelativeFilePath);
 
                     // Make sure that the destination directory exists
-                    var newFilePathDirectory = Path.GetDirectoryName(newFilePath);
+                    // var newFilePathDirectory = FileUtilities.GetDirectoryName(newFilePath);
+                    var newFilePathDirectory = FileUtilities.GetDirectory(newFilePath);
                     if (string.IsNullOrEmpty(newFilePathDirectory))
                     {
                         Logger.LogError($"Unable to read the path from {newFilePathDirectory}");

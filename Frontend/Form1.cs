@@ -138,6 +138,9 @@ namespace Frontend
             {
                 InitializeComponent();
 
+                // Set the Main Form name
+                this.Text = $"DROMsM v{ApplicationVersion.FullVersionText}";
+
                 Logger.SetListView(logsListView);
 
                 mainManager = new MainManager(this);
@@ -467,7 +470,7 @@ namespace Frontend
                 // if (selectedNodeTag is ROMEntry singleROMEntry)
                 if (singleROMEntry != null && !singleROMEntry.IsDummyROM)
                 {
-                    romFilePath.Text = singleROMEntry.FilePath;
+                    romFilePath.Text = singleROMEntry.AbsoluteFilePath;
                     romFilename.Text = singleROMEntry.FilenameWithExtension;
                     romGoodDump.Checked = singleROMEntry.HasCode(ROMStandardCodes.VerifiedGoodDump);
                     romAlternateVersion.Checked = singleROMEntry.HasCode(ROMStandardCodes.AlternateVersion);
@@ -694,16 +697,22 @@ namespace Frontend
             }
         }
 
-        public void OnFinishedCombineMultipleBinsIntoOneTool()
+        public void OnFinishedCombineMultipleBinsIntoOneTool(MultipleGameROMGroup processedROMs)
         {
-            //ClearTotalsInfo();
-            //DisableSubOperationsButtons();
-            //treeviewsCurrentlyLinked = false;
+            ClearTotalsInfo();
+            DisableSubOperationsButtons();
+            treeviewsCurrentlyLinked = false;
 
-            //applyCombineMultipleBinFilesToOneButton.Enabled = true;
+            applyCombineMultipleBinFilesToOneButton.Enabled = true;
 
-            //ClearLeftTreeView();
+            ClearLeftTreeView();
 
+            PopulateTreeView(rightTreeView, processedROMs, TreeViewROMDisplayNameType.RelativeFilePath);
+
+            if (options.AutoExpandAfterOperations)
+            {
+                ExpandLeftAndRightTreeViews();
+            }
         }
 
         private void ClearTotalsInfo()
@@ -1012,17 +1021,24 @@ namespace Frontend
 
         private void combineMultipleBinFilesToOneOperationButton_Click(object sender, EventArgs e)
         {
-            mainManager.ExecuteConvertMultipleBinsToOneTool();
+            mainManager.ExecuteConvertMultipleBinsToOneOperation();
         }
 
-        private void combineMultipleBinFilesToOneToolStripMenuItem_Click(object sender, EventArgs e)
+        private void applyCombineMultipleBinFilesToOneButton_Click(object sender, EventArgs e)
         {
             if (!MessageBoxOperations.ShowConfirmation("Are you sure you want to convert multiple bin files into one?", "Converting multiple bin files into one"))
             {
                 return;
             }
 
-            mainManager.ExecuteConvertMultipleBinsToOneTool();
+            var processedROMsGroup = mainManager.ExecuteConvertMultipleBinsToOneSubOperation();
+            if (processedROMsGroup == null)
+            {
+                MessageBoxOperations.ShowError("Unable to convert the bin files", "Error");
+                return;
+            }
+
+            MessageBoxOperations.ShowInformation($"Successfully combined {processedROMsGroup.TotalEntries} ROMs", "Finished combining bin files");
         }
     }
 }

@@ -55,9 +55,17 @@ namespace Frontend
 
         private bool romDirectoryAnalyzed;
 
-        private const char DirectorySlash = '\\';
-
         public readonly OperationsOptions options;
+
+        private string romsPathDirectoryInfoFullName;
+        // private ROMEntry[] allROMEntriesThreadSafe;
+        private ConcurrentBag<ROMEntry> allROMEntriesThreadSafe;
+        private const int MaxAssumedEntriesPerDirectory = 500;
+
+        private SingleGameROMGroupSet groupedByDirectoryROMGroupSet;
+        private MultipleGameROMGroup movedToRootRomGroup;
+        private MultipleGameROMGroup cueFilesRomGroup;
+        private RomDirectory topLevelDirectory;
 
         /// <summary>
         /// Regex constructed from https://stackoverflow.com/a/4892517/44084 and is a combination (|) of two expressions:
@@ -146,10 +154,6 @@ namespace Frontend
             "Duplicates",
         };
 
-        private SingleGameROMGroupSet groupedByDirectoryROMGroupSet;
-        private MultipleGameROMGroup movedToRootRomGroup;
-        private RomDirectory topLevelDirectory;
-
         public MainManager(Form1 mainForm)
         {
             this.mainForm = mainForm;
@@ -206,8 +210,8 @@ namespace Frontend
                 return;
             }
 
-            // Normalize the flashes in the roms path
-            romsPath = romsPath.Replace('/', DirectorySlash);
+            // Normalize the slashes in the roms path
+            romsPath = FileUtilities.NormalizePathSlashes(romsPath);
 
             //// If the last character of the roms path is a '\', remove it
             //if (romsPath[romsPath.Length - 1] == '\\')
@@ -262,7 +266,7 @@ namespace Frontend
                 // FileUtilities.GetDirectoryInfo(path, out var directoryName, out var directoryFullName);
                 //var directoryInfo = FileUtilities.CreateDirectoryInfo(path);
                 //var directoryName = directoryInfo.Name;
-                var directoryName = FileUtilities.GetDirectoryName(path);
+                var directoryName = FileUtilities.GetNameOfDirectory(path);
 
                 // Make sure that this is not an ignored directory
                 foreach (var directoryNameToIgnore in topLevelDirectoriesToIgnore)
@@ -357,14 +361,36 @@ namespace Frontend
             currentState = MainState.MoveAllROMsToRoot;
         }
 
-        public void ExecuteConvertMultipleBinsToOneTool()
+        public void ExecuteConvertMultipleBinsToOneOperation()
         {
             if (!romDirectoryAnalyzed)
             {
                 return;
             }
 
-            mainForm.OnFinishedCombineMultipleBinsIntoOneTool();
+            var cueFilesToUse_ThreadSafe = new ConcurrentBag<ROMEntry>();
+
+            Parallel.ForEach(allGamesROMGroup.Entries, romEntry =>
+            {
+                if (romEntry.FileType != ROMFileType.Cue)
+                {
+                    return;
+                }
+
+                var isInProcessedDirectory = FileUtilities.PathContainsDirectory(romEntry.AbsoluteFilePath, "Processed");
+                if (isInProcessedDirectory)
+                {
+                    return;
+                }
+
+                cueFilesToUse_ThreadSafe.Add(romEntry);
+            });
+
+            cueFilesRomGroup = new MultipleGameROMGroup();
+            cueFilesRomGroup.AddRange(cueFilesToUse_ThreadSafe.ToList());
+            cueFilesRomGroup.Sort(false);
+
+            mainForm.OnFinishedCombineMultipleBinsIntoOneTool(cueFilesRomGroup);
 
             currentState = MainState.CombineMultipleBinsToOne;
         }
@@ -466,6 +492,70 @@ namespace Frontend
             return true;
         }
 
+        public MultipleGameROMGroup ExecuteConvertMultipleBinsToOneSubOperation()
+        {
+            if (currentState != MainState.CombineMultipleBinsToOne)
+            {
+                return null;
+            }
+
+            var chdmanHandler = new CHDMANHandler();
+
+            var outputProcessedDirectory = FileUtilities.CombinePath(currentRomsPath, "Processed");
+
+            var processedRoms = new ConcurrentBag<ROMEntry>();
+
+            // https://stackoverflow.com/a/9290531/44084
+            // var cpuPercentageToUse = 0.5f;
+            //var parallelOptions = new ParallelOptions
+            //{
+            //    // MaxDegreeOfParallelism = Convert.ToInt32(Math.Ceiling((Environment.ProcessorCount * cpuPercentageToUse) * 1.0))
+            //    MaxDegreeOfParallelism = 2
+            //};
+
+            // TODO: Switch back to Parallel once you're done testing
+            // Parallel.ForEach(cueFilesRomGroup.Entries, parallelOptions, romEntry =>
+            foreach (var romEntry in cueFilesRomGroup.Entries)
+            {
+                //if (romEntry.FileType != ROMFileType.Cue)
+                //{
+                //    return;
+                //    // continue;
+                //}
+
+                //// Skip roms in the Processed directories
+                //// TODO: These should be skipped in the initial step
+                //var isInProcessedDirectory = FileUtilities.PathContainsDirectory(romEntry.AbsoluteFilePath, "Processed");
+                //if (isInProcessedDirectory)
+                //{
+                //    return;
+                //}
+
+                var cueFilePath = romEntry.AbsoluteFilePath;
+                // var chdOutputDirectory = FileUtilities.CombinePath(FileUtilities.GetDirectory(cueFilePath), "Processed");
+                var chdOutputDirectory = FileUtilities.CombinePath(outputProcessedDirectory, romEntry.Filename);
+                //var chdFilePath = chdmanHandler.ConvertToCHD(cueFilePath, chdOutputDirectory);
+                //var combinedCueFilePath = chdmanHandler.ConvertToCueBin(chdFilePath, chdOutputDirectory);
+                var combinedCueFilePath = chdmanHandler.CombineMultipleBinsIntoOne(cueFilePath, chdOutputDirectory);
+                // Logger.Log($"CHD: {chdFilePath}, Combined cue: {combinedCueFilePath}");
+                Logger.Log($"Combined cue: {combinedCueFilePath}");
+
+                processedRoms.Add(romEntry);
+            // });
+            }
+
+            var romsGroup = new MultipleGameROMGroup();
+            romsGroup.AddRange(processedRoms.ToList());
+            //var comparer = new SingleROMEntryComparer_ComparisonName {IgnoreRelativeDirectory = false};
+            //romsGroup.Sort(comparer);
+            romsGroup.Sort(false);
+
+            // Reprocess the ROMs list
+            AnalyzeROMsDirectory(currentRomsPath);
+
+            return romsGroup;
+        }
+
         private void ProcessFile(string filePath)
         {
             if (string.IsNullOrEmpty(filePath))
@@ -474,7 +564,8 @@ namespace Frontend
                 return;
             }
 
-            var directory = Path.GetDirectoryName(filePath);
+            // var directory = FileUtilities.GetDirectoryName(filePath);
+            var directory = FileUtilities.GetDirectory(filePath);
             if (directory == null)
             {
                 return;
@@ -489,7 +580,7 @@ namespace Frontend
                 return;
             }
 
-            var fileExtension = Path.GetExtension(filePath);
+            var fileExtension = FileUtilities.GetExtension(filePath);
 
             // Check if we should ignore this file extension
             if (fileTypesToIgnore.Contains(fileExtension))
@@ -499,21 +590,21 @@ namespace Frontend
                 return;
             }
 
-            var filename = Path.GetFileNameWithoutExtension(filePath);
+            var filename = FileUtilities.GetFileNameWithoutExtension(filePath);
             var filenameWithExtension = $"{filename}{fileExtension}";
 
-            var displayName = RemoveROMSymbols(filename);
+            var displayName = ROMEntry.RemoveROMSymbols(filename);
 
             // var absoluteDirectory = directoryInfo.FullName;
             var relativeFilePath = filePath.Replace(romsPathDirectoryInfoFullName, string.Empty);
 
-            if (relativeFilePath[0] == DirectorySlash)
+            if (relativeFilePath[0] == FileUtilities.DirectorySlash)
             {
                 relativeFilePath = relativeFilePath.Substring(1, relativeFilePath.Length - 1);
             }
 
             string romSubDirectoryPath = string.Empty;
-            var relativeFilePathLastIndexOf = relativeFilePath.LastIndexOf(DirectorySlash);
+            var relativeFilePathLastIndexOf = relativeFilePath.LastIndexOf(FileUtilities.DirectorySlash);
             if (relativeFilePathLastIndexOf >= 0)
             {
                 romSubDirectoryPath = relativeFilePath.Substring(0, relativeFilePathLastIndexOf + 1);
@@ -522,14 +613,14 @@ namespace Frontend
             // var displayNameWithPath = Path.ChangeExtension(relativeFilePath, null);
             var displayNameWithPath = FileUtilities.CombinePath(romSubDirectoryPath, displayName);
 
-            var singleROMEntry = new ROMEntry
+            var singleROMEntry = new ROMEntry(filePath)
             {
-                FilePath = filePath,
                 Filename = filename,
                 FilenameWithExtension = filenameWithExtension,
                 AbsoluteDirectory = absoluteDirectory,
                 RelativeFilePath = relativeFilePath,
-                ComparisonName = ConvertFilenameForComparison(filename),
+                RelativeSubDirectory = romSubDirectoryPath,
+                ComparisonName = ROMEntry.ConvertFilenameForComparison(filename),
                 DisplayName = displayName,
                 DisplayNameWithPath = displayNameWithPath,
             };
@@ -545,11 +636,6 @@ namespace Frontend
             // allROMEntriesThreadSafe[i] = singleROMEntry;
             allROMEntriesThreadSafe.Add(singleROMEntry);
         }
-
-        private string romsPathDirectoryInfoFullName;
-        // private ROMEntry[] allROMEntriesThreadSafe;
-        private ConcurrentBag<ROMEntry> allROMEntriesThreadSafe;
-        private const int MaxAssumedEntriesPerDirectory = 500;
 
         private MultipleGameROMGroup CreateAllROMEntries(string romsPath)
         {
@@ -710,8 +796,9 @@ namespace Frontend
             var romGroupSet = new SingleGameROMGroupSet();
 
             var roms = mainROMGroup.Clone(); 
-            var comparer = new SingleROMEntryComparer_ComparisonName {IgnoreRelativeDirectory = !requireROMsToBeInSameDirectory};
-            roms.Sort(comparer);
+            //var comparer = new SingleROMEntryComparer_ComparisonName {IgnoreRelativeDirectory = !requireROMsToBeInSameDirectory};
+            //roms.Sort(comparer);
+            roms.Sort(!requireROMsToBeInSameDirectory);
 
             var currentFileGroup = new SingleGameROMGroup();
             // currentFileGroup.Add(mainROMGroup.EntryAt(0));
@@ -1059,62 +1146,8 @@ namespace Frontend
             }
         }
 
-        private string ConvertFilenameForComparison(string filename)
-        {
-            // First remove all the ROM Symbols
-            var filename_compare = RemoveROMSymbols(filename);
-
-            // Next replace any fluff characters that can affect comparison matches
-            filename_compare = filename_compare.ToLowerInvariant()
-                    // .Replace("&", "and")
-
-                    // TODO: Fix this numbers-replacement bullshit because the order matters
-                    .Replace(" vii", "7")
-                    .Replace(" vi", "6")
-                    .Replace(" iv", "4")
-                    .Replace(" v", "5")
-                    .Replace(" iii", "3")
-                    .Replace(" ii", "2")
-                    .Replace(" i", "1")
-
-                    .Replace(" ", string.Empty)
-                    .Replace("-", string.Empty)
-                    .Replace("_", string.Empty)
-                    .Replace(",", string.Empty)
-                    .Replace("'", string.Empty)
-
-                    .Replace("the", string.Empty)
-                    .Replace("and", string.Empty)
-                    .Replace("&", string.Empty)
-                ;
-
-            filename_compare = filename_compare
-                // Covert it to lower again because of any replacement modifications we did in the previous set
-                .ToLowerInvariant()
-                .Trim();
-
-            return filename_compare;
-        }
-
-        private static string RemoveROMSymbols(string filename)
-        {
-            // TODO: these can be combined
-            filename = Regex.Replace(filename, @"\(.*?\)", string.Empty);
-            filename = Regex.Replace(filename, @"\[.*?\]", string.Empty);
-
-            /*
-            // TODO: Commenting this to see if replacing bracket stuff with regex is enough
-            for (int i = 0; i < RomSymbols.Length; i++)
-            {
-                filename = Replace(filename, RomSymbols[i], string.Empty, StringComparison.OrdinalIgnoreCase);
-            }
-            */
-
-            filename = filename.Trim();
-            return filename;
-        }
-
         /// <summary>
+        /// TODO: MOVE OUT OF HERE
         /// https://stackoverflow.com/a/45756981
         /// Returns a new string in which all occurrences of a specified string in the current instance are replaced with another 
         /// specified string according the type of search to use for the specified string.
@@ -1211,6 +1244,14 @@ namespace Frontend
             return resultStringBuilder.ToString();
         }
 
+        /// <summary>
+        /// TODO: MOVE OUT OF HERE
+        /// </summary>
+        /// <typeparam name="TKey"></typeparam>
+        /// <typeparam name="TValue"></typeparam>
+        /// <param name="dic"></param>
+        /// <param name="fromKey"></param>
+        /// <param name="toKey"></param>
         private static void RenameDictionaryKey<TKey, TValue>(IDictionary<TKey, TValue> dic, TKey fromKey, TKey toKey)
         {
             TValue value = dic[fromKey];

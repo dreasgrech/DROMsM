@@ -128,7 +128,7 @@ namespace Frontend
 
         private ROMEntry CreateDummyROMEntry()
         {
-            var dummyROM = new ROMEntry
+            var dummyROM = new ROMEntry(DummyName)
             {
                 DisplayName = DummyName,
                 Filename = DummyName,

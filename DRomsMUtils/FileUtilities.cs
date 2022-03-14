@@ -1,14 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Alphaleonis.Win32.Filesystem;
 using Opulos.Core.IO;
 
 namespace DRomsMUtils
 {
     public static class FileUtilities
     {
+        public const char DirectorySlash = '\\';
+
         private static int WindowsMaxFilePathLength = 260;
 
         public static void MoveDirectory(string sourcePath, string destinationPath)
@@ -94,7 +98,7 @@ namespace DRomsMUtils
             return new Alphaleonis.Win32.Filesystem.DirectoryInfo(path);
         }
 
-        public static string GetDirectoryName(string path)
+        public static string GetNameOfDirectory(string path)
         {
             var directoryInfo = FileUtilities.CreateDirectoryInfo(path);
             return directoryInfo.Name;
@@ -104,6 +108,11 @@ namespace DRomsMUtils
         {
             var directoryInfo = FileUtilities.CreateDirectoryInfo(path);
             return directoryInfo.FullName;
+        }
+
+        public static string GetDirectory(string path)
+        {
+            return Alphaleonis.Win32.Filesystem.Path.GetDirectoryName(path);
         }
 
         public static void GetDirectoryInfo(string path, out string name, out string fullName)
@@ -121,6 +130,11 @@ namespace DRomsMUtils
         public static string GetFileNameWithoutExtension(string filePath)
         {
             return Alphaleonis.Win32.Filesystem.Path.GetFileNameWithoutExtension(filePath);
+        }
+
+        public static string GetExtension(string filePath)
+        {
+            return Alphaleonis.Win32.Filesystem.Path.GetExtension(filePath);
         }
 
         public static string CombinePath(params string[] paths)
@@ -146,6 +160,53 @@ namespace DRomsMUtils
         public static void DeleteDirectory(string path)
         {
             Alphaleonis.Win32.Filesystem.Directory.Delete(path);
+        }
+
+        public static void DeleteFile(string path)
+        {
+            if (!FileExists(path))
+            {
+                return;
+            }
+
+            Alphaleonis.Win32.Filesystem.File.Delete(path);
+        }
+
+        public static bool PathContainsDirectory(string path, string directoryName)
+        {
+            var normalizedPath = NormalizePathSlashes(path);
+            var pathStartsWithDirectory = normalizedPath.StartsWith(directoryName, StringComparison.OrdinalIgnoreCase);
+            if (pathStartsWithDirectory)
+            {
+                return true;
+            }
+
+            var pathContainsDirectory =
+                normalizedPath.Contains($"{directoryName}{DirectorySlash}")
+                ||
+                normalizedPath.Contains($"{DirectorySlash}{directoryName}");
+            if (pathContainsDirectory)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public static string NormalizePathSlashes(string path)
+        {
+            // Normalize the slashes in the roms path
+            return path.Replace('/', DirectorySlash);
+        }
+
+        public static string[] ReadAllLines(string filePath)
+        {
+            return Alphaleonis.Win32.Filesystem.File.ReadAllLines(filePath, PathFormat.FullPath);
+        }
+
+        public static IEnumerable<string> ReadLines(string filePath)
+        {
+            return Alphaleonis.Win32.Filesystem.File.ReadLines(filePath, PathFormat.FullPath);
         }
     }
 }
