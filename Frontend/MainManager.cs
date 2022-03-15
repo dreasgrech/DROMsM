@@ -35,6 +35,7 @@ namespace Frontend
         private bool resultsOptions_showTotals = false;
 
         private const string DuplicatesDirectoryName = "Duplicates";
+        private const string ProcessedDirectoryName = "Processed";
 
         private string currentRomsPath;
         private MultipleGameROMGroup currentDuplicatesROMGroup;
@@ -153,7 +154,7 @@ namespace Frontend
         private readonly HashSet<string> topLevelDirectoriesToIgnore = new HashSet<string>()
         {
             "media",
-            "Duplicates",
+            DuplicatesDirectoryName,
         };
 
         public MainManager(Form1 mainForm)
@@ -250,7 +251,7 @@ namespace Frontend
         {
             topLevelDirectory = FindEmptyTopLevelDirectories();
 
-            mainForm.OnFinishedAnalyzingTopLevelDirectories(topLevelDirectory);
+            mainForm.OnFinishedAnalyzingTopLevelDirectoriesOperation(topLevelDirectory);
 
             currentState = MainState.AnalyzeTopLevelDirectories;
         }
@@ -323,7 +324,7 @@ namespace Frontend
             var suggestedROMSet = allROMsGroupSet.FindSuggestedROMs(out currentDuplicatesROMGroup);
             // mainForm.PopulateRightTreeView(suggestedROMSet, true, true);
 
-            mainForm.OnFinishedFindingDuplicateROMs(suggestedROMSet, currentDuplicatesROMGroup);
+            mainForm.OnFinishedFindingDuplicateROMsOperation(suggestedROMSet, currentDuplicatesROMGroup);
 
             currentState = MainState.FindDuplicatesAnalysis;
         }
@@ -340,7 +341,7 @@ namespace Frontend
 
             // mainForm.PopulateRightTreeView(groupedByDirectoryROMGroupSet, false, true);
 
-            mainForm.OnFinishedProcessingIntoDirectories(groupedByDirectoryROMGroupSet);
+            mainForm.OnFinishedProcessingIntoDirectoriesOperation(groupedByDirectoryROMGroupSet);
 
             currentState = MainState.SplitIntoGroupsAnalysis;
         }
@@ -379,11 +380,12 @@ namespace Frontend
                     return;
                 }
 
-                var isInProcessedDirectory = FileUtilities.PathContainsDirectory(romEntry.AbsoluteFilePath, "Processed");
-                if (isInProcessedDirectory)
-                {
-                    return;
-                }
+                //// Ignore ROMs in the Processed directory
+                //var isInProcessedDirectory = FileUtilities.PathContainsDirectory(romEntry.AbsoluteFilePath, ProcessedDirectoryName);
+                //if (isInProcessedDirectory)
+                //{
+                //    return;
+                //}
 
                 cueFilesToUse_ThreadSafe.Add(romEntry);
             });
@@ -392,7 +394,7 @@ namespace Frontend
             cueFilesRomGroup.AddRange(cueFilesToUse_ThreadSafe.ToList());
             cueFilesRomGroup.Sort(false);
 
-            mainForm.OnFinishedCombineMultipleBinsIntoOneTool(cueFilesRomGroup);
+            mainForm.OnFinishedCombineMultipleBinsIntoOneOperation(cueFilesRomGroup);
 
             currentState = MainState.CombineMultipleBinsToOne;
         }
@@ -412,6 +414,13 @@ namespace Frontend
             // var mameFileEntries = mameFile.Entries;
             Parallel.ForEach(allGamesROMGroup.Entries, romEntry =>
             {
+                //// Ignore ROMs in the Processed directory
+                //var isInProcessedDirectory = FileUtilities.PathContainsDirectory(romEntry.AbsoluteFilePath, ProcessedDirectoryName);
+                //if (isInProcessedDirectory)
+                //{
+                //    return;
+                //}
+
                 // Check if this entry
                 if (!mameFile.TryResolve(romEntry.Filename, out var entryFromFile))
                 {
@@ -536,7 +545,7 @@ namespace Frontend
 
             var chdmanHandler = new CHDMANHandler();
 
-            var outputProcessedDirectory = FileUtilities.CombinePath(currentRomsPath, "Processed");
+            var outputProcessedDirectory = FileUtilities.CombinePath(currentRomsPath, ProcessedDirectoryName);
 
             var processedRoms = new ConcurrentBag<ROMEntry>();
 
@@ -548,31 +557,14 @@ namespace Frontend
             //    MaxDegreeOfParallelism = 2
             //};
 
-            // TODO: Switch back to Parallel once you're done testing
+            // TODO: Switch back to Parallel once you're done testing.
+            // TODO: ACTUALLY, Running more than one at a time was actually causing my CPU to max at 100%, so probably best to let this run synchronously.
             // Parallel.ForEach(cueFilesRomGroup.Entries, parallelOptions, romEntry =>
             foreach (var romEntry in cueFilesRomGroup.Entries)
             {
-                //if (romEntry.FileType != ROMFileType.Cue)
-                //{
-                //    return;
-                //    // continue;
-                //}
-
-                //// Skip roms in the Processed directories
-                //// TODO: These should be skipped in the initial step
-                //var isInProcessedDirectory = FileUtilities.PathContainsDirectory(romEntry.AbsoluteFilePath, "Processed");
-                //if (isInProcessedDirectory)
-                //{
-                //    return;
-                //}
-
                 var cueFilePath = romEntry.AbsoluteFilePath;
-                // var chdOutputDirectory = FileUtilities.CombinePath(FileUtilities.GetDirectory(cueFilePath), "Processed");
                 var chdOutputDirectory = FileUtilities.CombinePath(outputProcessedDirectory, romEntry.Filename);
-                //var chdFilePath = chdmanHandler.ConvertToCHD(cueFilePath, chdOutputDirectory);
-                //var combinedCueFilePath = chdmanHandler.ConvertToCueBin(chdFilePath, chdOutputDirectory);
                 var combinedCueFilePath = chdmanHandler.CombineMultipleBinsIntoOne(cueFilePath, chdOutputDirectory);
-                // Logger.Log($"CHD: {chdFilePath}, Combined cue: {combinedCueFilePath}");
                 Logger.Log($"Combined cue: {combinedCueFilePath}");
 
                 processedRoms.Add(romEntry);
@@ -581,14 +573,28 @@ namespace Frontend
 
             var romsGroup = new MultipleGameROMGroup();
             romsGroup.AddRange(processedRoms.ToList());
-            //var comparer = new SingleROMEntryComparer_ComparisonName {IgnoreRelativeDirectory = false};
-            //romsGroup.Sort(comparer);
             romsGroup.Sort(false);
 
             // Reprocess the ROMs list
             AnalyzeROMsDirectory(currentRomsPath);
 
             return romsGroup;
+        }
+
+        public bool ExecuteRemoveROMsFromMAMEExportFileSubOperation()
+        {
+            if (currentState != MainState.RemoveROMsFromMAMEExportFile)
+            {
+                return false;
+            }
+
+            var processedDirectory = FileUtilities.CombinePath(currentRomsPath, ProcessedDirectoryName);
+            fromMAMEFileRomGroup.MoveEntriesToDirectory(processedDirectory, false);
+
+            // Reprocess the ROMs list
+            AnalyzeROMsDirectory(currentRomsPath);
+
+            return true;
         }
 
         private void ProcessFile(string filePath)
@@ -598,6 +604,18 @@ namespace Frontend
                 // continue;
                 return;
             }
+
+            /*
+            // Ignore ROMs in our special directories
+            var isInSpecialDirectory =
+                FileUtilities.PathContainsDirectory(filePath, ProcessedDirectoryName) ||
+                FileUtilities.PathContainsDirectory(filePath, DuplicatesDirectoryName);
+
+            if (isInSpecialDirectory)
+            {
+                return;
+            }
+            */
 
             // var directory = FileUtilities.GetDirectoryName(filePath);
             var directory = FileUtilities.GetDirectory(filePath);
@@ -610,7 +628,12 @@ namespace Frontend
             FileUtilities.GetDirectoryInfo(directory, out var directoryName, out var absoluteDirectory);
             //var directoryInfo = FileUtilities.CreateDirectoryInfo(directory);
             //var directoryName = directoryInfo.Name;
-            if (string.Equals(directoryName, DuplicatesDirectoryName))
+
+            // Ignore ROMs in our special directories
+            if (
+                string.Equals(directoryName, DuplicatesDirectoryName, StringComparison.OrdinalIgnoreCase) || 
+                string.Equals(directoryName, ProcessedDirectoryName, StringComparison.OrdinalIgnoreCase)
+                )
             {
                 return;
             }

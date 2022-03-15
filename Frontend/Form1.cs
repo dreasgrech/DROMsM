@@ -620,7 +620,7 @@ namespace Frontend
             totalAllRomsLabel.Text = multipleGameROMGroupTotalEntries.ToString();
         }
 
-        public void OnFinishedAnalyzingTopLevelDirectories(RomDirectory rootDirectory)
+        public void OnFinishedAnalyzingTopLevelDirectoriesOperation(RomDirectory rootDirectory)
         {
             ClearLeftTreeView();
             ClearRightTreeView();
@@ -635,7 +635,7 @@ namespace Frontend
             PopulateTreeView(rightTreeView, rootDirectory, TreeViewROMDirectoryDisplayNameType.FullPath);
         }
 
-        public void OnFinishedFindingDuplicateROMs(SingleGameROMGroupSet singlesROMGroupSet, MultipleGameROMGroup duplicateROMs)
+        public void OnFinishedFindingDuplicateROMsOperation(SingleGameROMGroupSet singlesROMGroupSet, MultipleGameROMGroup duplicateROMs)
         {
             ClearTotalsInfo();
             DisableSubOperationsButtons();
@@ -658,7 +658,7 @@ namespace Frontend
             }
         }
 
-        public void OnFinishedProcessingIntoDirectories(SingleGameROMGroupSet splitIntoDirectoriesROMGroupSet)
+        public void OnFinishedProcessingIntoDirectoriesOperation(SingleGameROMGroupSet splitIntoDirectoriesROMGroupSet)
         {
             ClearTotalsInfo();
             DisableSubOperationsButtons();
@@ -706,9 +706,11 @@ namespace Frontend
             {
                 ExpandLeftAndRightTreeViews();
             }
+
+            Logger.Log($"Found {movedToRootROMGroup.TotalEntries} matching roms");
         }
 
-        public void OnFinishedCombineMultipleBinsIntoOneTool(MultipleGameROMGroup processedROMs)
+        public void OnFinishedCombineMultipleBinsIntoOneOperation(MultipleGameROMGroup processedROMs)
         {
             ClearTotalsInfo();
             DisableSubOperationsButtons();
@@ -734,7 +736,10 @@ namespace Frontend
             DisableSubOperationsButtons();
             treeviewsCurrentlyLinked = false;
 
-            removeROMsFromMAMEFileSubOperationButton.Enabled = true;
+            if (processedROMs.TotalEntries > 0)
+            {
+                removeROMsFromMAMEFileSubOperationButton.Enabled = true;
+            }
 
             ClearLeftTreeView();
 
@@ -1073,7 +1078,19 @@ namespace Frontend
 
         private void removeROMsFromMAMEFileSubOperationButton_Click(object sender, EventArgs e)
         {
+            if (!MessageBoxOperations.ShowConfirmation("Are you sure you want to remove the matching MAME ROM files?", "Removing matching MAME files"))
+            {
+                return;
+            }
 
+            var result = mainManager.ExecuteRemoveROMsFromMAMEExportFileSubOperation();
+            if (!result)
+            {
+                MessageBoxOperations.ShowError("Unable to remove the MAME ROM files", "Error");
+                return;
+            }
+
+            MessageBoxOperations.ShowInformation($"Successfully Moved the MAME ROM files", "Finished moving the MAME ROM files");
         }
     }
 }
