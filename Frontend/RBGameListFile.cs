@@ -68,14 +68,13 @@ namespace Frontend
 
         public RBGameListGame ResolveGame(string filePath)
         {
-            // return filenameGameMap.TryGetValue(filePath, out var gameListGame) ? gameListGame : null;
             if (filenameGameMap.TryGetValue(filePath, out var gameListGame))
             {
                 // Logger.Log($"Found entry in gamelist.xml: {filePath}");
                 return gameListGame;
             }
 
-            Logger.Log($"Unable to find entry in gamelist.xml: {filePath}");
+            // Logger.Log($"Unable to find entry in gamelist.xml: {filePath}");
             return null;
         }
     }
