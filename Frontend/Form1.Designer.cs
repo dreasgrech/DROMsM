@@ -127,6 +127,8 @@
             this.findDuplicatesResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitIntoDirectoriesResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeROMsFromMAMEFileOperationButton = new System.Windows.Forms.Button();
+            this.removeROMsFromMAMEFileSubOperationButton = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -209,7 +211,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1547, 576);
+            this.groupBox1.Size = new System.Drawing.Size(1608, 721);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Results";
@@ -231,8 +233,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer2.Panel2MinSize = 400;
-            this.splitContainer2.Size = new System.Drawing.Size(1534, 474);
-            this.splitContainer2.SplitterDistance = 1115;
+            this.splitContainer2.Size = new System.Drawing.Size(1595, 619);
+            this.splitContainer2.SplitterDistance = 1176;
             this.splitContainer2.TabIndex = 15;
             // 
             // splitContainer4
@@ -248,8 +250,8 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.splitContainer1);
-            this.splitContainer4.Size = new System.Drawing.Size(1115, 474);
-            this.splitContainer4.SplitterDistance = 367;
+            this.splitContainer4.Size = new System.Drawing.Size(1176, 619);
+            this.splitContainer4.SplitterDistance = 387;
             this.splitContainer4.TabIndex = 15;
             // 
             // unprocessedROMsTreeview
@@ -257,7 +259,7 @@
             this.unprocessedROMsTreeview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unprocessedROMsTreeview.Location = new System.Drawing.Point(0, 0);
             this.unprocessedROMsTreeview.Name = "unprocessedROMsTreeview";
-            this.unprocessedROMsTreeview.Size = new System.Drawing.Size(367, 474);
+            this.unprocessedROMsTreeview.Size = new System.Drawing.Size(387, 619);
             this.unprocessedROMsTreeview.TabIndex = 0;
             this.unprocessedROMsTreeview.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.unprocessedROMsTreeView_AfterSelect);
             // 
@@ -274,8 +276,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.rightTreeView);
-            this.splitContainer1.Size = new System.Drawing.Size(744, 474);
-            this.splitContainer1.SplitterDistance = 372;
+            this.splitContainer1.Size = new System.Drawing.Size(785, 619);
+            this.splitContainer1.SplitterDistance = 392;
             this.splitContainer1.TabIndex = 14;
             // 
             // leftTreeView
@@ -283,7 +285,7 @@
             this.leftTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.leftTreeView.Location = new System.Drawing.Point(0, 0);
             this.leftTreeView.Name = "leftTreeView";
-            this.leftTreeView.Size = new System.Drawing.Size(372, 474);
+            this.leftTreeView.Size = new System.Drawing.Size(392, 619);
             this.leftTreeView.TabIndex = 15;
             this.leftTreeView.ScrollV += new devio.Windows.Controls.ScrollEventHandler(this.leftTreeView_ScrollV);
             this.leftTreeView.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.originalROMs_AfterCollapse);
@@ -295,7 +297,7 @@
             this.rightTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rightTreeView.Location = new System.Drawing.Point(0, 0);
             this.rightTreeView.Name = "rightTreeView";
-            this.rightTreeView.Size = new System.Drawing.Size(368, 474);
+            this.rightTreeView.Size = new System.Drawing.Size(389, 619);
             this.rightTreeView.TabIndex = 16;
             this.rightTreeView.ScrollV += new devio.Windows.Controls.ScrollEventHandler(this.rightTreeView_ScrollV);
             this.rightTreeView.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.processedROMsTreeView_AfterCollapse);
@@ -318,8 +320,8 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.tableLayoutPanel2);
-            this.splitContainer3.Size = new System.Drawing.Size(415, 474);
-            this.splitContainer3.SplitterDistance = 400;
+            this.splitContainer3.Size = new System.Drawing.Size(415, 619);
+            this.splitContainer3.SplitterDistance = 436;
             this.splitContainer3.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -383,7 +385,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(415, 400);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(415, 436);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // romFilename
@@ -750,7 +752,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 134F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(415, 70);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(415, 179);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // label8
@@ -805,7 +807,7 @@
             this.panel4.Controls.Add(this.panel1);
             this.panel4.Controls.Add(this.panel3);
             this.panel4.Controls.Add(this.panel2);
-            this.panel4.Location = new System.Drawing.Point(4, 528);
+            this.panel4.Location = new System.Drawing.Point(4, 673);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(493, 43);
             this.panel4.TabIndex = 10;
@@ -974,8 +976,8 @@
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.logsListView);
-            this.splitContainer5.Size = new System.Drawing.Size(1547, 695);
-            this.splitContainer5.SplitterDistance = 576;
+            this.splitContainer5.Size = new System.Drawing.Size(1608, 840);
+            this.splitContainer5.SplitterDistance = 721;
             this.splitContainer5.TabIndex = 18;
             // 
             // logsListView
@@ -986,7 +988,7 @@
             this.logsListView.HideSelection = false;
             this.logsListView.Location = new System.Drawing.Point(0, 0);
             this.logsListView.Name = "logsListView";
-            this.logsListView.Size = new System.Drawing.Size(1547, 115);
+            this.logsListView.Size = new System.Drawing.Size(1608, 115);
             this.logsListView.TabIndex = 0;
             this.logsListView.UseCompatibleStateImageBehavior = false;
             this.logsListView.View = System.Windows.Forms.View.Details;
@@ -1006,7 +1008,7 @@
             this.panel5.Controls.Add(this.tableLayoutPanel4);
             this.panel5.Location = new System.Drawing.Point(12, 27);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1550, 184);
+            this.panel5.Size = new System.Drawing.Size(1611, 184);
             this.panel5.TabIndex = 19;
             // 
             // panel7
@@ -1027,12 +1029,14 @@
             this.seperator1.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.seperator1.Location = new System.Drawing.Point(-3, 41);
             this.seperator1.Name = "seperator1";
-            this.seperator1.Size = new System.Drawing.Size(1553, 2);
+            this.seperator1.Size = new System.Drawing.Size(1614, 2);
             this.seperator1.TabIndex = 20;
             // 
             // panel6
             // 
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.panel6.Controls.Add(this.removeROMsFromMAMEFileSubOperationButton);
+            this.panel6.Controls.Add(this.removeROMsFromMAMEFileOperationButton);
             this.panel6.Controls.Add(this.applyCombineMultipleBinFilesToOneButton);
             this.panel6.Controls.Add(this.combineMultipleBinFilesToOneOperationButton);
             this.panel6.Controls.Add(this.removeEmptyTopLevelDirectoriesSubOperationButton);
@@ -1210,7 +1214,7 @@
             this.exportToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1574, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1635, 24);
             this.menuStrip1.TabIndex = 19;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -1272,11 +1276,36 @@
             this.newItemToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.newItemToolStripMenuItem.Text = "NewItem";
             // 
+            // removeROMsFromMAMEFileOperationButton
+            // 
+            this.removeROMsFromMAMEFileOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeROMsFromMAMEFileOperationButton.ForeColor = System.Drawing.Color.Red;
+            this.removeROMsFromMAMEFileOperationButton.Location = new System.Drawing.Point(988, 7);
+            this.removeROMsFromMAMEFileOperationButton.Name = "removeROMsFromMAMEFileOperationButton";
+            this.removeROMsFromMAMEFileOperationButton.Size = new System.Drawing.Size(222, 23);
+            this.removeROMsFromMAMEFileOperationButton.TabIndex = 26;
+            this.removeROMsFromMAMEFileOperationButton.Text = "Remove ROMs from MAME file";
+            this.removeROMsFromMAMEFileOperationButton.UseVisualStyleBackColor = true;
+            this.removeROMsFromMAMEFileOperationButton.Click += new System.EventHandler(this.removeROMsFromMAMEFileOperationButton_Click);
+            // 
+            // removeROMsFromMAMEFileSubOperationButton
+            // 
+            this.removeROMsFromMAMEFileSubOperationButton.Enabled = false;
+            this.removeROMsFromMAMEFileSubOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeROMsFromMAMEFileSubOperationButton.ForeColor = System.Drawing.Color.Black;
+            this.removeROMsFromMAMEFileSubOperationButton.Location = new System.Drawing.Point(988, 34);
+            this.removeROMsFromMAMEFileSubOperationButton.Name = "removeROMsFromMAMEFileSubOperationButton";
+            this.removeROMsFromMAMEFileSubOperationButton.Size = new System.Drawing.Size(222, 23);
+            this.removeROMsFromMAMEFileSubOperationButton.TabIndex = 27;
+            this.removeROMsFromMAMEFileSubOperationButton.Text = "Apply";
+            this.removeROMsFromMAMEFileSubOperationButton.UseVisualStyleBackColor = true;
+            this.removeROMsFromMAMEFileSubOperationButton.Click += new System.EventHandler(this.removeROMsFromMAMEFileSubOperationButton_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1574, 924);
+            this.ClientSize = new System.Drawing.Size(1635, 1069);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.splitContainer5);
@@ -1427,6 +1456,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.TextBox romTrack;
         private System.Windows.Forms.ToolStripMenuItem newItemToolStripMenuItem;
+        private System.Windows.Forms.Button removeROMsFromMAMEFileOperationButton;
+        private System.Windows.Forms.Button removeROMsFromMAMEFileSubOperationButton;
     }
 }
 

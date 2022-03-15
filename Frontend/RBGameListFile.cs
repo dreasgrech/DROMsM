@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 
 namespace Frontend
 {
@@ -15,11 +16,25 @@ namespace Frontend
 
     public class MAMEExportFile
     {
-        public List<MAMEExportFileEntry> Entries { get; set; }
+        private List<MAMEExportFileEntry> Entries { get; set; }
+        // private Dictionary<string, MAMEExportFileEntry> EntriesByFilename { get; set; }
+        private ConcurrentDictionary<string, MAMEExportFileEntry> EntriesByFilename { get; set; }
 
         public MAMEExportFile()
         {
             Entries = new List<MAMEExportFileEntry>();
+            EntriesByFilename = new ConcurrentDictionary<string, MAMEExportFileEntry>(/* icomparer */);
+        }
+
+        public void Add(MAMEExportFileEntry entry)
+        {
+            Entries.Add(entry);
+            EntriesByFilename[entry.Filename] = entry;
+        }
+
+        public bool TryResolve(string filename, out MAMEExportFileEntry entry)
+        {
+            return EntriesByFilename.TryGetValue(filename, out entry);
         }
     }
 

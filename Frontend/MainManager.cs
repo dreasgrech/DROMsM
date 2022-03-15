@@ -22,7 +22,8 @@ namespace Frontend
         SplitIntoGroupsAnalysis,
         MoveAllROMsToRoot,
         AnalyzeTopLevelDirectories,
-        CombineMultipleBinsToOne
+        CombineMultipleBinsToOne,
+        RemoveROMsFromMAMEExportFile
     }
 
     public class MainManager
@@ -65,6 +66,7 @@ namespace Frontend
         private SingleGameROMGroupSet groupedByDirectoryROMGroupSet;
         private MultipleGameROMGroup movedToRootRomGroup;
         private MultipleGameROMGroup cueFilesRomGroup;
+        private MultipleGameROMGroup fromMAMEFileRomGroup;
         private RomDirectory topLevelDirectory;
 
         /// <summary>
@@ -393,6 +395,39 @@ namespace Frontend
             mainForm.OnFinishedCombineMultipleBinsIntoOneTool(cueFilesRomGroup);
 
             currentState = MainState.CombineMultipleBinsToOne;
+        }
+
+        public void ExecuteRemoveROMsFromMameFileOperation(string mameExportFilePath)
+        {
+            if (!romDirectoryAnalyzed)
+            {
+                return;
+            }
+
+            var mameExportFileReader = new MAMEExportFileReader();
+            var mameFile = mameExportFileReader.ParseFile(mameExportFilePath);
+
+            var matchingROMEntries_ThreadSafe = new ConcurrentBag<ROMEntry>();
+
+            // var mameFileEntries = mameFile.Entries;
+            Parallel.ForEach(allGamesROMGroup.Entries, romEntry =>
+            {
+                // Check if this entry
+                if (!mameFile.TryResolve(romEntry.Filename, out var entryFromFile))
+                {
+                    return;
+                }
+
+                matchingROMEntries_ThreadSafe.Add(romEntry);
+            });
+
+            fromMAMEFileRomGroup = new MultipleGameROMGroup();
+            fromMAMEFileRomGroup.AddRange(matchingROMEntries_ThreadSafe.ToList());
+            fromMAMEFileRomGroup.Sort(false);
+
+            mainForm.OnFinishedRemoveROMsFromMAMEExportFileOperation(mameExportFilePath, fromMAMEFileRomGroup);
+
+            currentState = MainState.RemoveROMsFromMAMEExportFile;
         }
 
         public bool ExecuteRemoveEmptyTopLevelDirectoriesSubOperation(out int directoriesDeleted, out int directoriesNotDeleted)

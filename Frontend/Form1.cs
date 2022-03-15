@@ -565,10 +565,12 @@ namespace Frontend
                             }
                             */
                         }
+                        /*
                         else
                         {
                             Logger.Log($"No gamelist.xml entry found for {singleROMEntry.DisplayName}");
                         }
+                        */
                     }
                     //else
                     //{
@@ -722,6 +724,28 @@ namespace Frontend
             {
                 ExpandLeftAndRightTreeViews();
             }
+
+            Logger.Log($"Found {processedROMs.TotalEntries} matching roms");
+        }
+
+        public void OnFinishedRemoveROMsFromMAMEExportFileOperation(string mameExportFilePath, MultipleGameROMGroup processedROMs)
+        {
+            ClearTotalsInfo();
+            DisableSubOperationsButtons();
+            treeviewsCurrentlyLinked = false;
+
+            removeROMsFromMAMEFileSubOperationButton.Enabled = true;
+
+            ClearLeftTreeView();
+
+            PopulateTreeView(rightTreeView, processedROMs, TreeViewROMDisplayNameType.RelativeFilePath);
+
+            if (options.AutoExpandAfterOperations)
+            {
+                ExpandLeftAndRightTreeViews();
+            }
+
+            Logger.Log($"Found {processedROMs.TotalEntries} matching MAME roms from {mameExportFilePath}");
         }
 
         private void ClearTotalsInfo()
@@ -738,6 +762,7 @@ namespace Frontend
             applyMoveAllROMsToRootButton.Enabled = false;
             removeEmptyTopLevelDirectoriesSubOperationButton.Enabled = false;
             applyCombineMultipleBinFilesToOneButton.Enabled = false;
+            removeROMsFromMAMEFileSubOperationButton.Enabled = false;
 
             findDuplicatesResultsToolStripMenuItem.Enabled = false;
             splitIntoDirectoriesResultsToolStripMenuItem.Enabled = false;
@@ -750,6 +775,7 @@ namespace Frontend
             moveROMsToRootOperationButton.Enabled = enabled;
             removeTopLevelDirectoriesOperationButton.Enabled = enabled;
             combineMultipleBinFilesToOneOperationButton.Enabled = enabled;
+            removeROMsFromMAMEFileOperationButton.Enabled = enabled;
         }
 
         private void analyzeDirectoryButton_Click(object sender, EventArgs e)
@@ -939,19 +965,19 @@ namespace Frontend
 
         private void exportAllROMsListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var filename = ShowSaveFileDialog();
+            var filename = FormFileOperations.ShowSaveFileDialog();
             ExportToFile(mainManager.ExportAllROMSListToFile, filename);
         }
 
         private void findDuplicatesResultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var filename = ShowSaveFileDialog();
+            var filename = FormFileOperations.ShowSaveFileDialog();
             ExportToFile(mainManager.ExportFindDuplicatesOperationResults, filename);
         }
 
         private void splitIntoDirectoriesResultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var filename = ShowSaveFileDialog();
+            var filename = FormFileOperations.ShowSaveFileDialog();
             ExportToFile(mainManager.ExportGroupByDirectoryOperationResults, filename);
         }
 
@@ -973,22 +999,6 @@ namespace Frontend
                 // MessageBox.Show($"Successfully exported to {filename}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                 Process.Start(filename);
             }
-        }
-
-        private string ShowSaveFileDialog()
-        {
-            var sfd = new SaveFileDialog()
-            {
-                Filter = "Text File|*.txt",
-            };
-
-            var dialogResult = sfd.ShowDialog();
-            if (dialogResult != DialogResult.OK)
-            {
-                return string.Empty;
-            }
-
-            return sfd.FileName;
         }
 
         private void matchUsingGameListXMLNameCheckbox_CheckedChanged(object sender, EventArgs e)
@@ -1048,6 +1058,22 @@ namespace Frontend
             }
 
             MessageBoxOperations.ShowInformation($"Successfully combined {processedROMsGroup.TotalEntries} ROMs", "Finished combining bin files");
+        }
+
+        private void removeROMsFromMAMEFileOperationButton_Click(object sender, EventArgs e)
+        {
+            var mameExportFilePath = FormFileOperations.ShowOpenFileDialog();
+            if (string.IsNullOrEmpty(mameExportFilePath))
+            {
+                return;
+            }
+
+            mainManager.ExecuteRemoveROMsFromMameFileOperation(mameExportFilePath);
+        }
+
+        private void removeROMsFromMAMEFileSubOperationButton_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

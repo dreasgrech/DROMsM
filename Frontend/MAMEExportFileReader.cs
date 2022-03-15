@@ -13,7 +13,6 @@ namespace Frontend
             }
 
             var mameExportFile = new MAMEExportFile();
-            var mameExportFileEntries = mameExportFile.Entries;
             TextFileReader.ReadFile(filePath, (line, lineNumber) =>
             {
                 // Skip the first line since it just contains "Name:" and "Description"
@@ -35,7 +34,7 @@ namespace Frontend
                     Name = gameName
                 };
 
-                mameExportFileEntries.Add(mameExportFileEntry);
+                mameExportFile.Add(mameExportFileEntry);
             });
 
             return mameExportFile;

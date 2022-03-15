@@ -116,6 +116,7 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="FormFileOperations.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MainManager.cs" />
     <Compile Include="MAMEExportFileReader.cs" />
