@@ -589,7 +589,7 @@ namespace Frontend
             }
 
             var processedDirectory = FileUtilities.CombinePath(currentRomsPath, ProcessedDirectoryName);
-            fromMAMEFileRomGroup.MoveEntriesToDirectory(processedDirectory, false);
+            fromMAMEFileRomGroup.MoveEntriesToDirectory(processedDirectory, true);
 
             // Reprocess the ROMs list
             AnalyzeROMsDirectory(currentRomsPath);
@@ -644,7 +644,7 @@ namespace Frontend
             if (fileTypesToIgnore.Contains(fileExtension))
             {
                 // continue;
-                Logger.Log($"Ignoring file: {filePath}");
+                Logger.Log($"Skipping {filePath}");
                 return;
             }
 
