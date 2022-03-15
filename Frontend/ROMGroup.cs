@@ -54,7 +54,7 @@ namespace Frontend
         {
             if (entry == null)
             {
-                // todo: log it
+                Logger.LogError("Trying to log a null ROMEntry, and this shouldn't happen");
                 return;
             }
 
@@ -132,8 +132,11 @@ namespace Frontend
             if (!FileUtilities.DirectoryExists(destinationDirectory))
             {
                 Logger.Log($"Creating directory {destinationDirectory}");
-                // Directory.CreateDirectory(destinationDirectory);
                 FileUtilities.CreateDirectory(destinationDirectory);
+            }
+            else
+            {
+                Logger.Log($"Directory {destinationDirectory} already exists so we'll use it");
             }
 
             // Move all the roms to the new directory
@@ -147,7 +150,6 @@ namespace Frontend
                     newFilePath = FileUtilities.CombinePath(destinationDirectory, rom.RelativeFilePath);
 
                     // Make sure that the destination directory exists
-                    // var newFilePathDirectory = FileUtilities.GetDirectoryName(newFilePath);
                     var newFilePathDirectory = FileUtilities.GetDirectory(newFilePath);
                     if (string.IsNullOrEmpty(newFilePathDirectory))
                     {
@@ -156,7 +158,7 @@ namespace Frontend
 
                     if (!string.IsNullOrEmpty(newFilePathDirectory) && !FileUtilities.DirectoryExists(newFilePathDirectory))
                     {
-                        // Directory.CreateDirectory(newFilePathDirectory);
+                        Logger.Log($"Creating directory {newFilePathDirectory}");
                         FileUtilities.CreateDirectory(newFilePathDirectory);
                     }
                 }
@@ -167,7 +169,6 @@ namespace Frontend
 
                 // Move the file from the current file path to the new path
                 Logger.Log($"Moving {currentFilePath} to {newFilePath}");
-                // File.Move(currentFilePath, newFilePath);
                 FileUtilities.MoveFile(currentFilePath, newFilePath);
             });
         }
