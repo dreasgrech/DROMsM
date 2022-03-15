@@ -2,6 +2,7 @@
 using System.Net;
 using System.Text;
 using System.Xml.Linq;
+using DRomsMUtils;
 
 namespace Frontend
 {
@@ -31,7 +32,7 @@ namespace Frontend
                 }
             }
 
-            File.WriteAllText(outputFilePath, sb.ToString());
+            FileUtilities.WriteAllText(outputFilePath, sb.ToString());
 
             return true;
         }
@@ -56,7 +57,7 @@ namespace Frontend
                 sb.AppendLine($"{romEntry.FilenameWithExtension}");
             }
 
-            File.WriteAllText(outputFilePath, sb.ToString());
+            FileUtilities.WriteAllText(outputFilePath, sb.ToString());
 
             return true;
         }

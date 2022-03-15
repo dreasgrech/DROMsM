@@ -2,6 +2,27 @@
 
 namespace Frontend
 {
+    public class MAMEExportFileEntry
+    {
+        public string Filename { get; set; }
+        public string Name { get; set; }
+
+        public override string ToString()
+        {
+            return $"{Filename}     {Name}";
+        }
+    }
+
+    public class MAMEExportFile
+    {
+        public List<MAMEExportFileEntry> Entries { get; set; }
+
+        public MAMEExportFile()
+        {
+            Entries = new List<MAMEExportFileEntry>();
+        }
+    }
+
     public class RBGameListFile
     {
         public string FilePath { get; set; }

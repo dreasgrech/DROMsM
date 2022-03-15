@@ -138,6 +138,15 @@ namespace Frontend
             {
                 InitializeComponent();
 
+                /****************/
+                /*
+                MessageBoxOperations.ShowError("Dont forget to remove this test", "asd");
+                var mameNotWorkingFile = @"D:\dromsmanagerdirs\mameexported_notworking.txt";
+                var mameExportFileReader = new MAMEExportFileReader();
+                var mameFile = mameExportFileReader.ParseFile(mameNotWorkingFile);
+                */
+                /*****************/
+
                 // Set the Main Form name
                 this.Text = $"DROMsM v{ApplicationVersion.FullVersionText}";
 
@@ -513,7 +522,7 @@ namespace Frontend
                             if (hasImage)
                             {
                                 var imageFilePath = FileUtilities.CombinePath(rbGameListFileFileBaseDirectoryPath, gameListFileEntry.Image);
-                                if (File.Exists(imageFilePath))
+                                if (FileUtilities.FileExists(imageFilePath))
                                 {
                                     romPictureBox.LoadAsync(imageFilePath);
 
@@ -959,7 +968,7 @@ namespace Frontend
                 return;
             }
 
-            if (File.Exists(filename))
+            if (!FileUtilities.FileExists(filename))
             {
                 // MessageBox.Show($"Successfully exported to {filename}", "Saved", MessageBoxButtons.OK, MessageBoxIcon.Information, MessageBoxDefaultButton.Button1);
                 Process.Start(filename);

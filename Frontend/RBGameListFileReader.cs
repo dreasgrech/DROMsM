@@ -11,7 +11,7 @@ namespace Frontend
 
         private string FindGameListFile(string rbGameListFilePath)
         {
-            var fileExists = File.Exists(rbGameListFilePath);
+            var fileExists = FileUtilities.FileExists(rbGameListFilePath);
             if (!fileExists)
             {
                 // var fileDirectoryPath = FileUtilities.GetDirectoryName(rbGameListFilePath);
@@ -39,7 +39,7 @@ namespace Frontend
             // var gameListFilePath = Path.Combine(romsPath, "gamelist.xml");
             var rbGameListFilePath = FindGameListFile(GetFilePath(romsPath));
 
-            var fileExists = File.Exists(rbGameListFilePath);
+            var fileExists = FileUtilities.FileExists(rbGameListFilePath);
             if (!fileExists)
             {
                 return null;

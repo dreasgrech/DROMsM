@@ -106,6 +106,8 @@
   <ItemGroup>
     <Compile Include="ApplicationVersion.cs" />
     <Compile Include="CHDMANHandler.cs" />
+    <Compile Include="CUEFile.cs" />
+    <Compile Include="CUEFileHandler.cs" />
     <Compile Include="DoubleExtensions.cs" />
     <Compile Include="FastDirectoryEnumerator.cs" />
     <Compile Include="Form1.cs">
@@ -116,6 +118,7 @@
     </Compile>
     <Compile Include="Logger.cs" />
     <Compile Include="MainManager.cs" />
+    <Compile Include="MAMEExportFileReader.cs" />
     <Compile Include="MessageBoxOperations.cs" />
     <Compile Include="MultipleGameROMGroup.cs" />
     <Compile Include="OperationsOptions.cs" />
@@ -126,7 +129,7 @@
     <Compile Include="RBGameListFile.cs" />
     <Compile Include="RBGameListFolder.cs" />
     <Compile Include="RBGameListGame.cs" />
-    <Compile Include="RecalboxGameListReader.cs" />
+    <Compile Include="RBGameListFileReader.cs" />
     <Compile Include="RomDirectory.cs" />
     <Compile Include="ROMEntry.cs" />
     <Compile Include="ROMGroup.cs" />
@@ -138,6 +141,7 @@
     <Compile Include="ROMEnums.cs" />
     <Compile Include="SingleROMEntryComparer_ComparisonName.cs" />
     <Compile Include="StopwatchManager.cs" />
+    <Compile Include="TextFileReader.cs" />
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

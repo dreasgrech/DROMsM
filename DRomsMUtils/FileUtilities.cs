@@ -147,6 +147,11 @@ namespace DRomsMUtils
             return Alphaleonis.Win32.Filesystem.File.Exists(file);
         }
 
+        public static void WriteAllText(string path, string contents)
+        {
+            Alphaleonis.Win32.Filesystem.File.WriteAllText(path, contents);
+        }
+
         public static bool DirectoryExists(string path)
         {
             return Alphaleonis.Win32.Filesystem.Directory.Exists(path);

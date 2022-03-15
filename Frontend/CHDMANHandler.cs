@@ -1,74 +1,9 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
+﻿using System.Reflection;
 using System.Threading.Tasks;
 using DRomsMUtils;
 
 namespace Frontend
 {
-    public class CUEFile : ROMEntry
-    {
-        public List<string> BINFilesPaths { get; private set; }
-
-        public CUEFile(string absoluteFilePath) : base(absoluteFilePath)
-        {
-            BINFilesPaths = new List<string>();
-        }
-    }
-
-    public class CUEFileHandler
-    {
-        private const string BinFileStartOfLine = "FILE ";
-
-        public CUEFile ParseCUEFile(string cueFilePath)
-        {
-            if (!FileUtilities.FileExists(cueFilePath))
-            {
-                return null;
-            }
-
-            using (var enumerator = FileUtilities.ReadLines(cueFilePath).GetEnumerator())
-            {
-                while (enumerator.MoveNext())
-                {
-                    var line = enumerator.Current;
-                    if (string.IsNullOrEmpty(line))
-                    {
-                        continue;
-                    }
-
-                    line = line.Trim();
-
-                    if (!line.StartsWith(BinFileStartOfLine))
-                    {
-                        continue;
-                    }
-
-                }
-            }
-
-            return null;
-
-            //var cueFileLines = FileUtilities.ReadAllLines(cueFilePath);
-            //// foreach (var cueFileLine in cueFileLines)
-            //Parallel.ForEach(cueFileLines, cueFileLine =>
-            //{
-            //    var line = cueFileLine;
-            //    if (string.IsNullOrEmpty(line))
-            //    {
-            //        // continue;
-            //        return;
-            //    }
-
-            //    line = line.Trim();
-
-            //    if (!line.StartsWith(BinFileStartOfLine))
-            //    {
-            //        return;
-            //    }
-            //});
-        }
-    }
-
     /// <summary>
     /// chdman args from https://i12bretro.github.io/tutorials/0323.html
     /// </summary>
