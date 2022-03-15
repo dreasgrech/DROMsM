@@ -2,6 +2,11 @@
 {
     public static class ProjectSettingsManager
     {
+        static ProjectSettingsManager()
+        {
+            UpgradeSettingsVersion();
+        }
+
         public static string ResolveString(ProjectSettings key)
         {
             switch (key)
@@ -50,6 +55,16 @@
             }
 
             Properties.Settings.Default.Save();
+        }
+
+        private static void UpgradeSettingsVersion()
+        {
+            if (Properties.Settings.Default.UpdateSettingsVersion)
+            {
+                Properties.Settings.Default.Upgrade();
+                Properties.Settings.Default.UpdateSettingsVersion = false;
+                Properties.Settings.Default.Save();
+            }
         }
     }
 

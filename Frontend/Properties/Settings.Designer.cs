@@ -58,5 +58,17 @@ namespace Frontend.Properties {
                 this["AutoExpandTreeViewsAfterOperations"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool UpdateSettingsVersion {
+            get {
+                return ((bool)(this["UpdateSettingsVersion"]));
+            }
+            set {
+                this["UpdateSettingsVersion"] = value;
+            }
+        }
     }
 }
