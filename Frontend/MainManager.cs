@@ -543,6 +543,9 @@ namespace Frontend
                 return null;
             }
 
+            // TODO: This needs to change such that chdman.exe is copied to the root directory of the roms and executed from there.
+            // TODO: This is because if you feed in a path which is longer than the allowed Windows limit the CHD man, it will fail
+
             var chdmanHandler = new CHDMANHandler();
 
             var outputProcessedDirectory = FileUtilities.CombinePath(currentRomsPath, ProcessedDirectoryName);
@@ -557,18 +560,42 @@ namespace Frontend
             //    MaxDegreeOfParallelism = 2
             //};
 
-            // TODO: Switch back to Parallel once you're done testing.
-            // TODO: ACTUALLY, Running more than one at a time was actually causing my CPU to max at 100%, so probably best to let this run synchronously.
-            // Parallel.ForEach(cueFilesRomGroup.Entries, parallelOptions, romEntry =>
-            foreach (var romEntry in cueFilesRomGroup.Entries)
+            var operationStarted = chdmanHandler.StartOperation(currentRomsPath);
+            if (!operationStarted)
             {
-                var cueFilePath = romEntry.AbsoluteFilePath;
-                var chdOutputDirectory = FileUtilities.CombinePath(outputProcessedDirectory, romEntry.Filename);
-                var combinedCueFilePath = chdmanHandler.CombineMultipleBinsIntoOne(cueFilePath, chdOutputDirectory);
-                Logger.Log($"Combined cue: {combinedCueFilePath}");
+                return null;
+            }
 
-                processedRoms.Add(romEntry);
-            // });
+            try
+            {
+                // TODO: Switch back to Parallel once you're done testing.
+                // TODO: ACTUALLY, Running more than one at a time was actually causing my CPU to max at 100%, so probably best to let this run synchronously.
+                // Parallel.ForEach(cueFilesRomGroup.Entries, parallelOptions, romEntry =>
+                foreach (var romEntry in cueFilesRomGroup.Entries)
+                {
+                    var cueFilePath = romEntry.AbsoluteFilePath;
+                    var chdOutputDirectory = FileUtilities.CombinePath(outputProcessedDirectory, romEntry.Filename);
+                    var combinedCueFilePath = chdmanHandler.CombineMultipleBinsIntoOne(cueFilePath, chdOutputDirectory);
+                    Logger.Log($"Combined cue: {combinedCueFilePath}");
+
+                    processedRoms.Add(romEntry);
+                    // });
+                }
+
+                var operationStopped = chdmanHandler.StopOperation();
+                if (!operationStopped)
+                {
+                    return null;
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.LogException(ex);
+
+                chdmanHandler.StopOperation();
+
+                return null;
             }
 
             var romsGroup = new MultipleGameROMGroup();

@@ -1,4 +1,5 @@
-﻿using System.Reflection;
+﻿using System;
+using System.Reflection;
 using System.Threading.Tasks;
 using DRomsMUtils;
 
@@ -9,17 +10,97 @@ namespace Frontend
     /// </summary>
     public class CHDMANHandler
     {
-        private const string CHDMANRelativeFilePath = @"chdman\chdman.exe";
+        private const string CHDMANFilename = @"chdman.exe";
+        // private const string CHDMANRelativeFilePath = @"chdman\chdman.exe";
+        private const string CHDMANRelativeFilePath = @"chdman\" + CHDMANFilename;
 
         private readonly string CHDMANFullFilePath;
+
+        private string currentOperationCHDMANFilePath;
+
+        private bool runningOperation;
 
         public CHDMANHandler()
         {
             CHDMANFullFilePath = FileUtilities.CombinePath(FileUtilities.GetDirectory(Assembly.GetExecutingAssembly().Location), CHDMANRelativeFilePath);
         }
 
+        public bool StartOperation(string workingDirectory)
+        {
+            try
+            {
+                if (runningOperation)
+                {
+                    return false;
+                }
+
+
+                // Make a copy of chdman to our working directory
+                var destinationFilepath = FileUtilities.CombinePath(workingDirectory, CHDMANFilename);
+
+                Logger.Log($"Starting chdman operation.  Copying chdman from {CHDMANFullFilePath} to {destinationFilepath}");
+
+                var fileCopied = FileUtilities.CopyFile(CHDMANFullFilePath, destinationFilepath);
+                if (!fileCopied)
+                {
+                    Logger.LogError($"Unable to start chdman operation.  Could not copy chdman from {CHDMANFullFilePath} to {destinationFilepath}");
+                    return false;
+                }
+
+                currentOperationCHDMANFilePath = destinationFilepath;
+
+                runningOperation = true;
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        public bool StopOperation()
+        {
+            try
+            {
+                if (!runningOperation)
+                {
+                    return false;
+                }
+
+                if (string.IsNullOrEmpty(currentOperationCHDMANFilePath))
+                {
+                    return false;
+                }
+
+                Logger.Log($"Stopping chdman operation.  Deleting {currentOperationCHDMANFilePath}");
+
+                // Delete the chdman we created when we started the operation
+                var fileDeleted = FileUtilities.DeleteFile(currentOperationCHDMANFilePath);
+                if (!fileDeleted)
+                {
+                    return false;
+                }
+
+                currentOperationCHDMANFilePath = null;
+
+                runningOperation = false;
+
+                return true;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
         public string ConvertToCHD(string cueFilePath, string chdOutputDirectory)
         {
+            if (!runningOperation)
+            {
+                return null;
+            }
+
             // Make sure the output directory exists
             FileUtilities.CreateDirectory(chdOutputDirectory);
 
@@ -38,6 +119,11 @@ namespace Frontend
 
         public string ConvertToCueBin(string chdFilePath, string outputDirectory)
         {
+            if (!runningOperation)
+            {
+                return null;
+            }
+
             // Make sure the output directory exists
             FileUtilities.CreateDirectory(outputDirectory);
 
@@ -56,6 +142,11 @@ namespace Frontend
 
         public string CombineMultipleBinsIntoOne(string cueFilePath, string outputDirectory)
         {
+            if (!runningOperation)
+            {
+                return null;
+            }
+
             // First convert the cue/bin to chd
             var chdFilePath = ConvertToCHD(cueFilePath, outputDirectory);
 
@@ -70,14 +161,15 @@ namespace Frontend
 
         private void StartProcess(string arguments)
         {
-            Logger.Log($"{CHDMANFullFilePath} {arguments}");
+            // Logger.Log($"{CHDMANFullFilePath} {arguments}");
+            Logger.Log($"{currentOperationCHDMANFilePath} {arguments}");
 
             var fileReaderProcess = new System.Diagnostics.Process()
             {
                 EnableRaisingEvents = false,
                 StartInfo = new System.Diagnostics.ProcessStartInfo()
                 {
-                    FileName = CHDMANFullFilePath,
+                    FileName = currentOperationCHDMANFilePath,
                     UseShellExecute = false,
                     //RedirectStandardError = true,
                     //RedirectStandardInput = true,

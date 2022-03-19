@@ -20,6 +20,35 @@ namespace DRomsMUtils
             Alphaleonis.Win32.Filesystem.Directory.Move(sourcePath, destinationPath);
         }
 
+        public static bool CopyFile(string sourceFilename, string destFilename)
+        {
+            try
+            {
+                // Make sure there isn't a file that already exists at the destination location
+                if (FileExists(destFilename))
+                {
+                    return false;
+                }
+
+                // var filePathsExceedMaxPath = sourceFilename.Length >= WindowsMaxFilePathLength || destFilename.Length >= WindowsMaxFilePathLength;
+                var filePathsExceedMaxPath = PathExceedsWindowsMaxFilePathLength(sourceFilename) || PathExceedsWindowsMaxFilePathLength(destFilename);
+                if (filePathsExceedMaxPath)
+                {
+                    Alphaleonis.Win32.Filesystem.File.Copy(sourceFilename, destFilename);
+                }
+                else
+                {
+                    System.IO.File.Copy(sourceFilename, destFilename);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
         public static bool MoveFile(string sourceFilename, string destFilename)
         {
             try
@@ -30,7 +59,8 @@ namespace DRomsMUtils
                     return false;
                 }
 
-                var filePathsExceedMaxPath = sourceFilename.Length >= WindowsMaxFilePathLength || destFilename.Length >= WindowsMaxFilePathLength;
+                // var filePathsExceedMaxPath = sourceFilename.Length >= WindowsMaxFilePathLength || destFilename.Length >= WindowsMaxFilePathLength;
+                var filePathsExceedMaxPath = PathExceedsWindowsMaxFilePathLength(sourceFilename) || PathExceedsWindowsMaxFilePathLength(destFilename);
                 if (filePathsExceedMaxPath)
                 {
                     Alphaleonis.Win32.Filesystem.File.Move(sourceFilename, destFilename);
@@ -167,14 +197,16 @@ namespace DRomsMUtils
             Alphaleonis.Win32.Filesystem.Directory.Delete(path);
         }
 
-        public static void DeleteFile(string path)
+        public static bool DeleteFile(string path)
         {
             if (!FileExists(path))
             {
-                return;
+                return false;
             }
 
             Alphaleonis.Win32.Filesystem.File.Delete(path);
+
+            return true;
         }
 
         public static bool PathContainsDirectory(string path, string directoryName)
@@ -212,6 +244,11 @@ namespace DRomsMUtils
         public static IEnumerable<string> ReadLines(string filePath)
         {
             return Alphaleonis.Win32.Filesystem.File.ReadLines(filePath, PathFormat.FullPath);
+        }
+
+        public static bool PathExceedsWindowsMaxFilePathLength(string filePath)
+        {
+            return filePath.Length >= WindowsMaxFilePathLength;
         }
     }
 }
