@@ -581,8 +581,10 @@ namespace Frontend
             return romsGroup;
         }
 
-        public bool ExecuteRemoveROMsFromMAMEExportFileSubOperation()
+        public bool ExecuteRemoveROMsFromMAMEExportFileSubOperation(out string outputDirectory)
         {
+            outputDirectory = string.Empty;
+
             if (currentState != MainState.RemoveROMsFromMAMEExportFile)
             {
                 return false;
@@ -593,6 +595,8 @@ namespace Frontend
 
             // Reprocess the ROMs list
             AnalyzeROMsDirectory(currentRomsPath);
+
+            outputDirectory = processedDirectory;
 
             return true;
         }

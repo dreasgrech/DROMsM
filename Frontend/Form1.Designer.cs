@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.romsDirectoryTextBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.expandAllButton = new System.Windows.Forms.Button();
@@ -105,6 +106,8 @@
             this.panel7 = new System.Windows.Forms.Panel();
             this.seperator1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.removeROMsFromMAMEFileSubOperationButton = new System.Windows.Forms.Button();
+            this.removeROMsFromMAMEFileOperationButton = new System.Windows.Forms.Button();
             this.applyCombineMultipleBinFilesToOneButton = new System.Windows.Forms.Button();
             this.combineMultipleBinFilesToOneOperationButton = new System.Windows.Forms.Button();
             this.removeEmptyTopLevelDirectoriesSubOperationButton = new System.Windows.Forms.Button();
@@ -127,8 +130,8 @@
             this.findDuplicatesResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitIntoDirectoriesResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.removeROMsFromMAMEFileOperationButton = new System.Windows.Forms.Button();
-            this.removeROMsFromMAMEFileSubOperationButton = new System.Windows.Forms.Button();
+            this.logViewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.logViewContextMenuItem_Copy = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -162,6 +165,7 @@
             this.panel6.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.logViewContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // romsDirectoryTextBox
@@ -984,6 +988,7 @@
             // 
             this.logsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.columnHeader1});
+            this.logsListView.ContextMenuStrip = this.logViewContextMenu;
             this.logsListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.logsListView.HideSelection = false;
             this.logsListView.Location = new System.Drawing.Point(0, 0);
@@ -996,7 +1001,7 @@
             // columnHeader1
             // 
             this.columnHeader1.Text = "Logs";
-            this.columnHeader1.Width = 620;
+            this.columnHeader1.Width = 1604;
             // 
             // panel5
             // 
@@ -1051,6 +1056,31 @@
             this.panel6.Name = "panel6";
             this.panel6.Size = new System.Drawing.Size(1303, 60);
             this.panel6.TabIndex = 21;
+            // 
+            // removeROMsFromMAMEFileSubOperationButton
+            // 
+            this.removeROMsFromMAMEFileSubOperationButton.Enabled = false;
+            this.removeROMsFromMAMEFileSubOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeROMsFromMAMEFileSubOperationButton.ForeColor = System.Drawing.Color.Black;
+            this.removeROMsFromMAMEFileSubOperationButton.Location = new System.Drawing.Point(988, 34);
+            this.removeROMsFromMAMEFileSubOperationButton.Name = "removeROMsFromMAMEFileSubOperationButton";
+            this.removeROMsFromMAMEFileSubOperationButton.Size = new System.Drawing.Size(222, 23);
+            this.removeROMsFromMAMEFileSubOperationButton.TabIndex = 27;
+            this.removeROMsFromMAMEFileSubOperationButton.Text = "Apply";
+            this.removeROMsFromMAMEFileSubOperationButton.UseVisualStyleBackColor = true;
+            this.removeROMsFromMAMEFileSubOperationButton.Click += new System.EventHandler(this.removeROMsFromMAMEFileSubOperationButton_Click);
+            // 
+            // removeROMsFromMAMEFileOperationButton
+            // 
+            this.removeROMsFromMAMEFileOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeROMsFromMAMEFileOperationButton.ForeColor = System.Drawing.Color.Red;
+            this.removeROMsFromMAMEFileOperationButton.Location = new System.Drawing.Point(988, 7);
+            this.removeROMsFromMAMEFileOperationButton.Name = "removeROMsFromMAMEFileOperationButton";
+            this.removeROMsFromMAMEFileOperationButton.Size = new System.Drawing.Size(222, 23);
+            this.removeROMsFromMAMEFileOperationButton.TabIndex = 26;
+            this.removeROMsFromMAMEFileOperationButton.Text = "Remove ROMs from MAME file";
+            this.removeROMsFromMAMEFileOperationButton.UseVisualStyleBackColor = true;
+            this.removeROMsFromMAMEFileOperationButton.Click += new System.EventHandler(this.removeROMsFromMAMEFileOperationButton_Click);
             // 
             // applyCombineMultipleBinFilesToOneButton
             // 
@@ -1276,30 +1306,20 @@
             this.newItemToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.newItemToolStripMenuItem.Text = "NewItem";
             // 
-            // removeROMsFromMAMEFileOperationButton
+            // logViewContextMenu
             // 
-            this.removeROMsFromMAMEFileOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.removeROMsFromMAMEFileOperationButton.ForeColor = System.Drawing.Color.Red;
-            this.removeROMsFromMAMEFileOperationButton.Location = new System.Drawing.Point(988, 7);
-            this.removeROMsFromMAMEFileOperationButton.Name = "removeROMsFromMAMEFileOperationButton";
-            this.removeROMsFromMAMEFileOperationButton.Size = new System.Drawing.Size(222, 23);
-            this.removeROMsFromMAMEFileOperationButton.TabIndex = 26;
-            this.removeROMsFromMAMEFileOperationButton.Text = "Remove ROMs from MAME file";
-            this.removeROMsFromMAMEFileOperationButton.UseVisualStyleBackColor = true;
-            this.removeROMsFromMAMEFileOperationButton.Click += new System.EventHandler(this.removeROMsFromMAMEFileOperationButton_Click);
+            this.logViewContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.logViewContextMenuItem_Copy});
+            this.logViewContextMenu.Name = "logViewContextMenu";
+            this.logViewContextMenu.Size = new System.Drawing.Size(181, 48);
+            this.logViewContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.logViewContextMenu_Opening);
             // 
-            // removeROMsFromMAMEFileSubOperationButton
+            // logViewContextMenuItem_Copy
             // 
-            this.removeROMsFromMAMEFileSubOperationButton.Enabled = false;
-            this.removeROMsFromMAMEFileSubOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.removeROMsFromMAMEFileSubOperationButton.ForeColor = System.Drawing.Color.Black;
-            this.removeROMsFromMAMEFileSubOperationButton.Location = new System.Drawing.Point(988, 34);
-            this.removeROMsFromMAMEFileSubOperationButton.Name = "removeROMsFromMAMEFileSubOperationButton";
-            this.removeROMsFromMAMEFileSubOperationButton.Size = new System.Drawing.Size(222, 23);
-            this.removeROMsFromMAMEFileSubOperationButton.TabIndex = 27;
-            this.removeROMsFromMAMEFileSubOperationButton.Text = "Apply";
-            this.removeROMsFromMAMEFileSubOperationButton.UseVisualStyleBackColor = true;
-            this.removeROMsFromMAMEFileSubOperationButton.Click += new System.EventHandler(this.removeROMsFromMAMEFileSubOperationButton_Click);
+            this.logViewContextMenuItem_Copy.Name = "logViewContextMenuItem_Copy";
+            this.logViewContextMenuItem_Copy.Size = new System.Drawing.Size(180, 22);
+            this.logViewContextMenuItem_Copy.Text = "Copy";
+            this.logViewContextMenuItem_Copy.Click += new System.EventHandler(this.logViewContextMenuItem_Copy_Click);
             // 
             // Form1
             // 
@@ -1350,6 +1370,7 @@
             this.tableLayoutPanel4.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.logViewContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1458,6 +1479,8 @@
         private System.Windows.Forms.ToolStripMenuItem newItemToolStripMenuItem;
         private System.Windows.Forms.Button removeROMsFromMAMEFileOperationButton;
         private System.Windows.Forms.Button removeROMsFromMAMEFileSubOperationButton;
+        private System.Windows.Forms.ContextMenuStrip logViewContextMenu;
+        private System.Windows.Forms.ToolStripMenuItem logViewContextMenuItem_Copy;
     }
 }
 

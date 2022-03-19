@@ -192,6 +192,8 @@ namespace Frontend
         {
             try
             {
+                // Logger.Log("Art of Fighting - Ryuuko no Ken Gaiden ~ The Path of the Warrior - Art of Fighting 3 (Japan, USA) (En,Ja,Es,Pt)\\Art of Fighting - Ryuuko no Ken Gaiden ~ The Path of the Warrior - Art of Fighting 3 (Japan, USA) (En,Ja,Es,Pt)\\Art of Fighting - Ryuuko no Ken Gaiden ~ The Path of the Warrior - Art of Fighting 3 (Japan, USA) (En,Ja,Es,Pt)\\last bit");
+
                 //var romsPath = romsDirectoryTextBox.Text;
                 //if (string.IsNullOrEmpty(romsPath))
                 //{
@@ -1083,14 +1085,34 @@ namespace Frontend
                 return;
             }
 
-            var result = mainManager.ExecuteRemoveROMsFromMAMEExportFileSubOperation();
+            var result = mainManager.ExecuteRemoveROMsFromMAMEExportFileSubOperation(out var outputDirectory);
             if (!result)
             {
-                MessageBoxOperations.ShowError("Unable to remove the MAME ROM files", "Error");
+                MessageBoxOperations.ShowError("Unable to move the MAME ROM files", "Error");
                 return;
             }
 
-            MessageBoxOperations.ShowInformation($"Successfully Moved the MAME ROM files", "Finished moving the MAME ROM files");
+            MessageBoxOperations.ShowInformation($"Successfully moved the MAME ROM files to {outputDirectory}", "Finished moving the MAME ROM files");
+            // TODO: Open the directory where the ROMs where moved to here
+        }
+
+        private void logViewContextMenuItem_Copy_Click(object sender, EventArgs e)
+        {
+            var logsListViewSelectedItems = logsListView.SelectedItems;
+            if (logsListViewSelectedItems.Count == 0)
+            {
+                return;
+            }
+
+            var selectedItem = logsListViewSelectedItems[0];
+            Clipboard.SetText(selectedItem.Text);
+        }
+
+        private void logViewContextMenu_Opening(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            // Don't allow the logger context menu to be opened if there are no items selected
+            var logsListViewSelectedItems = logsListView.SelectedItems;
+            e.Cancel = logsListViewSelectedItems.Count == 0;
         }
     }
 }
