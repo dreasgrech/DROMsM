@@ -15,20 +15,40 @@ namespace DRomsMUtils
 
         private static int WindowsMaxFilePathLength = 260;
 
-        public static void MoveDirectory(string sourcePath, string destinationPath)
-        {
-            Alphaleonis.Win32.Filesystem.Directory.Move(sourcePath, destinationPath);
-        }
-
-        public static bool CopyFile(string sourceFilename, string destFilename)
+        public static bool MoveDirectory(string sourcePath, string destinationPath)
         {
             try
             {
-                // Make sure there isn't a file that already exists at the destination location
-                if (FileExists(destFilename))
+                Alphaleonis.Win32.Filesystem.Directory.Move(sourcePath, destinationPath);
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public static bool CopyFile(string sourceFilename, string destFilename, bool overwrite)
+        {
+            try
+            {
+                var destFileExists = FileExists(destFilename);
+                if (destFileExists)
                 {
-                    return false;
+                    if (!overwrite)
+                    {
+                        return false;
+                    }
+
+                    // Delete the destination file since it already exists and we're overwriting
+                    DeleteFile(destFilename);
                 }
+
+                //// Make sure there isn't a file that already exists at the destination location
+                //if (!overwrite && FileExists(destFilename))
+                //{
+                //    return false;
+                //}
 
                 // var filePathsExceedMaxPath = sourceFilename.Length >= WindowsMaxFilePathLength || destFilename.Length >= WindowsMaxFilePathLength;
                 var filePathsExceedMaxPath = PathExceedsWindowsMaxFilePathLength(sourceFilename) || PathExceedsWindowsMaxFilePathLength(destFilename);
@@ -150,6 +170,17 @@ namespace DRomsMUtils
             var directoryInfo = FileUtilities.CreateDirectoryInfo(path);
             name = directoryInfo.Name;
             fullName = directoryInfo.FullName;
+        }
+
+        public static string GetDirectoryParent(string path)
+        {
+            var directoryInfo = Alphaleonis.Win32.Filesystem.Directory.GetParent(path);
+            if (directoryInfo == null)
+            {
+                return null;
+            }
+
+            return directoryInfo.FullName;
         }
 
         public static string GetFileName(string filePath)

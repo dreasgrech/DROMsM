@@ -1,4 +1,5 @@
 ﻿using System;
+using System.IO;
 using System.Reflection;
 using System.Threading.Tasks;
 using DRomsMUtils;
@@ -34,13 +35,12 @@ namespace Frontend
                     return false;
                 }
 
-
                 // Make a copy of chdman to our working directory
                 var destinationFilepath = FileUtilities.CombinePath(workingDirectory, CHDMANFilename);
 
                 Logger.Log($"Starting chdman operation.  Copying chdman from {CHDMANFullFilePath} to {destinationFilepath}");
 
-                var fileCopied = FileUtilities.CopyFile(CHDMANFullFilePath, destinationFilepath);
+                var fileCopied = FileUtilities.CopyFile(CHDMANFullFilePath, destinationFilepath, true);
                 if (!fileCopied)
                 {
                     Logger.LogError($"Unable to start chdman operation.  Could not copy chdman from {CHDMANFullFilePath} to {destinationFilepath}");
@@ -104,15 +104,45 @@ namespace Frontend
             // Make sure the output directory exists
             FileUtilities.CreateDirectory(chdOutputDirectory);
 
+            var originalCueFileName = FileUtilities.GetFileName(cueFilePath);
+
             var chdOutputFilename = $"{FileUtilities.GetFileNameWithoutExtension(cueFilePath)}.chd";
             var chdOutputFilePath = FileUtilities.CombinePath(chdOutputDirectory, chdOutputFilename);
 
             // Delete the output file it it already exists
             FileUtilities.DeleteFile(chdOutputFilePath);
 
-            var arguments = $"createcd -i \"{cueFilePath}\" -o \"{chdOutputFilePath}\" -f";
+            /***************************/
+            // TODO ONLY RENAME DIRECTORY IS WE ARE IN A SUBDIRECTORY
+            // if (FileUtilities.PathExceedsWindowsMaxFilePathLength(cueFilePath))
+            // {
+                // Rename the directories
+                var renamedCueDirectory = TemporarilyRenameDirectory(cueFilePath);
+                var renamedCHDDirectory = TemporarilyRenameDirectory(chdOutputFilePath);
+
+                // Rename the files
+                var renamedCueDirectoryWithOriginalCueFileNamePath = FileUtilities.CombinePath(renamedCueDirectory, originalCueFileName);
+                var renamedCueFilePath = TemporarilyRenameFile(renamedCueDirectoryWithOriginalCueFileNamePath);
+                var renamedCHDDirectoryWithChdOutputFileName = FileUtilities.CombinePath(renamedCHDDirectory, chdOutputFilename);
+                var renamedCHDFilePath = TemporarilyRenameFile(renamedCHDDirectoryWithChdOutputFileName);
+            // }
+
+            /***************************/
+
+            // var arguments = $"createcd -i \"{cueFilePath}\" -o \"{chdOutputFilePath}\" -f";
+            var arguments = $"createcd -i \"{renamedCueFilePath}\" -o \"{renamedCHDFilePath}\" -f";
 
             StartProcess(arguments);
+
+            // Rename the files back
+            FileUtilities.MoveFile(renamedCueFilePath, renamedCueDirectoryWithOriginalCueFileNamePath);
+            FileUtilities.MoveFile(renamedCHDFilePath, renamedCHDDirectoryWithChdOutputFileName);
+
+            // Rename the directories back
+            var cueFilePathDirectory = FileUtilities.GetDirectory(cueFilePath);
+            var chdOutputFilePathDirectory = FileUtilities.GetDirectory(chdOutputFilePath);
+            FileUtilities.MoveDirectory(renamedCueDirectory, cueFilePathDirectory);
+            FileUtilities.MoveDirectory(renamedCHDDirectory, chdOutputFilePathDirectory);
 
             return chdOutputFilePath;
         }
@@ -196,6 +226,30 @@ namespace Frontend
                 Logger.Log(stdout.ReadLine());
             }
             */
+        }
+
+        private string TemporarilyRenameDirectory(string directory)
+        {
+            directory = FileUtilities.GetDirectory(directory);
+
+            var directoryName = FileUtilities.GetNameOfDirectory(directory);
+            var renamedDirectoryName = $"_{directoryName.GetHashCode()}";
+            var parentDirectory = FileUtilities.GetDirectoryParent(directory);
+            var renamedFullPath = FileUtilities.CombinePath(parentDirectory, renamedDirectoryName);
+
+            var directoryMoved = FileUtilities.MoveDirectory(directory, renamedFullPath);
+
+            return renamedFullPath;
+        }
+
+        private string TemporarilyRenameFile(string filePath)
+        {
+            var fileExtension = FileUtilities.GetExtension(filePath);
+            var renamedFilename = $"_{filePath.GetHashCode()}{fileExtension}";
+            var amendedFilePath = FileUtilities.CombinePath(FileUtilities.GetDirectory(filePath), renamedFilename);
+            var fileMoved = FileUtilities.MoveFile(filePath, amendedFilePath);
+
+            return amendedFilePath;
         }
 
         private void FileReaderProcess_OutputDataReceived(object sender, System.Diagnostics.DataReceivedEventArgs e)
