@@ -11,7 +11,8 @@ namespace DRomsMUtils
 {
     public static class FileUtilities
     {
-        public const char DirectorySlash = '\\';
+        public const char DirectoryBackSlash = '\\';
+        public const char DirectoryForwardSlash = '/';
 
         private static int WindowsMaxFilePathLength = 260;
 
@@ -250,9 +251,9 @@ namespace DRomsMUtils
             }
 
             var pathContainsDirectory =
-                normalizedPath.Contains($"{directoryName}{DirectorySlash}")
+                normalizedPath.Contains($"{directoryName}{DirectoryBackSlash}")
                 ||
-                normalizedPath.Contains($"{DirectorySlash}{directoryName}");
+                normalizedPath.Contains($"{DirectoryBackSlash}{directoryName}");
             if (pathContainsDirectory)
             {
                 return true;
@@ -264,7 +265,7 @@ namespace DRomsMUtils
         public static string NormalizePathSlashes(string path)
         {
             // Normalize the slashes in the roms path
-            return path.Replace('/', DirectorySlash);
+            return path.Replace(DirectoryForwardSlash, DirectoryBackSlash);
         }
 
         public static string[] ReadAllLines(string filePath)

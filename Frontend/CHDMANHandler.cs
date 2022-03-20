@@ -17,6 +17,7 @@ namespace Frontend
 
         private readonly string CHDMANFullFilePath;
 
+        private string currentOperationCHDMANDirectoryName;
         private string currentOperationCHDMANFilePath;
 
         private bool runningOperation;
@@ -48,6 +49,7 @@ namespace Frontend
                 }
 
                 currentOperationCHDMANFilePath = destinationFilepath;
+                currentOperationCHDMANDirectoryName = FileUtilities.GetNameOfDirectory(FileUtilities.GetDirectory(destinationFilepath));
 
                 runningOperation = true;
 
@@ -83,6 +85,7 @@ namespace Frontend
                 }
 
                 currentOperationCHDMANFilePath = null;
+                currentOperationCHDMANDirectoryName = null;
 
                 runningOperation = false;
 
@@ -101,6 +104,22 @@ namespace Frontend
                 return null;
             }
 
+            /****************************/
+            return RunCHDMan("createcd", cueFilePath, chdOutputDirectory, "chd");
+            /****************************/
+
+            /*
+            var cueFilePathDirectory = FileUtilities.GetDirectory(cueFilePath);
+
+            var currentOperationInRootDirectory =
+                string.Equals(FileUtilities.GetNameOfDirectory(cueFilePathDirectory), currentOperationCHDMANDirectoryName) ||
+                string.Equals(FileUtilities.GetNameOfDirectory(chdOutputDirectory), currentOperationCHDMANDirectoryName);
+
+            // if (FileUtilities.PathExceedsWindowsMaxFilePathLength(cueFilePath))
+
+            // Only rename the directory if we are not working in the directory where chdman is!
+            var renamingDirectory = !currentOperationInRootDirectory;
+
             // Make sure the output directory exists
             FileUtilities.CreateDirectory(chdOutputDirectory);
 
@@ -112,24 +131,21 @@ namespace Frontend
             // Delete the output file it it already exists
             FileUtilities.DeleteFile(chdOutputFilePath);
 
-            /***************************/
-            // TODO ONLY RENAME DIRECTORY IS WE ARE IN A SUBDIRECTORY
-            // if (FileUtilities.PathExceedsWindowsMaxFilePathLength(cueFilePath))
-            // {
-                // Rename the directories
-                var renamedCueDirectory = TemporarilyRenameDirectory(cueFilePath);
-                var renamedCHDDirectory = TemporarilyRenameDirectory(chdOutputFilePath);
+            // Rename the directories
+            var renamedCueDirectory = cueFilePathDirectory;
+            var renamedCHDDirectory = chdOutputDirectory;
+            if (renamingDirectory)
+            {
+                renamedCueDirectory = TemporarilyRenameDirectory(cueFilePath);
+                renamedCHDDirectory = TemporarilyRenameDirectory(chdOutputFilePath);
+            }
 
-                // Rename the files
-                var renamedCueDirectoryWithOriginalCueFileNamePath = FileUtilities.CombinePath(renamedCueDirectory, originalCueFileName);
-                var renamedCueFilePath = TemporarilyRenameFile(renamedCueDirectoryWithOriginalCueFileNamePath);
-                var renamedCHDDirectoryWithChdOutputFileName = FileUtilities.CombinePath(renamedCHDDirectory, chdOutputFilename);
-                var renamedCHDFilePath = TemporarilyRenameFile(renamedCHDDirectoryWithChdOutputFileName);
-            // }
+            // Rename the files
+            var renamedCueDirectoryWithOriginalCueFileNamePath = FileUtilities.CombinePath(renamedCueDirectory, originalCueFileName);
+            var renamedCueFilePath = TemporarilyRenameFile(renamedCueDirectoryWithOriginalCueFileNamePath);
+            var renamedCHDDirectoryWithChdOutputFileName = FileUtilities.CombinePath(renamedCHDDirectory, chdOutputFilename);
+            var renamedCHDFilePath = TemporarilyRenameFile(renamedCHDDirectoryWithChdOutputFileName);
 
-            /***************************/
-
-            // var arguments = $"createcd -i \"{cueFilePath}\" -o \"{chdOutputFilePath}\" -f";
             var arguments = $"createcd -i \"{renamedCueFilePath}\" -o \"{renamedCHDFilePath}\" -f";
 
             StartProcess(arguments);
@@ -139,12 +155,16 @@ namespace Frontend
             FileUtilities.MoveFile(renamedCHDFilePath, renamedCHDDirectoryWithChdOutputFileName);
 
             // Rename the directories back
-            var cueFilePathDirectory = FileUtilities.GetDirectory(cueFilePath);
-            var chdOutputFilePathDirectory = FileUtilities.GetDirectory(chdOutputFilePath);
-            FileUtilities.MoveDirectory(renamedCueDirectory, cueFilePathDirectory);
-            FileUtilities.MoveDirectory(renamedCHDDirectory, chdOutputFilePathDirectory);
+            if (renamingDirectory)
+            {
+                // var cueFilePathDirectory = FileUtilities.GetDirectory(cueFilePath);
+                var chdOutputFilePathDirectory = FileUtilities.GetDirectory(chdOutputFilePath);
+                FileUtilities.MoveDirectory(renamedCueDirectory, cueFilePathDirectory);
+                FileUtilities.MoveDirectory(renamedCHDDirectory, chdOutputFilePathDirectory);
+            }
 
             return chdOutputFilePath;
+            */
         }
 
         public string ConvertToCueBin(string chdFilePath, string outputDirectory)
@@ -154,6 +174,11 @@ namespace Frontend
                 return null;
             }
 
+            /****************************/
+            return RunCHDMan("extractcd", chdFilePath, outputDirectory, "cue");
+            /****************************/
+
+            /*
             // Make sure the output directory exists
             FileUtilities.CreateDirectory(outputDirectory);
 
@@ -168,6 +193,7 @@ namespace Frontend
             StartProcess(arguments);
 
             return cueOutputFilename;
+            */
         }
 
         public string CombineMultipleBinsIntoOne(string cueFilePath, string outputDirectory)
@@ -255,6 +281,78 @@ namespace Frontend
         private void FileReaderProcess_OutputDataReceived(object sender, System.Diagnostics.DataReceivedEventArgs e)
         {
             Logger.Log(e.Data);
+        }
+
+        public string RunCHDMan(string command, string inputFilePath, string outputDirectory, string outputFileExtension)
+        {
+            if (!runningOperation)
+            {
+                return null;
+            }
+
+            /*
+            var directory = FileUtilities.GetDirectory(currentOperationCHDMANFilePath);
+            inputFilePath = inputFilePath.Replace(directory, string.Empty);
+            outputDirectory = outputDirectory.Replace(directory, string.Empty);
+            */
+
+            var inputFilePathDirectory = FileUtilities.GetDirectory(inputFilePath);
+
+            var currentOperationInRootDirectory =
+                string.Equals(FileUtilities.GetNameOfDirectory(inputFilePathDirectory), currentOperationCHDMANDirectoryName) ||
+                string.Equals(FileUtilities.GetNameOfDirectory(outputDirectory), currentOperationCHDMANDirectoryName);
+
+            // if (FileUtilities.PathExceedsWindowsMaxFilePathLength(cueFilePath))
+
+            // Only rename the directory if we are not working in the directory where chdman is!
+            var renamingDirectory = !currentOperationInRootDirectory;
+
+            // Make sure the output directory exists
+            FileUtilities.CreateDirectory(outputDirectory);
+
+            var originalInputFileName = FileUtilities.GetFileName(inputFilePath);
+
+            // var outputFilename = $"{FileUtilities.GetFileNameWithoutExtension(inputFilePath)}.chd";
+            var outputFilename = $"{FileUtilities.GetFileNameWithoutExtension(inputFilePath)}.{outputFileExtension}";
+            var outputFilePath = FileUtilities.CombinePath(outputDirectory, outputFilename);
+
+            // Delete the output file it it already exists
+            FileUtilities.DeleteFile(outputFilePath);
+
+            // Rename the directories
+            var renamedInputDirectory = inputFilePathDirectory;
+            var renamedOutputDirectory = outputDirectory;
+            if (renamingDirectory)
+            {
+                renamedInputDirectory = TemporarilyRenameDirectory(inputFilePath);
+                renamedOutputDirectory = TemporarilyRenameDirectory(outputFilePath);
+            }
+
+            // Rename the files
+            var renamedInputDirectoryWithOriginalInputFileNamePath = FileUtilities.CombinePath(renamedInputDirectory, originalInputFileName);
+            var renamedInputFilePath = TemporarilyRenameFile(renamedInputDirectoryWithOriginalInputFileNamePath);
+            var renamedOutputDirectoryWithOutputFileName = FileUtilities.CombinePath(renamedOutputDirectory, outputFilename);
+            // var renamedOutputFilePath = TemporarilyRenameFile(renamedOutputDirectoryWithOutputFileName);
+            var renamedOutputFilePath = renamedOutputDirectoryWithOutputFileName;
+
+            // var arguments = $"createcd -i \"{renamedInputFilePath}\" -o \"{renamedOutputFilePath}\" -f";
+            var arguments = $"{command} -i \"{renamedInputFilePath}\" -o \"{renamedOutputFilePath}\" -f";
+
+            StartProcess(arguments);
+
+            // Rename the files back
+            FileUtilities.MoveFile(renamedInputFilePath, renamedInputDirectoryWithOriginalInputFileNamePath);
+            //FileUtilities.MoveFile(renamedOutputFilePath, renamedOutputDirectoryWithOutputFileName);
+
+            // Rename the directories back
+            if (renamingDirectory)
+            {
+                var outputFilePathDirectory = FileUtilities.GetDirectory(outputFilePath);
+                FileUtilities.MoveDirectory(renamedInputDirectory, inputFilePathDirectory);
+                FileUtilities.MoveDirectory(renamedOutputDirectory, outputFilePathDirectory);
+            }
+
+            return outputFilePath;
         }
     }
 }

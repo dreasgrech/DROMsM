@@ -687,13 +687,13 @@ namespace Frontend
             // var absoluteDirectory = directoryInfo.FullName;
             var relativeFilePath = filePath.Replace(romsPathDirectoryInfoFullName, string.Empty);
 
-            if (relativeFilePath[0] == FileUtilities.DirectorySlash)
+            if (relativeFilePath[0] == FileUtilities.DirectoryBackSlash)
             {
                 relativeFilePath = relativeFilePath.Substring(1, relativeFilePath.Length - 1);
             }
 
             string romSubDirectoryPath = string.Empty;
-            var relativeFilePathLastIndexOf = relativeFilePath.LastIndexOf(FileUtilities.DirectorySlash);
+            var relativeFilePathLastIndexOf = relativeFilePath.LastIndexOf(FileUtilities.DirectoryBackSlash);
             if (relativeFilePathLastIndexOf >= 0)
             {
                 romSubDirectoryPath = relativeFilePath.Substring(0, relativeFilePathLastIndexOf + 1);
