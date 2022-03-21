@@ -7,6 +7,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 using CsvHelper;
+using CsvHelper.Configuration;
 using Frontend;
 
 namespace DRomsMUtils
@@ -17,8 +18,16 @@ namespace DRomsMUtils
         {
             try
             {
+                var config = new CsvConfiguration(CultureInfo.CurrentCulture)
+                {
+                    //Mode = CsvMode.Escape
+                    TrimOptions = TrimOptions.None,
+                    HasHeaderRecord = true
+                };
+
                 using (var writer = new StreamWriter(filePath))
-                using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                // using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
+                using (var csv = new CsvWriter(writer, config))
                 {
                     csv.WriteHeader<DATFileMachine>();
                     csv.NextRecord();
