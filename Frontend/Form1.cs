@@ -163,7 +163,8 @@ namespace Frontend
 
                 ApplyInitialSavedProjectSettings();
 
-                allowedSimilarityValueTextbox.Text = mainManager.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
+                // allowedSimilarityValueTextbox.Text = mainManager.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
+                // allowedSimilarityValueTextbox.Text = OperationsOptions.Instance.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
 
                 /*
                 var romsDirectory = romsDirectoryTextBox.Text;
@@ -184,8 +185,10 @@ namespace Frontend
         private void ApplyInitialSavedProjectSettings()
         {
             romsDirectoryTextBox.Text = ProjectSettingsManager.ResolveString(ProjectSettings.ROMsDirectory);
-            matchUsingGamelistXMLNameCheckbox.Checked = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
-            autoExpandAfterOperationsCheckbox.Checked = ProjectSettingsManager.ResolveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations);
+            OperationsOptions.Instance.MatchUsingGameListXMLName = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
+            // matchUsingGamelistXMLNameCheckbox.Checked = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
+            // autoExpandAfterOperationsCheckbox.Checked = ProjectSettingsManager.ResolveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations);
+            OperationsOptions.Instance.AutoExpandAfterOperations = ProjectSettingsManager.ResolveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations);
         }
 
         private void findSuggestedButton_Click(object sender, EventArgs e)
@@ -942,23 +945,25 @@ namespace Frontend
         }
 #endregion
 
-        private void allowedSimilarityValueTextBox_Leave(object sender, EventArgs e)
-        {
-            var allowedSimilarityValueTextBoxText = allowedSimilarityValueTextbox.Text;
-            if (!double.TryParse(allowedSimilarityValueTextbox.Text, out var allowedSimilarityValue))
-            {
-                Logger.Log($"Unable to parse {allowedSimilarityValueTextBoxText} as an Allowed Similarity Value.  Numbers only.");
+        //private void allowedSimilarityValueTextBox_Leave(object sender, EventArgs e)
+        //{
+        //    var allowedSimilarityValueTextBoxText = allowedSimilarityValueTextbox.Text;
+        //    if (!double.TryParse(allowedSimilarityValueTextbox.Text, out var allowedSimilarityValue))
+        //    {
+        //        Logger.Log($"Unable to parse {allowedSimilarityValueTextBoxText} as an Allowed Similarity Value.  Numbers only.");
 
-                allowedSimilarityValueTextbox.Text = mainManager.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
-                return;
-            }
+        //        // allowedSimilarityValueTextbox.Text = mainManager.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
+        //        allowedSimilarityValueTextbox.Text = OperationsOptions.Instance.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
+        //        return;
+        //    }
 
-            allowedSimilarityValue = DoubleExtensions.Clamp(allowedSimilarityValue, 0, 1);
-            allowedSimilarityValueTextbox.Text = allowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
+        //    allowedSimilarityValue = DoubleExtensions.Clamp(allowedSimilarityValue, 0, 1);
+        //    allowedSimilarityValueTextbox.Text = allowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
 
-            mainManager.AllowedSimilarityValue = allowedSimilarityValue;
-            Logger.Log($"Updating the Allowed Similarity Value to {allowedSimilarityValueTextBoxText}.");
-        }
+        //    // mainManager.AllowedSimilarityValue = allowedSimilarityValue;
+        //    OperationsOptions.Instance.AllowedSimilarityValue = allowedSimilarityValue;
+        //    Logger.Log($"Updating the Allowed Similarity Value to {allowedSimilarityValueTextBoxText}.");
+        //}
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1008,21 +1013,21 @@ namespace Frontend
             }
         }
 
-        private void matchUsingGameListXMLNameCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            var checkboxValue = matchUsingGamelistXMLNameCheckbox.Checked;
+        //private void matchUsingGameListXMLNameCheckbox_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    var checkboxValue = matchUsingGamelistXMLNameCheckbox.Checked;
 
-            options.MatchUsingGameListXMLName = checkboxValue;
-            ProjectSettingsManager.SaveBool(ProjectSettings.MatchUsingGameListXMLName, checkboxValue);
-        }
+        //    options.MatchUsingGameListXMLName = checkboxValue;
+        //    ProjectSettingsManager.SaveBool(ProjectSettings.MatchUsingGameListXMLName, checkboxValue);
+        //}
 
-        private void autoExpandAfterOperationsCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            var checkboxValue = autoExpandAfterOperationsCheckbox.Checked;
+        //private void autoExpandAfterOperationsCheckbox_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    var checkboxValue = autoExpandAfterOperationsCheckbox.Checked;
 
-            options.AutoExpandAfterOperations = checkboxValue;
-            ProjectSettingsManager.SaveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations, checkboxValue);
-        }
+        //    options.AutoExpandAfterOperations = checkboxValue;
+        //    ProjectSettingsManager.SaveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations, checkboxValue);
+        //}
 
         private void removeTopLevelDirectoriesOperationButton_Click(object sender, EventArgs e)
         {
@@ -1113,6 +1118,12 @@ namespace Frontend
             // Don't allow the logger context menu to be opened if there are no items selected
             var logsListViewSelectedItems = logsListView.SelectedItems;
             e.Cancel = logsListViewSelectedItems.Count == 0;
+        }
+
+        private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var preferencesForm = new MainPreferencesForm();
+            var dialogResult = preferencesForm.ShowDialog();
         }
     }
 }

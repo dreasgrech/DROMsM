@@ -102,36 +102,39 @@
             this.splitContainer5 = new System.Windows.Forms.SplitContainer();
             this.logsListView = new System.Windows.Forms.ListView();
             this.columnHeader1 = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.logViewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.logViewContextMenuItem_Copy = new System.Windows.Forms.ToolStripMenuItem();
             this.panel5 = new System.Windows.Forms.Panel();
+            this.label7 = new System.Windows.Forms.Label();
             this.panel7 = new System.Windows.Forms.Panel();
             this.seperator1 = new System.Windows.Forms.Label();
             this.panel6 = new System.Windows.Forms.Panel();
+            this.panel13 = new System.Windows.Forms.Panel();
+            this.panel12 = new System.Windows.Forms.Panel();
+            this.panel8 = new System.Windows.Forms.Panel();
             this.removeROMsFromMAMEFileSubOperationButton = new System.Windows.Forms.Button();
             this.removeROMsFromMAMEFileOperationButton = new System.Windows.Forms.Button();
-            this.applyCombineMultipleBinFilesToOneButton = new System.Windows.Forms.Button();
-            this.combineMultipleBinFilesToOneOperationButton = new System.Windows.Forms.Button();
-            this.removeEmptyTopLevelDirectoriesSubOperationButton = new System.Windows.Forms.Button();
-            this.removeTopLevelDirectoriesOperationButton = new System.Windows.Forms.Button();
-            this.applyMoveAllROMsToRootButton = new System.Windows.Forms.Button();
+            this.panel11 = new System.Windows.Forms.Panel();
             this.moveROMsToRootOperationButton = new System.Windows.Forms.Button();
-            this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
-            this.label9 = new System.Windows.Forms.Label();
-            this.allowedSimilarityValueTextbox = new System.Windows.Forms.TextBox();
-            this.label7 = new System.Windows.Forms.Label();
-            this.matchUsingGamelistXMLNameCheckbox = new System.Windows.Forms.CheckBox();
-            this.autoExpandAfterOperationsCheckbox = new System.Windows.Forms.CheckBox();
-            this.label10 = new System.Windows.Forms.Label();
+            this.applyMoveAllROMsToRootButton = new System.Windows.Forms.Button();
+            this.panel10 = new System.Windows.Forms.Panel();
+            this.removeTopLevelDirectoriesOperationButton = new System.Windows.Forms.Button();
+            this.removeEmptyTopLevelDirectoriesSubOperationButton = new System.Windows.Forms.Button();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.combineMultipleBinFilesToOneOperationButton = new System.Windows.Forms.Button();
+            this.applyCombineMultipleBinFilesToOneButton = new System.Windows.Forms.Button();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exportAllROMsListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.findDuplicatesResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.splitIntoDirectoriesResultsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.logViewContextMenu = new System.Windows.Forms.ContextMenuStrip(this.components);
-            this.logViewContextMenuItem_Copy = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator2 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -160,12 +163,17 @@
             this.splitContainer5.Panel1.SuspendLayout();
             this.splitContainer5.Panel2.SuspendLayout();
             this.splitContainer5.SuspendLayout();
+            this.logViewContextMenu.SuspendLayout();
             this.panel5.SuspendLayout();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
-            this.tableLayoutPanel4.SuspendLayout();
+            this.panel13.SuspendLayout();
+            this.panel12.SuspendLayout();
+            this.panel8.SuspendLayout();
+            this.panel11.SuspendLayout();
+            this.panel10.SuspendLayout();
+            this.panel9.SuspendLayout();
             this.menuStrip1.SuspendLayout();
-            this.logViewContextMenu.SuspendLayout();
             this.SuspendLayout();
             // 
             // romsDirectoryTextBox
@@ -215,7 +223,7 @@
             this.groupBox1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.groupBox1.Location = new System.Drawing.Point(0, 0);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(1608, 721);
+            this.groupBox1.Size = new System.Drawing.Size(1608, 871);
             this.groupBox1.TabIndex = 6;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Results";
@@ -237,8 +245,8 @@
             // 
             this.splitContainer2.Panel2.Controls.Add(this.splitContainer3);
             this.splitContainer2.Panel2MinSize = 400;
-            this.splitContainer2.Size = new System.Drawing.Size(1595, 619);
-            this.splitContainer2.SplitterDistance = 1176;
+            this.splitContainer2.Size = new System.Drawing.Size(1595, 768);
+            this.splitContainer2.SplitterDistance = 1172;
             this.splitContainer2.TabIndex = 15;
             // 
             // splitContainer4
@@ -254,8 +262,8 @@
             // splitContainer4.Panel2
             // 
             this.splitContainer4.Panel2.Controls.Add(this.splitContainer1);
-            this.splitContainer4.Size = new System.Drawing.Size(1176, 619);
-            this.splitContainer4.SplitterDistance = 387;
+            this.splitContainer4.Size = new System.Drawing.Size(1172, 768);
+            this.splitContainer4.SplitterDistance = 385;
             this.splitContainer4.TabIndex = 15;
             // 
             // unprocessedROMsTreeview
@@ -263,7 +271,7 @@
             this.unprocessedROMsTreeview.Dock = System.Windows.Forms.DockStyle.Fill;
             this.unprocessedROMsTreeview.Location = new System.Drawing.Point(0, 0);
             this.unprocessedROMsTreeview.Name = "unprocessedROMsTreeview";
-            this.unprocessedROMsTreeview.Size = new System.Drawing.Size(387, 619);
+            this.unprocessedROMsTreeview.Size = new System.Drawing.Size(385, 768);
             this.unprocessedROMsTreeview.TabIndex = 0;
             this.unprocessedROMsTreeview.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.unprocessedROMsTreeView_AfterSelect);
             // 
@@ -280,8 +288,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.rightTreeView);
-            this.splitContainer1.Size = new System.Drawing.Size(785, 619);
-            this.splitContainer1.SplitterDistance = 392;
+            this.splitContainer1.Size = new System.Drawing.Size(783, 768);
+            this.splitContainer1.SplitterDistance = 390;
             this.splitContainer1.TabIndex = 14;
             // 
             // leftTreeView
@@ -289,7 +297,7 @@
             this.leftTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.leftTreeView.Location = new System.Drawing.Point(0, 0);
             this.leftTreeView.Name = "leftTreeView";
-            this.leftTreeView.Size = new System.Drawing.Size(392, 619);
+            this.leftTreeView.Size = new System.Drawing.Size(390, 768);
             this.leftTreeView.TabIndex = 15;
             this.leftTreeView.ScrollV += new devio.Windows.Controls.ScrollEventHandler(this.leftTreeView_ScrollV);
             this.leftTreeView.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.originalROMs_AfterCollapse);
@@ -301,7 +309,7 @@
             this.rightTreeView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.rightTreeView.Location = new System.Drawing.Point(0, 0);
             this.rightTreeView.Name = "rightTreeView";
-            this.rightTreeView.Size = new System.Drawing.Size(389, 619);
+            this.rightTreeView.Size = new System.Drawing.Size(389, 768);
             this.rightTreeView.TabIndex = 16;
             this.rightTreeView.ScrollV += new devio.Windows.Controls.ScrollEventHandler(this.rightTreeView_ScrollV);
             this.rightTreeView.AfterCollapse += new System.Windows.Forms.TreeViewEventHandler(this.processedROMsTreeView_AfterCollapse);
@@ -324,7 +332,7 @@
             // splitContainer3.Panel2
             // 
             this.splitContainer3.Panel2.Controls.Add(this.tableLayoutPanel2);
-            this.splitContainer3.Size = new System.Drawing.Size(415, 619);
+            this.splitContainer3.Size = new System.Drawing.Size(419, 768);
             this.splitContainer3.SplitterDistance = 436;
             this.splitContainer3.TabIndex = 3;
             // 
@@ -389,7 +397,7 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 75F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 24F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 59F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(415, 436);
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(419, 436);
             this.tableLayoutPanel1.TabIndex = 2;
             // 
             // romFilename
@@ -399,7 +407,7 @@
             this.romFilename.Margin = new System.Windows.Forms.Padding(0);
             this.romFilename.Name = "romFilename";
             this.romFilename.ReadOnly = true;
-            this.romFilename.Size = new System.Drawing.Size(316, 20);
+            this.romFilename.Size = new System.Drawing.Size(320, 20);
             this.romFilename.TabIndex = 18;
             // 
             // label6
@@ -450,7 +458,7 @@
             this.romFilePath.Margin = new System.Windows.Forms.Padding(0);
             this.romFilePath.Name = "romFilePath";
             this.romFilePath.ReadOnly = true;
-            this.romFilePath.Size = new System.Drawing.Size(316, 20);
+            this.romFilePath.Size = new System.Drawing.Size(320, 20);
             this.romFilePath.TabIndex = 1;
             // 
             // label3
@@ -714,7 +722,7 @@
             this.romUniversalCodes.Location = new System.Drawing.Point(99, 318);
             this.romUniversalCodes.Margin = new System.Windows.Forms.Padding(0, 0, 0, 5);
             this.romUniversalCodes.Name = "romUniversalCodes";
-            this.romUniversalCodes.Size = new System.Drawing.Size(316, 70);
+            this.romUniversalCodes.Size = new System.Drawing.Size(320, 70);
             this.romUniversalCodes.TabIndex = 29;
             this.romUniversalCodes.UseCompatibleStateImageBehavior = false;
             this.romUniversalCodes.View = System.Windows.Forms.View.List;
@@ -756,7 +764,7 @@
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 134F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 53F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 8F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(415, 179);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(419, 328);
             this.tableLayoutPanel2.TabIndex = 3;
             // 
             // label8
@@ -802,7 +810,7 @@
             this.romName.Margin = new System.Windows.Forms.Padding(0);
             this.romName.Name = "romName";
             this.romName.ReadOnly = true;
-            this.romName.Size = new System.Drawing.Size(316, 20);
+            this.romName.Size = new System.Drawing.Size(320, 20);
             this.romName.TabIndex = 33;
             // 
             // panel4
@@ -811,7 +819,7 @@
             this.panel4.Controls.Add(this.panel1);
             this.panel4.Controls.Add(this.panel3);
             this.panel4.Controls.Add(this.panel2);
-            this.panel4.Location = new System.Drawing.Point(4, 673);
+            this.panel4.Location = new System.Drawing.Point(4, 822);
             this.panel4.Name = "panel4";
             this.panel4.Size = new System.Drawing.Size(493, 43);
             this.panel4.TabIndex = 10;
@@ -894,10 +902,10 @@
             // findDuplicatesButton
             // 
             this.findDuplicatesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.findDuplicatesButton.ForeColor = System.Drawing.Color.Red;
-            this.findDuplicatesButton.Location = new System.Drawing.Point(3, 7);
+            this.findDuplicatesButton.ForeColor = System.Drawing.Color.DarkGreen;
+            this.findDuplicatesButton.Location = new System.Drawing.Point(3, 1);
             this.findDuplicatesButton.Name = "findDuplicatesButton";
-            this.findDuplicatesButton.Size = new System.Drawing.Size(118, 23);
+            this.findDuplicatesButton.Size = new System.Drawing.Size(156, 23);
             this.findDuplicatesButton.TabIndex = 12;
             this.findDuplicatesButton.Text = "Find Duplicates";
             this.findDuplicatesButton.UseVisualStyleBackColor = true;
@@ -917,10 +925,10 @@
             // 
             this.applyDuplicatesResultsButton.Enabled = false;
             this.applyDuplicatesResultsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.applyDuplicatesResultsButton.ForeColor = System.Drawing.Color.Black;
-            this.applyDuplicatesResultsButton.Location = new System.Drawing.Point(3, 34);
+            this.applyDuplicatesResultsButton.ForeColor = System.Drawing.Color.Red;
+            this.applyDuplicatesResultsButton.Location = new System.Drawing.Point(169, 0);
             this.applyDuplicatesResultsButton.Name = "applyDuplicatesResultsButton";
-            this.applyDuplicatesResultsButton.Size = new System.Drawing.Size(118, 23);
+            this.applyDuplicatesResultsButton.Size = new System.Drawing.Size(43, 23);
             this.applyDuplicatesResultsButton.TabIndex = 14;
             this.applyDuplicatesResultsButton.Text = "Apply";
             this.applyDuplicatesResultsButton.UseVisualStyleBackColor = true;
@@ -929,10 +937,10 @@
             // splitIntoDirectoriesButton
             // 
             this.splitIntoDirectoriesButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.splitIntoDirectoriesButton.ForeColor = System.Drawing.Color.Red;
-            this.splitIntoDirectoriesButton.Location = new System.Drawing.Point(142, 7);
+            this.splitIntoDirectoriesButton.ForeColor = System.Drawing.Color.DarkGreen;
+            this.splitIntoDirectoriesButton.Location = new System.Drawing.Point(3, 3);
             this.splitIntoDirectoriesButton.Name = "splitIntoDirectoriesButton";
-            this.splitIntoDirectoriesButton.Size = new System.Drawing.Size(143, 23);
+            this.splitIntoDirectoriesButton.Size = new System.Drawing.Size(157, 23);
             this.splitIntoDirectoriesButton.TabIndex = 15;
             this.splitIntoDirectoriesButton.Text = "Split into directories";
             this.splitIntoDirectoriesButton.UseVisualStyleBackColor = true;
@@ -942,10 +950,10 @@
             // 
             this.applySplitResultsButton.Enabled = false;
             this.applySplitResultsButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.applySplitResultsButton.ForeColor = System.Drawing.Color.Black;
-            this.applySplitResultsButton.Location = new System.Drawing.Point(142, 34);
+            this.applySplitResultsButton.ForeColor = System.Drawing.Color.Red;
+            this.applySplitResultsButton.Location = new System.Drawing.Point(164, 3);
             this.applySplitResultsButton.Name = "applySplitResultsButton";
-            this.applySplitResultsButton.Size = new System.Drawing.Size(143, 23);
+            this.applySplitResultsButton.Size = new System.Drawing.Size(48, 23);
             this.applySplitResultsButton.TabIndex = 16;
             this.applySplitResultsButton.Text = "Apply";
             this.applySplitResultsButton.UseVisualStyleBackColor = true;
@@ -954,7 +962,7 @@
             // analyzeDirectoryButton
             // 
             this.analyzeDirectoryButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.analyzeDirectoryButton.ForeColor = System.Drawing.Color.DarkGreen;
+            this.analyzeDirectoryButton.ForeColor = System.Drawing.SystemColors.ControlText;
             this.analyzeDirectoryButton.Location = new System.Drawing.Point(594, 4);
             this.analyzeDirectoryButton.Name = "analyzeDirectoryButton";
             this.analyzeDirectoryButton.Size = new System.Drawing.Size(137, 23);
@@ -969,7 +977,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer5.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer5.Location = new System.Drawing.Point(15, 217);
+            this.splitContainer5.Location = new System.Drawing.Point(15, 224);
             this.splitContainer5.Name = "splitContainer5";
             this.splitContainer5.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -980,8 +988,8 @@
             // splitContainer5.Panel2
             // 
             this.splitContainer5.Panel2.Controls.Add(this.logsListView);
-            this.splitContainer5.Size = new System.Drawing.Size(1608, 840);
-            this.splitContainer5.SplitterDistance = 721;
+            this.splitContainer5.Size = new System.Drawing.Size(1608, 994);
+            this.splitContainer5.SplitterDistance = 871;
             this.splitContainer5.TabIndex = 18;
             // 
             // logsListView
@@ -993,7 +1001,7 @@
             this.logsListView.HideSelection = false;
             this.logsListView.Location = new System.Drawing.Point(0, 0);
             this.logsListView.Name = "logsListView";
-            this.logsListView.Size = new System.Drawing.Size(1608, 115);
+            this.logsListView.Size = new System.Drawing.Size(1608, 119);
             this.logsListView.TabIndex = 0;
             this.logsListView.UseCompatibleStateImageBehavior = false;
             this.logsListView.View = System.Windows.Forms.View.Details;
@@ -1003,18 +1011,44 @@
             this.columnHeader1.Text = "Logs";
             this.columnHeader1.Width = 1604;
             // 
+            // logViewContextMenu
+            // 
+            this.logViewContextMenu.ImageScalingSize = new System.Drawing.Size(24, 24);
+            this.logViewContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.logViewContextMenuItem_Copy});
+            this.logViewContextMenu.Name = "logViewContextMenu";
+            this.logViewContextMenu.Size = new System.Drawing.Size(103, 26);
+            this.logViewContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.logViewContextMenu_Opening);
+            // 
+            // logViewContextMenuItem_Copy
+            // 
+            this.logViewContextMenuItem_Copy.Name = "logViewContextMenuItem_Copy";
+            this.logViewContextMenuItem_Copy.Size = new System.Drawing.Size(102, 22);
+            this.logViewContextMenuItem_Copy.Text = "Copy";
+            this.logViewContextMenuItem_Copy.Click += new System.EventHandler(this.logViewContextMenuItem_Copy_Click);
+            // 
             // panel5
             // 
             this.panel5.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
+            this.panel5.Controls.Add(this.label7);
             this.panel5.Controls.Add(this.panel7);
             this.panel5.Controls.Add(this.seperator1);
             this.panel5.Controls.Add(this.panel6);
-            this.panel5.Controls.Add(this.tableLayoutPanel4);
             this.panel5.Location = new System.Drawing.Point(12, 27);
             this.panel5.Name = "panel5";
-            this.panel5.Size = new System.Drawing.Size(1611, 184);
+            this.panel5.Size = new System.Drawing.Size(1611, 191);
             this.panel5.TabIndex = 19;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(7, 54);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(81, 18);
+            this.label7.TabIndex = 23;
+            this.label7.Text = "Operations";
             // 
             // panel7
             // 
@@ -1040,31 +1074,52 @@
             // panel6
             // 
             this.panel6.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.panel6.Controls.Add(this.removeROMsFromMAMEFileSubOperationButton);
-            this.panel6.Controls.Add(this.removeROMsFromMAMEFileOperationButton);
-            this.panel6.Controls.Add(this.applyCombineMultipleBinFilesToOneButton);
-            this.panel6.Controls.Add(this.combineMultipleBinFilesToOneOperationButton);
-            this.panel6.Controls.Add(this.removeEmptyTopLevelDirectoriesSubOperationButton);
-            this.panel6.Controls.Add(this.removeTopLevelDirectoriesOperationButton);
-            this.panel6.Controls.Add(this.applyMoveAllROMsToRootButton);
-            this.panel6.Controls.Add(this.moveROMsToRootOperationButton);
-            this.panel6.Controls.Add(this.findDuplicatesButton);
-            this.panel6.Controls.Add(this.applyDuplicatesResultsButton);
-            this.panel6.Controls.Add(this.splitIntoDirectoriesButton);
-            this.panel6.Controls.Add(this.applySplitResultsButton);
-            this.panel6.Location = new System.Drawing.Point(3, 121);
+            this.panel6.Controls.Add(this.panel13);
+            this.panel6.Controls.Add(this.panel12);
+            this.panel6.Controls.Add(this.panel8);
+            this.panel6.Controls.Add(this.panel11);
+            this.panel6.Controls.Add(this.panel10);
+            this.panel6.Controls.Add(this.panel9);
+            this.panel6.Location = new System.Drawing.Point(0, 75);
             this.panel6.Name = "panel6";
-            this.panel6.Size = new System.Drawing.Size(1303, 60);
+            this.panel6.Size = new System.Drawing.Size(1611, 113);
             this.panel6.TabIndex = 21;
+            // 
+            // panel13
+            // 
+            this.panel13.Controls.Add(this.findDuplicatesButton);
+            this.panel13.Controls.Add(this.applyDuplicatesResultsButton);
+            this.panel13.Location = new System.Drawing.Point(7, 12);
+            this.panel13.Name = "panel13";
+            this.panel13.Size = new System.Drawing.Size(220, 27);
+            this.panel13.TabIndex = 23;
+            // 
+            // panel12
+            // 
+            this.panel12.Controls.Add(this.splitIntoDirectoriesButton);
+            this.panel12.Controls.Add(this.applySplitResultsButton);
+            this.panel12.Location = new System.Drawing.Point(7, 42);
+            this.panel12.Name = "panel12";
+            this.panel12.Size = new System.Drawing.Size(220, 33);
+            this.panel12.TabIndex = 23;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.removeROMsFromMAMEFileSubOperationButton);
+            this.panel8.Controls.Add(this.removeROMsFromMAMEFileOperationButton);
+            this.panel8.Location = new System.Drawing.Point(252, 77);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(311, 30);
+            this.panel8.TabIndex = 23;
             // 
             // removeROMsFromMAMEFileSubOperationButton
             // 
             this.removeROMsFromMAMEFileSubOperationButton.Enabled = false;
             this.removeROMsFromMAMEFileSubOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.removeROMsFromMAMEFileSubOperationButton.ForeColor = System.Drawing.Color.Black;
-            this.removeROMsFromMAMEFileSubOperationButton.Location = new System.Drawing.Point(988, 34);
+            this.removeROMsFromMAMEFileSubOperationButton.ForeColor = System.Drawing.Color.Red;
+            this.removeROMsFromMAMEFileSubOperationButton.Location = new System.Drawing.Point(252, 3);
             this.removeROMsFromMAMEFileSubOperationButton.Name = "removeROMsFromMAMEFileSubOperationButton";
-            this.removeROMsFromMAMEFileSubOperationButton.Size = new System.Drawing.Size(222, 23);
+            this.removeROMsFromMAMEFileSubOperationButton.Size = new System.Drawing.Size(49, 23);
             this.removeROMsFromMAMEFileSubOperationButton.TabIndex = 27;
             this.removeROMsFromMAMEFileSubOperationButton.Text = "Apply";
             this.removeROMsFromMAMEFileSubOperationButton.UseVisualStyleBackColor = true;
@@ -1073,83 +1128,29 @@
             // removeROMsFromMAMEFileOperationButton
             // 
             this.removeROMsFromMAMEFileOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.removeROMsFromMAMEFileOperationButton.ForeColor = System.Drawing.Color.Red;
-            this.removeROMsFromMAMEFileOperationButton.Location = new System.Drawing.Point(988, 7);
+            this.removeROMsFromMAMEFileOperationButton.ForeColor = System.Drawing.Color.DarkGreen;
+            this.removeROMsFromMAMEFileOperationButton.Location = new System.Drawing.Point(3, 3);
             this.removeROMsFromMAMEFileOperationButton.Name = "removeROMsFromMAMEFileOperationButton";
-            this.removeROMsFromMAMEFileOperationButton.Size = new System.Drawing.Size(222, 23);
+            this.removeROMsFromMAMEFileOperationButton.Size = new System.Drawing.Size(243, 23);
             this.removeROMsFromMAMEFileOperationButton.TabIndex = 26;
             this.removeROMsFromMAMEFileOperationButton.Text = "Remove ROMs from MAME file";
             this.removeROMsFromMAMEFileOperationButton.UseVisualStyleBackColor = true;
             this.removeROMsFromMAMEFileOperationButton.Click += new System.EventHandler(this.removeROMsFromMAMEFileOperationButton_Click);
             // 
-            // applyCombineMultipleBinFilesToOneButton
+            // panel11
             // 
-            this.applyCombineMultipleBinFilesToOneButton.Enabled = false;
-            this.applyCombineMultipleBinFilesToOneButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.applyCombineMultipleBinFilesToOneButton.ForeColor = System.Drawing.Color.Black;
-            this.applyCombineMultipleBinFilesToOneButton.Location = new System.Drawing.Point(747, 34);
-            this.applyCombineMultipleBinFilesToOneButton.Name = "applyCombineMultipleBinFilesToOneButton";
-            this.applyCombineMultipleBinFilesToOneButton.Size = new System.Drawing.Size(222, 23);
-            this.applyCombineMultipleBinFilesToOneButton.TabIndex = 25;
-            this.applyCombineMultipleBinFilesToOneButton.Text = "Apply";
-            this.applyCombineMultipleBinFilesToOneButton.UseVisualStyleBackColor = true;
-            this.applyCombineMultipleBinFilesToOneButton.Click += new System.EventHandler(this.applyCombineMultipleBinFilesToOneButton_Click);
-            // 
-            // combineMultipleBinFilesToOneOperationButton
-            // 
-            this.combineMultipleBinFilesToOneOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.combineMultipleBinFilesToOneOperationButton.ForeColor = System.Drawing.Color.Red;
-            this.combineMultipleBinFilesToOneOperationButton.Location = new System.Drawing.Point(747, 7);
-            this.combineMultipleBinFilesToOneOperationButton.Name = "combineMultipleBinFilesToOneOperationButton";
-            this.combineMultipleBinFilesToOneOperationButton.Size = new System.Drawing.Size(222, 23);
-            this.combineMultipleBinFilesToOneOperationButton.TabIndex = 24;
-            this.combineMultipleBinFilesToOneOperationButton.Text = "Combine multiple bin files to one";
-            this.combineMultipleBinFilesToOneOperationButton.UseVisualStyleBackColor = true;
-            this.combineMultipleBinFilesToOneOperationButton.Click += new System.EventHandler(this.combineMultipleBinFilesToOneOperationButton_Click);
-            // 
-            // removeEmptyTopLevelDirectoriesSubOperationButton
-            // 
-            this.removeEmptyTopLevelDirectoriesSubOperationButton.Enabled = false;
-            this.removeEmptyTopLevelDirectoriesSubOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.removeEmptyTopLevelDirectoriesSubOperationButton.ForeColor = System.Drawing.Color.Black;
-            this.removeEmptyTopLevelDirectoriesSubOperationButton.Location = new System.Drawing.Point(485, 34);
-            this.removeEmptyTopLevelDirectoriesSubOperationButton.Name = "removeEmptyTopLevelDirectoriesSubOperationButton";
-            this.removeEmptyTopLevelDirectoriesSubOperationButton.Size = new System.Drawing.Size(243, 23);
-            this.removeEmptyTopLevelDirectoriesSubOperationButton.TabIndex = 23;
-            this.removeEmptyTopLevelDirectoriesSubOperationButton.Text = "Apply";
-            this.removeEmptyTopLevelDirectoriesSubOperationButton.UseVisualStyleBackColor = true;
-            this.removeEmptyTopLevelDirectoriesSubOperationButton.Click += new System.EventHandler(this.removeEmptyTopLevelDirectoriesSubOperationButton_Click);
-            // 
-            // removeTopLevelDirectoriesOperationButton
-            // 
-            this.removeTopLevelDirectoriesOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.removeTopLevelDirectoriesOperationButton.ForeColor = System.Drawing.Color.Red;
-            this.removeTopLevelDirectoriesOperationButton.Location = new System.Drawing.Point(485, 7);
-            this.removeTopLevelDirectoriesOperationButton.Name = "removeTopLevelDirectoriesOperationButton";
-            this.removeTopLevelDirectoriesOperationButton.Size = new System.Drawing.Size(243, 23);
-            this.removeTopLevelDirectoriesOperationButton.TabIndex = 23;
-            this.removeTopLevelDirectoriesOperationButton.Text = "Remove Empty Top-Level Directories";
-            this.removeTopLevelDirectoriesOperationButton.UseVisualStyleBackColor = true;
-            this.removeTopLevelDirectoriesOperationButton.Click += new System.EventHandler(this.removeTopLevelDirectoriesOperationButton_Click);
-            // 
-            // applyMoveAllROMsToRootButton
-            // 
-            this.applyMoveAllROMsToRootButton.Enabled = false;
-            this.applyMoveAllROMsToRootButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.applyMoveAllROMsToRootButton.ForeColor = System.Drawing.Color.Black;
-            this.applyMoveAllROMsToRootButton.Location = new System.Drawing.Point(306, 34);
-            this.applyMoveAllROMsToRootButton.Name = "applyMoveAllROMsToRootButton";
-            this.applyMoveAllROMsToRootButton.Size = new System.Drawing.Size(157, 23);
-            this.applyMoveAllROMsToRootButton.TabIndex = 18;
-            this.applyMoveAllROMsToRootButton.Text = "Apply";
-            this.applyMoveAllROMsToRootButton.UseVisualStyleBackColor = true;
-            this.applyMoveAllROMsToRootButton.Click += new System.EventHandler(this.applyMoveAllROMsToRootButton_Click);
+            this.panel11.Controls.Add(this.moveROMsToRootOperationButton);
+            this.panel11.Controls.Add(this.applyMoveAllROMsToRootButton);
+            this.panel11.Location = new System.Drawing.Point(7, 74);
+            this.panel11.Name = "panel11";
+            this.panel11.Size = new System.Drawing.Size(220, 33);
+            this.panel11.TabIndex = 23;
             // 
             // moveROMsToRootOperationButton
             // 
             this.moveROMsToRootOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.moveROMsToRootOperationButton.ForeColor = System.Drawing.Color.Red;
-            this.moveROMsToRootOperationButton.Location = new System.Drawing.Point(306, 7);
+            this.moveROMsToRootOperationButton.ForeColor = System.Drawing.Color.DarkGreen;
+            this.moveROMsToRootOperationButton.Location = new System.Drawing.Point(3, 3);
             this.moveROMsToRootOperationButton.Name = "moveROMsToRootOperationButton";
             this.moveROMsToRootOperationButton.Size = new System.Drawing.Size(157, 23);
             this.moveROMsToRootOperationButton.TabIndex = 17;
@@ -1157,91 +1158,93 @@
             this.moveROMsToRootOperationButton.UseVisualStyleBackColor = true;
             this.moveROMsToRootOperationButton.Click += new System.EventHandler(this.moveROMsToRootOperationButton_Click);
             // 
-            // tableLayoutPanel4
+            // applyMoveAllROMsToRootButton
             // 
-            this.tableLayoutPanel4.ColumnCount = 2;
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel4.Controls.Add(this.label9, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.allowedSimilarityValueTextbox, 1, 0);
-            this.tableLayoutPanel4.Controls.Add(this.label7, 0, 0);
-            this.tableLayoutPanel4.Controls.Add(this.matchUsingGamelistXMLNameCheckbox, 1, 1);
-            this.tableLayoutPanel4.Controls.Add(this.autoExpandAfterOperationsCheckbox, 1, 2);
-            this.tableLayoutPanel4.Controls.Add(this.label10, 0, 2);
-            this.tableLayoutPanel4.Location = new System.Drawing.Point(3, 60);
-            this.tableLayoutPanel4.Name = "tableLayoutPanel4";
-            this.tableLayoutPanel4.RowCount = 3;
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel4.Size = new System.Drawing.Size(366, 59);
-            this.tableLayoutPanel4.TabIndex = 19;
+            this.applyMoveAllROMsToRootButton.Enabled = false;
+            this.applyMoveAllROMsToRootButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.applyMoveAllROMsToRootButton.ForeColor = System.Drawing.Color.Red;
+            this.applyMoveAllROMsToRootButton.Location = new System.Drawing.Point(166, 3);
+            this.applyMoveAllROMsToRootButton.Name = "applyMoveAllROMsToRootButton";
+            this.applyMoveAllROMsToRootButton.Size = new System.Drawing.Size(46, 23);
+            this.applyMoveAllROMsToRootButton.TabIndex = 18;
+            this.applyMoveAllROMsToRootButton.Text = "Apply";
+            this.applyMoveAllROMsToRootButton.UseVisualStyleBackColor = true;
+            this.applyMoveAllROMsToRootButton.Click += new System.EventHandler(this.applyMoveAllROMsToRootButton_Click);
             // 
-            // label9
+            // panel10
             // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(0, 20);
-            this.label9.Margin = new System.Windows.Forms.Padding(0);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(153, 13);
-            this.label9.TabIndex = 20;
-            this.label9.Text = "Match using gamelist.xml name";
+            this.panel10.Controls.Add(this.removeTopLevelDirectoriesOperationButton);
+            this.panel10.Controls.Add(this.removeEmptyTopLevelDirectoriesSubOperationButton);
+            this.panel10.Location = new System.Drawing.Point(252, 12);
+            this.panel10.Name = "panel10";
+            this.panel10.Size = new System.Drawing.Size(311, 27);
+            this.panel10.TabIndex = 23;
             // 
-            // allowedSimilarityValueTextbox
+            // removeTopLevelDirectoriesOperationButton
             // 
-            this.allowedSimilarityValueTextbox.Location = new System.Drawing.Point(183, 0);
-            this.allowedSimilarityValueTextbox.Margin = new System.Windows.Forms.Padding(0);
-            this.allowedSimilarityValueTextbox.Name = "allowedSimilarityValueTextbox";
-            this.allowedSimilarityValueTextbox.Size = new System.Drawing.Size(120, 20);
-            this.allowedSimilarityValueTextbox.TabIndex = 2;
-            this.allowedSimilarityValueTextbox.Leave += new System.EventHandler(this.allowedSimilarityValueTextBox_Leave);
+            this.removeTopLevelDirectoriesOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeTopLevelDirectoriesOperationButton.ForeColor = System.Drawing.Color.DarkGreen;
+            this.removeTopLevelDirectoriesOperationButton.Location = new System.Drawing.Point(2, 1);
+            this.removeTopLevelDirectoriesOperationButton.Name = "removeTopLevelDirectoriesOperationButton";
+            this.removeTopLevelDirectoriesOperationButton.Size = new System.Drawing.Size(243, 23);
+            this.removeTopLevelDirectoriesOperationButton.TabIndex = 23;
+            this.removeTopLevelDirectoriesOperationButton.Text = "Remove Empty Top-Level Directories";
+            this.removeTopLevelDirectoriesOperationButton.UseVisualStyleBackColor = true;
+            this.removeTopLevelDirectoriesOperationButton.Click += new System.EventHandler(this.removeTopLevelDirectoriesOperationButton_Click);
             // 
-            // label7
+            // removeEmptyTopLevelDirectoriesSubOperationButton
             // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(0, 0);
-            this.label7.Margin = new System.Windows.Forms.Padding(0);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(117, 13);
-            this.label7.TabIndex = 1;
-            this.label7.Text = "Allowed Similarity Value";
+            this.removeEmptyTopLevelDirectoriesSubOperationButton.Enabled = false;
+            this.removeEmptyTopLevelDirectoriesSubOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.removeEmptyTopLevelDirectoriesSubOperationButton.ForeColor = System.Drawing.Color.Red;
+            this.removeEmptyTopLevelDirectoriesSubOperationButton.Location = new System.Drawing.Point(251, 0);
+            this.removeEmptyTopLevelDirectoriesSubOperationButton.Name = "removeEmptyTopLevelDirectoriesSubOperationButton";
+            this.removeEmptyTopLevelDirectoriesSubOperationButton.Size = new System.Drawing.Size(50, 23);
+            this.removeEmptyTopLevelDirectoriesSubOperationButton.TabIndex = 23;
+            this.removeEmptyTopLevelDirectoriesSubOperationButton.Text = "Apply";
+            this.removeEmptyTopLevelDirectoriesSubOperationButton.UseVisualStyleBackColor = true;
+            this.removeEmptyTopLevelDirectoriesSubOperationButton.Click += new System.EventHandler(this.removeEmptyTopLevelDirectoriesSubOperationButton_Click);
             // 
-            // matchUsingGamelistXMLNameCheckbox
+            // panel9
             // 
-            this.matchUsingGamelistXMLNameCheckbox.AutoSize = true;
-            this.matchUsingGamelistXMLNameCheckbox.Location = new System.Drawing.Point(186, 23);
-            this.matchUsingGamelistXMLNameCheckbox.Name = "matchUsingGamelistXMLNameCheckbox";
-            this.matchUsingGamelistXMLNameCheckbox.Size = new System.Drawing.Size(15, 14);
-            this.matchUsingGamelistXMLNameCheckbox.TabIndex = 21;
-            this.matchUsingGamelistXMLNameCheckbox.UseVisualStyleBackColor = true;
-            this.matchUsingGamelistXMLNameCheckbox.CheckedChanged += new System.EventHandler(this.matchUsingGameListXMLNameCheckbox_CheckedChanged);
+            this.panel9.Controls.Add(this.combineMultipleBinFilesToOneOperationButton);
+            this.panel9.Controls.Add(this.applyCombineMultipleBinFilesToOneButton);
+            this.panel9.Location = new System.Drawing.Point(252, 42);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(311, 33);
+            this.panel9.TabIndex = 23;
             // 
-            // autoExpandAfterOperationsCheckbox
+            // combineMultipleBinFilesToOneOperationButton
             // 
-            this.autoExpandAfterOperationsCheckbox.AutoSize = true;
-            this.autoExpandAfterOperationsCheckbox.Location = new System.Drawing.Point(186, 43);
-            this.autoExpandAfterOperationsCheckbox.Name = "autoExpandAfterOperationsCheckbox";
-            this.autoExpandAfterOperationsCheckbox.Size = new System.Drawing.Size(15, 14);
-            this.autoExpandAfterOperationsCheckbox.TabIndex = 23;
-            this.autoExpandAfterOperationsCheckbox.UseVisualStyleBackColor = true;
-            this.autoExpandAfterOperationsCheckbox.CheckedChanged += new System.EventHandler(this.autoExpandAfterOperationsCheckbox_CheckedChanged);
+            this.combineMultipleBinFilesToOneOperationButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.combineMultipleBinFilesToOneOperationButton.ForeColor = System.Drawing.Color.DarkGreen;
+            this.combineMultipleBinFilesToOneOperationButton.Location = new System.Drawing.Point(2, 3);
+            this.combineMultipleBinFilesToOneOperationButton.Name = "combineMultipleBinFilesToOneOperationButton";
+            this.combineMultipleBinFilesToOneOperationButton.Size = new System.Drawing.Size(243, 23);
+            this.combineMultipleBinFilesToOneOperationButton.TabIndex = 24;
+            this.combineMultipleBinFilesToOneOperationButton.Text = "Combine multiple bin files to one";
+            this.combineMultipleBinFilesToOneOperationButton.UseVisualStyleBackColor = true;
+            this.combineMultipleBinFilesToOneOperationButton.Click += new System.EventHandler(this.combineMultipleBinFilesToOneOperationButton_Click);
             // 
-            // label10
+            // applyCombineMultipleBinFilesToOneButton
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(0, 40);
-            this.label10.Margin = new System.Windows.Forms.Padding(0);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(143, 13);
-            this.label10.TabIndex = 22;
-            this.label10.Text = "Auto-expand after operations";
+            this.applyCombineMultipleBinFilesToOneButton.Enabled = false;
+            this.applyCombineMultipleBinFilesToOneButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.applyCombineMultipleBinFilesToOneButton.ForeColor = System.Drawing.Color.Red;
+            this.applyCombineMultipleBinFilesToOneButton.Location = new System.Drawing.Point(251, 3);
+            this.applyCombineMultipleBinFilesToOneButton.Name = "applyCombineMultipleBinFilesToOneButton";
+            this.applyCombineMultipleBinFilesToOneButton.Size = new System.Drawing.Size(50, 23);
+            this.applyCombineMultipleBinFilesToOneButton.TabIndex = 25;
+            this.applyCombineMultipleBinFilesToOneButton.Text = "Apply";
+            this.applyCombineMultipleBinFilesToOneButton.UseVisualStyleBackColor = true;
+            this.applyCombineMultipleBinFilesToOneButton.Click += new System.EventHandler(this.applyCombineMultipleBinFilesToOneButton_Click);
             // 
             // menuStrip1
             // 
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.exportToolStripMenuItem});
+            this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(1635, 24);
@@ -1251,17 +1254,12 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.exportToolStripMenuItem,
+            this.toolStripSeparator2,
             this.exitToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(93, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
             // exportToolStripMenuItem
             // 
@@ -1271,7 +1269,7 @@
             this.findDuplicatesResultsToolStripMenuItem,
             this.splitIntoDirectoriesResultsToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // exportAllROMsListToolStripMenuItem
@@ -1300,32 +1298,44 @@
             this.splitIntoDirectoriesResultsToolStripMenuItem.Text = "Split Into Directories Results";
             this.splitIntoDirectoriesResultsToolStripMenuItem.Click += new System.EventHandler(this.splitIntoDirectoriesResultsToolStripMenuItem_Click);
             // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
+            this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.preferencesToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // preferencesToolStripMenuItem
+            // 
+            this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.preferencesToolStripMenuItem.Text = "Preferences";
+            this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
+            // 
             // newItemToolStripMenuItem
             // 
             this.newItemToolStripMenuItem.Name = "newItemToolStripMenuItem";
             this.newItemToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.newItemToolStripMenuItem.Text = "NewItem";
             // 
-            // logViewContextMenu
+            // toolStripSeparator2
             // 
-            this.logViewContextMenu.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.logViewContextMenuItem_Copy});
-            this.logViewContextMenu.Name = "logViewContextMenu";
-            this.logViewContextMenu.Size = new System.Drawing.Size(181, 48);
-            this.logViewContextMenu.Opening += new System.ComponentModel.CancelEventHandler(this.logViewContextMenu_Opening);
-            // 
-            // logViewContextMenuItem_Copy
-            // 
-            this.logViewContextMenuItem_Copy.Name = "logViewContextMenuItem_Copy";
-            this.logViewContextMenuItem_Copy.Size = new System.Drawing.Size(180, 22);
-            this.logViewContextMenuItem_Copy.Text = "Copy";
-            this.logViewContextMenuItem_Copy.Click += new System.EventHandler(this.logViewContextMenuItem_Copy_Click);
+            this.toolStripSeparator2.Name = "toolStripSeparator2";
+            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1635, 1069);
+            this.ClientSize = new System.Drawing.Size(1635, 1085);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.splitContainer5);
@@ -1362,15 +1372,20 @@
             this.splitContainer5.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer5)).EndInit();
             this.splitContainer5.ResumeLayout(false);
+            this.logViewContextMenu.ResumeLayout(false);
             this.panel5.ResumeLayout(false);
+            this.panel5.PerformLayout();
             this.panel7.ResumeLayout(false);
             this.panel7.PerformLayout();
             this.panel6.ResumeLayout(false);
-            this.tableLayoutPanel4.ResumeLayout(false);
-            this.tableLayoutPanel4.PerformLayout();
+            this.panel13.ResumeLayout(false);
+            this.panel12.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel11.ResumeLayout(false);
+            this.panel10.ResumeLayout(false);
+            this.panel9.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
-            this.logViewContextMenu.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1450,8 +1465,6 @@
         private System.Windows.Forms.Label nameLabel;
         private System.Windows.Forms.TextBox romName;
         private System.Windows.Forms.Panel panel5;
-        private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox allowedSimilarityValueTextbox;
         private System.Windows.Forms.MenuStrip menuStrip1;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
@@ -1460,11 +1473,6 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem findDuplicatesResultsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem splitIntoDirectoriesResultsToolStripMenuItem;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
-        private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.CheckBox matchUsingGamelistXMLNameCheckbox;
-        private System.Windows.Forms.CheckBox autoExpandAfterOperationsCheckbox;
-        private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label seperator1;
         private System.Windows.Forms.Panel panel7;
         private System.Windows.Forms.Panel panel6;
@@ -1481,6 +1489,16 @@
         private System.Windows.Forms.Button removeROMsFromMAMEFileSubOperationButton;
         private System.Windows.Forms.ContextMenuStrip logViewContextMenu;
         private System.Windows.Forms.ToolStripMenuItem logViewContextMenuItem_Copy;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem preferencesToolStripMenuItem;
+        private System.Windows.Forms.Panel panel12;
+        private System.Windows.Forms.Panel panel11;
+        private System.Windows.Forms.Panel panel10;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.Panel panel13;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator2;
     }
 }
 

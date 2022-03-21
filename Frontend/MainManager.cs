@@ -30,7 +30,7 @@ namespace Frontend
     {
         public int UnprocessedTotalEntries => allGamesROMGroup.TotalEntries;
 
-        public double AllowedSimilarityValue { get; set; }
+        // public double AllowedSimilarityValue { get; set; }
 
         private bool resultsOptions_showTotals = false;
 
@@ -161,7 +161,7 @@ namespace Frontend
         {
             this.mainForm = mainForm;
 
-            AllowedSimilarityValue = 0.9;
+            OperationsOptions.Instance.AllowedSimilarityValue = 0.9;
 
             // var gameListFilePath = @"D:\dromsmanagerdirs\gamelist_neogeocd.xml";
             // var gameListFilePath = @"D:\dromsmanagerdirs\gamelist_nes.xml";
@@ -944,7 +944,8 @@ namespace Frontend
 
                         var similarity = dl.GetSimilarity(prevFilename_compare, currentFilename_compare);
                         // areROMsSame = similarity >= 0.9;
-                        areROMsSame = similarity >= AllowedSimilarityValue;
+                        // areROMsSame = similarity >= AllowedSimilarityValue;
+                        areROMsSame = similarity >= OperationsOptions.Instance.AllowedSimilarityValue;
                         if (areROMsSame)
                         {
                             // If the name of the ROMs contain a number at the end, compare the number
