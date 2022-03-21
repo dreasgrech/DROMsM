@@ -108,6 +108,13 @@
     <Compile Include="CHDMANHandler.cs" />
     <Compile Include="CUEFile.cs" />
     <Compile Include="CUEFileHandler.cs" />
+    <Compile Include="DATFileHandler.cs" />
+    <Compile Include="DATFileViewerForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DATFileViewerForm.Designer.cs">
+      <DependentUpon>DATFileViewerForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="DoubleExtensions.cs" />
     <Compile Include="FastDirectoryEnumerator.cs" />
     <Compile Include="FloatExtensions.cs" />
@@ -150,6 +157,9 @@
     <Compile Include="SingleROMEntryComparer_ComparisonName.cs" />
     <Compile Include="StopwatchManager.cs" />
     <Compile Include="TextFileReader.cs" />
+    <EmbeddedResource Include="DATFileViewerForm.resx">
+      <DependentUpon>DATFileViewerForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>

@@ -175,6 +175,9 @@ namespace Frontend
                     // FindDuplicateROMs();
                 }
                 */
+
+                //var datFileHandler = new DATFileHandler();
+                //var datFile = datFileHandler.ParseDATFile(@"D:\dromsmanagerdirs\mamedatfile.xml");
             }
             catch (Exception ex)
             {
@@ -1067,7 +1070,7 @@ namespace Frontend
 
         private void removeROMsFromMAMEFileOperationButton_Click(object sender, EventArgs e)
         {
-            var mameExportFilePath = FormFileOperations.ShowOpenFileDialog();
+            var mameExportFilePath = FormFileOperations.ShowOpenFileDialog_TextFiles();
             if (string.IsNullOrEmpty(mameExportFilePath))
             {
                 return;
@@ -1119,6 +1122,24 @@ namespace Frontend
             preferencesForm.StartPosition = FormStartPosition.CenterParent;
 
             var dialogResult = preferencesForm.ShowDialog();
+        }
+
+        private void viewDATFileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // var datFilePath = FormFileOperations.ShowOpenFileDialog("XML Files|*.xml;|DAT Files|*.dat;All Files|*.*");
+            // var datFilePath = FormFileOperations.ShowOpenFileDialog("TXT Files(*.txt;)| *.txt;| Image Files(*.jpg; *.jpeg; *.bmp)| *.jpg; *.jpeg;.bmp; ");
+            // var datFilePath = FormFileOperations.ShowOpenFileDialog("Image Files(*.jpg; *.jpeg; *.bmp)| *.jpg; *.jpeg;.bmp; |TXT Files(*.txt;)| *.txt; ");
+            // var datFilePath = FormFileOperations.ShowOpenFileDialog("DAT Files(*.dat; *.xml; *.bmp)| *.dat; *.xml;.bmp; |TXT Files(*.txt;)| *.txt; ");
+            // var datFilePath = FormFileOperations.ShowOpenFileDialog("DAT Files(*.dat; *.xml)| *.dat; *.xml; |TXT Files(*.txt;)| *.txt; ");
+            var datFilePath = FormFileOperations.ShowOpenFileDialog("DAT Files(*.dat; *.xml)| *.dat; *.xml; |All Files(*.*;)| *.*; ");
+            if (string.IsNullOrEmpty(datFilePath))
+            {
+                return;
+            }
+
+            var datFileViewerForm = new DATFileViewerForm {StartPosition = FormStartPosition.CenterParent};
+            datFileViewerForm.ProcessDATFile(datFilePath);
+            datFileViewerForm.ShowDialog();
         }
     }
 }

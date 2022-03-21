@@ -20,11 +20,16 @@ namespace Frontend
             return sfd.FileName;
         }
 
-        public static string ShowOpenFileDialog()
+        public static string ShowOpenFileDialog_TextFiles()
+        {
+            return ShowOpenFileDialog("Text File|*.txt");
+        }
+
+        public static string ShowOpenFileDialog(string filter)
         {
             var ofd = new OpenFileDialog
             {
-                Filter = "Text File|*.txt",
+                Filter = filter,
             };
 
             var dialogResult = ofd.ShowDialog();
