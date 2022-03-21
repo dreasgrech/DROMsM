@@ -130,7 +130,7 @@ namespace Frontend
 
         private bool treeviewsCurrentlyLinked;
 
-        private OperationsOptions options;
+        // private OperationsOptions options;
 
         public Form1()
         {
@@ -153,7 +153,7 @@ namespace Frontend
                 Logger.SetListView(logsListView);
 
                 mainManager = new MainManager(this);
-                options = mainManager.options;
+                // options = mainManager.options;
 
                 exportAllROMsListToolStripMenuItem.Enabled = false;
 
@@ -185,10 +185,10 @@ namespace Frontend
         private void ApplyInitialSavedProjectSettings()
         {
             romsDirectoryTextBox.Text = ProjectSettingsManager.ResolveString(ProjectSettings.ROMsDirectory);
-            OperationsOptions.Instance.MatchUsingGameListXMLName = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
+            // OperationsOptions.Instance.MatchUsingGameListXMLName = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
             // matchUsingGamelistXMLNameCheckbox.Checked = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
             // autoExpandAfterOperationsCheckbox.Checked = ProjectSettingsManager.ResolveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations);
-            OperationsOptions.Instance.AutoExpandAfterOperations = ProjectSettingsManager.ResolveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations);
+            // OperationsOptions.Instance.AutoExpandAfterOperations = ProjectSettingsManager.ResolveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations);
         }
 
         private void findSuggestedButton_Click(object sender, EventArgs e)
@@ -657,10 +657,7 @@ namespace Frontend
             totalSingleRomsLabel.Text = totalSingles.ToString();
             totalDuplicateRomsLabel.Text = duplicateROMs.TotalEntries.ToString();
 
-            if (options.AutoExpandAfterOperations)
-            {
-                ExpandLeftAndRightTreeViews();
-            }
+            AfterFinishingOperation();
         }
 
         public void OnFinishedProcessingIntoDirectoriesOperation(SingleGameROMGroupSet splitIntoDirectoriesROMGroupSet)
@@ -679,10 +676,7 @@ namespace Frontend
             var total = splitIntoDirectoriesROMGroupSet.SingleGameROMGroups.Count;
             totalSingleRomsLabel.Text = total.ToString();
 
-            if (options.AutoExpandAfterOperations)
-            {
-                ExpandLeftAndRightTreeViews();
-            }
+            AfterFinishingOperation();
         }
 
         // public void OnFinishedMovingAllROMsToRootOperation(SingleGameROMGroupSet movedToRootROMGroupSet)
@@ -707,12 +701,9 @@ namespace Frontend
             totalSingleRomsLabel.Text = total.ToString();
             */
 
-            if (options.AutoExpandAfterOperations)
-            {
-                ExpandLeftAndRightTreeViews();
-            }
-
             Logger.Log($"Found {movedToRootROMGroup.TotalEntries} matching roms");
+
+            AfterFinishingOperation();
         }
 
         public void OnFinishedCombineMultipleBinsIntoOneOperation(MultipleGameROMGroup processedROMs)
@@ -727,12 +718,9 @@ namespace Frontend
 
             PopulateTreeView(rightTreeView, processedROMs, TreeViewROMDisplayNameType.RelativeFilePath);
 
-            if (options.AutoExpandAfterOperations)
-            {
-                ExpandLeftAndRightTreeViews();
-            }
-
             Logger.Log($"Found {processedROMs.TotalEntries} matching roms");
+
+            AfterFinishingOperation();
         }
 
         public void OnFinishedRemoveROMsFromMAMEExportFileOperation(string mameExportFilePath, MultipleGameROMGroup processedROMs)
@@ -750,12 +738,17 @@ namespace Frontend
 
             PopulateTreeView(rightTreeView, processedROMs, TreeViewROMDisplayNameType.RelativeFilePath);
 
-            if (options.AutoExpandAfterOperations)
+            Logger.Log($"Found {processedROMs.TotalEntries} matching MAME roms from {mameExportFilePath}");
+
+            AfterFinishingOperation();
+        }
+
+        void AfterFinishingOperation()
+        {
+            if (ProjectSettingsManager.ResolveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations))
             {
                 ExpandLeftAndRightTreeViews();
             }
-
-            Logger.Log($"Found {processedROMs.TotalEntries} matching MAME roms from {mameExportFilePath}");
         }
 
         private void ClearTotalsInfo()
@@ -1123,6 +1116,8 @@ namespace Frontend
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
             var preferencesForm = new MainPreferencesForm();
+            preferencesForm.StartPosition = FormStartPosition.CenterParent;
+
             var dialogResult = preferencesForm.ShowDialog();
         }
     }

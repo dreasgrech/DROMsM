@@ -7,6 +7,27 @@
             UpgradeSettingsVersion();
         }
 
+        public static float ResolveFloat(ProjectSettings key)
+        {
+            switch (key)
+            {
+                case ProjectSettings.AllowedSimilarityValue: return Properties.Settings.Default.AllowedSimilarityValue;
+            }
+
+            return 0;
+        }
+
+        public static void SaveFloat(ProjectSettings key, float value)
+        {
+            switch (key)
+            {
+                case ProjectSettings.AllowedSimilarityValue: Properties.Settings.Default.AllowedSimilarityValue = value;
+                    break;
+            }
+
+            Properties.Settings.Default.Save();
+        }
+
         public static string ResolveString(ProjectSettings key)
         {
             switch (key)
@@ -72,6 +93,7 @@
     {
         ROMsDirectory,
         MatchUsingGameListXMLName,
-        AutoExpandTreeViewsAfterOperations
+        AutoExpandTreeViewsAfterOperations,
+        AllowedSimilarityValue,
     }
 }

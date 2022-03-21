@@ -57,7 +57,7 @@ namespace Frontend
 
         private bool romDirectoryAnalyzed;
 
-        public readonly OperationsOptions options;
+        // public readonly OperationsOptions options;
 
         private string romsPathDirectoryInfoFullName;
         // private ROMEntry[] allROMEntriesThreadSafe;
@@ -161,7 +161,7 @@ namespace Frontend
         {
             this.mainForm = mainForm;
 
-            OperationsOptions.Instance.AllowedSimilarityValue = 0.9;
+            // OperationsOptions.Instance.AllowedSimilarityValue = 0.9;
 
             // var gameListFilePath = @"D:\dromsmanagerdirs\gamelist_neogeocd.xml";
             // var gameListFilePath = @"D:\dromsmanagerdirs\gamelist_nes.xml";
@@ -172,7 +172,7 @@ namespace Frontend
 
             dl = new BlueSimilarity.DamerauLevenshtein();
 
-            options = new OperationsOptions();
+            // options = new OperationsOptions();
 
             /*
             // Normalize the ROM Symbols
@@ -895,7 +895,9 @@ namespace Frontend
 
             romGroupSet.Add(currentFileGroup);
 
-            var matchUsingGameListXMLName = options.MatchUsingGameListXMLName;
+            // var matchUsingGameListXMLName = options.MatchUsingGameListXMLName;
+            var matchUsingGameListXMLName = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
+            var allowedSimilarityValue = ProjectSettingsManager.ResolveFloat(ProjectSettings.AllowedSimilarityValue);
 
             // var allRomEntriesCount = mainROMGroup.TotalEntries;
             var allRomEntriesCount = roms.TotalEntries;
@@ -945,7 +947,8 @@ namespace Frontend
                         var similarity = dl.GetSimilarity(prevFilename_compare, currentFilename_compare);
                         // areROMsSame = similarity >= 0.9;
                         // areROMsSame = similarity >= AllowedSimilarityValue;
-                        areROMsSame = similarity >= OperationsOptions.Instance.AllowedSimilarityValue;
+                        // areROMsSame = similarity >= OperationsOptions.Instance.AllowedSimilarityValue;
+                        areROMsSame = similarity >= allowedSimilarityValue;
                         if (areROMsSame)
                         {
                             // If the name of the ROMs contain a number at the end, compare the number

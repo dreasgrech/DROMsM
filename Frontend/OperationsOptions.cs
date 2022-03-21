@@ -2,6 +2,7 @@
 
 namespace Frontend
 {
+    /*
     public class OperationsOptions
     {
         public double AllowedSimilarityValue { get; set; }
@@ -15,4 +16,5 @@ namespace Frontend
             Instance = new OperationsOptions();
         }
     }
+    */
 }

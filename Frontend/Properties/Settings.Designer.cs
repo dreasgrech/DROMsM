@@ -70,5 +70,17 @@ namespace Frontend.Properties {
                 this["UpdateSettingsVersion"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.9")]
+        public float AllowedSimilarityValue {
+            get {
+                return ((float)(this["AllowedSimilarityValue"]));
+            }
+            set {
+                this["AllowedSimilarityValue"] = value;
+            }
+        }
     }
 }

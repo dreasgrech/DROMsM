@@ -14,5 +14,8 @@
     <Setting Name="UpdateSettingsVersion" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
+    <Setting Name="AllowedSimilarityValue" Type="System.Single" Scope="User">
+      <Value Profile="(Default)">0.9</Value>
+    </Setting>
   </Settings>
 </SettingsFile>
