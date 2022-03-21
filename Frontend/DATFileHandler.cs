@@ -1,5 +1,4 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 //using System.Xml;
@@ -56,44 +55,5 @@ namespace Frontend
 
             return datFile;
         }
-    }
-}
-
-public class DATFileMachine
-{
-    public string Name { get; set; }
-    public string Description { get; set; }
-    public int Year { get; set; }
-    public string Manufacturer { get; set; }
-
-    public override string ToString()
-    {
-        return $"{Name} {Description}";
-    }
-}
-
-public class DATFile
-{
-    public string Build { get; set; }
-    private List<DATFileMachine> Machines { get; }
-
-    public int TotalMachines
-    {
-        get { return Machines.Count; }
-    }
-
-    public DATFile()
-    {
-        Machines = new List<DATFileMachine>();
-    }
-
-    public void AddMachine(DATFileMachine machine)
-    {
-        Machines.Add(machine);
-    }
-
-    public List<DATFileMachine>.Enumerator GetMachinesEnumerator()
-    {
-        return Machines.GetEnumerator();
     }
 }

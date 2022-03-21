@@ -73,6 +73,8 @@
   <ItemGroup>
     <Compile Include="DATFileCSVWriter.cs" />
     <Compile Include="Entities\CUEFile.cs" />
+    <Compile Include="Entities\DATFile.cs" />
+    <Compile Include="Entities\DATFileMachine.cs" />
     <Compile Include="Entities\MultipleGameROMGroup.cs" />
     <Compile Include="Entities\RBGameListFile.cs" />
     <Compile Include="Entities\RBGameListFolder.cs" />

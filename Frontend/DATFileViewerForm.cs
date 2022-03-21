@@ -7,11 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DRomsMUtils;
 
 namespace Frontend
 {
     public partial class DATFileViewerForm : Form
     {
+        private DATFile currentDATFile;
+
         public DATFileViewerForm()
         {
             InitializeComponent();
@@ -52,16 +55,26 @@ namespace Frontend
             datFilePathLabel.Text = datFilePath;
             totalSetsLabel.Text = datFile.TotalMachines.ToString();
             buildLabel.Text = datFile.Build;
+
+            currentDATFile = datFile;
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var saveFilePath = FormFileOperations.ShowSaveFileDialog(FormFileOperations.SaveDialog_DATFilesFilter);
+            var saveFilePath = FormFileOperations.ShowSaveFileDialog(FormFileOperations.SaveDialog_CSVFilesFilter);
             if (string.IsNullOrEmpty(saveFilePath))
             {
                 return;
             }
 
+            var fileWritten = DATFileCSVWriter.WriteToFile(saveFilePath, currentDATFile);
+            if (!fileWritten)
+            {
+                MessageBoxOperations.ShowError($"Unable to create file {saveFilePath}", "Unable to write file");
+                return;
+            }
+
+            MessageBoxOperations.ShowInformation($"File successfully written at {saveFilePath}", "File exported");
         }
     }
 }
