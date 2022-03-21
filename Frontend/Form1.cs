@@ -12,13 +12,6 @@ using DRomsMUtils;
 
 namespace Frontend
 {
-    public enum TreeViewROMDisplayNameType
-    {
-        RelativeFilePath,
-        DisplayName,
-        FilenameWithExtension
-    }
-
     public enum TreeViewROMDirectoryDisplayNameType
     {
         FullPath
@@ -973,19 +966,19 @@ namespace Frontend
 
         private void exportAllROMsListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var filename = FormFileOperations.ShowSaveFileDialog();
+            var filename = FormFileOperations.ShowSaveFileDialog_Text();
             ExportToFile(mainManager.ExportAllROMSListToFile, filename);
         }
 
         private void findDuplicatesResultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var filename = FormFileOperations.ShowSaveFileDialog();
+            var filename = FormFileOperations.ShowSaveFileDialog_Text();
             ExportToFile(mainManager.ExportFindDuplicatesOperationResults, filename);
         }
 
         private void splitIntoDirectoriesResultsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var filename = FormFileOperations.ShowSaveFileDialog();
+            var filename = FormFileOperations.ShowSaveFileDialog_Text();
             ExportToFile(mainManager.ExportGroupByDirectoryOperationResults, filename);
         }
 
@@ -1126,12 +1119,7 @@ namespace Frontend
 
         private void viewDATFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // var datFilePath = FormFileOperations.ShowOpenFileDialog("XML Files|*.xml;|DAT Files|*.dat;All Files|*.*");
-            // var datFilePath = FormFileOperations.ShowOpenFileDialog("TXT Files(*.txt;)| *.txt;| Image Files(*.jpg; *.jpeg; *.bmp)| *.jpg; *.jpeg;.bmp; ");
-            // var datFilePath = FormFileOperations.ShowOpenFileDialog("Image Files(*.jpg; *.jpeg; *.bmp)| *.jpg; *.jpeg;.bmp; |TXT Files(*.txt;)| *.txt; ");
-            // var datFilePath = FormFileOperations.ShowOpenFileDialog("DAT Files(*.dat; *.xml; *.bmp)| *.dat; *.xml;.bmp; |TXT Files(*.txt;)| *.txt; ");
-            // var datFilePath = FormFileOperations.ShowOpenFileDialog("DAT Files(*.dat; *.xml)| *.dat; *.xml; |TXT Files(*.txt;)| *.txt; ");
-            var datFilePath = FormFileOperations.ShowOpenFileDialog("DAT Files(*.dat; *.xml)| *.dat; *.xml; |All Files(*.*;)| *.*; ");
+            var datFilePath = FormFileOperations.ShowOpenFileDialog(FormFileOperations.OpenDialog_DATFilesFilter);
             if (string.IsNullOrEmpty(datFilePath))
             {
                 return;

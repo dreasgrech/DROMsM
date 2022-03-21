@@ -53,5 +53,15 @@ namespace Frontend
             totalSetsLabel.Text = datFile.TotalMachines.ToString();
             buildLabel.Text = datFile.Build;
         }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var saveFilePath = FormFileOperations.ShowSaveFileDialog(FormFileOperations.SaveDialog_DATFilesFilter);
+            if (string.IsNullOrEmpty(saveFilePath))
+            {
+                return;
+            }
+
+        }
     }
 }

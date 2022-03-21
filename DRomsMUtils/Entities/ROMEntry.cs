@@ -179,4 +179,12 @@ namespace Frontend
             return Filename;
         }
     }
+
+    public enum TreeViewROMDisplayNameType
+    {
+        RelativeFilePath,
+        DisplayName,
+        FilenameWithExtension
+    }
+
 }

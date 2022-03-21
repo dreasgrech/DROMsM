@@ -106,7 +106,6 @@
   <ItemGroup>
     <Compile Include="ApplicationVersion.cs" />
     <Compile Include="CHDMANHandler.cs" />
-    <Compile Include="CUEFile.cs" />
     <Compile Include="CUEFileHandler.cs" />
     <Compile Include="DATFileHandler.cs" />
     <Compile Include="DATFileViewerForm.cs">
@@ -125,7 +124,6 @@
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
     <Compile Include="FormFileOperations.cs" />
-    <Compile Include="Logger.cs" />
     <Compile Include="MainManager.cs" />
     <Compile Include="MainPreferencesForm.cs">
       <SubType>Form</SubType>
@@ -134,27 +132,13 @@
       <DependentUpon>MainPreferencesForm.cs</DependentUpon>
     </Compile>
     <Compile Include="MAMEExportFileReader.cs" />
-    <Compile Include="MessageBoxOperations.cs" />
-    <Compile Include="MultipleGameROMGroup.cs" />
     <Compile Include="OperationsOptions.cs" />
     <Compile Include="OutputFileWriter.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="ProjectSettingsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RBGameListFile.cs" />
-    <Compile Include="RBGameListFolder.cs" />
-    <Compile Include="RBGameListGame.cs" />
     <Compile Include="RBGameListFileReader.cs" />
     <Compile Include="RomDirectory.cs" />
-    <Compile Include="ROMEntry.cs" />
-    <Compile Include="ROMGroup.cs" />
-    <Compile Include="SingleGameROMGroup.cs" />
-    <Compile Include="SingleGameROMGroupSet.cs" />
-    <Compile Include="ROMScoreCalculator.cs" />
-    <Compile Include="ROMSet.cs" />
-    <Compile Include="ScoreSortedROMComparer.cs" />
-    <Compile Include="ROMEnums.cs" />
-    <Compile Include="SingleROMEntryComparer_ComparisonName.cs" />
     <Compile Include="StopwatchManager.cs" />
     <Compile Include="TextFileReader.cs" />
     <EmbeddedResource Include="DATFileViewerForm.resx">

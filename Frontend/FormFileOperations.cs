@@ -4,11 +4,20 @@ namespace Frontend
 {
     public static class FormFileOperations
     {
-        public static string ShowSaveFileDialog()
+        public static string TextFilesFilter = "Text File|*.txt";
+        public static string OpenDialog_DATFilesFilter = "DAT Files(*.dat; *.xml)| *.dat; *.xml; |All Files(*.*;)| *.*; ";
+        public static string SaveDialog_DATFilesFilter = "DAT Files(*.dat)| *.dat; |XML Files(*.xml)| *.xml; |All Files(*.*;)| *.*; ";
+
+        public static string ShowSaveFileDialog_Text()
+        {
+            return ShowSaveFileDialog(TextFilesFilter);
+        }
+
+        public static string ShowSaveFileDialog(string filter)
         {
             var sfd = new SaveFileDialog()
             {
-                Filter = "Text File|*.txt",
+                Filter = filter,
             };
 
             var dialogResult = sfd.ShowDialog();
@@ -22,7 +31,7 @@ namespace Frontend
 
         public static string ShowOpenFileDialog_TextFiles()
         {
-            return ShowOpenFileDialog("Text File|*.txt");
+            return ShowOpenFileDialog(TextFilesFilter);
         }
 
         public static string ShowOpenFileDialog(string filter)
