@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.label1 = new System.Windows.Forms.Label();
+            this.datFilePathLabel = new System.Windows.Forms.Label();
             this.datFileListView = new System.Windows.Forms.ListView();
             this.setcolumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.nameColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -40,20 +40,27 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label2 = new System.Windows.Forms.Label();
+            this.totalSetsLabel = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.buildLabel = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
+            this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // datFilePathLabel
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(12, 39);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(115, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "C:\\My directory\\file.dat";
+            this.datFilePathLabel.AutoSize = true;
+            this.datFilePathLabel.Location = new System.Drawing.Point(12, 33);
+            this.datFilePathLabel.Name = "datFilePathLabel";
+            this.datFilePathLabel.Size = new System.Drawing.Size(115, 13);
+            this.datFilePathLabel.TabIndex = 0;
+            this.datFilePathLabel.Text = "C:\\My directory\\file.dat";
             // 
             // datFileListView
             // 
@@ -69,7 +76,7 @@
             this.datFileListView.HideSelection = false;
             this.datFileListView.Location = new System.Drawing.Point(0, 0);
             this.datFileListView.Name = "datFileListView";
-            this.datFileListView.Size = new System.Drawing.Size(1225, 543);
+            this.datFileListView.Size = new System.Drawing.Size(1225, 593);
             this.datFileListView.TabIndex = 1;
             this.datFileListView.UseCompatibleStateImageBehavior = false;
             this.datFileListView.View = System.Windows.Forms.View.Details;
@@ -90,15 +97,19 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer1.Location = new System.Drawing.Point(12, 68);
+            this.splitContainer1.Location = new System.Drawing.Point(12, 49);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
             // splitContainer1.Panel1
             // 
             this.splitContainer1.Panel1.Controls.Add(this.datFileListView);
-            this.splitContainer1.Size = new System.Drawing.Size(1225, 619);
-            this.splitContainer1.SplitterDistance = 543;
+            // 
+            // splitContainer1.Panel2
+            // 
+            this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
+            this.splitContainer1.Size = new System.Drawing.Size(1225, 651);
+            this.splitContainer1.SplitterDistance = 593;
             this.splitContainer1.TabIndex = 2;
             // 
             // yearColumn
@@ -147,22 +158,80 @@
             this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.closeToolStripMenuItem.Text = "Close";
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.00422F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.99578F));
+            this.tableLayoutPanel1.Controls.Add(this.buildLabel, 1, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.totalSetsLabel, 1, 1);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 3);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 2;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(240, 42);
+            this.tableLayoutPanel1.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(0, 20);
+            this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.TabIndex = 0;
+            this.label2.Text = "Total sets";
+            // 
+            // totalSetsLabel
+            // 
+            this.totalSetsLabel.AutoSize = true;
+            this.totalSetsLabel.Location = new System.Drawing.Point(67, 20);
+            this.totalSetsLabel.Name = "totalSetsLabel";
+            this.totalSetsLabel.Size = new System.Drawing.Size(13, 13);
+            this.totalSetsLabel.TabIndex = 1;
+            this.totalSetsLabel.Text = "0";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(0, 0);
+            this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(30, 13);
+            this.label3.TabIndex = 2;
+            this.label3.Text = "Build";
+            // 
+            // buildLabel
+            // 
+            this.buildLabel.AutoSize = true;
+            this.buildLabel.Location = new System.Drawing.Point(67, 0);
+            this.buildLabel.Name = "buildLabel";
+            this.buildLabel.Size = new System.Drawing.Size(95, 13);
+            this.buildLabel.TabIndex = 3;
+            this.buildLabel.Text = "0.241 (mame0241)";
+            // 
             // DATFileViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1249, 712);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.datFilePathLabel);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "DATFileViewerForm";
             this.Text = "DATFileViewerForm";
             this.splitContainer1.Panel1.ResumeLayout(false);
+            this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -170,7 +239,7 @@
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label datFilePathLabel;
         private System.Windows.Forms.ListView datFileListView;
         private System.Windows.Forms.ColumnHeader setcolumn;
         private System.Windows.Forms.ColumnHeader nameColumn;
@@ -182,5 +251,10 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label buildLabel;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label totalSetsLabel;
+        private System.Windows.Forms.Label label2;
     }
 }

@@ -48,7 +48,10 @@ namespace Frontend
             // Expand the columns
             datFileListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 
-            Text = $@"Viewing {datFile}";
+            Text = $@"Viewing {datFilePath}";
+            datFilePathLabel.Text = datFilePath;
+            totalSetsLabel.Text = datFile.TotalMachines.ToString();
+            buildLabel.Text = datFile.Build;
         }
     }
 }

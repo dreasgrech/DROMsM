@@ -19,13 +19,17 @@ namespace Frontend
             using (var xml = XmlParser.ParseFile(filePath))
             {
                 var rootNode = xml.Root;
+                if (rootNode.TryFindAttribute("build", out var buildAttribute))
+                {
+                    datFile.Build = buildAttribute.Value.ToString();
+                }
 
                 foreach (var machineNode in rootNode.Children)
                 {
                     var datFileMachine = new DATFileMachine();
-                    if (machineNode.TryFindAttribute("name", out var nameAttributeNode))
+                    if (machineNode.TryFindAttribute("name", out var nameAttribute))
                     {
-                        datFileMachine.Name = nameAttributeNode.Value.ToString();
+                        datFileMachine.Name = nameAttribute.Value.ToString();
                     }
 
                     if (machineNode.TryFindChild("description", out var descriptionNode))
@@ -70,7 +74,13 @@ public class DATFileMachine
 
 public class DATFile
 {
+    public string Build { get; set; }
     private List<DATFileMachine> Machines { get; }
+
+    public int TotalMachines
+    {
+        get { return Machines.Count; }
+    }
 
     public DATFile()
     {
