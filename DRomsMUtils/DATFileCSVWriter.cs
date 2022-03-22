@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Globalization;
 using System.IO;
@@ -14,7 +15,8 @@ namespace DRomsMUtils
 {
     public static class DATFileCSVWriter
     {
-        public static bool WriteToFile(string filePath, DATFile datFile)
+        // public static bool WriteToFile(string filePath, DATFile datFile)
+        public static bool WriteToFile(string filePath, ArrayList datFileMachinesArrayList)
         {
             try
             {
@@ -34,14 +36,16 @@ namespace DRomsMUtils
 
                     csv.WriteHeader<DATFileMachine>();
                     csv.NextRecord();
-                    using (var machinesEnumerator = datFile.GetMachinesEnumerator())
+                    // using (var machinesEnumerator = datFile.GetMachinesEnumerator())
+                    foreach (var datFileMachineElement in datFileMachinesArrayList)
                     {
-                        while (machinesEnumerator.MoveNext())
-                        {
-                            var datFileMachine = machinesEnumerator.Current;
+                        var datFileMachine = (DATFileMachine) datFileMachineElement;
+                        //while (machinesEnumerator.MoveNext())
+                        //{
+                            // var datFileMachine = machinesEnumerator.Current;
                             csv.WriteRecord(datFileMachine);
                             csv.NextRecord();
-                        }
+                        // }
                     }
                 }
             }

@@ -15,6 +15,7 @@ namespace Frontend
     public partial class DATFileViewerForm : Form
     {
         private DATFile currentDATFile;
+        private DATFileMachineVirtualListDataSource datFileMachineVirtualListDataSource;
 
         public DATFileViewerForm()
         {
@@ -62,7 +63,7 @@ namespace Frontend
             }
             */
 
-            var datFileMachineVirtualListDataSource = new DATFileMachineVirtualListDataSource(olvDatFileListView);
+            datFileMachineVirtualListDataSource = new DATFileMachineVirtualListDataSource(olvDatFileListView);
             datFileMachineVirtualListDataSource.AddObjects(datFile.Machines);
             // datFileMachineVirtualListDataSource.AddObjects(listViewItems);
             olvDatFileListView.VirtualListDataSource = datFileMachineVirtualListDataSource;
@@ -86,7 +87,9 @@ namespace Frontend
                 return;
             }
 
-            var fileWritten = DATFileCSVWriter.WriteToFile(saveFilePath, currentDATFile);
+            var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
+            // var fileWritten = DATFileCSVWriter.WriteToFile(saveFilePath, currentDATFile);
+            var fileWritten = DATFileCSVWriter.WriteToFile(saveFilePath, filteredObjectList);
             if (!fileWritten)
             {
                 MessageBoxOperations.ShowError($"Unable to create file {saveFilePath}", "Unable to write file");
