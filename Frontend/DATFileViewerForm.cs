@@ -55,7 +55,7 @@ namespace Frontend
             }
 
             // Expand the columns
-            datFileListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
+            // datFileListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 
             Text = $@"Viewing {datFilePath}";
             datFilePathLabel.Text = datFilePath;

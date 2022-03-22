@@ -28,70 +28,74 @@ namespace Frontend
                 foreach (var machineNode in rootNode.Children)
                 {
                     var datFileMachine = new DATFileMachine();
+
                     if (machineNode.TryFindAttribute("name", out var nameAttribute))
                     {
                         datFileMachine.Name = NormalizeText(nameAttribute.Value.ToString());
                     }
 
-                    if (machineNode.TryFindChild("description", out var descriptionNode))
+                    var machineNodeChildNodes = machineNode.Children;
+                    foreach (var machineNodeChildNode in machineNodeChildNodes)
                     {
-                        datFileMachine.Description = NormalizeText(descriptionNode.InnerText.ToString());
-                    }
-
-                    if (machineNode.TryFindChild("year", out var yearNode))
-                    {
-                        datFileMachine.Year = NormalizeText(yearNode.InnerText.ToString());
-                    }
-
-                    if (machineNode.TryFindChild("manufacturer", out var manufacturerNode))
-                    {
-                        datFileMachine.Manufacturer = NormalizeText(manufacturerNode.InnerText.ToString());
-                    }
-
-                    if (machineNode.TryFindChild("driver", out var driverNode))
-                    {
-                        if (driverNode.TryFindAttribute("status", out var statusAttribute))
+                        var machineNodeChildNodeInnerText = NormalizeText(machineNodeChildNode.InnerText.ToString());
+                        switch (machineNodeChildNode.Name.ToString())
                         {
-                            datFileMachine.Status = NormalizeText(statusAttribute.Value.ToString());
-                        }
-
-                        if (driverNode.TryFindAttribute("emulation", out var emulationAttribute))
-                        {
-                            datFileMachine.Emulation = NormalizeText(emulationAttribute.Value.ToString());
-                        }
-
-                        if (driverNode.TryFindAttribute("savestate", out var saveStateAttribute))
-                        {
-                            datFileMachine.SaveStates = NormalizeText(saveStateAttribute.Value.ToString());
-                        }
-                    }
-
-                    if (machineNode.TryFindChild("input", out var inputNode))
-                    {
-                        if (inputNode.TryFindAttribute("players", out var playersAttribute))
-                        {
-                            datFileMachine.Players = NormalizeText(playersAttribute.Value.ToString());
-                        }
-
-                        if (inputNode.TryFindAttribute("coins", out var coinsAttribute))
-                        {
-                            datFileMachine.Coins = NormalizeText(coinsAttribute.Value.ToString());
-                        }
-
-                        var controlTypesList = new List<string>();
-                        var inputNodeChildren = inputNode.Children;
-                        foreach (var inputNodeChild in inputNodeChildren)
-                        {
-                            if (inputNodeChild.Name == "control")
+                            case "description":
+                                datFileMachine.Description = machineNodeChildNodeInnerText;
+                                break;
+                            case "year":
+                                datFileMachine.Year = machineNodeChildNodeInnerText;
+                                break;
+                            case "manufacturer":
+                                datFileMachine.Manufacturer = machineNodeChildNodeInnerText;
+                                break;
+                            case "driver":
                             {
-                                if (inputNodeChild.TryFindAttribute("type", out var controlTypeAttribute))
+                                if (machineNodeChildNode.TryFindAttribute("status", out var statusAttribute))
                                 {
-                                    controlTypesList.Add(controlTypeAttribute.Value.ToString());
+                                    datFileMachine.Status = NormalizeText(statusAttribute.Value.ToString());
+                                }
+
+                                if (machineNodeChildNode.TryFindAttribute("emulation", out var emulationAttribute))
+                                {
+                                    datFileMachine.Emulation = NormalizeText(emulationAttribute.Value.ToString());
+                                }
+
+                                if (machineNodeChildNode.TryFindAttribute("savestate", out var saveStateAttribute))
+                                {
+                                    datFileMachine.SaveStates = NormalizeText(saveStateAttribute.Value.ToString());
                                 }
                             }
-                        }
+                                break;
+                            case "input":
+                            {
+                                if (machineNodeChildNode.TryFindAttribute("players", out var playersAttribute))
+                                {
+                                    datFileMachine.Players = NormalizeText(playersAttribute.Value.ToString());
+                                }
 
-                        datFileMachine.Controls = string.Join(" ", controlTypesList);
+                                if (machineNodeChildNode.TryFindAttribute("coins", out var coinsAttribute))
+                                {
+                                    datFileMachine.Coins = NormalizeText(coinsAttribute.Value.ToString());
+                                }
+
+                                var controlTypesList = new List<string>();
+                                var inputNodeChildren = machineNodeChildNode.Children;
+                                foreach (var inputNodeChild in inputNodeChildren)
+                                {
+                                    if (inputNodeChild.Name == "control")
+                                    {
+                                        if (inputNodeChild.TryFindAttribute("type", out var controlTypeAttribute))
+                                        {
+                                            controlTypesList.Add(controlTypeAttribute.Value.ToString());
+                                        }
+                                    }
+                                }
+
+                                datFileMachine.Controls = string.Join(" ", controlTypesList);
+                            }
+                                break;
+                        }
                     }
 
                     datFile.AddMachine(datFileMachine);
