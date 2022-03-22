@@ -47,6 +47,7 @@ namespace Frontend
                         machine.SaveStates,
                         machine.Players,
                         machine.Coins,
+                        machine.Controls,
                     });
 
                     datFileListView.Items.Add(listViewItem);

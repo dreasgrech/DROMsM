@@ -9,6 +9,7 @@
     public string SaveStates { get; set; }
     public string Players { get; set; }
     public string Coins { get; set; }
+    public string Controls { get; set; }
 
     public override string ToString()
     {

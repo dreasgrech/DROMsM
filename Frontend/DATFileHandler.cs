@@ -1,6 +1,8 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
+using System.Text;
 //using System.Xml;
 //using System.Xml.Linq;
 using U8Xml;
@@ -75,6 +77,21 @@ namespace Frontend
                         {
                             datFileMachine.Coins = NormalizeText(coinsAttribute.Value.ToString());
                         }
+
+                        var controlTypesList = new List<string>();
+                        var inputNodeChildren = inputNode.Children;
+                        foreach (var inputNodeChild in inputNodeChildren)
+                        {
+                            if (inputNodeChild.Name == "control")
+                            {
+                                if (inputNodeChild.TryFindAttribute("type", out var controlTypeAttribute))
+                                {
+                                    controlTypesList.Add(controlTypeAttribute.Value.ToString());
+                                }
+                            }
+                        }
+
+                        datFileMachine.Controls = string.Join(" ", controlTypesList);
                     }
 
                     datFile.AddMachine(datFileMachine);

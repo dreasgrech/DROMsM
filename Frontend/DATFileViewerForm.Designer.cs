@@ -50,6 +50,7 @@
             this.saveStatesColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.playersColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.coinsColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.controlsColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -79,7 +80,8 @@
             this.emulationColumn,
             this.saveStatesColumn,
             this.playersColumn,
-            this.coinsColumn});
+            this.coinsColumn,
+            this.controlsColumn});
             this.datFileListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.datFileListView.FullRowSelect = true;
             this.datFileListView.GridLines = true;
@@ -245,6 +247,10 @@
             // 
             this.coinsColumn.Text = "Coins";
             // 
+            // controlsColumn
+            // 
+            this.controlsColumn.Text = "Controls";
+            // 
             // DATFileViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -293,5 +299,6 @@
         private System.Windows.Forms.ColumnHeader saveStatesColumn;
         private System.Windows.Forms.ColumnHeader playersColumn;
         private System.Windows.Forms.ColumnHeader coinsColumn;
+        private System.Windows.Forms.ColumnHeader controlsColumn;
     }
 }
