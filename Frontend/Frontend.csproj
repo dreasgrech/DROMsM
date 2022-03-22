@@ -74,11 +74,15 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\DirectX for Managed Code\1.0.2902.0\Microsoft.DirectX.AudioVideoPlayback.dll</HintPath>
     </Reference>
+    <Reference Include="ObjectListView">
+      <HintPath>..\..\..\..\Downloads\ObjectListViewFull-2.8.0\ObjectListView\bin\Release\ObjectListView.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Buffers, Version=4.0.2.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Buffers.4.4.0\lib\netstandard2.0\System.Buffers.dll</HintPath>
     </Reference>
     <Reference Include="System.Core" />
+    <Reference Include="System.Design" />
     <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.Memory.4.5.3\lib\netstandard2.0\System.Memory.dll</HintPath>
     </Reference>
@@ -109,6 +113,7 @@
     <Compile Include="CHDMANHandler.cs" />
     <Compile Include="CUEFileHandler.cs" />
     <Compile Include="DATFileHandler.cs" />
+    <Compile Include="DATFileMachineVirtualListDataSource.cs" />
     <Compile Include="DATFileViewerForm.cs">
       <SubType>Form</SubType>
     </Compile>

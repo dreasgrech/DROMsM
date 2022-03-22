@@ -76,6 +76,7 @@
     <Compile Include="Entities\DATFile.cs" />
     <Compile Include="Entities\DATFileMachine.cs" />
     <Compile Include="Entities\DatFileMachineComparer_ComparisonName.cs" />
+    <Compile Include="Entities\DatFileMachineComparer_MAMEIndex.cs" />
     <Compile Include="Entities\MultipleGameROMGroup.cs" />
     <Compile Include="Entities\RBGameListFile.cs" />
     <Compile Include="Entities\RBGameListFolder.cs" />

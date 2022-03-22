@@ -4,7 +4,7 @@ using Frontend;
 public class DATFile
 {
     public string Build { get; set; }
-    private List<DATFileMachine> Machines { get; }
+    public List<DATFileMachine> Machines { get; }
 
     public int TotalMachines
     {
@@ -23,7 +23,8 @@ public class DATFile
 
     public void SortMachines()
     {
-        var comparer = new DatFileMachineComparer_ComparisonName();
+        // var comparer = new DatFileMachineComparer_ComparisonName();
+        var comparer = new DatFileMachineComparer_MAMEIndex();
         Machines.Sort(comparer);
     }
 

@@ -29,10 +29,19 @@ namespace Frontend
                     datFile.Build = NormalizeText(buildAttribute.Value.ToString());
                 }
 
-                Parallel.ForEach(rootNode.Children, machineNode =>
+                var machineNodeChildren = rootNode.Children;
+                //var machineNodeChildrenCount = machineNodeChildren.Count;
+                //Parallel.For(0, machineNodeChildrenCount, i =>
+                //{
+                //    var machineNode = machineNodeChildren.
+
+                //});
+
+                Parallel.ForEach(machineNodeChildren, (machineNode, parallelLoopState, index) =>
                 // foreach (var machineNode in rootNode.Children)
                 {
                     var datFileMachine = new DATFileMachine();
+                    datFileMachine.MAMESortingIndex = (int) index;
 
                     if (machineNode.TryFindAttribute("name", out var nameAttribute))
                     {

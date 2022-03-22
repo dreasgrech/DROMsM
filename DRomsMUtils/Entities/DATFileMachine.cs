@@ -11,6 +11,8 @@
     public string Coins { get; set; }
     public string Controls { get; set; }
 
+    public int MAMESortingIndex { get; set; }
+
     public override string ToString()
     {
         return $"{Name} {Description}";

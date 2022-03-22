@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using BrightIdeasSoftware;
 using DRomsMUtils;
 
 namespace Frontend
@@ -25,6 +26,9 @@ namespace Frontend
             var datFileHandler = new DATFileHandler();
             var datFile = datFileHandler.ParseDATFile(datFilePath);
 
+            /*
+            // var listViewItems = new List<ListViewItem>();
+            var listViewItems = new List<OLVListItem>();
             using (var machinesEnumerator = datFile.GetMachinesEnumerator())
             {
                 while (machinesEnumerator.MoveNext())
@@ -36,7 +40,8 @@ namespace Frontend
                         continue;
                     }
 
-                    var listViewItem = new ListViewItem(new[]
+                    // var listViewItem = new ListViewItem(new[]
+                    var listViewItem = new OLVListItem(new[]
                     {
                         machine.Name, 
                         machine.Description,
@@ -50,9 +55,17 @@ namespace Frontend
                         machine.Controls,
                     });
 
-                    datFileListView.Items.Add(listViewItem);
+                    // datFileListView.Items.Add(listViewItem);
+                    // olvDatFileListView.Items.Add(listViewItem);
+                    listViewItems.Add(listViewItem);
                 }
             }
+            */
+
+            var datFileMachineVirtualListDataSource = new DATFileMachineVirtualListDataSource(olvDatFileListView);
+            datFileMachineVirtualListDataSource.AddObjects(datFile.Machines);
+            // datFileMachineVirtualListDataSource.AddObjects(listViewItems);
+            olvDatFileListView.VirtualListDataSource = datFileMachineVirtualListDataSource;
 
             // Expand the columns
             // datFileListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -81,6 +94,11 @@ namespace Frontend
             }
 
             MessageBoxOperations.ShowInformation($"File successfully written at {saveFilePath}", "File exported");
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
