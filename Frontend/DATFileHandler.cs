@@ -105,7 +105,7 @@ namespace Frontend
                                     }
                                 }
 
-                                datFileMachine.Controls = string.Join(" ", controlTypesList);
+                                datFileMachine.Controls = string.Join(",", controlTypesList);
                             }
                                 break;
                             case "dipswitch":

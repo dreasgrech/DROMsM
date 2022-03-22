@@ -87,7 +87,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
             this.splitContainer1.Size = new System.Drawing.Size(1225, 956);
-            this.splitContainer1.SplitterDistance = 898;
+            this.splitContainer1.SplitterDistance = 906;
             this.splitContainer1.TabIndex = 2;
             // 
             // menuStrip1
@@ -215,7 +215,7 @@
             this.olvDatFileListView.Location = new System.Drawing.Point(0, 0);
             this.olvDatFileListView.Name = "olvDatFileListView";
             this.olvDatFileListView.ShowGroups = false;
-            this.olvDatFileListView.Size = new System.Drawing.Size(1225, 898);
+            this.olvDatFileListView.Size = new System.Drawing.Size(1225, 906);
             this.olvDatFileListView.TabIndex = 4;
             this.olvDatFileListView.TintSortColumn = true;
             this.olvDatFileListView.UseAlternatingBackColors = true;
