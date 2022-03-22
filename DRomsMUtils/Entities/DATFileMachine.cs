@@ -2,8 +2,11 @@
 {
     public string Name { get; set; }
     public string Description { get; set; }
-    public int Year { get; set; }
+    public string Year { get; set; }
     public string Manufacturer { get; set; }
+    public string Status { get; set; }
+    public string Emulation { get; set; }
+    public string SaveStates { get; set; }
 
     public override string ToString()
     {

@@ -40,8 +40,11 @@ namespace Frontend
                     {
                         machine.Name, 
                         machine.Description,
-                        machine.Year.ToString(),
+                        machine.Year,
                         machine.Manufacturer,
+                        machine.Status,
+                        machine.Emulation,
+                        machine.SaveStates,
                     });
 
                     datFileListView.Items.Add(listViewItem);

@@ -45,6 +45,9 @@
             this.totalSetsLabel = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.buildLabel = new System.Windows.Forms.Label();
+            this.statusColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.emulationColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.saveStatesColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -69,7 +72,10 @@
             this.setcolumn,
             this.nameColumn,
             this.yearColumn,
-            this.manufacturerColumn});
+            this.manufacturerColumn,
+            this.statusColumn,
+            this.emulationColumn,
+            this.saveStatesColumn});
             this.datFileListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.datFileListView.FullRowSelect = true;
             this.datFileListView.GridLines = true;
@@ -214,6 +220,19 @@
             this.buildLabel.TabIndex = 3;
             this.buildLabel.Text = "0.241 (mame0241)";
             // 
+            // statusColumn
+            // 
+            this.statusColumn.Text = "Status";
+            // 
+            // emulationColumn
+            // 
+            this.emulationColumn.Text = "Emulation";
+            // 
+            // saveStatesColumn
+            // 
+            this.saveStatesColumn.Text = "Save States";
+            this.saveStatesColumn.Width = 95;
+            // 
             // DATFileViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -257,5 +276,8 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label totalSetsLabel;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ColumnHeader statusColumn;
+        private System.Windows.Forms.ColumnHeader emulationColumn;
+        private System.Windows.Forms.ColumnHeader saveStatesColumn;
     }
 }

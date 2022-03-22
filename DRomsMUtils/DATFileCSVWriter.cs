@@ -22,7 +22,8 @@ namespace DRomsMUtils
                 {
                     //Mode = CsvMode.Escape
                     TrimOptions = TrimOptions.None,
-                    HasHeaderRecord = true
+                    HasHeaderRecord = true,
+                    Encoding = Encoding.Default
                 };
 
                 using (var writer = new StreamWriter(filePath))
