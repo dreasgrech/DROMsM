@@ -23,13 +23,15 @@ namespace DRomsMUtils
                     //Mode = CsvMode.Escape
                     TrimOptions = TrimOptions.None,
                     HasHeaderRecord = true,
-                    Encoding = Encoding.Default
+                    Encoding = Encoding.UTF8
                 };
 
                 using (var writer = new StreamWriter(filePath))
                 // using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 using (var csv = new CsvWriter(writer, config))
                 {
+                    csv.Context.RegisterClassMap<DATFileMachineCSVClassMap>();
+
                     csv.WriteHeader<DATFileMachine>();
                     csv.NextRecord();
                     using (var machinesEnumerator = datFile.GetMachinesEnumerator())

@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DATFileCSVWriter.cs" />
+    <Compile Include="DATFileMachineCSVClassMap.cs" />
     <Compile Include="Entities\CUEFile.cs" />
     <Compile Include="Entities\DATFile.cs" />
     <Compile Include="Entities\DATFileMachine.cs" />
