@@ -48,6 +48,8 @@
             this.statusColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.emulationColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.saveStatesColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.playersColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.coinsColumn = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -75,7 +77,9 @@
             this.manufacturerColumn,
             this.statusColumn,
             this.emulationColumn,
-            this.saveStatesColumn});
+            this.saveStatesColumn,
+            this.playersColumn,
+            this.coinsColumn});
             this.datFileListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.datFileListView.FullRowSelect = true;
             this.datFileListView.GridLines = true;
@@ -233,6 +237,14 @@
             this.saveStatesColumn.Text = "Save States";
             this.saveStatesColumn.Width = 95;
             // 
+            // playersColumn
+            // 
+            this.playersColumn.Text = "Players";
+            // 
+            // coinsColumn
+            // 
+            this.coinsColumn.Text = "Coins";
+            // 
             // DATFileViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -279,5 +291,7 @@
         private System.Windows.Forms.ColumnHeader statusColumn;
         private System.Windows.Forms.ColumnHeader emulationColumn;
         private System.Windows.Forms.ColumnHeader saveStatesColumn;
+        private System.Windows.Forms.ColumnHeader playersColumn;
+        private System.Windows.Forms.ColumnHeader coinsColumn;
     }
 }

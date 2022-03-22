@@ -64,6 +64,19 @@ namespace Frontend
                         }
                     }
 
+                    if (machineNode.TryFindChild("input", out var inputNode))
+                    {
+                        if (inputNode.TryFindAttribute("players", out var playersAttribute))
+                        {
+                            datFileMachine.Players = NormalizeText(playersAttribute.Value.ToString());
+                        }
+
+                        if (inputNode.TryFindAttribute("coins", out var coinsAttribute))
+                        {
+                            datFileMachine.Coins = NormalizeText(coinsAttribute.Value.ToString());
+                        }
+                    }
+
                     datFile.AddMachine(datFileMachine);
                 }
             }
