@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using Frontend;
 
 public class DATFile
 {
@@ -18,6 +19,12 @@ public class DATFile
     public void AddMachine(DATFileMachine machine)
     {
         Machines.Add(machine);
+    }
+
+    public void SortMachines()
+    {
+        var comparer = new DatFileMachineComparer_ComparisonName();
+        Machines.Sort(comparer);
     }
 
     public List<DATFileMachine>.Enumerator GetMachinesEnumerator()

@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections.Concurrent;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
+using System.Threading.Tasks;
 //using System.Xml;
 //using System.Xml.Linq;
 using U8Xml;
@@ -17,6 +19,8 @@ namespace Frontend
         {
             var datFile = new DATFile();
 
+            var datFileMachineCollection_threaded = new ConcurrentBag<DATFileMachine>();
+
             using (var xml = XmlParser.ParseFile(filePath))
             {
                 var rootNode = xml.Root;
@@ -25,7 +29,8 @@ namespace Frontend
                     datFile.Build = NormalizeText(buildAttribute.Value.ToString());
                 }
 
-                foreach (var machineNode in rootNode.Children)
+                Parallel.ForEach(rootNode.Children, machineNode =>
+                // foreach (var machineNode in rootNode.Children)
                 {
                     var datFileMachine = new DATFileMachine();
 
@@ -37,17 +42,16 @@ namespace Frontend
                     var machineNodeChildNodes = machineNode.Children;
                     foreach (var machineNodeChildNode in machineNodeChildNodes)
                     {
-                        var machineNodeChildNodeInnerText = NormalizeText(machineNodeChildNode.InnerText.ToString());
                         switch (machineNodeChildNode.Name.ToString())
                         {
                             case "description":
-                                datFileMachine.Description = machineNodeChildNodeInnerText;
+                                datFileMachine.Description = NormalizeText(machineNodeChildNode.InnerText.ToString());
                                 break;
                             case "year":
-                                datFileMachine.Year = machineNodeChildNodeInnerText;
+                                datFileMachine.Year = NormalizeText(machineNodeChildNode.InnerText.ToString());
                                 break;
                             case "manufacturer":
-                                datFileMachine.Manufacturer = machineNodeChildNodeInnerText;
+                                datFileMachine.Manufacturer = NormalizeText(machineNodeChildNode.InnerText.ToString());
                                 break;
                             case "driver":
                             {
@@ -95,12 +99,26 @@ namespace Frontend
                                 datFileMachine.Controls = string.Join(" ", controlTypesList);
                             }
                                 break;
+                            case "dipswitch":
+                            {
+
+                            }
+                                break;
                         }
                     }
 
-                    datFile.AddMachine(datFileMachine);
-                }
+                    // datFile.AddMachine(datFileMachine);
+                    datFileMachineCollection_threaded.Add(datFileMachine);
+                // }
+                });
             }
+
+            foreach (var datFileMachine in datFileMachineCollection_threaded)
+            {
+                 datFile.AddMachine(datFileMachine);
+            }
+            
+            datFile.SortMachines();
 
             return datFile;
         }
