@@ -54,6 +54,8 @@
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -66,10 +68,9 @@
             // datFilePathLabel
             // 
             this.datFilePathLabel.AutoSize = true;
-            this.datFilePathLabel.Location = new System.Drawing.Point(18, 51);
-            this.datFilePathLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.datFilePathLabel.Location = new System.Drawing.Point(12, 33);
             this.datFilePathLabel.Name = "datFilePathLabel";
-            this.datFilePathLabel.Size = new System.Drawing.Size(163, 20);
+            this.datFilePathLabel.Size = new System.Drawing.Size(115, 13);
             this.datFilePathLabel.TabIndex = 0;
             this.datFilePathLabel.Text = "C:\\My directory\\file.dat";
             // 
@@ -79,8 +80,7 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.splitContainer1.FixedPanel = System.Windows.Forms.FixedPanel.Panel2;
-            this.splitContainer1.Location = new System.Drawing.Point(18, 75);
-            this.splitContainer1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.splitContainer1.Location = new System.Drawing.Point(12, 49);
             this.splitContainer1.Name = "splitContainer1";
             this.splitContainer1.Orientation = System.Windows.Forms.Orientation.Horizontal;
             // 
@@ -91,9 +91,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer1.Size = new System.Drawing.Size(1838, 1492);
-            this.splitContainer1.SplitterDistance = 1367;
-            this.splitContainer1.SplitterWidth = 6;
+            this.splitContainer1.Size = new System.Drawing.Size(1225, 863);
+            this.splitContainer1.SplitterDistance = 820;
             this.splitContainer1.TabIndex = 2;
             // 
             // olvDatFileListView
@@ -131,10 +130,10 @@
             this.olvDatFileListView.GridLines = true;
             this.olvDatFileListView.HideSelection = false;
             this.olvDatFileListView.Location = new System.Drawing.Point(0, 0);
-            this.olvDatFileListView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.olvDatFileListView.Margin = new System.Windows.Forms.Padding(0);
             this.olvDatFileListView.Name = "olvDatFileListView";
             this.olvDatFileListView.ShowGroups = false;
-            this.olvDatFileListView.Size = new System.Drawing.Size(1838, 1367);
+            this.olvDatFileListView.Size = new System.Drawing.Size(1225, 820);
             this.olvDatFileListView.TabIndex = 4;
             this.olvDatFileListView.TintSortColumn = true;
             this.olvDatFileListView.UseAlternatingBackColors = true;
@@ -228,22 +227,20 @@
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.totalSetsLabel, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 5);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 3);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 31F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(360, 65);
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(240, 42);
             this.tableLayoutPanel1.TabIndex = 0;
             // 
             // buildLabel
             // 
             this.buildLabel.AutoSize = true;
-            this.buildLabel.Location = new System.Drawing.Point(101, 0);
-            this.buildLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.buildLabel.Location = new System.Drawing.Point(67, 0);
             this.buildLabel.Name = "buildLabel";
-            this.buildLabel.Size = new System.Drawing.Size(143, 20);
+            this.buildLabel.Size = new System.Drawing.Size(95, 13);
             this.buildLabel.TabIndex = 3;
             this.buildLabel.Text = "0.241 (mame0241)";
             // 
@@ -251,41 +248,39 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(0, 0);
-            this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 20);
+            this.label3.Size = new System.Drawing.Size(30, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "Build";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 31);
-            this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 4, 0);
+            this.label2.Location = new System.Drawing.Point(0, 20);
+            this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(78, 20);
+            this.label2.Size = new System.Drawing.Size(53, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Total sets";
             // 
             // totalSetsLabel
             // 
             this.totalSetsLabel.AutoSize = true;
-            this.totalSetsLabel.Location = new System.Drawing.Point(101, 31);
-            this.totalSetsLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.totalSetsLabel.Location = new System.Drawing.Point(67, 20);
             this.totalSetsLabel.Name = "totalSetsLabel";
-            this.totalSetsLabel.Size = new System.Drawing.Size(18, 20);
+            this.totalSetsLabel.Size = new System.Drawing.Size(13, 13);
             this.totalSetsLabel.TabIndex = 1;
             this.totalSetsLabel.Text = "0";
             // 
             // menuStrip1
             // 
-            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(9, 3, 0, 3);
-            this.menuStrip1.Size = new System.Drawing.Size(1874, 35);
+            this.menuStrip1.Size = new System.Drawing.Size(1249, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -296,38 +291,53 @@
             this.toolStripSeparator1,
             this.closeToolStripMenuItem});
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(54, 29);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(188, 34);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(185, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(120, 6);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(188, 34);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(123, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
+            // optionsToolStripMenuItem
+            // 
+            this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showColorsToolStripMenuItem});
+            this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
+            this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
+            this.optionsToolStripMenuItem.Text = "Options";
+            // 
+            // showColorsToolStripMenuItem
+            // 
+            this.showColorsToolStripMenuItem.CheckOnClick = true;
+            this.showColorsToolStripMenuItem.Name = "showColorsToolStripMenuItem";
+            this.showColorsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showColorsToolStripMenuItem.Text = "Show Colors";
+            this.showColorsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showColorsToolStripMenuItem_CheckedChanged);
+            // 
             // DATFileViewerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1874, 1586);
+            this.ClientSize = new System.Drawing.Size(1249, 924);
             this.Controls.Add(this.datFilePathLabel);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "DATFileViewerForm";
             this.Text = "DATFileViewerForm";
             this.splitContainer1.Panel1.ResumeLayout(false);
@@ -372,5 +382,7 @@
         private BrightIdeasSoftware.OLVColumn olvScreenType;
         private BrightIdeasSoftware.OLVColumn olvScreenOrientation;
         private BrightIdeasSoftware.OLVColumn olvScreenRefreshRate;
+        private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showColorsToolStripMenuItem;
     }
 }

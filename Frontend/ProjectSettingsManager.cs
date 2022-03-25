@@ -58,6 +58,8 @@
                     return Properties.Settings.Default.MatchUsingGameListXMLName;
                 case ProjectSettings.AutoExpandTreeViewsAfterOperations:
                     return Properties.Settings.Default.AutoExpandTreeViewsAfterOperations;
+                case ProjectSettings.DATFileViewer_ShowColors:
+                    return Properties.Settings.Default.DATFileViewer_ShowColors;
             }
 
             return false;
@@ -72,6 +74,9 @@
                     break;
                 case ProjectSettings.AutoExpandTreeViewsAfterOperations:
                     Properties.Settings.Default.AutoExpandTreeViewsAfterOperations = value;
+                    break;
+                case ProjectSettings.DATFileViewer_ShowColors:
+                    Properties.Settings.Default.DATFileViewer_ShowColors = value;
                     break;
             }
 
@@ -95,5 +100,6 @@
         MatchUsingGameListXMLName,
         AutoExpandTreeViewsAfterOperations,
         AllowedSimilarityValue,
+        DATFileViewer_ShowColors
     }
 }

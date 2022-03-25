@@ -8,6 +8,7 @@
 public class DATFileMachine
 {
     public string Name { get; set; }
+    public bool IsDevice { get; set; }
     public string Description { get; set; }
     public string Year { get; set; }
     public string Manufacturer { get; set; }

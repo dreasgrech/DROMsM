@@ -82,5 +82,17 @@ namespace Frontend.Properties {
                 this["AllowedSimilarityValue"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("True")]
+        public bool DATFileViewer_ShowColors {
+            get {
+                return ((bool)(this["DATFileViewer_ShowColors"]));
+            }
+            set {
+                this["DATFileViewer_ShowColors"] = value;
+            }
+        }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+﻿using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -38,12 +39,21 @@ namespace Frontend
                     var datFileMachine = new DATFileMachine
                     {
                         MAMESortingIndex = (int) index,
-                        ScreenOrientation = DATFileMachineScreenOrientation.Horizontal // By default, set the orientation to Horizontal because any machines that have no reference to orientation are categorized as Horizontal in the MAME emulator
+                        ScreenOrientation = DATFileMachineScreenOrientation.Horizontal, // By default, set the orientation to Horizontal because any machines that have no reference to orientation are categorized as Horizontal in the MAME emulator
+                        IsDevice = false
                     };
 
                     if (machineNode.TryFindAttribute("name", out var nameAttribute))
                     {
                         datFileMachine.Name = NormalizeText(nameAttribute.Value.ToString());
+                    }
+
+                    if (machineNode.TryFindAttribute("isdevice", out var isDeviceAttribute))
+                    {
+                        if (string.Equals(isDeviceAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
+                        {
+                            datFileMachine.IsDevice = true;
+                        }
                     }
 
                     var machineNodeChildNodes = machineNode.Children;
@@ -86,7 +96,10 @@ namespace Frontend
                         // }
                     });
 
-                    datFileMachineCollection_threaded.Add(datFileMachine);
+                    if (!datFileMachine.IsDevice)
+                    {
+                        datFileMachineCollection_threaded.Add(datFileMachine);
+                    }
                 // }
                 });
             }
@@ -146,8 +159,6 @@ namespace Frontend
                 datFileMachine.ScreenOrientation = DATFileMachineScreenOrientation.Vertical;
                 return;
             }
-
-            var x = 2;
         }
 
         private static void HandleInputNode(ref XmlNode machineNodeChildNode, DATFileMachine datFileMachine)

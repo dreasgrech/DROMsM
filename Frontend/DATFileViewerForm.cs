@@ -17,9 +17,14 @@ namespace Frontend
         private DATFile currentDATFile;
         private DATFileMachineVirtualListDataSource datFileMachineVirtualListDataSource;
 
+        private bool showingWorkingColors;
+
         public DATFileViewerForm()
         {
             InitializeComponent();
+
+            showingWorkingColors = ProjectSettingsManager.ResolveBool(ProjectSettings.DATFileViewer_ShowColors);
+            showColorsToolStripMenuItem.Checked = showingWorkingColors;
         }
 
         public void ProcessDATFile(string datFilePath)
@@ -106,6 +111,11 @@ namespace Frontend
 
         private void olvDatFileListView_FormatRow(object sender, FormatRowEventArgs e)
         {
+            if (!showingWorkingColors)
+            {
+                return;
+            }
+
             var datFileMachine = e.Model as DATFileMachine;
             if (datFileMachine == null)
             {
@@ -135,6 +145,17 @@ namespace Frontend
                     olvListItem.BackColor = Color.LightCoral;
                 } break;
             }
+        }
+
+        private void showColorsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            showingWorkingColors = showColorsToolStripMenuItem.Checked;
+
+            // Refresh the ListView to reflect the colour change
+            olvDatFileListView.Refresh();
+
+            // Save the setting change
+            ProjectSettingsManager.SaveBool(ProjectSettings.DATFileViewer_ShowColors, showingWorkingColors);
         }
     }
 }
