@@ -103,5 +103,38 @@ namespace Frontend
         {
             Close();
         }
+
+        private void olvDatFileListView_FormatRow(object sender, FormatRowEventArgs e)
+        {
+            var datFileMachine = e.Model as DATFileMachine;
+            if (datFileMachine == null)
+            {
+                return;
+            }
+
+            var status = datFileMachine.Status;
+            if (string.IsNullOrEmpty(status))
+            {
+                return;
+            }
+
+            var olvListItem = e.Item;
+            var statusString = status.ToLowerInvariant();
+            switch (statusString)
+            {
+                case "imperfect":
+                {
+                    olvListItem.BackColor = Color.LightYellow;
+                } break;
+                case "good":
+                {
+                    olvListItem.BackColor = Color.LightGreen;
+                } break;
+                case "preliminary":
+                {
+                    olvListItem.BackColor = Color.LightCoral;
+                } break;
+            }
+        }
     }
 }

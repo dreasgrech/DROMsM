@@ -91,8 +91,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer1.Size = new System.Drawing.Size(1838, 1471);
-            this.splitContainer1.SplitterDistance = 1417;
+            this.splitContainer1.Size = new System.Drawing.Size(1838, 1492);
+            this.splitContainer1.SplitterDistance = 1367;
             this.splitContainer1.SplitterWidth = 6;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -134,7 +134,7 @@
             this.olvDatFileListView.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.olvDatFileListView.Name = "olvDatFileListView";
             this.olvDatFileListView.ShowGroups = false;
-            this.olvDatFileListView.Size = new System.Drawing.Size(1838, 1417);
+            this.olvDatFileListView.Size = new System.Drawing.Size(1838, 1367);
             this.olvDatFileListView.TabIndex = 4;
             this.olvDatFileListView.TintSortColumn = true;
             this.olvDatFileListView.UseAlternatingBackColors = true;
@@ -142,6 +142,7 @@
             this.olvDatFileListView.UseFiltering = true;
             this.olvDatFileListView.View = System.Windows.Forms.View.Details;
             this.olvDatFileListView.VirtualMode = true;
+            this.olvDatFileListView.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.olvDatFileListView_FormatRow);
             // 
             // olvSetColumn
             // 
@@ -321,7 +322,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1874, 1565);
+            this.ClientSize = new System.Drawing.Size(1874, 1586);
             this.Controls.Add(this.datFilePathLabel);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);
