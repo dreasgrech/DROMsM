@@ -30,18 +30,14 @@ namespace Frontend
                 }
 
                 var machineNodeChildren = rootNode.Children;
-                //var machineNodeChildrenCount = machineNodeChildren.Count;
-                //Parallel.For(0, machineNodeChildrenCount, i =>
-                //{
-                //    var machineNode = machineNodeChildren.
-
-                //});
 
                 Parallel.ForEach(machineNodeChildren, (machineNode, parallelLoopState, index) =>
                 // foreach (var machineNode in rootNode.Children)
                 {
-                    var datFileMachine = new DATFileMachine();
-                    datFileMachine.MAMESortingIndex = (int) index;
+                    var datFileMachine = new DATFileMachine
+                    {
+                        MAMESortingIndex = (int) index
+                    };
 
                     if (machineNode.TryFindAttribute("name", out var nameAttribute))
                     {
@@ -49,7 +45,8 @@ namespace Frontend
                     }
 
                     var machineNodeChildNodes = machineNode.Children;
-                    foreach (var machineNodeChildNode in machineNodeChildNodes)
+                    // foreach (var machineNodeChildNode in machineNodeChildNodes)
+                    Parallel.ForEach(machineNodeChildNodes, machineNodeChildNode =>
                     {
                         switch (machineNodeChildNode.Name.ToString())
                         {
@@ -114,7 +111,9 @@ namespace Frontend
                             }
                                 break;
                         }
-                    }
+
+                        // }
+                    });
 
                     // datFile.AddMachine(datFileMachine);
                     datFileMachineCollection_threaded.Add(datFileMachine);
