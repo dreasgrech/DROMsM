@@ -131,6 +131,9 @@ namespace Frontend
             {
                 InitializeComponent();
 
+                // Start the program maximized
+                WindowState = FormWindowState.Maximized;
+
                 /****************/
                 /*
                 MessageBoxOperations.ShowError("Dont forget to remove this test", "asd");
