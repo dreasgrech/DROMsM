@@ -148,12 +148,14 @@
             // 
             this.olvSetColumn.AspectName = "Name";
             this.olvSetColumn.Text = "Set";
+            this.olvSetColumn.UseFiltering = false;
             // 
             // olvNameColumn
             // 
             this.olvNameColumn.AspectName = "Description";
             this.olvNameColumn.MinimumWidth = 341;
             this.olvNameColumn.Text = "Name";
+            this.olvNameColumn.UseFiltering = false;
             this.olvNameColumn.Width = 341;
             // 
             // olvYearColumn
