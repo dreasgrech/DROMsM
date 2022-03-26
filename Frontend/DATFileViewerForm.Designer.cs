@@ -110,6 +110,7 @@
             this.olvDatFileListView.AllColumns.Add(this.olvScreenOrientation);
             this.olvDatFileListView.AllColumns.Add(this.olvScreenRefreshRate);
             this.olvDatFileListView.AllColumns.Add(this.olvControlsColumn);
+            this.olvDatFileListView.AllowColumnReorder = true;
             this.olvDatFileListView.AlternateRowBackColor = System.Drawing.Color.WhiteSmoke;
             this.olvDatFileListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvSetColumn,

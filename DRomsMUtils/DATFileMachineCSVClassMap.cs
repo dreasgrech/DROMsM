@@ -19,9 +19,10 @@ namespace DRomsMUtils
             Map(m => m.IsDevice).Ignore();
         }
 
-        public void ToggleColumn<TMember>(Expression<Func<DATFileMachine, TMember>> expression, bool include)
+        public void ToggleColumn<TMember>(Expression<Func<DATFileMachine, TMember>> expression, bool include, int columnIndex)
         {
             var mapped = Map(expression);
+            mapped = mapped.Index(columnIndex);
             if (!include)
             {
                 mapped.Ignore();

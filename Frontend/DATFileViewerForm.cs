@@ -32,51 +32,14 @@ namespace Frontend
             var datFileHandler = new DATFileHandler();
             var datFile = datFileHandler.ParseDATFile(datFilePath);
 
-            /*
-            // var listViewItems = new List<ListViewItem>();
-            var listViewItems = new List<OLVListItem>();
-            using (var machinesEnumerator = datFile.GetMachinesEnumerator())
-            {
-                while (machinesEnumerator.MoveNext())
-                {
-                    var machine = machinesEnumerator.Current;
-                    if (machine == null)
-                    {
-                        Logger.LogError($"Unable to add machine to ListView");
-                        continue;
-                    }
-
-                    // var listViewItem = new ListViewItem(new[]
-                    var listViewItem = new OLVListItem(new[]
-                    {
-                        machine.Name, 
-                        machine.Description,
-                        machine.Year,
-                        machine.Manufacturer,
-                        machine.Status,
-                        machine.Emulation,
-                        machine.SaveStates,
-                        machine.Players,
-                        machine.Coins,
-                        machine.Controls,
-                    });
-
-                    // datFileListView.Items.Add(listViewItem);
-                    // olvDatFileListView.Items.Add(listViewItem);
-                    listViewItems.Add(listViewItem);
-                }
-            }
-            */
-
             datFileMachineVirtualListDataSource = new DATFileMachineVirtualListDataSource(olvDatFileListView);
             datFileMachineVirtualListDataSource.AddObjects(datFile.Machines);
-            // datFileMachineVirtualListDataSource.AddObjects(listViewItems);
             olvDatFileListView.VirtualListDataSource = datFileMachineVirtualListDataSource;
 
             // Expand the columns
             // datFileListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
 
-            Text = $@"Viewing {datFilePath}";
+            Text = $@"DAT File Viewer - {datFilePath}";
             datFilePathLabel.Text = datFilePath;
             totalSetsLabel.Text = datFile.TotalMachines.ToString();
             buildLabel.Text = datFile.Build;
@@ -94,19 +57,19 @@ namespace Frontend
 
             var visibleColumns = olvDatFileListView.Columns;
             var classMap = new DATFileMachineCSVClassMap();
-            classMap.ToggleColumn(m => m.Name, visibleColumns.Contains(olvSetColumn));
-            classMap.ToggleColumn(m => m.Description, visibleColumns.Contains(olvNameColumn));
-            classMap.ToggleColumn(m => m.Year, visibleColumns.Contains(olvYearColumn));
-            classMap.ToggleColumn(m => m.Manufacturer, visibleColumns.Contains(olvManufacturer));
-            classMap.ToggleColumn(m => m.Status, visibleColumns.Contains(olvStatusColumn));
-            classMap.ToggleColumn(m => m.Emulation, visibleColumns.Contains(olvEmulationColumn));
-            classMap.ToggleColumn(m => m.SaveStates, visibleColumns.Contains(olvSaveStates));
-            classMap.ToggleColumn(m => m.Players, visibleColumns.Contains(olvPlayersColumn));
-            classMap.ToggleColumn(m => m.Coins, visibleColumns.Contains(olvCoinsColumn));
-            classMap.ToggleColumn(m => m.ScreenType, visibleColumns.Contains(olvScreenType));
-            classMap.ToggleColumn(m => m.ScreenOrientation, visibleColumns.Contains(olvScreenOrientation));
-            classMap.ToggleColumn(m => m.ScreenRefreshRate, visibleColumns.Contains(olvScreenRefreshRate));
-            classMap.ToggleColumn(m => m.Controls, visibleColumns.Contains(olvControlsColumn));
+            classMap.ToggleColumn(m => m.Name, visibleColumns.Contains(olvSetColumn), olvSetColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.Description, visibleColumns.Contains(olvNameColumn), olvNameColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.Year, visibleColumns.Contains(olvYearColumn), olvYearColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.Manufacturer, visibleColumns.Contains(olvManufacturer), olvManufacturer.DisplayIndex);
+            classMap.ToggleColumn(m => m.Status, visibleColumns.Contains(olvStatusColumn), olvStatusColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.Emulation, visibleColumns.Contains(olvEmulationColumn), olvEmulationColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.SaveStates, visibleColumns.Contains(olvSaveStates), olvSaveStates.DisplayIndex);
+            classMap.ToggleColumn(m => m.Players, visibleColumns.Contains(olvPlayersColumn), olvPlayersColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.Coins, visibleColumns.Contains(olvCoinsColumn), olvCoinsColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.ScreenType, visibleColumns.Contains(olvScreenType), olvScreenType.DisplayIndex);
+            classMap.ToggleColumn(m => m.ScreenOrientation, visibleColumns.Contains(olvScreenOrientation), olvScreenOrientation.DisplayIndex);
+            classMap.ToggleColumn(m => m.ScreenRefreshRate, visibleColumns.Contains(olvScreenRefreshRate), olvScreenRefreshRate.DisplayIndex);
+            classMap.ToggleColumn(m => m.Controls, visibleColumns.Contains(olvControlsColumn), olvControlsColumn.DisplayIndex);
 
             var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
             var fileWritten = DATFileCSVWriter.WriteToFile(saveFilePath, filteredObjectList, classMap);

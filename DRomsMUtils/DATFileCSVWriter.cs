@@ -37,18 +37,13 @@ namespace DRomsMUtils
                     csv.Context.RegisterClassMap(classMap);
 
                     csv.WriteHeader<DATFileMachine>();
-                    // csv.Writehea
                     csv.NextRecord();
-                    // using (var machinesEnumerator = datFile.GetMachinesEnumerator())
+
                     foreach (var datFileMachineElement in datFileMachinesArrayList)
                     {
                         var datFileMachine = (DATFileMachine) datFileMachineElement;
-                        //while (machinesEnumerator.MoveNext())
-                        //{
-                            // var datFileMachine = machinesEnumerator.Current;
-                            csv.WriteRecord(datFileMachine);
-                            csv.NextRecord();
-                        // }
+                        csv.WriteRecord(datFileMachine);
+                        csv.NextRecord();
                     }
                 }
             }
