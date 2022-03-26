@@ -25,42 +25,6 @@ namespace Frontend.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string ROMsDirectory {
-            get {
-                return ((string)(this["ROMsDirectory"]));
-            }
-            set {
-                this["ROMsDirectory"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool MatchUsingGameListXMLName {
-            get {
-                return ((bool)(this["MatchUsingGameListXMLName"]));
-            }
-            set {
-                this["MatchUsingGameListXMLName"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("False")]
-        public bool AutoExpandTreeViewsAfterOperations {
-            get {
-                return ((bool)(this["AutoExpandTreeViewsAfterOperations"]));
-            }
-            set {
-                this["AutoExpandTreeViewsAfterOperations"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("True")]
         public bool UpdateSettingsVersion {
             get {
@@ -73,25 +37,25 @@ namespace Frontend.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0.9")]
-        public float AllowedSimilarityValue {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProgramSettings_Main {
             get {
-                return ((float)(this["AllowedSimilarityValue"]));
+                return ((string)(this["ProgramSettings_Main"]));
             }
             set {
-                this["AllowedSimilarityValue"] = value;
+                this["ProgramSettings_Main"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("True")]
-        public bool DATFileViewer_ShowColors {
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProgramSettings_DATFileViewer {
             get {
-                return ((bool)(this["DATFileViewer_ShowColors"]));
+                return ((string)(this["ProgramSettings_DATFileViewer"]));
             }
             set {
-                this["DATFileViewer_ShowColors"] = value;
+                this["ProgramSettings_DATFileViewer"] = value;
             }
         }
     }

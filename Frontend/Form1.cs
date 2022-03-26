@@ -183,7 +183,10 @@ namespace Frontend
 
         private void ApplyInitialSavedProjectSettings()
         {
-            romsDirectoryTextBox.Text = ProjectSettingsManager.ResolveString(ProjectSettings.ROMsDirectory);
+            var mainSettings = ProjectSettingsManager.MainSettings;
+            // romsDirectoryTextBox.Text = ProjectSettingsManager.ResolveString(ProjectSettings.ROMsDirectory);
+            romsDirectoryTextBox.Text = mainSettings.ROMsDirectory;
+
             // OperationsOptions.Instance.MatchUsingGameListXMLName = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
             // matchUsingGamelistXMLNameCheckbox.Checked = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
             // autoExpandAfterOperationsCheckbox.Checked = ProjectSettingsManager.ResolveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations);
@@ -744,7 +747,9 @@ namespace Frontend
 
         void AfterFinishingOperation()
         {
-            if (ProjectSettingsManager.ResolveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations))
+            var mainSettings = ProjectSettingsManager.MainSettings;
+            // if (ProjectSettingsManager.ResolveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations))
+            if (mainSettings.AutoExpandTreeViewsAfterOperations)
             {
                 ExpandLeftAndRightTreeViews();
             }
@@ -793,7 +798,10 @@ namespace Frontend
 
         private void romsDirectoryTextBox_Leave(object sender, EventArgs e)
         {
-            ProjectSettingsManager.SaveString(ProjectSettings.ROMsDirectory, romsDirectoryTextBox.Text);
+            // ProjectSettingsManager.SaveString(ProjectSettings.ROMsDirectory, romsDirectoryTextBox.Text);
+            var mainSettings = ProjectSettingsManager.MainSettings;
+            mainSettings.ROMsDirectory = romsDirectoryTextBox.Text;
+            ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.Main);
         }
 
         //private void ShowExceptionError(Exception ex)

@@ -19,12 +19,24 @@ namespace Frontend
 
         private bool showingWorkingColors;
 
+        private readonly Dictionary<string, OLVColumn> columnsDictionary;
+
         public DATFileViewerForm()
         {
             InitializeComponent();
 
-            showingWorkingColors = ProjectSettingsManager.ResolveBool(ProjectSettings.DATFileViewer_ShowColors);
+            var settings = ProjectSettingsManager.DATFileViewerSettings;
+            // showingWorkingColors = ProjectSettingsManager.ResolveBool(ProjectSettings.DATFileViewer_ShowColors);
+            showingWorkingColors = settings.DATFileViewer_ShowColors;
+
             showColorsToolStripMenuItem.Checked = showingWorkingColors;
+
+            columnsDictionary = new Dictionary<string, OLVColumn>(/* todo: icomparer */);
+            var columns = olvDatFileListView.Columns;
+            foreach (OLVColumn columnHeader in columns)
+            {
+                columnsDictionary[columnHeader.AspectName] = columnHeader;
+            }
         }
 
         public void ProcessDATFile(string datFilePath)
@@ -133,7 +145,11 @@ namespace Frontend
             olvDatFileListView.Refresh();
 
             // Save the setting change
-            ProjectSettingsManager.SaveBool(ProjectSettings.DATFileViewer_ShowColors, showingWorkingColors);
+            // ProjectSettingsManager.SaveBool(ProjectSettings.DATFileViewer_ShowColors, showingWorkingColors);
+            var settings = ProjectSettingsManager.DATFileViewerSettings;
+            settings.DATFileViewer_ShowColors = showingWorkingColors;
+            ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
         }
     }
+
 }

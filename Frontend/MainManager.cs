@@ -896,8 +896,11 @@ namespace Frontend
             romGroupSet.Add(currentFileGroup);
 
             // var matchUsingGameListXMLName = options.MatchUsingGameListXMLName;
-            var matchUsingGameListXMLName = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
-            var allowedSimilarityValue = ProjectSettingsManager.ResolveFloat(ProjectSettings.AllowedSimilarityValue);
+            var settings = ProjectSettingsManager.MainSettings;
+            //var matchUsingGameListXMLName = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
+            //var allowedSimilarityValue = ProjectSettingsManager.ResolveFloat(ProjectSettings.AllowedSimilarityValue);
+            var matchUsingGameListXMLName = settings.MatchUsingGameListXMLName;
+            var allowedSimilarityValue = settings.AllowedSimilarityValue;
 
             // var allRomEntriesCount = mainROMGroup.TotalEntries;
             var allRomEntriesCount = roms.TotalEntries;

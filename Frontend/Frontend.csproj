@@ -83,6 +83,9 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\DirectX for Managed Code\1.0.2902.0\Microsoft.DirectX.AudioVideoPlayback.dll</HintPath>
     </Reference>
+    <Reference Include="Newtonsoft.Json, Version=13.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.13.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="ObjectListView">
       <HintPath>..\..\..\..\Downloads\ObjectListViewFull-2.8.0\ObjectListView\bin\Release\ObjectListView.dll</HintPath>
     </Reference>
@@ -153,6 +156,8 @@
     <Compile Include="OperationsOptions.cs" />
     <Compile Include="OutputFileWriter.cs" />
     <Compile Include="Program.cs" />
+    <Compile Include="ProgramSettings_DATFileViewer.cs" />
+    <Compile Include="ProgramSettings_Main.cs" />
     <Compile Include="ProjectSettingsManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RBGameListFileReader.cs" />

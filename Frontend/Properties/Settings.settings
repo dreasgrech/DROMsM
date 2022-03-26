@@ -2,23 +2,14 @@
 <SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Frontend.Properties" GeneratedClassName="Settings">
   <Profiles />
   <Settings>
-    <Setting Name="ROMsDirectory" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="MatchUsingGameListXMLName" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
-    <Setting Name="AutoExpandTreeViewsAfterOperations" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">False</Value>
-    </Setting>
     <Setting Name="UpdateSettingsVersion" Type="System.Boolean" Scope="User">
       <Value Profile="(Default)">True</Value>
     </Setting>
-    <Setting Name="AllowedSimilarityValue" Type="System.Single" Scope="User">
-      <Value Profile="(Default)">0.9</Value>
+    <Setting Name="ProgramSettings_Main" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
-    <Setting Name="DATFileViewer_ShowColors" Type="System.Boolean" Scope="User">
-      <Value Profile="(Default)">True</Value>
+    <Setting Name="ProgramSettings_DATFileViewer" Type="System.String" Scope="User">
+      <Value Profile="(Default)" />
     </Setting>
   </Settings>
 </SettingsFile>
