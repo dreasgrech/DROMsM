@@ -139,9 +139,11 @@
             this.olvDatFileListView.TintSortColumn = true;
             this.olvDatFileListView.UseAlternatingBackColors = true;
             this.olvDatFileListView.UseCompatibleStateImageBehavior = false;
+            this.olvDatFileListView.UseFilterIndicator = true;
             this.olvDatFileListView.UseFiltering = true;
             this.olvDatFileListView.View = System.Windows.Forms.View.Details;
             this.olvDatFileListView.VirtualMode = true;
+            this.olvDatFileListView.Filter += new System.EventHandler<BrightIdeasSoftware.FilterEventArgs>(this.olvDatFileListView_Filter);
             this.olvDatFileListView.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.olvDatFileListView_FormatRow);
             // 
             // olvSetColumn

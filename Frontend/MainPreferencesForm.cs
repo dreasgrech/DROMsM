@@ -19,7 +19,7 @@ namespace Frontend
             InitializeComponent();
 
             var settings = ProjectSettingsManager.MainSettings;
-            allowedSimilarityValueTextbox.Text = settings.AllowedSimilarityValue.ToString();
+            allowedSimilarityValueTextbox.Text = settings.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
             matchUsingGamelistXMLNameCheckbox.Checked = settings.MatchUsingGameListXMLName;
             autoExpandAfterOperationsCheckbox.Checked = settings.AutoExpandTreeViewsAfterOperations;
         }

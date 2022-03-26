@@ -26,16 +26,38 @@ namespace Frontend
             InitializeComponent();
 
             var settings = ProjectSettingsManager.DATFileViewerSettings;
-            showingWorkingColors = settings.DATFileViewer_ShowColors;
+            showingWorkingColors = settings.ShowColors;
 
             showColorsToolStripMenuItem.Checked = showingWorkingColors;
+
+            var savedColumnSettings = settings.ColumnSettings;
 
             columnsDictionary = new Dictionary<string, OLVColumn>(/* todo: icomparer */);
             var columns = olvDatFileListView.Columns;
             foreach (OLVColumn columnHeader in columns)
             {
-                columnsDictionary[columnHeader.AspectName] = columnHeader;
+                var aspectName = columnHeader.AspectName;
+                columnsDictionary[aspectName] = columnHeader;
+
+                var columnSavedSettings = savedColumnSettings[aspectName];
+                columnHeader.DisplayIndex = columnSavedSettings.DisplayIndex;
+                columnHeader.IsVisible = columnSavedSettings.Visible;
+
+                /******************************/
+                //settings.ColumnSettings[aspectName] = new DatFileViewerColumnSettings
+                //{
+                //    DisplayIndex = columnHeader.DisplayIndex,
+                //    Visible = columnHeader.IsVisible
+                //};
+                /******************************/
             }
+
+            // Rebuild the columns since we could have hidden some of them
+            olvDatFileListView.RebuildColumns();
+
+            /*****************************/
+            // ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
+            /*****************************/
         }
 
         public void ProcessDATFile(string datFilePath)
@@ -145,8 +167,13 @@ namespace Frontend
 
             // Save the setting change
             var settings = ProjectSettingsManager.DATFileViewerSettings;
-            settings.DATFileViewer_ShowColors = showingWorkingColors;
+            settings.ShowColors = showingWorkingColors;
             ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
+        }
+
+        private void olvDatFileListView_Filter(object sender, FilterEventArgs e)
+        {
+            var filteredObjects = e.FilteredObjects;
         }
     }
 

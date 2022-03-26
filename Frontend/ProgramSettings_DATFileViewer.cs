@@ -1,18 +1,23 @@
-﻿namespace Frontend
+﻿using System.Collections.Generic;
+
+namespace Frontend
 {
     public class ProgramSettings_DATFileViewer
     {
-        public bool DATFileViewer_ShowColors { get; set; }
+        public bool ShowColors { get; set; }
+        public Dictionary<string, DatFileViewerColumnSettings> ColumnSettings { get; set; }
 
         public ProgramSettings_DATFileViewer()
         {
             // Set default values
-            DATFileViewer_ShowColors = true;
+            ShowColors = true;
+            ColumnSettings = new Dictionary<string, DatFileViewerColumnSettings>(/* icomparer */);
         }
     }
 
-    public class DATFileViewerSavedData
+    public class DatFileViewerColumnSettings
     {
-
+        public int DisplayIndex { get; set; }
+        public bool Visible { get; set; }
     }
 }
