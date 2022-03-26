@@ -1,4 +1,6 @@
-﻿public enum DATFileMachineScreenOrientation
+﻿using CsvHelper.Configuration.Attributes;
+
+public enum DATFileMachineScreenOrientation
 {
     Unknown,
     Horizontal,
@@ -7,9 +9,12 @@
 
 public class DATFileMachine
 {
+    [Name("Set")]
     public string Name { get; set; }
-    public bool IsDevice { get; set; }
+
+    [Name("Name")]
     public string Description { get; set; }
+
     public string Year { get; set; }
     public string Manufacturer { get; set; }
     public string Status { get; set; }
@@ -23,6 +28,7 @@ public class DATFileMachine
     public string ScreenRefreshRate { get; set; }
 
     public int MAMESortingIndex { get; set; }
+    public bool IsDevice { get; set; }
 
     public override string ToString()
     {

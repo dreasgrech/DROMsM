@@ -96,6 +96,7 @@ namespace Frontend
                         // }
                     });
 
+                    // Add the machine to the entries list if it's not considered a DEVICE.
                     if (!datFileMachine.IsDevice)
                     {
                         datFileMachineCollection_threaded.Add(datFileMachine);

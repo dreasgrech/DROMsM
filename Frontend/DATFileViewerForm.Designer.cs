@@ -91,8 +91,8 @@
             // splitContainer1.Panel2
             // 
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
-            this.splitContainer1.Size = new System.Drawing.Size(1225, 863);
-            this.splitContainer1.SplitterDistance = 820;
+            this.splitContainer1.Size = new System.Drawing.Size(1692, 969);
+            this.splitContainer1.SplitterDistance = 926;
             this.splitContainer1.TabIndex = 2;
             // 
             // olvDatFileListView
@@ -133,7 +133,7 @@
             this.olvDatFileListView.Margin = new System.Windows.Forms.Padding(0);
             this.olvDatFileListView.Name = "olvDatFileListView";
             this.olvDatFileListView.ShowGroups = false;
-            this.olvDatFileListView.Size = new System.Drawing.Size(1225, 820);
+            this.olvDatFileListView.Size = new System.Drawing.Size(1692, 926);
             this.olvDatFileListView.TabIndex = 4;
             this.olvDatFileListView.TintSortColumn = true;
             this.olvDatFileListView.UseAlternatingBackColors = true;
@@ -214,6 +214,7 @@
             // olvControlsColumn
             // 
             this.olvControlsColumn.AspectName = "Controls";
+            this.olvControlsColumn.FillsFreeSpace = true;
             this.olvControlsColumn.MinimumWidth = 201;
             this.olvControlsColumn.Text = "Controls";
             this.olvControlsColumn.Width = 328;
@@ -280,7 +281,7 @@
             this.optionsToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1249, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(1716, 24);
             this.menuStrip1.TabIndex = 3;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -325,7 +326,7 @@
             // 
             this.showColorsToolStripMenuItem.CheckOnClick = true;
             this.showColorsToolStripMenuItem.Name = "showColorsToolStripMenuItem";
-            this.showColorsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showColorsToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
             this.showColorsToolStripMenuItem.Text = "Show Colors";
             this.showColorsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showColorsToolStripMenuItem_CheckedChanged);
             // 
@@ -333,7 +334,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1249, 924);
+            this.ClientSize = new System.Drawing.Size(1716, 1030);
             this.Controls.Add(this.datFilePathLabel);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.menuStrip1);

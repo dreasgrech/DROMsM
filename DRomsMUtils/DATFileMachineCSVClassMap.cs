@@ -1,4 +1,7 @@
-﻿using System.Globalization;
+﻿using System;
+using System.Globalization;
+using System.Linq.Expressions;
+using System.Windows.Forms;
 using CsvHelper.Configuration;
 
 namespace DRomsMUtils
@@ -13,6 +16,16 @@ namespace DRomsMUtils
         {
             AutoMap(CultureInfo.InvariantCulture);
             Map(m => m.MAMESortingIndex).Ignore();
+            Map(m => m.IsDevice).Ignore();
+        }
+
+        public void ToggleColumn<TMember>(Expression<Func<DATFileMachine, TMember>> expression, bool include)
+        {
+            var mapped = Map(expression);
+            if (!include)
+            {
+                mapped.Ignore();
+            }
         }
     }
 }

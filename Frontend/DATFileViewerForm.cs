@@ -92,9 +92,24 @@ namespace Frontend
                 return;
             }
 
+            var visibleColumns = olvDatFileListView.Columns;
+            var classMap = new DATFileMachineCSVClassMap();
+            classMap.ToggleColumn(m => m.Name, visibleColumns.Contains(olvSetColumn));
+            classMap.ToggleColumn(m => m.Description, visibleColumns.Contains(olvNameColumn));
+            classMap.ToggleColumn(m => m.Year, visibleColumns.Contains(olvYearColumn));
+            classMap.ToggleColumn(m => m.Manufacturer, visibleColumns.Contains(olvManufacturer));
+            classMap.ToggleColumn(m => m.Status, visibleColumns.Contains(olvStatusColumn));
+            classMap.ToggleColumn(m => m.Emulation, visibleColumns.Contains(olvEmulationColumn));
+            classMap.ToggleColumn(m => m.SaveStates, visibleColumns.Contains(olvSaveStates));
+            classMap.ToggleColumn(m => m.Players, visibleColumns.Contains(olvPlayersColumn));
+            classMap.ToggleColumn(m => m.Coins, visibleColumns.Contains(olvCoinsColumn));
+            classMap.ToggleColumn(m => m.ScreenType, visibleColumns.Contains(olvScreenType));
+            classMap.ToggleColumn(m => m.ScreenOrientation, visibleColumns.Contains(olvScreenOrientation));
+            classMap.ToggleColumn(m => m.ScreenRefreshRate, visibleColumns.Contains(olvScreenRefreshRate));
+            classMap.ToggleColumn(m => m.Controls, visibleColumns.Contains(olvControlsColumn));
+
             var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
-            // var fileWritten = DATFileCSVWriter.WriteToFile(saveFilePath, currentDATFile);
-            var fileWritten = DATFileCSVWriter.WriteToFile(saveFilePath, filteredObjectList);
+            var fileWritten = DATFileCSVWriter.WriteToFile(saveFilePath, filteredObjectList, classMap);
             if (!fileWritten)
             {
                 MessageBoxOperations.ShowError($"Unable to create file {saveFilePath}", "Unable to write file");

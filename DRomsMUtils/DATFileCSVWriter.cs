@@ -7,6 +7,7 @@ using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using CsvHelper;
 using CsvHelper.Configuration;
 using Frontend;
@@ -16,7 +17,7 @@ namespace DRomsMUtils
     public static class DATFileCSVWriter
     {
         // public static bool WriteToFile(string filePath, DATFile datFile)
-        public static bool WriteToFile(string filePath, ArrayList datFileMachinesArrayList)
+        public static bool WriteToFile(string filePath, ArrayList datFileMachinesArrayList, DATFileMachineCSVClassMap classMap)
         {
             try
             {
@@ -32,9 +33,11 @@ namespace DRomsMUtils
                 // using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 using (var csv = new CsvWriter(writer, config))
                 {
-                    csv.Context.RegisterClassMap<DATFileMachineCSVClassMap>();
+                    // csv.Context.RegisterClassMap<DATFileMachineCSVClassMap>();
+                    csv.Context.RegisterClassMap(classMap);
 
                     csv.WriteHeader<DATFileMachine>();
+                    // csv.Writehea
                     csv.NextRecord();
                     // using (var machinesEnumerator = datFile.GetMachinesEnumerator())
                     foreach (var datFileMachineElement in datFileMachinesArrayList)
