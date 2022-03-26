@@ -16,7 +16,6 @@ namespace DRomsMUtils
 {
     public static class DATFileCSVWriter
     {
-        // public static bool WriteToFile(string filePath, DATFile datFile)
         public static bool WriteToFile(string filePath, ArrayList datFileMachinesArrayList, DATFileMachineCSVClassMap classMap)
         {
             try
@@ -33,7 +32,6 @@ namespace DRomsMUtils
                 // using (var csv = new CsvWriter(writer, CultureInfo.InvariantCulture))
                 using (var csv = new CsvWriter(writer, config))
                 {
-                    // csv.Context.RegisterClassMap<DATFileMachineCSVClassMap>();
                     csv.Context.RegisterClassMap(classMap);
 
                     csv.WriteHeader<DATFileMachine>();

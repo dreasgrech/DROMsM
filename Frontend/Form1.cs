@@ -184,13 +184,7 @@ namespace Frontend
         private void ApplyInitialSavedProjectSettings()
         {
             var mainSettings = ProjectSettingsManager.MainSettings;
-            // romsDirectoryTextBox.Text = ProjectSettingsManager.ResolveString(ProjectSettings.ROMsDirectory);
             romsDirectoryTextBox.Text = mainSettings.ROMsDirectory;
-
-            // OperationsOptions.Instance.MatchUsingGameListXMLName = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
-            // matchUsingGamelistXMLNameCheckbox.Checked = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
-            // autoExpandAfterOperationsCheckbox.Checked = ProjectSettingsManager.ResolveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations);
-            // OperationsOptions.Instance.AutoExpandAfterOperations = ProjectSettingsManager.ResolveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations);
         }
 
         private void findSuggestedButton_Click(object sender, EventArgs e)
@@ -748,7 +742,6 @@ namespace Frontend
         void AfterFinishingOperation()
         {
             var mainSettings = ProjectSettingsManager.MainSettings;
-            // if (ProjectSettingsManager.ResolveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations))
             if (mainSettings.AutoExpandTreeViewsAfterOperations)
             {
                 ExpandLeftAndRightTreeViews();
@@ -798,7 +791,6 @@ namespace Frontend
 
         private void romsDirectoryTextBox_Leave(object sender, EventArgs e)
         {
-            // ProjectSettingsManager.SaveString(ProjectSettings.ROMsDirectory, romsDirectoryTextBox.Text);
             var mainSettings = ProjectSettingsManager.MainSettings;
             mainSettings.ROMsDirectory = romsDirectoryTextBox.Text;
             ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.Main);
@@ -1012,22 +1004,6 @@ namespace Frontend
                 Process.Start(filename);
             }
         }
-
-        //private void matchUsingGameListXMLNameCheckbox_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    var checkboxValue = matchUsingGamelistXMLNameCheckbox.Checked;
-
-        //    options.MatchUsingGameListXMLName = checkboxValue;
-        //    ProjectSettingsManager.SaveBool(ProjectSettings.MatchUsingGameListXMLName, checkboxValue);
-        //}
-
-        //private void autoExpandAfterOperationsCheckbox_CheckedChanged(object sender, EventArgs e)
-        //{
-        //    var checkboxValue = autoExpandAfterOperationsCheckbox.Checked;
-
-        //    options.AutoExpandAfterOperations = checkboxValue;
-        //    ProjectSettingsManager.SaveBool(ProjectSettings.AutoExpandTreeViewsAfterOperations, checkboxValue);
-        //}
 
         private void removeTopLevelDirectoriesOperationButton_Click(object sender, EventArgs e)
         {

@@ -885,29 +885,20 @@ namespace Frontend
             var romGroupSet = new SingleGameROMGroupSet();
 
             var roms = mainROMGroup.Clone(); 
-            //var comparer = new SingleROMEntryComparer_ComparisonName {IgnoreRelativeDirectory = !requireROMsToBeInSameDirectory};
-            //roms.Sort(comparer);
             roms.Sort(!requireROMsToBeInSameDirectory);
 
             var currentFileGroup = new SingleGameROMGroup();
-            // currentFileGroup.Add(mainROMGroup.EntryAt(0));
             currentFileGroup.Add(roms.EntryAt(0));
 
             romGroupSet.Add(currentFileGroup);
 
-            // var matchUsingGameListXMLName = options.MatchUsingGameListXMLName;
             var settings = ProjectSettingsManager.MainSettings;
-            //var matchUsingGameListXMLName = ProjectSettingsManager.ResolveBool(ProjectSettings.MatchUsingGameListXMLName);
-            //var allowedSimilarityValue = ProjectSettingsManager.ResolveFloat(ProjectSettings.AllowedSimilarityValue);
             var matchUsingGameListXMLName = settings.MatchUsingGameListXMLName;
             var allowedSimilarityValue = settings.AllowedSimilarityValue;
 
-            // var allRomEntriesCount = mainROMGroup.TotalEntries;
             var allRomEntriesCount = roms.TotalEntries;
             for (var i = 1; i < allRomEntriesCount; i++)
             {
-                //var prevROM = mainROMGroup.EntryAt(i - 1);
-                //var currentROM = mainROMGroup.EntryAt(i);
                 var prevROM = roms.EntryAt(i - 1);
                 var currentROM = roms.EntryAt(i);
 

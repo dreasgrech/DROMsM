@@ -26,7 +26,6 @@ namespace Frontend
             InitializeComponent();
 
             var settings = ProjectSettingsManager.DATFileViewerSettings;
-            // showingWorkingColors = ProjectSettingsManager.ResolveBool(ProjectSettings.DATFileViewer_ShowColors);
             showingWorkingColors = settings.DATFileViewer_ShowColors;
 
             showColorsToolStripMenuItem.Checked = showingWorkingColors;
@@ -145,7 +144,6 @@ namespace Frontend
             olvDatFileListView.Refresh();
 
             // Save the setting change
-            // ProjectSettingsManager.SaveBool(ProjectSettings.DATFileViewer_ShowColors, showingWorkingColors);
             var settings = ProjectSettingsManager.DATFileViewerSettings;
             settings.DATFileViewer_ShowColors = showingWorkingColors;
             ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
