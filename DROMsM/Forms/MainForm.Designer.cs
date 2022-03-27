@@ -1272,7 +1272,7 @@
             this.findDuplicatesResultsToolStripMenuItem,
             this.splitIntoDirectoriesResultsToolStripMenuItem});
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.exportToolStripMenuItem.Text = "Export";
             // 
             // exportAllROMsListToolStripMenuItem
@@ -1305,13 +1305,13 @@
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(132, 6);
             // 
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
             this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
@@ -1326,7 +1326,7 @@
             // preferencesToolStripMenuItem
             // 
             this.preferencesToolStripMenuItem.Name = "preferencesToolStripMenuItem";
-            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.preferencesToolStripMenuItem.Size = new System.Drawing.Size(135, 22);
             this.preferencesToolStripMenuItem.Text = "Preferences";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
@@ -1341,7 +1341,7 @@
             // viewDATFileToolStripMenuItem
             // 
             this.viewDATFileToolStripMenuItem.Name = "viewDATFileToolStripMenuItem";
-            this.viewDATFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.viewDATFileToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
             this.viewDATFileToolStripMenuItem.Text = "View DAT File";
             this.viewDATFileToolStripMenuItem.Click += new System.EventHandler(this.viewDATFileToolStripMenuItem_Click);
             // 
