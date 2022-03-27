@@ -1,4 +1,4 @@
-﻿namespace Frontend
+﻿namespace DROMsM.Forms
 {
     partial class DATFileViewerForm
     {

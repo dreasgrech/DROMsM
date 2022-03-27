@@ -1,19 +1,17 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
-using System.Windows.Forms;
-using CodeProject;
+using DROMsM.Forms;
 using DRomsMUtils;
-using Opulos.Core.IO;
+using Frontend;
 
-namespace Frontend
+namespace DROMsM
 {
     public enum MainState
     {

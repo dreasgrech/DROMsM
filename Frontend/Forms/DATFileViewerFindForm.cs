@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Forms;
 
-namespace Frontend.Forms
+namespace DROMsM.Forms
 {
     public partial class DATFileViewerFindForm : Form
     {

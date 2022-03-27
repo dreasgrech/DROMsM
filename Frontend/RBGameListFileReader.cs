@@ -1,9 +1,10 @@
 ﻿using System;
 using System.IO;
 using DRomsMUtils;
+using Frontend;
 using U8Xml;
 
-namespace Frontend
+namespace DROMsM
 {
     public class RBGameListFileReader
     {

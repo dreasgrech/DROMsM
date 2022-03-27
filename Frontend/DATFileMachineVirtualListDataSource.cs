@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Windows.Forms;
-using BrightIdeasSoftware;
+﻿using BrightIdeasSoftware;
 
-namespace Frontend
+namespace DROMsM
 {
     public class DATFileMachineVirtualListDataSource : FastObjectListDataSource
     {

@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Globalization;
 using System.Windows.Forms;
+using DROMsM.ProgramSettings;
+using Frontend;
 
-namespace Frontend
+namespace DROMsM.Forms
 {
     public partial class MainPreferencesForm : Form
     {

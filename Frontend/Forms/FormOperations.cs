@@ -1,7 +1,7 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace Frontend
+namespace DROMsM.Forms
 {
     public static class FormOperations
     {

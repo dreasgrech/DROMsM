@@ -1,4 +1,4 @@
-﻿namespace Frontend
+﻿namespace DROMsM.ProgramSettings
 {
     public class ProgramSettings_Main
     {

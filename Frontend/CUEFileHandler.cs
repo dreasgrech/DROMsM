@@ -1,7 +1,7 @@
-﻿using System.Drawing;
-using DRomsMUtils;
+﻿using DRomsMUtils;
+using Frontend;
 
-namespace Frontend
+namespace DROMsM
 {
     public class CUEFileHandler
     {

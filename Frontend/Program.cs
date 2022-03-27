@@ -1,12 +1,10 @@
 ﻿// #define CATCH_UNHANDLED_EXCEPTIONS
 
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using DROMsM.Forms;
 
-namespace Frontend
+namespace DROMsM
 {
     static class Program
     {

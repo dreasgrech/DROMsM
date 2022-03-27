@@ -1,6 +1,4 @@
-﻿using System.Runtime.CompilerServices;
-
-namespace Frontend
+﻿namespace DROMsM
 {
     /*
     public class OperationsOptions

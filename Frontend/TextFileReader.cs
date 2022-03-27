@@ -1,7 +1,7 @@
 ﻿using System;
 using DRomsMUtils;
 
-namespace Frontend
+namespace DROMsM
 {
     /// <summary>
     /// Contains helper methods for reading a text file

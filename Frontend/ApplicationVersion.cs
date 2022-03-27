@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Reflection;
 
-namespace Frontend
+namespace DROMsM
 {
     public static class ApplicationVersion
     {

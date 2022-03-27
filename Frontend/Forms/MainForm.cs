@@ -1,16 +1,15 @@
 ﻿// #define LOG_IMAGE_LOADING
 
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
 using System.Windows.Forms;
 using DRomsMUtils;
+using Frontend;
 
 // using Microsoft.DirectX.AudioVideoPlayback;
 
-namespace Frontend
+namespace DROMsM.Forms
 {
     public enum TreeViewROMDirectoryDisplayNameType
     {

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Frontend
+namespace DROMsM
 {
     public static class FloatExtensions
     {

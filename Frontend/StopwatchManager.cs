@@ -1,8 +1,8 @@
 ﻿using System.Diagnostics;
 using System.Globalization;
-using System.Windows.Forms;
+using Frontend;
 
-namespace Frontend
+namespace DROMsM
 {
     public static class StopwatchManager
     {

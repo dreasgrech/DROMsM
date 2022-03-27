@@ -9,7 +9,7 @@ using Microsoft.Win32.SafeHandles;
 /// <summary>
 /// https://www.codeproject.com/Articles/38959/A-Faster-Directory-Enumerator
 /// </summary>
-namespace CodeProject
+namespace DROMsM
 {
     /// <summary>
     /// Contains information about a file returned by the 
