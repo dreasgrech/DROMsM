@@ -23,8 +23,13 @@ namespace Frontend
             InitializeComponent();
 
             var settings = ProjectSettingsManager.DATFileViewerSettings;
+
             showingWorkingColors = settings.ShowColors;
             showColorsToolStripMenuItem.Checked = showingWorkingColors;
+
+            var showingGridLines = settings.ShowGridLines;
+            olvDatFileListView.GridLines = showingGridLines;
+            showGridLinesToolStripMenuItem.Checked = showingGridLines;
 
             // Restore the grid's state
             var savedState = settings.SavedState;
@@ -129,19 +134,6 @@ namespace Frontend
             }
         }
 
-        private void showColorsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
-        {
-            showingWorkingColors = showColorsToolStripMenuItem.Checked;
-
-            // Refresh the ListView to reflect the colour change
-            olvDatFileListView.Refresh();
-
-            // Save the setting change
-            var settings = ProjectSettingsManager.DATFileViewerSettings;
-            settings.ShowColors = showingWorkingColors;
-            ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
-        }
-
         private void DATFileViewerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Save the grid's state
@@ -158,5 +150,31 @@ namespace Frontend
             Close();
         }
 
+        private void showGridLinesToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            var showingGridLines = showGridLinesToolStripMenuItem.Checked;
+            olvDatFileListView.GridLines = showingGridLines;
+
+            // Refresh the ListView to reflect the change
+            olvDatFileListView.Refresh();
+
+            // Save the setting change
+            var settings = ProjectSettingsManager.DATFileViewerSettings;
+            settings.ShowGridLines = showingGridLines;
+            ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
+        }
+
+        private void showColorsToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
+        {
+            showingWorkingColors = showColorsToolStripMenuItem.Checked;
+
+            // Refresh the ListView to reflect the colour change
+            olvDatFileListView.Refresh();
+
+            // Save the setting change
+            var settings = ProjectSettingsManager.DATFileViewerSettings;
+            settings.ShowColors = showingWorkingColors;
+            ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
+        }
     }
 }

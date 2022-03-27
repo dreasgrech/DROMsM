@@ -56,6 +56,7 @@
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showGridLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -323,7 +324,8 @@
             // optionsToolStripMenuItem
             // 
             this.optionsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showColorsToolStripMenuItem});
+            this.showColorsToolStripMenuItem,
+            this.showGridLinesToolStripMenuItem});
             this.optionsToolStripMenuItem.Name = "optionsToolStripMenuItem";
             this.optionsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.optionsToolStripMenuItem.Text = "Options";
@@ -332,9 +334,17 @@
             // 
             this.showColorsToolStripMenuItem.CheckOnClick = true;
             this.showColorsToolStripMenuItem.Name = "showColorsToolStripMenuItem";
-            this.showColorsToolStripMenuItem.Size = new System.Drawing.Size(140, 22);
+            this.showColorsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.showColorsToolStripMenuItem.Text = "Show Colors";
             this.showColorsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showColorsToolStripMenuItem_CheckedChanged);
+            // 
+            // showGridLinesToolStripMenuItem
+            // 
+            this.showGridLinesToolStripMenuItem.CheckOnClick = true;
+            this.showGridLinesToolStripMenuItem.Name = "showGridLinesToolStripMenuItem";
+            this.showGridLinesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showGridLinesToolStripMenuItem.Text = "Show Grid Lines";
+            this.showGridLinesToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showGridLinesToolStripMenuItem_CheckedChanged);
             // 
             // DATFileViewerForm
             // 
@@ -392,5 +402,6 @@
         private BrightIdeasSoftware.OLVColumn olvScreenRefreshRate;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showColorsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showGridLinesToolStripMenuItem;
     }
 }
