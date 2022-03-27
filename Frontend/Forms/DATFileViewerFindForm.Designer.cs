@@ -93,12 +93,14 @@
             this.Controls.Add(this.searchTermTextBox);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "DATFileViewerFindForm";
             this.ShowInTaskbar = false;
             this.Text = "Search in DAT file";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DATFileViewerFindForm_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.DATFileViewerFindForm_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);

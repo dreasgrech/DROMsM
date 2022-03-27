@@ -46,7 +46,7 @@ namespace Frontend
 
         private readonly RBGameListFileReader recalboxGameListReader;
 
-        private readonly Form1 mainForm;
+        private readonly MainForm mainForm;
         private readonly BlueSimilarity.DamerauLevenshtein dl;
 
         private bool rbGameListFileAvailable;
@@ -157,7 +157,7 @@ namespace Frontend
             DuplicatesDirectoryName,
         };
 
-        public MainManager(Form1 mainForm)
+        public MainManager(MainForm mainForm)
         {
             this.mainForm = mainForm;
 

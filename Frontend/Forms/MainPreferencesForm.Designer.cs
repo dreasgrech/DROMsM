@@ -107,7 +107,6 @@
             this.matchUsingGamelistXMLNameCheckbox.Size = new System.Drawing.Size(15, 14);
             this.matchUsingGamelistXMLNameCheckbox.TabIndex = 21;
             this.matchUsingGamelistXMLNameCheckbox.UseVisualStyleBackColor = true;
-            this.matchUsingGamelistXMLNameCheckbox.CheckedChanged += new System.EventHandler(this.matchUsingGamelistXMLNameCheckbox_CheckedChanged);
             // 
             // autoExpandAfterOperationsCheckbox
             // 
@@ -117,7 +116,6 @@
             this.autoExpandAfterOperationsCheckbox.Size = new System.Drawing.Size(15, 14);
             this.autoExpandAfterOperationsCheckbox.TabIndex = 23;
             this.autoExpandAfterOperationsCheckbox.UseVisualStyleBackColor = true;
-            this.autoExpandAfterOperationsCheckbox.CheckedChanged += new System.EventHandler(this.autoExpandAfterOperationsCheckbox_CheckedChanged);
             // 
             // label10
             // 
@@ -136,9 +134,12 @@
             this.ClientSize = new System.Drawing.Size(406, 115);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.KeyPreview = true;
             this.Name = "MainPreferencesForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.Text = "Preferences";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainPreferencesForm_FormClosing);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.MainPreferencesForm_KeyDown);
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();

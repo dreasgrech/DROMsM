@@ -17,7 +17,7 @@ namespace Frontend
         FullPath
     }
 
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
         /// <summary>
         /// TODO: The problem with this is that order is important at the moment.
@@ -125,7 +125,7 @@ namespace Frontend
 
         // private OperationsOptions options;
 
-        public Form1()
+        public MainForm()
         {
             try
             {
@@ -1098,8 +1098,9 @@ namespace Frontend
 
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            using (var preferencesForm = new MainPreferencesForm {StartPosition = FormStartPosition.CenterParent})
+            using (var preferencesForm = new MainPreferencesForm {StartPosition = FormStartPosition.Manual})
             {
+                preferencesForm.Location = FormOperations.GetRelativeControlPoint(this, menuStrip1);
                 var dialogResult = preferencesForm.ShowDialog();
             }
         }

@@ -186,14 +186,11 @@ namespace Frontend
 
         private void OpenFindDialog()
         {
-            var relativeControl = topMenuStrip;
-            var locationOnScreen = PointToScreen(relativeControl.Location);
-
             using (var findForm = new DATFileViewerFindForm())
             {
                 // Open the form at the top left of our DAT File Viewer form
                 findForm.StartPosition = FormStartPosition.Manual;
-                findForm.Location = new Point(locationOnScreen.X, locationOnScreen.Y + relativeControl.Height + 3);
+                findForm.Location = FormOperations.GetRelativeControlPoint(this, topMenuStrip);
                 findForm.ShowDialog();
 
                 var searchTerm = findForm.SearchTerm;

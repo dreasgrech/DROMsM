@@ -145,6 +145,7 @@
     <Compile Include="DoubleExtensions.cs" />
     <Compile Include="FastDirectoryEnumerator.cs" />
     <Compile Include="FloatExtensions.cs" />
+    <Compile Include="Forms\FormOperations.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>

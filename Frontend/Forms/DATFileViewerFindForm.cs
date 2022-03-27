@@ -36,7 +36,15 @@ namespace Frontend.Forms
             UseRegularExpressions = useRegularExpressionsCheckbox.Checked;
 
             // Close the form since we're done now
-            Close();
+            CloseForm();
+        }
+
+        private void DATFileViewerFindForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                CloseForm();
+            }
         }
 
         private void searchTermTextBox_KeyDown(object sender, KeyEventArgs e)
@@ -47,6 +55,11 @@ namespace Frontend.Forms
             {
                 HandleFindButtonPressed();
             }
+        }
+
+        private void CloseForm()
+        {
+            Close();
         }
 
         private void DATFileViewerFindForm_FormClosing(object sender, FormClosingEventArgs e)

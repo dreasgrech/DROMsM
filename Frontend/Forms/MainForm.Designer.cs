@@ -1,6 +1,6 @@
 ﻿namespace Frontend
 {
-    partial class Form1
+    partial class MainForm
     {
         /// <summary>
         /// Required designer variable.
@@ -134,9 +134,9 @@
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewDATFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -1278,6 +1278,7 @@
             // exportAllROMsListToolStripMenuItem
             // 
             this.exportAllROMsListToolStripMenuItem.Name = "exportAllROMsListToolStripMenuItem";
+            this.exportAllROMsListToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
             this.exportAllROMsListToolStripMenuItem.Size = new System.Drawing.Size(220, 22);
             this.exportAllROMsListToolStripMenuItem.Text = "All ROMs List";
             this.exportAllROMsListToolStripMenuItem.Click += new System.EventHandler(this.exportAllROMsListToolStripMenuItem_Click);
@@ -1309,6 +1310,7 @@
             // exitToolStripMenuItem
             // 
             this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
             this.exitToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
@@ -1328,12 +1330,6 @@
             this.preferencesToolStripMenuItem.Text = "Preferences";
             this.preferencesToolStripMenuItem.Click += new System.EventHandler(this.preferencesToolStripMenuItem_Click);
             // 
-            // newItemToolStripMenuItem
-            // 
-            this.newItemToolStripMenuItem.Name = "newItemToolStripMenuItem";
-            this.newItemToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.newItemToolStripMenuItem.Text = "NewItem";
-            // 
             // toolsToolStripMenuItem
             // 
             this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1349,7 +1345,13 @@
             this.viewDATFileToolStripMenuItem.Text = "View DAT File";
             this.viewDATFileToolStripMenuItem.Click += new System.EventHandler(this.viewDATFileToolStripMenuItem_Click);
             // 
-            // Form1
+            // newItemToolStripMenuItem
+            // 
+            this.newItemToolStripMenuItem.Name = "newItemToolStripMenuItem";
+            this.newItemToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.newItemToolStripMenuItem.Text = "NewItem";
+            // 
+            // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -1357,8 +1359,9 @@
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel5);
             this.Controls.Add(this.splitContainer5);
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "Form1";
+            this.Name = "MainForm";
             this.Text = "DROMsM";
             this.groupBox1.ResumeLayout(false);
             this.splitContainer2.Panel1.ResumeLayout(false);

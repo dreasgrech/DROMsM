@@ -14,53 +14,58 @@ namespace Frontend
 {
     public partial class MainPreferencesForm : Form
     {
+        private readonly ProgramSettings_Main mainSettings;
+
         public MainPreferencesForm()
         {
             InitializeComponent();
 
-            var settings = ProjectSettingsManager.MainSettings;
-            allowedSimilarityValueTextbox.Text = settings.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
-            matchUsingGamelistXMLNameCheckbox.Checked = settings.MatchUsingGameListXMLName;
-            autoExpandAfterOperationsCheckbox.Checked = settings.AutoExpandTreeViewsAfterOperations;
-        }
-
-        private void matchUsingGamelistXMLNameCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            var checkboxValue = matchUsingGamelistXMLNameCheckbox.Checked;
-
-            var mainSettings = ProjectSettingsManager.MainSettings;
-            mainSettings.MatchUsingGameListXMLName = checkboxValue;
-            ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.Main);
-        }
-
-        private void autoExpandAfterOperationsCheckbox_CheckedChanged(object sender, EventArgs e)
-        {
-            var checkboxValue = autoExpandAfterOperationsCheckbox.Checked;
-
-            var mainSettings = ProjectSettingsManager.MainSettings;
-            mainSettings.AutoExpandTreeViewsAfterOperations = checkboxValue;
-            ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.Main);
+            mainSettings = ProjectSettingsManager.MainSettings;
+            allowedSimilarityValueTextbox.Text = mainSettings.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
+            matchUsingGamelistXMLNameCheckbox.Checked = mainSettings.MatchUsingGameListXMLName;
+            autoExpandAfterOperationsCheckbox.Checked = mainSettings.AutoExpandTreeViewsAfterOperations;
         }
 
         private void allowedSimilarityValueTextbox_Leave(object sender, EventArgs e)
         {
-            var settings = ProjectSettingsManager.MainSettings;
+            // var settings = ProjectSettingsManager.MainSettings;
 
             var allowedSimilarityValueTextBoxText = allowedSimilarityValueTextbox.Text;
             if (!float.TryParse(allowedSimilarityValueTextbox.Text, out var allowedSimilarityValue))
             {
                 Logger.Log($"Unable to parse {allowedSimilarityValueTextBoxText} as an Allowed Similarity Value.  Numbers only.");
 
-                allowedSimilarityValueTextbox.Text = settings.AllowedSimilarityValue.ToString();
+                allowedSimilarityValueTextbox.Text = mainSettings.AllowedSimilarityValue.ToString();
                 return;
             }
 
             allowedSimilarityValue = FloatExtensions.Clamp(allowedSimilarityValue, 0, 1);
             allowedSimilarityValueTextbox.Text = allowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
 
-            settings.AllowedSimilarityValue = allowedSimilarityValue;
+            mainSettings.AllowedSimilarityValue = allowedSimilarityValue;
+            // ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.Main);
+            // Logger.Log($"Updating the Allowed Similarity Value to {allowedSimilarityValueTextBoxText}.");
+        }
+
+        private void MainPreferencesForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Close();
+            }
+        }
+
+        private void SaveOptions()
+        {
+            mainSettings.MatchUsingGameListXMLName = matchUsingGamelistXMLNameCheckbox.Checked;
+            mainSettings.AutoExpandTreeViewsAfterOperations = autoExpandAfterOperationsCheckbox.Checked;
+
             ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.Main);
-            Logger.Log($"Updating the Allowed Similarity Value to {allowedSimilarityValueTextBoxText}.");
+        }
+
+        private void MainPreferencesForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SaveOptions();
         }
     }
 }
