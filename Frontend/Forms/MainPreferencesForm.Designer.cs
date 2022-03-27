@@ -31,7 +31,7 @@
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.tableLayoutPanel4 = new System.Windows.Forms.TableLayoutPanel();
             this.label9 = new System.Windows.Forms.Label();
-            this.allowedSimilarityValueTextbox = new System.Windows.Forms.TextBox();
+            this.allowedSimilarityValueTextBox = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.matchUsingGamelistXMLNameCheckbox = new System.Windows.Forms.CheckBox();
             this.autoExpandAfterOperationsCheckbox = new System.Windows.Forms.CheckBox();
@@ -56,7 +56,7 @@
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.tableLayoutPanel4.Controls.Add(this.label9, 0, 1);
-            this.tableLayoutPanel4.Controls.Add(this.allowedSimilarityValueTextbox, 1, 0);
+            this.tableLayoutPanel4.Controls.Add(this.allowedSimilarityValueTextBox, 1, 0);
             this.tableLayoutPanel4.Controls.Add(this.label7, 0, 0);
             this.tableLayoutPanel4.Controls.Add(this.matchUsingGamelistXMLNameCheckbox, 1, 1);
             this.tableLayoutPanel4.Controls.Add(this.autoExpandAfterOperationsCheckbox, 1, 2);
@@ -80,14 +80,14 @@
             this.label9.TabIndex = 20;
             this.label9.Text = "Match using gamelist.xml name";
             // 
-            // allowedSimilarityValueTextbox
+            // allowedSimilarityValueTextBox
             // 
-            this.allowedSimilarityValueTextbox.Location = new System.Drawing.Point(183, 0);
-            this.allowedSimilarityValueTextbox.Margin = new System.Windows.Forms.Padding(0);
-            this.allowedSimilarityValueTextbox.Name = "allowedSimilarityValueTextbox";
-            this.allowedSimilarityValueTextbox.Size = new System.Drawing.Size(82, 20);
-            this.allowedSimilarityValueTextbox.TabIndex = 2;
-            this.allowedSimilarityValueTextbox.Leave += new System.EventHandler(this.allowedSimilarityValueTextbox_Leave);
+            this.allowedSimilarityValueTextBox.Location = new System.Drawing.Point(183, 0);
+            this.allowedSimilarityValueTextBox.Margin = new System.Windows.Forms.Padding(0);
+            this.allowedSimilarityValueTextBox.Name = "allowedSimilarityValueTextBox";
+            this.allowedSimilarityValueTextBox.Size = new System.Drawing.Size(82, 20);
+            this.allowedSimilarityValueTextBox.TabIndex = 2;
+            this.allowedSimilarityValueTextBox.Leave += new System.EventHandler(this.allowedSimilarityValueTextBox_Leave);
             // 
             // label7
             // 
@@ -152,7 +152,7 @@
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel4;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox allowedSimilarityValueTextbox;
+        private System.Windows.Forms.TextBox allowedSimilarityValueTextBox;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.CheckBox matchUsingGamelistXMLNameCheckbox;
         private System.Windows.Forms.CheckBox autoExpandAfterOperationsCheckbox;

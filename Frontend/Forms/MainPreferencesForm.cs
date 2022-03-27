@@ -1,13 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Globalization;
-using System.Linq;
-using System.Security.Permissions;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Frontend
@@ -21,30 +13,26 @@ namespace Frontend
             InitializeComponent();
 
             mainSettings = ProjectSettingsManager.MainSettings;
-            allowedSimilarityValueTextbox.Text = mainSettings.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
+            allowedSimilarityValueTextBox.Text = mainSettings.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
             matchUsingGamelistXMLNameCheckbox.Checked = mainSettings.MatchUsingGameListXMLName;
             autoExpandAfterOperationsCheckbox.Checked = mainSettings.AutoExpandTreeViewsAfterOperations;
         }
 
-        private void allowedSimilarityValueTextbox_Leave(object sender, EventArgs e)
+        private void allowedSimilarityValueTextBox_Leave(object sender, EventArgs e)
         {
-            // var settings = ProjectSettingsManager.MainSettings;
-
-            var allowedSimilarityValueTextBoxText = allowedSimilarityValueTextbox.Text;
-            if (!float.TryParse(allowedSimilarityValueTextbox.Text, out var allowedSimilarityValue))
+            var allowedSimilarityValueTextBoxText = allowedSimilarityValueTextBox.Text;
+            if (!float.TryParse(allowedSimilarityValueTextBox.Text, out var allowedSimilarityValue))
             {
                 Logger.Log($"Unable to parse {allowedSimilarityValueTextBoxText} as an Allowed Similarity Value.  Numbers only.");
 
-                allowedSimilarityValueTextbox.Text = mainSettings.AllowedSimilarityValue.ToString();
+                allowedSimilarityValueTextBox.Text = mainSettings.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
                 return;
             }
 
-            allowedSimilarityValue = FloatExtensions.Clamp(allowedSimilarityValue, 0, 1);
-            allowedSimilarityValueTextbox.Text = allowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
+            allowedSimilarityValue = allowedSimilarityValue.Clamp(0, 1);
+            allowedSimilarityValueTextBox.Text = allowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
 
             mainSettings.AllowedSimilarityValue = allowedSimilarityValue;
-            // ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.Main);
-            // Logger.Log($"Updating the Allowed Similarity Value to {allowedSimilarityValueTextBoxText}.");
         }
 
         private void MainPreferencesForm_KeyDown(object sender, KeyEventArgs e)

@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace Frontend
+﻿namespace Frontend
 {
     public class ProgramSettings_DATFileViewer
     {
