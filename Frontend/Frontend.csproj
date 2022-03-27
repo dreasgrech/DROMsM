@@ -130,6 +130,12 @@
     <Compile Include="CUEFileHandler.cs" />
     <Compile Include="DATFileHandler.cs" />
     <Compile Include="DATFileMachineVirtualListDataSource.cs" />
+    <Compile Include="Forms\DATFileViewerFindForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\DATFileViewerFindForm.Designer.cs">
+      <DependentUpon>DATFileViewerFindForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\DATFileViewerForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -165,6 +171,9 @@
     <Compile Include="RomDirectory.cs" />
     <Compile Include="StopwatchManager.cs" />
     <Compile Include="TextFileReader.cs" />
+    <EmbeddedResource Include="Forms\DATFileViewerFindForm.resx">
+      <DependentUpon>DATFileViewerFindForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DATFileViewerForm.resx">
       <DependentUpon>DATFileViewerForm.cs</DependentUpon>
     </EmbeddedResource>

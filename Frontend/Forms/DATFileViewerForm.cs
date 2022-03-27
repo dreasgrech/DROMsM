@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using DRomsMUtils;
+using Frontend.Forms;
 
 namespace Frontend
 {
@@ -59,10 +60,6 @@ namespace Frontend
             datFilePathLabel.Text = datFilePath;
             totalSetsLabel.Text = datFile.TotalMachines.ToString();
             buildLabel.Text = datFile.Build;
-            
-            /***********************/
-            // olvDatFileListView.AdditionalFilter = TextMatchFilter.Regex(olvDatFileListView, "1942");
-            /***********************/
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -126,15 +123,18 @@ namespace Frontend
                 case "imperfect":
                 {
                     olvListItem.BackColor = Color.LightYellow;
-                } break;
+                }
+                    break;
                 case "good":
                 {
                     olvListItem.BackColor = Color.LightGreen;
-                } break;
+                }
+                    break;
                 case "preliminary":
                 {
                     olvListItem.BackColor = Color.LightCoral;
-                } break;
+                }
+                    break;
             }
         }
 
@@ -183,7 +183,37 @@ namespace Frontend
 
         private void findToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenFindDialog();
+        }
 
+        //private void DATFileViewerForm_KeyDown(object sender, KeyEventArgs e)
+        //{
+        //    // form.KeyPreview must be set to true to catch these
+        //    if (e.Control && e.KeyCode == Keys.F)
+        //    {
+        //        OpenFindDialog();
+        //    }
+        //}
+
+        private void OpenFindDialog()
+        {
+            var relativeControl = topMenuStrip;
+            var locationOnScreen = PointToScreen(relativeControl.Location);
+
+            using (var findForm = new DATFileViewerFindForm())
+            {
+                // Open the form at the top left of our DAT File Viewer form
+                findForm.StartPosition = FormStartPosition.Manual;
+                findForm.Location = new Point(locationOnScreen.X, locationOnScreen.Y + relativeControl.Height + 3);
+                findForm.ShowDialog();
+
+                var searchTerm = findForm.SearchTerm;
+                var useRegularExpressions = findForm.UseRegularExpressions;
+
+                var filter = useRegularExpressions ? TextMatchFilter.Regex(olvDatFileListView, searchTerm) : TextMatchFilter.Contains(olvDatFileListView, searchTerm);
+                // filter.Columns = olvDatFileListView.AllColumns.ToArray();
+                olvDatFileListView.AdditionalFilter = filter;
+            }
         }
     }
 }

@@ -1098,10 +1098,10 @@ namespace Frontend
 
         private void preferencesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var preferencesForm = new MainPreferencesForm();
-            preferencesForm.StartPosition = FormStartPosition.CenterParent;
-
-            var dialogResult = preferencesForm.ShowDialog();
+            using (var preferencesForm = new MainPreferencesForm {StartPosition = FormStartPosition.CenterParent})
+            {
+                var dialogResult = preferencesForm.ShowDialog();
+            }
         }
 
         private void viewDATFileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1112,9 +1112,11 @@ namespace Frontend
                 return;
             }
 
-            var datFileViewerForm = new DATFileViewerForm {StartPosition = FormStartPosition.CenterParent};
-            datFileViewerForm.ProcessDATFile(datFilePath);
-            datFileViewerForm.ShowDialog();
+            using (var datFileViewerForm = new DATFileViewerForm { StartPosition = FormStartPosition.CenterParent })
+            {
+                datFileViewerForm.ProcessDATFile(datFilePath);
+                datFileViewerForm.ShowDialog();
+            }
         }
     }
 }
