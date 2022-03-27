@@ -14,13 +14,9 @@ namespace Frontend
 {
     public partial class DATFileViewerForm : Form
     {
-        private DATFile currentDATFile;
         private DATFileMachineVirtualListDataSource datFileMachineVirtualListDataSource;
 
         private bool showingWorkingColors;
-
-        // private readonly Dictionary<string, OLVColumn> columnsDictionary;
-        private readonly Dictionary<int, OLVColumn> orderedColumns;
 
         public DATFileViewerForm()
         {
@@ -28,92 +24,18 @@ namespace Frontend
 
             var settings = ProjectSettingsManager.DATFileViewerSettings;
             showingWorkingColors = settings.ShowColors;
-
             showColorsToolStripMenuItem.Checked = showingWorkingColors;
 
-            var columns = olvDatFileListView.Columns;
-
-            var savedColumnSettings = settings.ColumnsSettings;
-
+            // Restore the grid's state
             var savedState = settings.SavedState;
             if (savedState != null)
             {
                 var restored = olvDatFileListView.RestoreState(savedState);
-                var x = restored;
-            }
-
-            /*
-
-            // Before changing the columns' display indexes, save a reference to their original display index values
-            // because once you change a DisplayIndex for one column, the others will be affected too.
-            var originalColumnsHeaderDisplayIndexes = new Dictionary<string, int> (EqualityComparer<string>.Default);
-            // var originalColumnsHeaderDisplayIndexes = new Orderedd
-            var sortedColumns = new SortedSet<OLVColumnWrapper>(new OLVColumnWrapperDisplayIndexComparer());
-            var sortedSettings = new SortedSet<DatFileViewerColumnSettings>(new DatFileViewerColumnSettingsDisplayIndexComparer());
-            foreach (var savedColumnSetting in savedColumnSettings)
-            {
-                sortedSettings.Add(savedColumnSetting.Value);
-            }
-
-            foreach (OLVColumn columnHeader in columns)
-            {
-                originalColumnsHeaderDisplayIndexes[columnHeader.AspectName] = columnHeader.DisplayIndex;
-
-                sortedColumns.Add(new OLVColumnWrapper(columnHeader));
-            }
-
-            foreach (OLVColumn columnHeader in columns)
-            {
-                var aspectName = columnHeader.AspectName;
-                if (!savedColumnSettings.ContainsKey(aspectName))
+                if (!restored)
                 {
-                    var columnSavedSettings = new DatFileViewerColumnSettings
-                    {
-                        AspectName = aspectName,
-                        DisplayIndex = columnHeader.DisplayIndex,
-                        Visible = columnHeader.IsVisible
-                    };
-
-                    savedColumnSettings[aspectName] = columnSavedSettings;
+                    Logger.LogError($"Unable to restore the DAT File Viewer's grid state");
                 }
             }
-
-            // todo: when a clumn is moved, all the columns after the new display index need to be moved too.
-
-            orderedColumns = new Dictionary<int, OLVColumn>(EqualityComparer<int>.Default);
-            // columnsDictionary = new Dictionary<string, OLVColumn>(EqualityComparer<string>.Default);
-
-            foreach (OLVColumn columnHeader in columns)
-            {
-                var aspectName = columnHeader.AspectName;
-                // columnsDictionary[aspectName] = columnHeader;
-
-                //// TODO: CONTINUE WORKING HERE
-                //// TODO: WHAT'S HAPPENING IS THAT WHEN YOU ARE CHANGING A DISPLAYINDEX, THE DISPLAYINDEX OF ALL THE OTHER COLUMNS IS AUTOMATICALLY CHANGING
-                //// Apply the column settings from our saved settings
-                //if (savedColumnSettings.TryGetValue(aspectName, out var columnSavedSettings))
-                //{
-                //    columnHeader.DisplayIndex = columnSavedSettings.DisplayIndex;
-                //    columnHeader.IsVisible = columnSavedSettings.Visible;
-                //}
-                //else
-                //{
-                //    columnHeader.DisplayIndex = originalColumnsHeaderDisplayIndexes[aspectName];
-                //}
-
-                var columnSavedSettings = savedColumnSettings[aspectName];
-                columnHeader.DisplayIndex = columnSavedSettings.DisplayIndex;
-                columnHeader.IsVisible = columnSavedSettings.Visible;
-
-                orderedColumns[columnHeader.DisplayIndex] = columnHeader;
-            }
-
-            ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
-
-            // Rebuild the columns since we could have hidden some of them
-            // olvDatFileListView.RebuildColumns();
-
-            */
         }
 
         public void ProcessDATFile(string datFilePath)
@@ -132,8 +54,6 @@ namespace Frontend
             datFilePathLabel.Text = datFilePath;
             totalSetsLabel.Text = datFile.TotalMachines.ToString();
             buildLabel.Text = datFile.Build;
-
-            currentDATFile = datFile;
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -169,11 +89,6 @@ namespace Frontend
             }
 
             MessageBoxOperations.ShowInformation($"File successfully written at {saveFilePath}", "File exported");
-        }
-
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
         }
 
         private void olvDatFileListView_FormatRow(object sender, FormatRowEventArgs e)
@@ -227,141 +142,21 @@ namespace Frontend
             ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
         }
 
-        private void olvDatFileListView_Filter(object sender, FilterEventArgs e)
-        {
-            // UpdateColumnSettings();
-        }
-
-        void UpdateColumnSettings()
-        {
-            var savedSettings = ProjectSettingsManager.DATFileViewerSettings;
-            var savedColumnsSettings = savedSettings.ColumnsSettings;
-
-            var allColumns = olvDatFileListView.AllColumns;
-            foreach (var column in allColumns)
-            {
-                var columnAspectName = column.AspectName;
-                //if (!savedColumnsSettings.TryGetValue(columnAspectName, out var columnSavedSettings))
-                //{
-                //    columnSavedSettings = new DatFileViewerColumnSettings();
-                //}
-
-                var columnSavedSettings = savedColumnsSettings[columnAspectName];
-
-                columnSavedSettings.Visible = column.IsVisible;
-                columnSavedSettings.DisplayIndex = column.DisplayIndex;
-                /*****************************/
-                savedColumnsSettings[columnAspectName] = columnSavedSettings;
-            }
-
-            ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
-
-        }
-
-        private void olvDatFileListView_ColumnReordered(object sender, ColumnReorderedEventArgs e)
-        {
-            // TODO: So the problem here is that this event runs BEFORE the columns after reordered,
-            // TODO: meaning their current DisplayIndex is not updated yet to reflect the reordering.
-            // UpdateColumnSettings();
-
-            /*
-            // TODO: The logic of this method is not correct!
-            // TODO: Here I need to go through all columns and update our
-
-            var movedColumnHeaderNewDisplayIndex = e.NewDisplayIndex;
-            var previousColumnHeaderDisplayIndex = e.OldDisplayIndex;
-
-            var savedSettings = ProjectSettingsManager.DATFileViewerSettings;
-            var savedColumnsSettings = savedSettings.ColumnsSettings;
-
-            // // This code is only used to clear while debugging
-            //settings.ColumnsSettings = new Dictionary<string, DatFileViewerColumnSettings>();
-            //ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
-
-            // Fetch the saved settings of the moved column
-            var movedColumnHeader = (OLVColumn) e.Header;
-            var movedColumnAspectName = movedColumnHeader.AspectName;
-            if (!savedColumnsSettings.TryGetValue(movedColumnAspectName, out var movedColumnSavedSettings))
-            {
-                movedColumnSavedSettings = new DatFileViewerColumnSettings();
-            }
-
-            // Fetch the saved settings of the column that has just had its position replaced
-            var previousColumnHeader = orderedColumns[movedColumnHeaderNewDisplayIndex];
-            var previousColumnAspectName = previousColumnHeader.AspectName;
-            if (!savedColumnsSettings.TryGetValue(previousColumnAspectName, out var previousColumnSavedSettings))
-            {
-                previousColumnSavedSettings = new DatFileViewerColumnSettings();
-            }
-
-            // Store a reference to the newly updated display indexes to our saved settings
-            movedColumnSavedSettings.DisplayIndex = movedColumnHeaderNewDisplayIndex;
-            previousColumnSavedSettings.DisplayIndex = previousColumnHeaderDisplayIndex;
-
-            // Re-set the saved settings of both columns to the saved settings collection (just in case this is a new saved settings for this column)
-            savedColumnsSettings[movedColumnAspectName] = movedColumnSavedSettings;
-            savedColumnsSettings[previousColumnAspectName] = previousColumnSavedSettings;
-
-            // Save a reference to the updated column order in our ordered columns collection
-            orderedColumns[movedColumnHeaderNewDisplayIndex] = movedColumnHeader;
-            orderedColumns[previousColumnHeaderDisplayIndex] = previousColumnHeader;
-
-            // Finally update the Project Settings with our updated data
-            ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
-            */
-        }
-
         private void DATFileViewerForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            /*
-            UpdateColumnSettings();
-            */
-
+            // Save the grid's state
             var olvDatFileListViewState = olvDatFileListView.SaveState();
 
+            // Save the state so that we can restore it the next time this form is opened
             var savedSettings = ProjectSettingsManager.DATFileViewerSettings;
             savedSettings.SavedState = olvDatFileListViewState;
             ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
-
         }
-    }
 
-    public class OLVColumnDisplayIndexComparer : IComparer<OLVColumn>
-    {
-        public int Compare(OLVColumn x, OLVColumn y)
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            return x.DisplayIndex.CompareTo(y.DisplayIndex);
-        }
-    }
-
-    public class OLVColumnWrapperDisplayIndexComparer : IComparer<OLVColumnWrapper>
-    {
-        public int Compare(OLVColumnWrapper x, OLVColumnWrapper y)
-        {
-            return x.olvColumn.DisplayIndex.CompareTo(y.olvColumn.DisplayIndex);
-        }
-    }
-
-    public class DatFileViewerColumnSettingsDisplayIndexComparer : IComparer<DatFileViewerColumnSettings>
-    {
-        public int Compare(DatFileViewerColumnSettings x, DatFileViewerColumnSettings y)
-        {
-            return x.DisplayIndex.CompareTo(y.DisplayIndex);
-        }
-    }
-
-    public class OLVColumnWrapper
-    {
-        public readonly OLVColumn olvColumn;
-
-        public OLVColumnWrapper(OLVColumn column)
-        {
-            olvColumn = column;
+            Close();
         }
 
-        public override string ToString()
-        {
-            return $"{olvColumn.DisplayIndex}. {olvColumn.AspectName}";
-        }
     }
 }

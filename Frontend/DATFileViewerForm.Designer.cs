@@ -127,6 +127,7 @@
             this.olvScreenOrientation,
             this.olvScreenRefreshRate,
             this.olvControlsColumn});
+            this.olvDatFileListView.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvDatFileListView.Dock = System.Windows.Forms.DockStyle.Fill;
             this.olvDatFileListView.FullRowSelect = true;
             this.olvDatFileListView.GridLines = true;
@@ -144,9 +145,7 @@
             this.olvDatFileListView.UseFiltering = true;
             this.olvDatFileListView.View = System.Windows.Forms.View.Details;
             this.olvDatFileListView.VirtualMode = true;
-            this.olvDatFileListView.Filter += new System.EventHandler<BrightIdeasSoftware.FilterEventArgs>(this.olvDatFileListView_Filter);
             this.olvDatFileListView.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.olvDatFileListView_FormatRow);
-            this.olvDatFileListView.ColumnReordered += new System.Windows.Forms.ColumnReorderedEventHandler(this.olvDatFileListView_ColumnReordered);
             // 
             // olvSetColumn
             // 
