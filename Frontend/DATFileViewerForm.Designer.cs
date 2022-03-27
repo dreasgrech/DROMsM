@@ -144,6 +144,7 @@
             this.olvDatFileListView.UseCompatibleStateImageBehavior = false;
             this.olvDatFileListView.UseFilterIndicator = true;
             this.olvDatFileListView.UseFiltering = true;
+            this.olvDatFileListView.UseHotControls = false;
             this.olvDatFileListView.View = System.Windows.Forms.View.Details;
             this.olvDatFileListView.VirtualMode = true;
             this.olvDatFileListView.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.olvDatFileListView_FormatRow);
@@ -334,7 +335,7 @@
             // 
             this.showColorsToolStripMenuItem.CheckOnClick = true;
             this.showColorsToolStripMenuItem.Name = "showColorsToolStripMenuItem";
-            this.showColorsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showColorsToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.showColorsToolStripMenuItem.Text = "Show Colors";
             this.showColorsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showColorsToolStripMenuItem_CheckedChanged);
             // 
@@ -342,7 +343,7 @@
             // 
             this.showGridLinesToolStripMenuItem.CheckOnClick = true;
             this.showGridLinesToolStripMenuItem.Name = "showGridLinesToolStripMenuItem";
-            this.showGridLinesToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.showGridLinesToolStripMenuItem.Size = new System.Drawing.Size(158, 22);
             this.showGridLinesToolStripMenuItem.Text = "Show Grid Lines";
             this.showGridLinesToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showGridLinesToolStripMenuItem_CheckedChanged);
             // 
