@@ -25,6 +25,11 @@ namespace Frontend
 
             var settings = ProjectSettingsManager.DATFileViewerSettings;
 
+            if (settings.Maximized)
+            {
+                WindowState = FormWindowState.Maximized;
+            }
+
             showingWorkingColors = settings.ShowColors;
             showColorsToolStripMenuItem.Checked = showingWorkingColors;
 
@@ -138,22 +143,6 @@ namespace Frontend
             }
         }
 
-        private void DATFileViewerForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            // Save the grid's state
-            var olvDatFileListViewState = olvDatFileListView.SaveState();
-
-            // Save the state so that we can restore it the next time this form is opened
-            var savedSettings = ProjectSettingsManager.DATFileViewerSettings;
-            savedSettings.SavedState = olvDatFileListViewState;
-            ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
-        }
-
-        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void showGridLinesToolStripMenuItem_CheckedChanged(object sender, EventArgs e)
         {
             var showingGridLines = showGridLinesToolStripMenuItem.Checked;
@@ -214,6 +203,23 @@ namespace Frontend
                 // filter.Columns = olvDatFileListView.AllColumns.ToArray();
                 olvDatFileListView.AdditionalFilter = filter;
             }
+        }
+
+        private void DATFileViewerForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            // Save the grid's state
+            var olvDatFileListViewState = olvDatFileListView.SaveState();
+
+            // Save the state so that we can restore it the next time this form is opened
+            var savedSettings = ProjectSettingsManager.DATFileViewerSettings;
+            savedSettings.SavedState = olvDatFileListViewState;
+            savedSettings.Maximized = WindowState == FormWindowState.Maximized;
+            ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
+        }
+
+        private void closeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }
