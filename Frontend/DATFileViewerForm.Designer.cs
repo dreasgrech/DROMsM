@@ -112,6 +112,7 @@
             this.olvDatFileListView.AllColumns.Add(this.olvControlsColumn);
             this.olvDatFileListView.AllowColumnReorder = true;
             this.olvDatFileListView.AlternateRowBackColor = System.Drawing.Color.WhiteSmoke;
+            this.olvDatFileListView.CellEditUseWholeCell = false;
             this.olvDatFileListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvSetColumn,
             this.olvNameColumn,
@@ -145,6 +146,7 @@
             this.olvDatFileListView.VirtualMode = true;
             this.olvDatFileListView.Filter += new System.EventHandler<BrightIdeasSoftware.FilterEventArgs>(this.olvDatFileListView_Filter);
             this.olvDatFileListView.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.olvDatFileListView_FormatRow);
+            this.olvDatFileListView.ColumnReordered += new System.Windows.Forms.ColumnReorderedEventHandler(this.olvDatFileListView_ColumnReordered);
             // 
             // olvSetColumn
             // 
@@ -346,6 +348,7 @@
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "DATFileViewerForm";
             this.Text = "DATFileViewerForm";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.DATFileViewerForm_FormClosing);
             this.splitContainer1.Panel1.ResumeLayout(false);
             this.splitContainer1.Panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
