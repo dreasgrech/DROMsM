@@ -59,6 +59,10 @@ namespace Frontend
             datFilePathLabel.Text = datFilePath;
             totalSetsLabel.Text = datFile.TotalMachines.ToString();
             buildLabel.Text = datFile.Build;
+            
+            /***********************/
+            // olvDatFileListView.AdditionalFilter = TextMatchFilter.Regex(olvDatFileListView, "1942");
+            /***********************/
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -175,6 +179,11 @@ namespace Frontend
             var settings = ProjectSettingsManager.DATFileViewerSettings;
             settings.ShowColors = showingWorkingColors;
             ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
+        }
+
+        private void findToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
