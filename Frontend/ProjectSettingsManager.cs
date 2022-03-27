@@ -11,10 +11,10 @@ namespace Frontend
         {
             UpgradeSettingsVersion();
 
-            var mainSettingsJson = Properties.Settings.Default.ProgramSettings_Main;
+            var mainSettingsJson = DROMsM.Properties.Settings.Default.ProgramSettings_Main;
             MainSettings = JsonConvert.DeserializeObject<ProgramSettings_Main>(mainSettingsJson) ?? new ProgramSettings_Main();
 
-            var datSettingsJson = Properties.Settings.Default.ProgramSettings_DATFileViewer;
+            var datSettingsJson = DROMsM.Properties.Settings.Default.ProgramSettings_DATFileViewer;
             DATFileViewerSettings = JsonConvert.DeserializeObject<ProgramSettings_DATFileViewer>(datSettingsJson) ?? new ProgramSettings_DATFileViewer();
         }
 
@@ -24,26 +24,26 @@ namespace Frontend
             {
                 case ProgramSettingsType.Main:
                 {
-                    Properties.Settings.Default.ProgramSettings_Main = JsonConvert.SerializeObject(MainSettings);
+                    DROMsM.Properties.Settings.Default.ProgramSettings_Main = JsonConvert.SerializeObject(MainSettings);
                 }
                     break;
                 case ProgramSettingsType.DATFileViewer:
                 {
-                    Properties.Settings.Default.ProgramSettings_DATFileViewer = JsonConvert.SerializeObject(DATFileViewerSettings);
+                    DROMsM.Properties.Settings.Default.ProgramSettings_DATFileViewer = JsonConvert.SerializeObject(DATFileViewerSettings);
                 }
                     break;
             }
 
-            Properties.Settings.Default.Save();
+            DROMsM.Properties.Settings.Default.Save();
         }
 
         private static void UpgradeSettingsVersion()
         {
-            if (Properties.Settings.Default.UpdateSettingsVersion)
+            if (DROMsM.Properties.Settings.Default.UpdateSettingsVersion)
             {
-                Properties.Settings.Default.Upgrade();
-                Properties.Settings.Default.UpdateSettingsVersion = false;
-                Properties.Settings.Default.Save();
+                DROMsM.Properties.Settings.Default.Upgrade();
+                DROMsM.Properties.Settings.Default.UpdateSettingsVersion = false;
+                DROMsM.Properties.Settings.Default.Save();
             }
         }
     }

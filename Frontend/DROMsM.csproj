@@ -6,8 +6,8 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProjectGuid>{63F2BDBD-654F-47B1-9EC4-442DCCE8AD31}</ProjectGuid>
     <OutputType>WinExe</OutputType>
-    <RootNamespace>Frontend</RootNamespace>
-    <AssemblyName>Frontend</AssemblyName>
+    <RootNamespace>DROMsM</RootNamespace>
+    <AssemblyName>DROMsM</AssemblyName>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -193,6 +193,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="Frontend_TemporaryKey.pfx" />
     <None Include="packages.config" />
