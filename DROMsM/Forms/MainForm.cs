@@ -1127,5 +1127,14 @@ namespace DROMsM.Forms
                 OpenDATFileViewerForm();
             }
         }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var aboutDialogForm = new AboutDialogForm(){StartPosition = FormStartPosition.Manual})
+            {
+                aboutDialogForm.Location = FormOperations.GetRelativeControlPoint(this, menuStrip1);
+                aboutDialogForm.ShowDialog();
+            }
+        }
     }
 }

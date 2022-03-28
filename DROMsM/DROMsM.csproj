@@ -30,7 +30,7 @@
     <ProductName>DROMsM</ProductName>
     <PublisherName>Dreas</PublisherName>
     <SuiteName>DROMsM</SuiteName>
-    <ApplicationRevision>8</ApplicationRevision>
+    <ApplicationRevision>12</ApplicationRevision>
     <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
@@ -77,9 +77,6 @@
     </Reference>
     <Reference Include="devio.Windows.Controls.ScrollingTreeView">
       <HintPath>..\..\..\..\Downloads\SyncScrollTreeView-master\SyncScrollTreeView-master\ScrollingTreeViewControl\bin\Debug\devio.Windows.Controls.ScrollingTreeView.dll</HintPath>
-    </Reference>
-    <Reference Include="Fastenshtein, Version=1.0.0.8, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\Fastenshtein.1.0.0.8\lib\net452\Fastenshtein.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=6.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.6.0.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
@@ -133,6 +130,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Forms\AboutDialogForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\AboutDialogForm.Designer.cs">
+      <DependentUpon>AboutDialogForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="ApplicationVersion.cs" />
     <Compile Include="CHDMANHandler.cs" />
     <Compile Include="CUEFileHandler.cs" />
@@ -153,7 +156,7 @@
     <Compile Include="DoubleExtensions.cs" />
     <Compile Include="FastDirectoryEnumerator.cs" />
     <Compile Include="FloatExtensions.cs" />
-    <Compile Include="Forms\FormOperations.cs" />
+    <Compile Include="FormOperations.cs" />
     <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -180,6 +183,9 @@
     <Compile Include="RomDirectory.cs" />
     <Compile Include="StopwatchManager.cs" />
     <Compile Include="TextFileReader.cs" />
+    <EmbeddedResource Include="Forms\AboutDialogForm.resx">
+      <DependentUpon>AboutDialogForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\DATFileViewerFindForm.resx">
       <DependentUpon>DATFileViewerFindForm.cs</DependentUpon>
     </EmbeddedResource>
