@@ -30,7 +30,7 @@
     <ProductName>DROMsM</ProductName>
     <PublisherName>Dreas</PublisherName>
     <SuiteName>DROMsM</SuiteName>
-    <ApplicationRevision>5</ApplicationRevision>
+    <ApplicationRevision>7</ApplicationRevision>
     <ApplicationVersion>0.0.0.%2a</ApplicationVersion>
     <UseApplicationTrust>false</UseApplicationTrust>
     <CreateDesktopShortcut>true</CreateDesktopShortcut>

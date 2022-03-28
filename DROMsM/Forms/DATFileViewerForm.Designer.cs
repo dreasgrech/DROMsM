@@ -44,6 +44,7 @@
             this.olvScreenOrientation = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvScreenRefreshRate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvIsCloneColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvBIOSColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvControlsColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buildLabel = new System.Windows.Forms.Label();
@@ -52,6 +53,7 @@
             this.totalSetsLabel = new System.Windows.Forms.Label();
             this.topMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveAsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -103,7 +105,6 @@
             // 
             this.olvDatFileListView.AllColumns.Add(this.olvSetColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvNameColumn);
-            this.olvDatFileListView.AllColumns.Add(this.olvIsCloneColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvYearColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvManufacturer);
             this.olvDatFileListView.AllColumns.Add(this.olvStatusColumn);
@@ -114,6 +115,8 @@
             this.olvDatFileListView.AllColumns.Add(this.olvScreenType);
             this.olvDatFileListView.AllColumns.Add(this.olvScreenOrientation);
             this.olvDatFileListView.AllColumns.Add(this.olvScreenRefreshRate);
+            this.olvDatFileListView.AllColumns.Add(this.olvIsCloneColumn);
+            this.olvDatFileListView.AllColumns.Add(this.olvBIOSColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvControlsColumn);
             this.olvDatFileListView.AllowColumnReorder = true;
             this.olvDatFileListView.AlternateRowBackColor = System.Drawing.Color.WhiteSmoke;
@@ -121,7 +124,6 @@
             this.olvDatFileListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvSetColumn,
             this.olvNameColumn,
-            this.olvIsCloneColumn,
             this.olvYearColumn,
             this.olvManufacturer,
             this.olvStatusColumn,
@@ -132,6 +134,8 @@
             this.olvScreenType,
             this.olvScreenOrientation,
             this.olvScreenRefreshRate,
+            this.olvIsCloneColumn,
+            this.olvBIOSColumn,
             this.olvControlsColumn});
             this.olvDatFileListView.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvDatFileListView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -157,6 +161,7 @@
             // olvSetColumn
             // 
             this.olvSetColumn.AspectName = "Name";
+            this.olvSetColumn.MinimumWidth = 30;
             this.olvSetColumn.Text = "Set";
             this.olvSetColumn.UseFiltering = false;
             // 
@@ -171,82 +176,111 @@
             // olvYearColumn
             // 
             this.olvYearColumn.AspectName = "Year";
-            this.olvYearColumn.DisplayIndex = 2;
+            this.olvYearColumn.DisplayIndex = 3;
+            this.olvYearColumn.MaximumWidth = 40;
+            this.olvYearColumn.MinimumWidth = 40;
             this.olvYearColumn.Text = "Year";
+            this.olvYearColumn.Width = 40;
             // 
             // olvManufacturer
             // 
             this.olvManufacturer.AspectName = "Manufacturer";
-            this.olvManufacturer.DisplayIndex = 3;
+            this.olvManufacturer.DisplayIndex = 4;
+            this.olvManufacturer.MinimumWidth = 80;
             this.olvManufacturer.Text = "Manufacturer";
-            this.olvManufacturer.Width = 100;
+            this.olvManufacturer.Width = 150;
             // 
             // olvStatusColumn
             // 
             this.olvStatusColumn.AspectName = "Status";
-            this.olvStatusColumn.DisplayIndex = 4;
+            this.olvStatusColumn.DisplayIndex = 5;
+            this.olvStatusColumn.MinimumWidth = 50;
             this.olvStatusColumn.Text = "Status";
-            this.olvStatusColumn.Width = 96;
+            this.olvStatusColumn.Width = 50;
             // 
             // olvEmulationColumn
             // 
             this.olvEmulationColumn.AspectName = "Emulation";
-            this.olvEmulationColumn.DisplayIndex = 5;
+            this.olvEmulationColumn.DisplayIndex = 6;
+            this.olvEmulationColumn.MinimumWidth = 60;
             this.olvEmulationColumn.Text = "Emulation";
             // 
             // olvSaveStates
             // 
             this.olvSaveStates.AspectName = "SaveStates";
-            this.olvSaveStates.DisplayIndex = 6;
+            this.olvSaveStates.DisplayIndex = 7;
+            this.olvSaveStates.MinimumWidth = 70;
             this.olvSaveStates.Text = "Save States";
-            this.olvSaveStates.Width = 88;
+            this.olvSaveStates.Width = 70;
             // 
             // olvPlayersColumn
             // 
             this.olvPlayersColumn.AspectName = "Players";
-            this.olvPlayersColumn.DisplayIndex = 7;
+            this.olvPlayersColumn.DisplayIndex = 8;
+            this.olvPlayersColumn.MaximumWidth = 50;
+            this.olvPlayersColumn.MinimumWidth = 50;
             this.olvPlayersColumn.Text = "Players";
+            this.olvPlayersColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvPlayersColumn.Width = 50;
             // 
             // olvCoinsColumn
             // 
             this.olvCoinsColumn.AspectName = "Coins";
-            this.olvCoinsColumn.DisplayIndex = 8;
+            this.olvCoinsColumn.DisplayIndex = 9;
+            this.olvCoinsColumn.MaximumWidth = 40;
+            this.olvCoinsColumn.MinimumWidth = 40;
             this.olvCoinsColumn.Text = "Coins";
+            this.olvCoinsColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvCoinsColumn.Width = 40;
             // 
             // olvScreenType
             // 
             this.olvScreenType.AspectName = "ScreenType";
-            this.olvScreenType.DisplayIndex = 9;
-            this.olvScreenType.Text = "Screen Type";
-            this.olvScreenType.Width = 140;
+            this.olvScreenType.DisplayIndex = 10;
+            this.olvScreenType.MinimumWidth = 50;
+            this.olvScreenType.Text = "Screen";
+            this.olvScreenType.Width = 50;
             // 
             // olvScreenOrientation
             // 
             this.olvScreenOrientation.AspectName = "ScreenOrientation";
-            this.olvScreenOrientation.DisplayIndex = 10;
-            this.olvScreenOrientation.Text = "Screen Orientation";
-            this.olvScreenOrientation.Width = 151;
+            this.olvScreenOrientation.DisplayIndex = 11;
+            this.olvScreenOrientation.MinimumWidth = 70;
+            this.olvScreenOrientation.Text = "Orientation";
+            this.olvScreenOrientation.Width = 70;
             // 
             // olvScreenRefreshRate
             // 
             this.olvScreenRefreshRate.AspectName = "ScreenRefreshRate";
-            this.olvScreenRefreshRate.DisplayIndex = 11;
+            this.olvScreenRefreshRate.DisplayIndex = 12;
+            this.olvScreenRefreshRate.MinimumWidth = 80;
             this.olvScreenRefreshRate.Text = "Refresh Rate";
-            this.olvScreenRefreshRate.Width = 138;
+            this.olvScreenRefreshRate.Width = 80;
             // 
             // olvIsCloneColumn
             // 
             this.olvIsCloneColumn.AspectName = "IsClone";
-            this.olvIsCloneColumn.DisplayIndex = 12;
+            this.olvIsCloneColumn.DisplayIndex = 2;
+            this.olvIsCloneColumn.MaximumWidth = 40;
+            this.olvIsCloneColumn.MinimumWidth = 40;
             this.olvIsCloneColumn.Text = "Clone";
+            this.olvIsCloneColumn.Width = 40;
+            // 
+            // olvBIOSColumn
+            // 
+            this.olvBIOSColumn.AspectName = "IsBIOS";
+            this.olvBIOSColumn.MaximumWidth = 40;
+            this.olvBIOSColumn.MinimumWidth = 40;
+            this.olvBIOSColumn.Text = "BIOS";
+            this.olvBIOSColumn.Width = 40;
             // 
             // olvControlsColumn
             // 
             this.olvControlsColumn.AspectName = "Controls";
             this.olvControlsColumn.FillsFreeSpace = true;
-            this.olvControlsColumn.MinimumWidth = 201;
+            this.olvControlsColumn.MinimumWidth = 50;
             this.olvControlsColumn.Text = "Controls";
-            this.olvControlsColumn.Width = 328;
+            this.olvControlsColumn.Width = 201;
             // 
             // tableLayoutPanel1
             // 
@@ -318,6 +352,7 @@
             // fileToolStripMenuItem
             // 
             this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openToolStripMenuItem,
             this.saveAsToolStripMenuItem,
             this.toolStripSeparator1,
             this.closeToolStripMenuItem});
@@ -325,24 +360,32 @@
             this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
             this.fileToolStripMenuItem.Text = "File";
             // 
+            // openToolStripMenuItem
+            // 
+            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
+            this.openToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.O)));
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.openToolStripMenuItem.Text = "Open...";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
+            // 
             // saveAsToolStripMenuItem
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
@@ -449,5 +492,7 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
         private BrightIdeasSoftware.OLVColumn olvIsCloneColumn;
+        private BrightIdeasSoftware.OLVColumn olvBIOSColumn;
+        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
     }
 }

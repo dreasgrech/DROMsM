@@ -45,6 +45,14 @@ namespace DROMsM
                         datFileMachine.Name = NormalizeText(nameAttribute.Value.ToString());
                     }
 
+                    if (machineNode.TryFindAttribute("isbios", out var isBIOSAttribute))
+                    {
+                        if (string.Equals(isBIOSAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
+                        {
+                            datFileMachine.IsBIOS = true;
+                        }
+                    }
+
                     if (machineNode.TryFindAttribute("cloneof", out var cloneOfAttribute))
                     {
                         datFileMachine.IsClone = true;

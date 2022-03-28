@@ -9,6 +9,7 @@ namespace DROMsM.Forms
 {
     public partial class DATFileViewerForm : Form
     {
+        public bool WantsToOpenNewFile { get; private set; }
         private DATFileMachineVirtualListDataSource datFileMachineVirtualListDataSource;
 
         private bool showingWorkingColors;
@@ -43,6 +44,7 @@ namespace DROMsM.Forms
             }
 
             olvIsCloneColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
+            olvBIOSColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
         }
 
         public void ProcessDATFile(string datFilePath)
@@ -86,6 +88,8 @@ namespace DROMsM.Forms
             classMap.ToggleColumn(m => m.ScreenOrientation, visibleColumns.Contains(olvScreenOrientation), olvScreenOrientation.DisplayIndex);
             classMap.ToggleColumn(m => m.ScreenRefreshRate, visibleColumns.Contains(olvScreenRefreshRate), olvScreenRefreshRate.DisplayIndex);
             classMap.ToggleColumn(m => m.Controls, visibleColumns.Contains(olvControlsColumn), olvControlsColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.IsClone, visibleColumns.Contains(olvIsCloneColumn), olvIsCloneColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.IsBIOS, visibleColumns.Contains(olvBIOSColumn), olvBIOSColumn.DisplayIndex);
 
             var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
             var fileWritten = DATFileCSVWriter.WriteToFile(saveFilePath, filteredObjectList, classMap);
@@ -213,6 +217,12 @@ namespace DROMsM.Forms
 
         private void closeToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            Close();
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            WantsToOpenNewFile = true;
             Close();
         }
     }

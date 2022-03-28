@@ -1090,11 +1090,18 @@ namespace DROMsM.Forms
 
         private void viewDATFileToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            OpenDATFileViewerForm();
+        }
+
+        private void OpenDATFileViewerForm()
+        {
             var datFilePath = FormFileOperations.ShowOpenFileDialog(FormFileOperations.OpenDialog_DATFilesFilter);
             if (string.IsNullOrEmpty(datFilePath))
             {
                 return;
             }
+
+            bool wantsToOpenNewFileAfterClosingThisOne;
 
             using (var datFileViewerForm = new DATFileViewerForm {StartPosition = FormStartPosition.CenterParent})
             {
@@ -1104,6 +1111,7 @@ namespace DROMsM.Forms
 #endif
                     datFileViewerForm.ProcessDATFile(datFilePath);
                     datFileViewerForm.ShowDialog();
+                    wantsToOpenNewFileAfterClosingThisOne = datFileViewerForm.WantsToOpenNewFile;
 #if !DEBUG
                 }
                 catch (Exception ex)
@@ -1112,6 +1120,11 @@ namespace DROMsM.Forms
                     Logger.LogException(ex);
                 }
 #endif
+            }
+
+            if (wantsToOpenNewFileAfterClosingThisOne)
+            {
+                OpenDATFileViewerForm();
             }
         }
     }
