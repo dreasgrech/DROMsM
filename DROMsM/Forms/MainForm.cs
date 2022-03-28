@@ -1112,10 +1112,18 @@ namespace DROMsM.Forms
                 return;
             }
 
-            using (var datFileViewerForm = new DATFileViewerForm { StartPosition = FormStartPosition.CenterParent })
+            using (var datFileViewerForm = new DATFileViewerForm {StartPosition = FormStartPosition.CenterParent})
             {
-                datFileViewerForm.ProcessDATFile(datFilePath);
-                datFileViewerForm.ShowDialog();
+                try
+                {
+                    datFileViewerForm.ProcessDATFile(datFilePath);
+                    datFileViewerForm.ShowDialog();
+                }
+                catch (Exception ex)
+                {
+                    MessageBoxOperations.ShowError($"Unable to parse {datFilePath}", "An error has been encountered while trying to parse the DAT file");
+                    Logger.LogException(ex);
+                }
             }
         }
     }
