@@ -161,7 +161,8 @@
             // olvSetColumn
             // 
             this.olvSetColumn.AspectName = "Name";
-            this.olvSetColumn.MinimumWidth = 30;
+            this.olvSetColumn.MaximumWidth = 60;
+            this.olvSetColumn.MinimumWidth = 60;
             this.olvSetColumn.Text = "Set";
             this.olvSetColumn.UseFiltering = false;
             // 
@@ -177,10 +178,11 @@
             // 
             this.olvYearColumn.AspectName = "Year";
             this.olvYearColumn.DisplayIndex = 3;
-            this.olvYearColumn.MaximumWidth = 40;
-            this.olvYearColumn.MinimumWidth = 40;
+            this.olvYearColumn.MaximumWidth = 70;
+            this.olvYearColumn.MinimumWidth = 70;
             this.olvYearColumn.Text = "Year";
-            this.olvYearColumn.Width = 40;
+            this.olvYearColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvYearColumn.Width = 70;
             // 
             // olvManufacturer
             // 
@@ -194,85 +196,92 @@
             // 
             this.olvStatusColumn.AspectName = "Status";
             this.olvStatusColumn.DisplayIndex = 5;
-            this.olvStatusColumn.MinimumWidth = 50;
+            this.olvStatusColumn.MinimumWidth = 80;
             this.olvStatusColumn.Text = "Status";
-            this.olvStatusColumn.Width = 50;
+            this.olvStatusColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvStatusColumn.Width = 80;
             // 
             // olvEmulationColumn
             // 
             this.olvEmulationColumn.AspectName = "Emulation";
             this.olvEmulationColumn.DisplayIndex = 6;
-            this.olvEmulationColumn.MinimumWidth = 60;
+            this.olvEmulationColumn.MinimumWidth = 90;
             this.olvEmulationColumn.Text = "Emulation";
+            this.olvEmulationColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvEmulationColumn.Width = 90;
             // 
             // olvSaveStates
             // 
             this.olvSaveStates.AspectName = "SaveStates";
             this.olvSaveStates.DisplayIndex = 7;
-            this.olvSaveStates.MinimumWidth = 70;
+            this.olvSaveStates.MinimumWidth = 100;
             this.olvSaveStates.Text = "Save States";
-            this.olvSaveStates.Width = 70;
+            this.olvSaveStates.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvSaveStates.Width = 100;
             // 
             // olvPlayersColumn
             // 
             this.olvPlayersColumn.AspectName = "Players";
             this.olvPlayersColumn.DisplayIndex = 8;
-            this.olvPlayersColumn.MaximumWidth = 50;
-            this.olvPlayersColumn.MinimumWidth = 50;
+            this.olvPlayersColumn.MinimumWidth = 80;
             this.olvPlayersColumn.Text = "Players";
             this.olvPlayersColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvPlayersColumn.Width = 50;
+            this.olvPlayersColumn.Width = 80;
             // 
             // olvCoinsColumn
             // 
             this.olvCoinsColumn.AspectName = "Coins";
             this.olvCoinsColumn.DisplayIndex = 9;
-            this.olvCoinsColumn.MaximumWidth = 40;
-            this.olvCoinsColumn.MinimumWidth = 40;
+            this.olvCoinsColumn.MinimumWidth = 80;
             this.olvCoinsColumn.Text = "Coins";
             this.olvCoinsColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvCoinsColumn.Width = 40;
+            this.olvCoinsColumn.Width = 80;
             // 
             // olvScreenType
             // 
             this.olvScreenType.AspectName = "ScreenType";
             this.olvScreenType.DisplayIndex = 10;
-            this.olvScreenType.MinimumWidth = 50;
+            this.olvScreenType.MinimumWidth = 80;
             this.olvScreenType.Text = "Screen";
-            this.olvScreenType.Width = 50;
+            this.olvScreenType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvScreenType.Width = 80;
             // 
             // olvScreenOrientation
             // 
             this.olvScreenOrientation.AspectName = "ScreenOrientation";
             this.olvScreenOrientation.DisplayIndex = 11;
-            this.olvScreenOrientation.MinimumWidth = 70;
+            this.olvScreenOrientation.MinimumWidth = 100;
             this.olvScreenOrientation.Text = "Orientation";
-            this.olvScreenOrientation.Width = 70;
+            this.olvScreenOrientation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvScreenOrientation.Width = 100;
             // 
             // olvScreenRefreshRate
             // 
             this.olvScreenRefreshRate.AspectName = "ScreenRefreshRate";
             this.olvScreenRefreshRate.DisplayIndex = 12;
-            this.olvScreenRefreshRate.MinimumWidth = 80;
+            this.olvScreenRefreshRate.MinimumWidth = 110;
             this.olvScreenRefreshRate.Text = "Refresh Rate";
-            this.olvScreenRefreshRate.Width = 80;
+            this.olvScreenRefreshRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvScreenRefreshRate.Width = 110;
             // 
             // olvIsCloneColumn
             // 
             this.olvIsCloneColumn.AspectName = "IsClone";
             this.olvIsCloneColumn.DisplayIndex = 2;
-            this.olvIsCloneColumn.MaximumWidth = 40;
-            this.olvIsCloneColumn.MinimumWidth = 40;
+            this.olvIsCloneColumn.MaximumWidth = 70;
+            this.olvIsCloneColumn.MinimumWidth = 70;
             this.olvIsCloneColumn.Text = "Clone";
-            this.olvIsCloneColumn.Width = 40;
+            this.olvIsCloneColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvIsCloneColumn.Width = 70;
             // 
             // olvBIOSColumn
             // 
             this.olvBIOSColumn.AspectName = "IsBIOS";
-            this.olvBIOSColumn.MaximumWidth = 40;
-            this.olvBIOSColumn.MinimumWidth = 40;
+            this.olvBIOSColumn.MaximumWidth = 70;
+            this.olvBIOSColumn.MinimumWidth = 70;
             this.olvBIOSColumn.Text = "BIOS";
-            this.olvBIOSColumn.Width = 40;
+            this.olvBIOSColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvBIOSColumn.Width = 70;
             // 
             // olvControlsColumn
             // 
