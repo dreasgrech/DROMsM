@@ -90,6 +90,7 @@ namespace DROMsM.Forms
             classMap.ToggleColumn(m => m.Controls, visibleColumns.Contains(olvControlsColumn), olvControlsColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.IsClone, visibleColumns.Contains(olvIsCloneColumn), olvIsCloneColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.IsBIOS, visibleColumns.Contains(olvBIOSColumn), olvBIOSColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.IsMechanical, visibleColumns.Contains(olvMechanicalColumn), olvMechanicalColumn.DisplayIndex);
 
             var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
             var fileWritten = DATFileCSVWriter.WriteToFile(saveFilePath, filteredObjectList, classMap);

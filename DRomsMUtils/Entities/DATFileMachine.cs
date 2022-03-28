@@ -28,7 +28,8 @@ public class DATFileMachine
     public string ScreenRefreshRate { get; set; }
     public bool IsBIOS { get; set; }
     public bool IsClone { get; set; }
-    public string ParentRom { get; set; }
+    public bool IsMechanical { get; set; }
+    // public string ParentRom { get; set; }
 
     public int MAMESortingIndex { get; set; }
     public bool IsDevice { get; set; }

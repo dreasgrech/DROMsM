@@ -53,6 +53,14 @@ namespace DROMsM
                         }
                     }
 
+                    if (machineNode.TryFindAttribute("ismechanical", out var isMechanicalAttribute))
+                    {
+                        if (string.Equals(isMechanicalAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
+                        {
+                            datFileMachine.IsMechanical = true;
+                        }
+                    }
+
                     if (machineNode.TryFindAttribute("cloneof", out var cloneOfAttribute))
                     {
                         datFileMachine.IsClone = true;
