@@ -157,22 +157,6 @@ namespace DROMsM.Forms
                 ToggleOperationsButtons(false);
 
                 ApplyInitialSavedProjectSettings();
-
-                // allowedSimilarityValueTextbox.Text = mainManager.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
-                // allowedSimilarityValueTextbox.Text = OperationsOptions.Instance.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
-
-                /*
-                var romsDirectory = romsDirectoryTextBox.Text;
-                if (!string.IsNullOrEmpty(romsDirectory))
-                {
-                    mainManager.AnalyzeROMDirectory(romsDirectory);
-
-                    // FindDuplicateROMs();
-                }
-                */
-
-                //var datFileHandler = new DATFileHandler();
-                //var datFile = datFileHandler.ParseDATFile(@"D:\dromsmanagerdirs\mamedatfile.xml");
             }
             catch (Exception ex)
             {
@@ -1114,16 +1098,20 @@ namespace DROMsM.Forms
 
             using (var datFileViewerForm = new DATFileViewerForm {StartPosition = FormStartPosition.CenterParent})
             {
+#if !DEBUG
                 try
                 {
+#endif
                     datFileViewerForm.ProcessDATFile(datFilePath);
                     datFileViewerForm.ShowDialog();
+#if !DEBUG
                 }
                 catch (Exception ex)
                 {
                     MessageBoxOperations.ShowError($"Unable to parse {datFilePath}", "An error has been encountered while trying to parse the DAT file");
                     Logger.LogException(ex);
                 }
+#endif
             }
         }
     }

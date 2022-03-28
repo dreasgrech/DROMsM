@@ -43,6 +43,7 @@
             this.olvScreenType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvScreenOrientation = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvScreenRefreshRate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvIsCloneColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvControlsColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buildLabel = new System.Windows.Forms.Label();
@@ -102,6 +103,7 @@
             // 
             this.olvDatFileListView.AllColumns.Add(this.olvSetColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvNameColumn);
+            this.olvDatFileListView.AllColumns.Add(this.olvIsCloneColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvYearColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvManufacturer);
             this.olvDatFileListView.AllColumns.Add(this.olvStatusColumn);
@@ -119,6 +121,7 @@
             this.olvDatFileListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvSetColumn,
             this.olvNameColumn,
+            this.olvIsCloneColumn,
             this.olvYearColumn,
             this.olvManufacturer,
             this.olvStatusColumn,
@@ -168,58 +171,74 @@
             // olvYearColumn
             // 
             this.olvYearColumn.AspectName = "Year";
+            this.olvYearColumn.DisplayIndex = 2;
             this.olvYearColumn.Text = "Year";
             // 
             // olvManufacturer
             // 
             this.olvManufacturer.AspectName = "Manufacturer";
+            this.olvManufacturer.DisplayIndex = 3;
             this.olvManufacturer.Text = "Manufacturer";
             this.olvManufacturer.Width = 100;
             // 
             // olvStatusColumn
             // 
             this.olvStatusColumn.AspectName = "Status";
+            this.olvStatusColumn.DisplayIndex = 4;
             this.olvStatusColumn.Text = "Status";
             this.olvStatusColumn.Width = 96;
             // 
             // olvEmulationColumn
             // 
             this.olvEmulationColumn.AspectName = "Emulation";
+            this.olvEmulationColumn.DisplayIndex = 5;
             this.olvEmulationColumn.Text = "Emulation";
             // 
             // olvSaveStates
             // 
             this.olvSaveStates.AspectName = "SaveStates";
+            this.olvSaveStates.DisplayIndex = 6;
             this.olvSaveStates.Text = "Save States";
             this.olvSaveStates.Width = 88;
             // 
             // olvPlayersColumn
             // 
             this.olvPlayersColumn.AspectName = "Players";
+            this.olvPlayersColumn.DisplayIndex = 7;
             this.olvPlayersColumn.Text = "Players";
             // 
             // olvCoinsColumn
             // 
             this.olvCoinsColumn.AspectName = "Coins";
+            this.olvCoinsColumn.DisplayIndex = 8;
             this.olvCoinsColumn.Text = "Coins";
             // 
             // olvScreenType
             // 
             this.olvScreenType.AspectName = "ScreenType";
+            this.olvScreenType.DisplayIndex = 9;
             this.olvScreenType.Text = "Screen Type";
             this.olvScreenType.Width = 140;
             // 
             // olvScreenOrientation
             // 
             this.olvScreenOrientation.AspectName = "ScreenOrientation";
+            this.olvScreenOrientation.DisplayIndex = 10;
             this.olvScreenOrientation.Text = "Screen Orientation";
             this.olvScreenOrientation.Width = 151;
             // 
             // olvScreenRefreshRate
             // 
             this.olvScreenRefreshRate.AspectName = "ScreenRefreshRate";
+            this.olvScreenRefreshRate.DisplayIndex = 11;
             this.olvScreenRefreshRate.Text = "Refresh Rate";
             this.olvScreenRefreshRate.Width = 138;
+            // 
+            // olvIsCloneColumn
+            // 
+            this.olvIsCloneColumn.AspectName = "IsClone";
+            this.olvIsCloneColumn.DisplayIndex = 12;
+            this.olvIsCloneColumn.Text = "Clone";
             // 
             // olvControlsColumn
             // 
@@ -310,20 +329,20 @@
             // 
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
             this.saveAsToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.S)));
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.saveAsToolStripMenuItem.Text = "Save As...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(160, 6);
             // 
             // closeToolStripMenuItem
             // 
             this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
             this.closeToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Alt | System.Windows.Forms.Keys.F4)));
-            this.closeToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(163, 22);
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
@@ -429,5 +448,6 @@
         private System.Windows.Forms.ToolStripMenuItem showGridLinesToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
+        private BrightIdeasSoftware.OLVColumn olvIsCloneColumn;
     }
 }

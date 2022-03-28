@@ -41,6 +41,8 @@ namespace DROMsM.Forms
                     Logger.LogError($"Unable to restore the DAT File Viewer's grid state");
                 }
             }
+
+            olvIsCloneColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
         }
 
         public void ProcessDATFile(string datFilePath)
@@ -120,6 +122,7 @@ namespace DROMsM.Forms
             switch (statusString)
             {
                 case "imperfect":
+                case "protection":
                 {
                     olvListItem.BackColor = Color.LightYellow;
                 }

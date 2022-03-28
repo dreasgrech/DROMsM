@@ -26,6 +26,8 @@ public class DATFileMachine
     public string ScreenType { get; set; }
     public DATFileMachineScreenOrientation ScreenOrientation { get; set; }
     public string ScreenRefreshRate { get; set; }
+    public bool IsClone { get; set; }
+    public string ParentRom { get; set; }
 
     public int MAMESortingIndex { get; set; }
     public bool IsDevice { get; set; }

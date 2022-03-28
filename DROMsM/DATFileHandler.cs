@@ -45,9 +45,22 @@ namespace DROMsM
                         datFileMachine.Name = NormalizeText(nameAttribute.Value.ToString());
                     }
 
+                    if (machineNode.TryFindAttribute("cloneof", out var cloneOfAttribute))
+                    {
+                        datFileMachine.IsClone = true;
+                    }
+
                     if (machineNode.TryFindAttribute("isdevice", out var isDeviceAttribute))
                     {
                         if (string.Equals(isDeviceAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
+                        {
+                            datFileMachine.IsDevice = true;
+                        }
+                    }
+
+                    if (machineNode.TryFindAttribute("runnable", out var runnableAttribute))
+                    {
+                        if (string.Equals(runnableAttribute.Value.ToString(), "no", StringComparison.OrdinalIgnoreCase))
                         {
                             datFileMachine.IsDevice = true;
                         }
