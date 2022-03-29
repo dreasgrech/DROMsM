@@ -195,6 +195,14 @@ namespace DROMsM
                     break;
             }
         }
+
+        private void AboutDialogForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Escape)
+            {
+                Close();
+            }
+        }
     }
 
     public enum AboutDialogUpdateStatus

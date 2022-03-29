@@ -107,6 +107,7 @@ namespace DROMsM.Forms
             var rootNodeXMLOpeningTag = currentDATFile.GetRootNodeXMLOpeningTag();
             fullXMLFileStringBuilder.AppendLine(rootNodeXMLOpeningTag);
 
+            // Write all the filtered nodes
             var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
             foreach (DATFileMachine datFileMachine in filteredObjectList)
             {
