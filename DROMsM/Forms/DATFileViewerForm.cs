@@ -111,6 +111,7 @@ namespace DROMsM.Forms
             foreach (DATFileMachine datFileMachine in filteredObjectList)
             {
                 var xmlValue = datFileMachine.XMLValue;
+                fullXMLFileStringBuilder.Append("\t");
                 fullXMLFileStringBuilder.AppendLine(xmlValue);
             }
 
