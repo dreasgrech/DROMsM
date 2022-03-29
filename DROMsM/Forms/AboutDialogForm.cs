@@ -88,6 +88,11 @@ namespace DROMsM
                 errorMessage = $"This application cannot be updated. It is likely not a ClickOnce application. Error: {ioe.Message}";
                 return AboutDialogUpdateStatus.ErrorCheckingForUpdates;
             }
+            catch (Exception ex)
+            {
+                errorMessage = $"An error occured while trying to check for updates.  Error: {ex.Message}";
+                return AboutDialogUpdateStatus.ErrorCheckingForUpdates;
+            }
 
             if (!updateCheckInfo.UpdateAvailable)
             {
@@ -108,8 +113,8 @@ namespace DROMsM
 
             if (!updateInfo.IsUpdateRequired)
             {
-                DialogResult dr = MessageBox.Show("An update is available. Would you like to update DROMsM now?", "Update Available", MessageBoxButtons.OKCancel);
-                if (DialogResult.OK != dr)
+                var wantsToUpdate = MessageBoxOperations.ShowConfirmation("An update is available. Would you like to update DROMsM now?", "Update Available");
+                if (!wantsToUpdate)
                 {
                     doUpdate = false;
                 }
@@ -117,11 +122,7 @@ namespace DROMsM
             else
             {
                 // Display a message that the app MUST reboot. Display the minimum required version.
-                MessageBox.Show(
-                    $"This application has detected a mandatory update from your current version to version {updateInfo.MinimumRequiredVersion}. The application will now install the update and restart.",
-                    "Update Available", 
-                    MessageBoxButtons.OK,
-                    MessageBoxIcon.Information);
+                MessageBoxOperations.ShowInformation($"This application has detected a mandatory update from your current version to version {updateInfo.MinimumRequiredVersion}. The application will now install the update and restart.", "Update Available");
             }
 
             if (doUpdate)
@@ -129,12 +130,12 @@ namespace DROMsM
                 try
                 {
                     applicationDeployment.Update();
-                    MessageBox.Show("The application has been upgraded, and will now restart.");
+                    MessageBoxOperations.ShowInformation("The application has been upgraded, and will now restart.", "DROMsM has been updated");
                     Application.Restart();
                 }
                 catch (DeploymentDownloadException dde)
                 {
-                    MessageBox.Show($"Cannot install the latest version of the application. \n\nPlease check your network connection, or try again later. Error: {dde}");
+                    MessageBoxOperations.ShowError($"Cannot install the latest version of the application. \n\nPlease check your network connection, or try again later. Error: {dde}", "Unable to update DROMsM");
                 }
             }
         }
@@ -164,7 +165,7 @@ namespace DROMsM
                 case AboutDialogUpdateStatus.UpdateAvailable:
                 {
                     color = Color.BlueViolet; 
-                    text = "Update available";
+                    text = "Update available!";
                 } break;
                 case AboutDialogUpdateStatus.ErrorCheckingForUpdates:
                 {
@@ -185,6 +186,11 @@ namespace DROMsM
                 case AboutDialogUpdateStatus.NoUpdateAvailable:
                 {
                     CheckForUpdates();
+                }
+                    break;
+                case AboutDialogUpdateStatus.UpdateAvailable:
+                {
+                        DownloadUpdate();
                 }
                     break;
             }
