@@ -45,6 +45,9 @@
             this.olvScreenRefreshRate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvIsCloneColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvBIOSColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvMechanicalColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvRequireCHDsColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvSamplesColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvControlsColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buildLabel = new System.Windows.Forms.Label();
@@ -62,7 +65,6 @@
             this.optionsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showColorsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.showGridLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.olvMechanicalColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -119,6 +121,8 @@
             this.olvDatFileListView.AllColumns.Add(this.olvIsCloneColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvBIOSColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvMechanicalColumn);
+            this.olvDatFileListView.AllColumns.Add(this.olvRequireCHDsColumn);
+            this.olvDatFileListView.AllColumns.Add(this.olvSamplesColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvControlsColumn);
             this.olvDatFileListView.AllowColumnReorder = true;
             this.olvDatFileListView.AlternateRowBackColor = System.Drawing.Color.WhiteSmoke;
@@ -139,6 +143,8 @@
             this.olvIsCloneColumn,
             this.olvBIOSColumn,
             this.olvMechanicalColumn,
+            this.olvRequireCHDsColumn,
+            this.olvSamplesColumn,
             this.olvControlsColumn});
             this.olvDatFileListView.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvDatFileListView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -274,6 +280,32 @@
             this.olvBIOSColumn.Text = "BIOS";
             this.olvBIOSColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvBIOSColumn.Width = 70;
+            // 
+            // olvMechanicalColumn
+            // 
+            this.olvMechanicalColumn.AspectName = "IsMechanical";
+            this.olvMechanicalColumn.MinimumWidth = 90;
+            this.olvMechanicalColumn.Text = "Mechanical";
+            this.olvMechanicalColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvMechanicalColumn.Width = 90;
+            // 
+            // olvRequireCHDsColumn
+            // 
+            this.olvRequireCHDsColumn.AspectName = "RequireCHDs";
+            this.olvRequireCHDsColumn.MaximumWidth = 70;
+            this.olvRequireCHDsColumn.MinimumWidth = 70;
+            this.olvRequireCHDsColumn.Text = "CHDs";
+            this.olvRequireCHDsColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvRequireCHDsColumn.Width = 70;
+            // 
+            // olvSamplesColumn
+            // 
+            this.olvSamplesColumn.AspectName = "RequireSamples";
+            this.olvSamplesColumn.MaximumWidth = 80;
+            this.olvSamplesColumn.MinimumWidth = 80;
+            this.olvSamplesColumn.Text = "Samples";
+            this.olvSamplesColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvSamplesColumn.Width = 80;
             // 
             // olvControlsColumn
             // 
@@ -431,14 +463,6 @@
             this.showGridLinesToolStripMenuItem.Text = "Show Grid Lines";
             this.showGridLinesToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showGridLinesToolStripMenuItem_CheckedChanged);
             // 
-            // olvMechanicalColumn
-            // 
-            this.olvMechanicalColumn.AspectName = "IsMechanical";
-            this.olvMechanicalColumn.MinimumWidth = 90;
-            this.olvMechanicalColumn.Text = "Mechanical";
-            this.olvMechanicalColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvMechanicalColumn.Width = 90;
-            // 
             // DATFileViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -504,5 +528,7 @@
         private BrightIdeasSoftware.OLVColumn olvBIOSColumn;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private BrightIdeasSoftware.OLVColumn olvMechanicalColumn;
+        private BrightIdeasSoftware.OLVColumn olvRequireCHDsColumn;
+        private BrightIdeasSoftware.OLVColumn olvSamplesColumn;
     }
 }

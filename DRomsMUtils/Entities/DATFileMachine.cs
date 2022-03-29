@@ -1,5 +1,4 @@
-﻿using CsvHelper.Configuration.Attributes;
-
+﻿
 public enum DATFileMachineScreenOrientation
 {
     Unknown,
@@ -9,10 +8,10 @@ public enum DATFileMachineScreenOrientation
 
 public class DATFileMachine
 {
-    [Name("Set")]
+    [CsvHelper.Configuration.Attributes.Name("Set")]
     public string Name { get; set; }
 
-    [Name("Name")]
+    [CsvHelper.Configuration.Attributes.Name("Name")]
     public string Description { get; set; }
 
     public string Year { get; set; }
@@ -29,6 +28,8 @@ public class DATFileMachine
     public bool IsBIOS { get; set; }
     public bool IsClone { get; set; }
     public bool IsMechanical { get; set; }
+    public bool RequireCHDs { get; set; }
+    public bool RequireSamples { get; set; }
     // public string ParentRom { get; set; }
 
     public int MAMESortingIndex { get; set; }

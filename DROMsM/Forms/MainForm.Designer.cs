@@ -136,9 +136,9 @@
             this.preferencesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.viewDATFileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.newItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -1348,12 +1348,6 @@
             this.viewDATFileToolStripMenuItem.Text = "View DAT File";
             this.viewDATFileToolStripMenuItem.Click += new System.EventHandler(this.viewDATFileToolStripMenuItem_Click);
             // 
-            // newItemToolStripMenuItem
-            // 
-            this.newItemToolStripMenuItem.Name = "newItemToolStripMenuItem";
-            this.newItemToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
-            this.newItemToolStripMenuItem.Text = "NewItem";
-            // 
             // helpToolStripMenuItem
             // 
             this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -1365,9 +1359,15 @@
             // aboutToolStripMenuItem
             // 
             this.aboutToolStripMenuItem.Name = "aboutToolStripMenuItem";
-            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.aboutToolStripMenuItem.Size = new System.Drawing.Size(161, 22);
             this.aboutToolStripMenuItem.Text = "About DROMsM";
             this.aboutToolStripMenuItem.Click += new System.EventHandler(this.aboutToolStripMenuItem_Click);
+            // 
+            // newItemToolStripMenuItem
+            // 
+            this.newItemToolStripMenuItem.Name = "newItemToolStripMenuItem";
+            this.newItemToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
+            this.newItemToolStripMenuItem.Text = "NewItem";
             // 
             // MainForm
             // 

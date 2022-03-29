@@ -45,6 +45,9 @@ namespace DROMsM.Forms
 
             olvIsCloneColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
             olvBIOSColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
+            olvRequireCHDsColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
+            olvMechanicalColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
+            olvSamplesColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
         }
 
         public void ProcessDATFile(string datFilePath)
@@ -91,6 +94,8 @@ namespace DROMsM.Forms
             classMap.ToggleColumn(m => m.IsClone, visibleColumns.Contains(olvIsCloneColumn), olvIsCloneColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.IsBIOS, visibleColumns.Contains(olvBIOSColumn), olvBIOSColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.IsMechanical, visibleColumns.Contains(olvMechanicalColumn), olvMechanicalColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.RequireCHDs, visibleColumns.Contains(olvRequireCHDsColumn), olvRequireCHDsColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.RequireSamples, visibleColumns.Contains(olvSamplesColumn), olvSamplesColumn.DisplayIndex);
 
             var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
             var fileWritten = DATFileCSVWriter.WriteToFile(saveFilePath, filteredObjectList, classMap);

@@ -38,6 +38,11 @@ namespace DROMsM
                 updateStatus = IsUpdateAvailable(out updateInfo, out applicationDeployment, out updateCheckErrorMessage);
             });
 
+            if (!string.IsNullOrEmpty(updateCheckErrorMessage))
+            {
+                Logger.LogError(updateCheckErrorMessage);
+            }
+
             Task uiTask = task.ContinueWith(OnAfterFinishedCheckingForUpdates, TaskScheduler.FromCurrentSynchronizationContext());
         }
 

@@ -112,6 +112,16 @@ namespace DROMsM
                                 HandleDisplayNode(ref machineNodeChildNode, datFileMachine);
                             }
                                 break;
+                            case "disk":
+                            {
+                                datFileMachine.RequireCHDs = true;
+                            }
+                                break;
+                            case "sample":
+                            {
+                                datFileMachine.RequireSamples = true;
+                            }
+                                break;
                             //case "dipswitch":
                             //{
                             //    HandleDipSwitchNode(ref machineNodeChildNode, datFileMachine);
