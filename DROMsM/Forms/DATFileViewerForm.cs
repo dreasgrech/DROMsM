@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Drawing;
+using System.IO;
+using System.Text;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
 using DRomsMUtils;
@@ -12,6 +14,7 @@ namespace DROMsM.Forms
         public bool WantsToOpenNewFile { get; private set; }
         private DATFileMachineVirtualListDataSource datFileMachineVirtualListDataSource;
 
+        private DATFile currentDATFile;
         private bool showingWorkingColors;
 
         public DATFileViewerForm()
@@ -66,12 +69,64 @@ namespace DROMsM.Forms
             datFilePathLabel.Text = datFilePath;
             totalSetsLabel.Text = datFile.TotalMachines.ToString();
             buildLabel.Text = datFile.Build;
+
+            currentDATFile = datFile;
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var saveFilePath = FormFileOperations.ShowSaveFileDialog(FormFileOperations.SaveDialog_CSVFilesFilter);
-            if (string.IsNullOrEmpty(saveFilePath))
+            if (currentDATFile == null)
+            {
+                Logger.LogError("There's no currently stored DAT file!");
+                return;
+            }
+
+            var saveAsFilePath = FormFileOperations.ShowSaveFileDialog(FormFileOperations.SaveDialog_DATFilesFilter);
+            if (string.IsNullOrEmpty(saveAsFilePath))
+            {
+                return;
+            }
+
+            var fullXMLFileStringBuilder = new StringBuilder();
+
+            // Write the declaration
+            var declaration = currentDATFile.XMLDeclaration;
+            if (!string.IsNullOrEmpty(declaration))
+            {
+                fullXMLFileStringBuilder.AppendLine(declaration);
+            }
+
+            // Write the doc type
+            var docType = currentDATFile.XMLDocType;
+            if (!string.IsNullOrEmpty(docType))
+            {
+                fullXMLFileStringBuilder.AppendLine(docType);
+            }
+
+            // Write the root node opening tag
+            var rootNodeXMLOpeningTag = currentDATFile.GetRootNodeXMLOpeningTag();
+            fullXMLFileStringBuilder.AppendLine(rootNodeXMLOpeningTag);
+
+            var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
+            foreach (DATFileMachine datFileMachine in filteredObjectList)
+            {
+                var xmlValue = datFileMachine.XMLValue;
+                fullXMLFileStringBuilder.AppendLine(xmlValue);
+            }
+
+            // Write the root node closing tag
+            var rootNodeXMLClosingTag = currentDATFile.GetRootNodeXMLClosingTag();
+            fullXMLFileStringBuilder.AppendLine(rootNodeXMLClosingTag);
+
+            var full = fullXMLFileStringBuilder.ToString();
+            FileUtilities.WriteAllText(saveAsFilePath, full);
+            MessageBoxOperations.ShowInformation($"File successfully saved to {saveAsFilePath}", "DAT File saved");
+        }
+
+        private void exportToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var exportFilePath = FormFileOperations.ShowSaveFileDialog(FormFileOperations.SaveDialog_CSVFilesFilter);
+            if (string.IsNullOrEmpty(exportFilePath))
             {
                 return;
             }
@@ -98,14 +153,14 @@ namespace DROMsM.Forms
             classMap.ToggleColumn(m => m.RequireSamples, visibleColumns.Contains(olvSamplesColumn), olvSamplesColumn.DisplayIndex);
 
             var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
-            var fileWritten = DATFileCSVWriter.WriteToFile(saveFilePath, filteredObjectList, classMap);
+            var fileWritten = DATFileCSVWriter.WriteToFile(exportFilePath, filteredObjectList, classMap);
             if (!fileWritten)
             {
-                MessageBoxOperations.ShowError($"Unable to create file {saveFilePath}", "Unable to write file");
+                MessageBoxOperations.ShowError($"Unable to create file {exportFilePath}", "Unable to export file");
                 return;
             }
 
-            MessageBoxOperations.ShowInformation($"File successfully written at {saveFilePath}", "File exported");
+            MessageBoxOperations.ShowInformation($"File successfully written to {exportFilePath}", "File exported");
         }
 
         private void olvDatFileListView_FormatRow(object sender, FormatRowEventArgs e)

@@ -22,7 +22,32 @@ namespace DROMsM
 
             using (var xml = XmlParser.ParseFile(filePath))
             {
+                if (xml.Declaration.TryGetValue(out var xmlDeclaration))
+                {
+                    datFile.XMLDeclaration = xmlDeclaration.ToString();
+                }
+
+                if (xml.DocumentType.TryGetValue(out var xmlDocType))
+                {
+                    datFile.XMLDocType = xmlDocType.ToString();
+                }
+
                 var rootNode = xml.Root;
+                datFile.XMLRootNodeName = rootNode.Name.ToString();
+
+                // Save the root node's attributes just in case we need to rewrite the file later on
+                var datFileXMLRootNodeAttributes = datFile.XMLRootNodeAttributes;
+                var rootNodeAttributes = rootNode.Attributes;
+                foreach (var rootNodeAttribute in rootNodeAttributes)
+                {
+                    if (rootNodeAttribute.IsNull)
+                    {
+                        continue;
+                    }
+
+                    datFileXMLRootNodeAttributes[rootNodeAttribute.Name.ToString()] = rootNodeAttribute.Value.ToString();
+                }
+
                 if (rootNode.TryFindAttribute("build", out var buildAttribute))
                 {
                     datFile.Build = NormalizeText(buildAttribute.Value.ToString());
@@ -37,7 +62,8 @@ namespace DROMsM
                     {
                         MAMESortingIndex = (int) index,
                         ScreenOrientation = DATFileMachineScreenOrientation.Horizontal, // By default, set the orientation to Horizontal because any machines that have no reference to orientation are categorized as Horizontal in the MAME emulator
-                        IsDevice = false
+                        IsDevice = false,
+                        XMLValue = machineNode.AsRawString().ToString()
                     };
 
                     if (machineNode.TryFindAttribute("name", out var nameAttribute))

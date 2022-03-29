@@ -17,6 +17,7 @@ namespace DRomsMUtils
             AutoMap(CultureInfo.InvariantCulture);
             Map(m => m.MAMESortingIndex).Ignore();
             Map(m => m.IsDevice).Ignore();
+            Map(m => m.XMLValue).Ignore();
         }
 
         public void ToggleColumn<TMember>(Expression<Func<DATFileMachine, TMember>> expression, bool include, int columnIndex)

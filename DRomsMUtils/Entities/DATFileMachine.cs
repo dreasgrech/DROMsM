@@ -34,6 +34,7 @@ public class DATFileMachine
 
     public int MAMESortingIndex { get; set; }
     public bool IsDevice { get; set; }
+    public string XMLValue { get; set; }
 
     public override string ToString()
     {

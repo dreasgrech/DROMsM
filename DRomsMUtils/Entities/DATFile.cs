@@ -1,19 +1,24 @@
 ﻿using System.Collections.Generic;
+using System.Text;
 using Frontend;
+using U8Xml;
 
 public class DATFile
 {
     public string Build { get; set; }
     public List<DATFileMachine> Machines { get; }
 
-    public int TotalMachines
-    {
-        get { return Machines.Count; }
-    }
+    public string XMLDeclaration { get; set; }
+    public string XMLDocType { get; set; }
+    public string XMLRootNodeName { get; set; }
+    public Dictionary<string,string> XMLRootNodeAttributes { get; set; }
+
+    public int TotalMachines => Machines.Count;
 
     public DATFile()
     {
         Machines = new List<DATFileMachine>();
+        XMLRootNodeAttributes = new Dictionary<string, string>(EqualityComparer<string>.Default);
     }
 
     public void AddMachine(DATFileMachine machine)
@@ -26,6 +31,28 @@ public class DATFile
         // var comparer = new DatFileMachineComparer_ComparisonName();
         var comparer = new DatFileMachineComparer_MAMEIndex();
         Machines.Sort(comparer);
+    }
+
+    public string GetRootNodeXMLOpeningTag()
+    {
+        var fullStringBuilder = new StringBuilder();
+        fullStringBuilder.Append($"<{XMLRootNodeName} ");
+        using (var attributesEnumerator = XMLRootNodeAttributes.GetEnumerator())
+        {
+            while (attributesEnumerator.MoveNext())
+            {
+                var current = attributesEnumerator.Current;
+                fullStringBuilder.Append($" {current.Key}=\"{current.Value}\"");
+            }
+        }
+
+        fullStringBuilder.Append(">");
+        return fullStringBuilder.ToString();
+    }
+
+    public string GetRootNodeXMLClosingTag()
+    {
+        return $"</{XMLRootNodeName}>";
     }
 
     public List<DATFileMachine>.Enumerator GetMachinesEnumerator()
