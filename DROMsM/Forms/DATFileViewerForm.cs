@@ -288,5 +288,15 @@ namespace DROMsM.Forms
             WantsToOpenNewFile = true;
             Close();
         }
+
+        private void resetFilteringToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            // TODO: Still need to implement this
+            // olvDatFileListView.ResetColumnFiltering();
+
+            // olvDatFileListView.Sorting = SortOrder.None;
+            //olvDatFileListView.Sort(olvDatFileListView.LastSortColumn, SortOrder.None);
+            //olvDatFileListView.ListViewItemSorter = new DatFileMachineComparer_MAMEIndex();
+        }
     }
 }
