@@ -21,7 +21,8 @@
 [Dd]ebug/
 [Dd]ebugPublic/
 [Rr]elease/
-[Rr]eleases/
+#[Rr]eleases/ # Andreas: Commented while testing Squirrel.Windows
+
 x64/
 x86/
 bld/
@@ -192,7 +193,8 @@ PublishScripts/
 # NuGet Packages
 *.nupkg
 # The packages folder can be ignored because of Package Restore
-**/[Pp]ackages/*
+#**/[Pp]ackages/* ## Andreas: Commented while testing Squirrel.Windows
+
 # except build/, which is used as an MSBuild target.
 !**/[Pp]ackages/build/
 # Uncomment if necessary however generally it will be regenerated when needed

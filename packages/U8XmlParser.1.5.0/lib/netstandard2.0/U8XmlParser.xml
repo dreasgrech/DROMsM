@@ -1,0 +1,668 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>U8XmlParser</name>
+    </assembly>
+    <members>
+        <member name="M:U8Xml.Internal.RawStringTable.TryAdd(U8Xml.RawString@,U8Xml.RawString@)">
+            <summary>Add a pair of key and value. It returns false if the key already registered.</summary>
+            <param name="key">key to add. (Must not be empty)</param>
+            <param name="value">value to add</param>
+            <returns>true if success</returns>
+        </member>
+        <member name="M:U8Xml.Internal.SpanHelper.Trim(System.ReadOnlySpan{System.Byte})">
+            <summary>Trim invisible charactors. (whitespace, '\t', '\r', and '\n')</summary>
+            <returns>trimmed string</returns>
+        </member>
+        <member name="M:U8Xml.Internal.SpanHelper.TrimStart(System.ReadOnlySpan{System.Byte})">
+            <summary>Trim invisible charactors of start. (whitespace, '\t', '\r', and '\n')</summary>
+            <returns>trimmed string</returns>
+        </member>
+        <member name="M:U8Xml.Internal.SpanHelper.TrimEnd(System.ReadOnlySpan{System.Byte})">
+            <summary>Trim invisible charactors of end. (whitespace, '\t', '\r' and '\n')</summary>
+            <returns>trimmed string</returns>
+        </member>
+        <member name="T:U8Xml.Internal.UnmanagedBuffer">
+            <summary>Unmanaged memory buffer of type <see langword="byte"/></summary>
+        </member>
+        <member name="M:U8Xml.Internal.XmlObjectCore.AsRawString">
+            <summary>Get whole xml string as utf-8 bytes data.</summary>
+            <returns>whole xml string</returns>
+        </member>
+        <member name="T:U8Xml.Option`1">
+            <summary>A type that represents a value that may exist.</summary>
+            <typeparam name="T">type of the value</typeparam>
+        </member>
+        <member name="P:U8Xml.Option`1.Null">
+            <summary>Get empty instance of <see cref="T:U8Xml.Option`1"/>.</summary>
+        </member>
+        <member name="M:U8Xml.Option`1.#ctor(`0@)">
+            <summary>Create the instance of <see cref="T:U8Xml.Option`1"/>.</summary>
+            <param name="v">original value</param>
+        </member>
+        <member name="P:U8Xml.Option`1.Value">
+            <summary>Get the value if exists, or it throws <see cref="T:System.InvalidOperationException"/>.</summary>
+        </member>
+        <member name="P:U8Xml.Option`1.HasValue">
+            <summary>Get whether the value exists or not.</summary>
+        </member>
+        <member name="M:U8Xml.Option`1.TryGetValue(`0@)">
+            <summary>Try to get a value if exists, or the method returns false.</summary>
+            <param name="value">a value if exists. (Don't use it if the method returns false.)</param>
+            <returns>succeed or not</returns>
+        </member>
+        <member name="M:U8Xml.Option`1.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:U8Xml.Option`1.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:U8Xml.Option`1.Equals(U8Xml.Option{`0})">
+            <summary>Returns whether the value is same as the specified instance.</summary>
+            <param name="other">an instance to check</param>
+            <returns>equal or not</returns>
+        </member>
+        <member name="M:U8Xml.Option`1.Equals(`0@)">
+            <summary>Returns whether the value is same as the specified instance.</summary>
+            <param name="other">an instance to check</param>
+            <returns>equal or not</returns>
+        </member>
+        <member name="M:U8Xml.Option`1.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:U8Xml.Option`1.op_Implicit(`0@)~U8Xml.Option{`0}">
+            <summary>implicit cast operation <typeparamref name="T"/> to <see cref="T:U8Xml.Option`1"/></summary>
+            <param name="value">a value to cast</param>
+        </member>
+        <member name="T:U8Xml.RawString">
+            <summary>Provides raw byte array of utf8, which is compatible <see cref="T:System.ReadOnlySpan`1"/> of <see langword="byte"/>.</summary>
+        </member>
+        <member name="P:U8Xml.RawString.InfUtf8Str">
+            <summary>utf-8 bytes of "∞"</summary>
+        </member>
+        <member name="P:U8Xml.RawString.Empty">
+            <summary>Get an empty instance of <see cref="T:U8Xml.RawString"/>.</summary>
+        </member>
+        <member name="P:U8Xml.RawString.IsEmpty">
+            <summary>Get whether the byte array is empty or not.</summary>
+        </member>
+        <member name="P:U8Xml.RawString.Length">
+            <summary>Get length of the byte array. (NOT length of utf-8 string)</summary>
+        </member>
+        <member name="P:U8Xml.RawString.Ptr">
+            <summary>Get pointer to the head of the utf-8 characters.</summary>
+        </member>
+        <member name="P:U8Xml.RawString.Item(System.Int32)">
+            <summary>Get or set an item with specified index</summary>
+            <param name="index">index of an item</param>
+            <returns>the item</returns>
+        </member>
+        <member name="M:U8Xml.RawString.AsSpan">
+            <summary>Get read-only bytes data</summary>
+            <returns><see cref="T:System.ReadOnlySpan`1"/> of type <see langword="byte"/></returns>
+        </member>
+        <member name="M:U8Xml.RawString.ToArray">
+            <summary>Copy the bytes to a new byte array.</summary>
+            <returns>new array</returns>
+        </member>
+        <member name="M:U8Xml.RawString.Slice(System.Int32)">
+            <summary>Get slice of the array</summary>
+            <param name="start">start index to slice</param>
+            <returns>sliced array</returns>
+        </member>
+        <member name="M:U8Xml.RawString.Slice(System.Int32,System.Int32)">
+            <summary>Get slice of the array</summary>
+            <param name="start">start index to slice</param>
+            <param name="length">length to slice from <paramref name="start"/></param>
+            <returns>sliced array</returns>
+        </member>
+        <member name="M:U8Xml.RawString.Trim">
+            <summary>Trim invisible charactors. (whitespace, '\t', '\r', and '\n')</summary>
+            <returns>trimmed string</returns>
+        </member>
+        <member name="M:U8Xml.RawString.TrimStart">
+            <summary>Trim invisible charactors of start. (whitespace, '\t', '\r', and '\n')</summary>
+            <returns>trimmed string</returns>
+        </member>
+        <member name="M:U8Xml.RawString.TrimEnd">
+            <summary>Trim invisible charactors of end. (whitespace, '\t', '\r' and '\n')</summary>
+            <returns>trimmed string</returns>
+        </member>
+        <member name="M:U8Xml.RawString.At(System.Int32)">
+            <summary>Get or set an item with specified index.</summary>
+            <remarks>[CAUTION] This method does not check index boundary!</remarks>
+            <param name="index">index of an item</param>
+            <returns>reference to the item</returns>
+        </member>
+        <member name="M:U8Xml.RawString.SliceUnsafe(System.Int32,System.Int32)">
+            <summary>Get slice of the array</summary>
+            <remarks>[CAUTION] Boundary is not checked. Be careful !</remarks>
+            <param name="start">start index to slice</param>
+            <param name="length">length to slice from <paramref name="start"/></param>
+            <returns>sliced array</returns>
+        </member>
+        <member name="M:U8Xml.RawString.GetPinnableReference">
+            <summary>Get pinnnable reference.</summary>
+            <returns>reference to the head of the data</returns>
+        </member>
+        <member name="M:U8Xml.RawString.ToString">
+            <summary>Decode byte array as utf-8 and get <see langword="string"/></summary>
+            <returns>decoded string</returns>
+        </member>
+        <member name="M:U8Xml.RawString.GetHashCode(System.ReadOnlySpan{System.Byte})">
+            <summary>Compute hash code for the specified span using the same algorithm as <see cref="M:U8Xml.RawString.GetHashCode"/>.</summary>
+            <param name="utf8String">span to compute hash code</param>
+            <returns>hash code</returns>
+        </member>
+        <member name="M:U8Xml.RawString.GetHashCode(System.IntPtr,System.Int32)">
+            <summary>Compute hash code for the specified span using the same algorithm as <see cref="M:U8Xml.RawString.GetHashCode"/>.</summary>
+            <param name="ptr">pointer to byte span head</param>
+            <param name="length">length of byte span</param>
+            <returns>hash code</returns>
+        </member>
+        <member name="M:U8Xml.RawString.StartWith(U8Xml.RawString)">
+            <summary>Use <see cref="M:U8Xml.RawString.StartsWith(U8Xml.RawString)"/> instead. (The correct method name is Start**s**With)</summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="M:U8Xml.RawString.StartWith(System.ReadOnlySpan{System.Byte})">
+            <summary>Use <see cref="M:U8Xml.RawString.StartsWith(System.ReadOnlySpan{System.Byte})"/> instead. (The correct method name is Start**s**With)</summary>
+            <param name="other"></param>
+            <returns></returns>
+        </member>
+        <member name="T:U8Xml.Unsafes.XmlObjectUnsafe">
+            <summary>
+            [WARNING] DON'T use this if you don't know how to use. This method is hidden. <para/>
+            *** Memory leaks happen if you use it in the wrong way. ***<para/>
+            You MUST dispose after using it. It's compatible with <see cref="T:U8Xml.XmlObject"/>
+            </summary>
+        </member>
+        <member name="T:U8Xml.Unsafes.XmlParserUnsafe">
+            <summary>
+            [WARNING] DON'T use this if you don't know how to use. The class is hidden.<para/>
+            *** Memory leaks happen if you use it in the wrong way. ***<para/>
+            The object returned from the methods MUST BE disposed after you use it.<para/>
+            </summary>
+        </member>
+        <member name="M:U8Xml.Unsafes.XmlParserUnsafe.ParseUnsafe(System.ReadOnlySpan{System.Byte})">
+            <summary>
+            [WARNING] DON'T use this if you don't know how to use. The method is hidden. <para/>
+            *** Memory leaks happen if you use it in the wrong way. ***<para/>
+            The object returned from the method MUST BE disposed after you use it.<para/>
+            </summary>
+            <param name="utf8Text">utf-8 string to parse</param>
+            <returns>xml object</returns>
+        </member>
+        <member name="M:U8Xml.Unsafes.XmlParserUnsafe.ParseUnsafe(System.IO.Stream)">
+            <summary>
+            [WARNING] DON'T use this if you don't know how to use. The method is hidden. <para/>
+            *** Memory leaks happen if you use it in the wrong way. ***<para/>
+            The object returned from the method MUST BE disposed after you use it.<para/>
+            </summary>
+            <param name="stream">stream to parse</param>
+            <returns>xml object</returns>
+        </member>
+        <member name="M:U8Xml.Unsafes.XmlParserUnsafe.ParseUnsafe(System.IO.Stream,System.Int32)">
+            <summary>
+            [WARNING] DON'T use this if you don't know how to use. The method is hidden. <para/>
+            *** Memory leaks happen if you use it in the wrong way. ***<para/>
+            The object returned from the method MUST BE disposed after you use it.<para/>
+            </summary>
+            <param name="stream">stream to parse</param>
+            <param name="fileSizeHint">file size hint</param>
+            <returns>xml object</returns>
+        </member>
+        <member name="M:U8Xml.Unsafes.XmlParserUnsafe.ParseFileUnsafe(System.String)">
+            <summary>
+            [WARNING] DON'T use this if you don't know how to use. The method is hidden. <para/>
+            *** Memory leaks happen if you use it in the wrong way. ***<para/>
+            The object returned from the method MUST BE disposed after you use it.<para/>
+            </summary>
+            <param name="filePath">file path to parse</param>
+            <returns>xml object</returns>
+        </member>
+        <member name="M:U8Xml.Unsafes.XmlParserUnsafe.ParseFileUnsafe(System.String,System.Text.Encoding)">
+            <summary>
+            [WARNING] DON'T use this if you don't know how to use. The method is hidden. <para/>
+            *** Memory leaks happen if you use it in the wrong way. ***<para/>
+            The object returned from the method MUST BE disposed after you use it.<para/>
+            </summary>
+            <param name="filePath">file path to parse</param>
+            <param name="encoding">encoding of the file</param>
+            <returns>xml object</returns>
+        </member>
+        <member name="T:U8Xml.XmlAttribute">
+            <summary>Attribute of node in xml</summary>
+        </member>
+        <member name="P:U8Xml.XmlAttribute.Name">
+            <summary>Get attribute name</summary>
+        </member>
+        <member name="P:U8Xml.XmlAttribute.Value">
+            <summary>Get attribute value</summary>
+        </member>
+        <member name="M:U8Xml.XmlAttribute.TryGetFullName(U8Xml.RawString@,U8Xml.RawString@)">
+            <summary>Get full name of the attribute. Returns false if the full name could not be resolved.</summary>
+            <param name="namespaceName">
+            namespace name of the attribute<para/>
+            ex) "abcde" in the case the attribute is a:bar="123" in &lt;node xmlns:a="abcde" a:bar="123" /&gt;<para/>
+            </param>
+            <param name="name">
+            local name of the attribute<para/>
+            ex) "bar" in the case the attribute is a:bar="123" in &lt;node xmlns:a="abcde" a:bar="123" /&gt;<para/>
+            </param>
+            <returns></returns>
+        </member>
+        <member name="M:U8Xml.XmlAttribute.GetFullName">
+            <summary>Get full name of the attribute. The method throws <see cref="T:System.InvalidOperationException"/> if the full name could not resolved.</summary>
+            <remarks>
+            ex) Returns ("abcde", "bar") in the case the attribute is a:bar="123" in &lt;node xmlns:a="abcde" a:bar="123" /&gt;<para/>
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">the full name could not resolved</exception>
+            <returns>A pair of namespace name and local name</returns>
+        </member>
+        <member name="F:U8Xml.XmlAttribute_.Name">
+            <summary>Attribute name</summary>
+        </member>
+        <member name="F:U8Xml.XmlAttribute_.Value">
+            <summary>Attribute value</summary>
+        </member>
+        <member name="T:U8Xml.XmlAttributeEnumerableExtension">
+            <summary>Privides extensions of <see cref="T:U8Xml.XmlAttribute"/> enumeration.</summary>
+        </member>
+        <member name="M:U8Xml.XmlAttributeEnumerableExtension.FindOrDefault``1(``0,System.ReadOnlySpan{System.Byte})">
+            <summary>Find an attribute by name. Returns the first attribute found.</summary>
+            <param name="source">source list to enumerate</param>
+            <param name="name">attribute name to find</param>
+            <returns>a found attribute as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlAttributeEnumerableExtension.FindOrDefault``1(``0,U8Xml.RawString)">
+            <summary>Find an attribute by name. Returns the first attribute found.</summary>
+            <param name="source">source list to enumerate</param>
+            <param name="name">attribute name to find</param>
+            <returns>a found attribute as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlAttributeEnumerableExtension.FindOrDefault``1(``0,System.ReadOnlySpan{System.Char})">
+            <summary>Find an attribute by name. Returns the first attribute found.</summary>
+            <param name="source">source list to enumerate</param>
+            <param name="name">attribute name to find</param>
+            <returns>a found attribute as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlAttributeEnumerableExtension.FindOrDefault``1(``0,System.String)">
+            <summary>Find an attribute by name. Returns the first attribute found.</summary>
+            <param name="source">source list to enumerate</param>
+            <param name="name">attribute name to find</param>
+            <returns>a found attribute as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlAttributeEnumerableExtension.Find``1(``0,System.ReadOnlySpan{System.Byte})">
+            <summary>Find an attribute by name. Returns the first attribute found.</summary>
+            <param name="source">source list to enumerate</param>
+            <param name="name">attribute name to find</param>
+            <returns>a found attribute as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlAttributeEnumerableExtension.Find``1(``0,U8Xml.RawString)">
+            <summary>Find an attribute by name. Returns the first attribute found.</summary>
+            <param name="source">source list to enumerate</param>
+            <param name="name">attribute name to find</param>
+            <returns>a found attribute as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlAttributeEnumerableExtension.Find``1(``0,System.ReadOnlySpan{System.Char})">
+            <summary>Find an attribute by name. Returns the first attribute found.</summary>
+            <param name="source">source list to enumerate</param>
+            <param name="name">attribute name to find</param>
+            <returns>a found attribute as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlAttributeEnumerableExtension.Find``1(``0,System.String)">
+            <summary>Find an attribute by name. Returns the first attribute found.</summary>
+            <param name="source">source list to enumerate</param>
+            <param name="name">attribute name to find</param>
+            <returns>a found attribute as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="T:U8Xml.XmlAttributeList">
+            <summary>Provides list of <see cref="T:U8Xml.XmlAttribute"/></summary>
+        </member>
+        <member name="P:U8Xml.XmlAttributeList.Count">
+            <summary>Get count of attributes</summary>
+        </member>
+        <member name="M:U8Xml.XmlEntityTable.CheckNeedToResolve(System.ReadOnlySpan{System.Byte},System.Int32@)">
+            <summary>Check to see if the input string needs to be resolved.</summary>
+            <param name="str">string to check</param>
+            <param name="requiredBufferLength">byte length to required to resolve</param>
+            <returns>state of resolver</returns>
+        </member>
+        <member name="M:U8Xml.XmlEntityTable.CheckNeedToResolve(U8Xml.RawString,System.Int32@)">
+            <summary>Check to see if the input string needs to be resolved.</summary>
+            <param name="str">string to check</param>
+            <param name="requiredBufferLength">byte length to required to resolve</param>
+            <returns>state of resolver</returns>
+        </member>
+        <member name="M:U8Xml.XmlEntityTable.GetResolvedByteLength(System.ReadOnlySpan{System.Byte})">
+            <summary>Get byte length of a buffer which the resolver need to resolve the string.</summary>
+            <param name="str">string to check</param>
+            <returns>byte length of a buffer</returns>
+        </member>
+        <member name="M:U8Xml.XmlEntityTable.GetResolvedByteLength(U8Xml.RawString)">
+            <summary>Get byte length of a buffer which the resolver need to resolve the string.</summary>
+            <param name="str">string to check</param>
+            <returns>byte length of a buffer</returns>
+        </member>
+        <member name="M:U8Xml.XmlEntityTable.ResolveToString(System.ReadOnlySpan{System.Byte})">
+            <summary>Resolve the input utf-8 string to <see langword="string"/></summary>
+            <param name="str">utf-8 string to resolve</param>
+            <returns>resolved <see langword="string"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlEntityTable.ResolveToString(U8Xml.RawString)">
+            <summary>Resolve the input utf-8 string to <see langword="string"/></summary>
+            <param name="str">utf-8 string to resolve</param>
+            <returns>resolved <see langword="string"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlEntityTable.Resolve(System.ReadOnlySpan{System.Byte})">
+            <summary>Resolve the string.</summary>
+            <param name="str">the string to resolve</param>
+            <returns>resolved utf-8 string as byte array</returns>
+        </member>
+        <member name="M:U8Xml.XmlEntityTable.Resolve(U8Xml.RawString)">
+            <summary>Resolve the string.</summary>
+            <param name="str">the string to resolve</param>
+            <returns>resolved utf-8 string as byte array</returns>
+        </member>
+        <member name="M:U8Xml.XmlEntityTable.Resolve(System.ReadOnlySpan{System.Byte},System.Span{System.Byte})">
+            <summary>Resolve the string to the specified buffer.</summary>
+            <remarks>The buffer must be large enough to resolve.</remarks>
+            <param name="str">string to resolve</param>
+            <param name="bufferToResolve">the buffer used in resolving the string</param>
+            <returns>byte length of the resolved string</returns>
+        </member>
+        <member name="M:U8Xml.XmlEntityTable.Resolve(U8Xml.RawString,System.Span{System.Byte})">
+            <summary>Resolve the string to the specified buffer.</summary>
+            <remarks>The buffer must be large enough to resolve.</remarks>
+            <param name="str">string to resolve</param>
+            <param name="bufferToResolve">the buffer used in resolving the string</param>
+            <returns>byte length of the resolved string</returns>
+        </member>
+        <member name="T:U8Xml.XmlEntityResolverState">
+            <summary>State of <see cref="T:U8Xml.XmlEntityTable"/></summary>
+        </member>
+        <member name="F:U8Xml.XmlEntityResolverState.NoNeeded">
+            <summary>It does not need to resolve the string.</summary>
+        </member>
+        <member name="F:U8Xml.XmlEntityResolverState.NeedToResolve">
+            <summary>It needs to resolve the string.</summary>
+        </member>
+        <member name="F:U8Xml.XmlEntityResolverState.CannotResolve">
+            <summary>The string is invalid. The resolver cannot resolve it.</summary>
+        </member>
+        <member name="T:U8Xml.XmlNode">
+            <summary>A xml node type.</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.IsNull">
+            <summary>Get whether the node is null. (Valid nodes always return false.)</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.Name">
+            <summary>Get name of the node.</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.InnerText">
+            <summary>Get an inner text of the node.</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.HasAttribute">
+            <summary>Get whether the node has any attribute.</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.Attributes">
+            <summary>Get attributes of the node.</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.HasChildren">
+            <summary>Get whether the node has any children.</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.Children">
+            <summary>Get children of the node.</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.Descendants">
+            <summary>Get descendant nodes in the way of depth-first search.</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.Depth">
+            <summary>Get depth of the node in xml. (The root node is 0.)</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.IsRoot">
+            <summary>Get whether the node is root.</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.Parent">
+            <summary>Get a parent node of the node.</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.FirstChild">
+            <summary>Get the first child node.</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.LastChild">
+            <summary>Get the last child of the node.</summary>
+        </member>
+        <member name="P:U8Xml.XmlNode.NextSibling">
+            <summary>Get the next sibling of the node.</summary>
+        </member>
+        <member name="M:U8Xml.XmlNode.AsRawString">
+            <summary>Get the string that this node represents as <see cref="T:U8Xml.RawString"/>.</summary>
+            <remarks>The indent of the node is ignored at the head.</remarks>
+            <returns><see cref="T:U8Xml.RawString"/> this node represents</returns>
+        </member>
+        <member name="M:U8Xml.XmlNode.FindChildOrDefault(U8Xml.RawString)">
+            <summary>Find a child by name. Returns the first child found.</summary>
+            <param name="name">child name to find</param>
+            <returns>a found child node as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlNode.FindChildOrDefault(System.ReadOnlySpan{System.Byte})">
+            <summary>Find a child by name. Returns the first child found.</summary>
+            <param name="name">child name to find</param>
+            <returns>a found child node as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlNode.FindChildOrDefault(System.String)">
+            <summary>Find a child by name. Returns the first child found.</summary>
+            <param name="name">child name to find</param>
+            <returns>a found child node as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlNode.FindChildOrDefault(System.ReadOnlySpan{System.Char})">
+            <summary>Find a child by name. Returns the first child found.</summary>
+            <param name="name">child name to find</param>
+            <returns>a found child node as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlNode.FindChild(U8Xml.RawString)">
+            <summary>Find a child by name. Returns the first child found, or throws <see cref="T:System.InvalidOperationException"/> if not found.</summary>
+            <param name="name">child name to find</param>
+            <returns>a found child node</returns>
+        </member>
+        <member name="M:U8Xml.XmlNode.FindChild(System.ReadOnlySpan{System.Byte})">
+            <summary>Find a child by name. Returns the first child found, or throws <see cref="T:System.InvalidOperationException"/> if not found.</summary>
+            <param name="name">child name to find</param>
+            <returns>a found child node</returns>
+        </member>
+        <member name="M:U8Xml.XmlNode.FindChild(System.String)">
+            <summary>Find a child by name. Returns the first child found, or throws <see cref="T:System.InvalidOperationException"/> if not found.</summary>
+            <param name="name">child name to find</param>
+            <returns>a found child node</returns>
+        </member>
+        <member name="M:U8Xml.XmlNode.FindChild(System.ReadOnlySpan{System.Char})">
+            <summary>Find a child by name. Returns the first child found, or throws <see cref="T:System.InvalidOperationException"/> if not found.</summary>
+            <param name="name">child name to find</param>
+            <returns>a found child node</returns>
+        </member>
+        <member name="M:U8Xml.XmlNode.TryGetFullName(U8Xml.RawString@,U8Xml.RawString@)">
+            <summary>Get full name of the node. Returns false if the full name could not be resolved.</summary>
+            <param name="namespaceName">
+            namespace name of the node<para/>
+            ex) "abcde" in the case the node is &lt;a:foo xmlns:a="abcde" /&gt;<para/>
+            </param>
+            <param name="name">
+            local name of the node<para/>
+            ex) "foo" in the case the node is &lt;a:foo xmlns:a="abcde" /&gt;<para/>
+            </param>
+            <returns>Whether the full name of the node could be resolved</returns>
+        </member>
+        <member name="M:U8Xml.XmlNode.GetFullName">
+            <summary>Get full name of the node. The method throws <see cref="T:System.InvalidOperationException"/> if the full name could not resolved.</summary>
+            <remarks>
+            ex) Returns ("abcde", "foo") in the case the node is &lt;a:foo xmlns:a="abcde" /&gt;<para/>
+            </remarks>
+            <exception cref="T:System.InvalidOperationException">the full name could not resolved</exception>
+            <returns>A pair of namespace name and local name</returns>
+        </member>
+        <member name="M:U8Xml.XmlNode.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:U8Xml.XmlNode.Equals(U8Xml.XmlNode)">
+            <summary>Returns whether the value is same as the specified instance.</summary>
+            <param name="other">an instance to check</param>
+            <returns>equal or not</returns>s
+        </member>
+        <member name="M:U8Xml.XmlNode.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:U8Xml.XmlNode.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="M:U8Xml.XmlNode.op_Equality(U8Xml.XmlNode,U8Xml.XmlNode)">
+            <summary>Returns true if both <see cref="T:U8Xml.XmlNode"/>s are same objects.</summary>
+            <param name="left">left operand</param>
+            <param name="right">right operand</param>
+            <returns>true if both <see cref="T:U8Xml.XmlNode"/>s are same objects</returns>
+        </member>
+        <member name="M:U8Xml.XmlNode.op_Inequality(U8Xml.XmlNode,U8Xml.XmlNode)">
+            <summary>Returns true if both <see cref="T:U8Xml.XmlNode"/>s are not same objects.</summary>
+            <param name="left">left operand</param>
+            <param name="right">right operand</param>
+            <returns>true if both <see cref="T:U8Xml.XmlNode"/>s are not same objects</returns>
+        </member>
+        <member name="T:U8Xml.XmlNodeEnumerableExtension">
+            <summary>Privides extensions of <see cref="T:U8Xml.XmlNode"/> enumeration.</summary>
+        </member>
+        <member name="M:U8Xml.XmlNodeEnumerableExtension.FindOrDefault``1(``0,System.ReadOnlySpan{System.Byte})">
+            <summary>Find a node by name. Returns the first node found.</summary>
+            <param name="source">source node list to enumerate</param>
+            <param name="name">node name to find</param>
+            <returns>a found node as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlNodeEnumerableExtension.FindOrDefault``1(``0,U8Xml.RawString)">
+            <summary>Find a node by name. Returns the first node found.</summary>
+            <param name="source">source node list to enumerate</param>
+            <param name="name">node name to find</param>
+            <returns>a found node as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlNodeEnumerableExtension.FindOrDefault``1(``0,System.ReadOnlySpan{System.Char})">
+            <summary>Find a node by name. Returns the first node found.</summary>
+            <param name="source">source node list to enumerate</param>
+            <param name="name">node name to find</param>
+            <returns>a found node as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlNodeEnumerableExtension.FindOrDefault``1(``0,System.String)">
+            <summary>Find a node by name. Returns the first node found.</summary>
+            <param name="source">source node list to enumerate</param>
+            <param name="name">node name to find</param>
+            <returns>a found node as <see cref="T:U8Xml.Option`1"/></returns>
+        </member>
+        <member name="M:U8Xml.XmlNodeEnumerableExtension.Find``1(``0,System.ReadOnlySpan{System.Byte})">
+            <summary>Find a node by name. Returns the first node found, or throws <see cref="T:System.InvalidOperationException"/> if not found.</summary>
+            <param name="source">source node list to enumerate</param>
+            <param name="name">node name to find</param>
+            <returns>a found node</returns>
+        </member>
+        <member name="M:U8Xml.XmlNodeEnumerableExtension.Find``1(``0,U8Xml.RawString)">
+            <summary>Find a node by name. Returns the first node found, or throws <see cref="T:System.InvalidOperationException"/> if not found.</summary>
+            <param name="source">source node list to enumerate</param>
+            <param name="name">node name to find</param>
+            <returns>a found node</returns>
+        </member>
+        <member name="M:U8Xml.XmlNodeEnumerableExtension.Find``1(``0,System.ReadOnlySpan{System.Char})">
+            <summary>Find a node by name. Returns the first node found, or throws <see cref="T:System.InvalidOperationException"/> if not found.</summary>
+            <param name="source">source node list to enumerate</param>
+            <param name="name">node name to find</param>
+            <returns>a found node</returns>
+        </member>
+        <member name="M:U8Xml.XmlNodeEnumerableExtension.Find``1(``0,System.String)">
+            <summary>Find a node by name. Returns the first node found, or throws <see cref="T:System.InvalidOperationException"/> if not found.</summary>
+            <param name="source">source node list to enumerate</param>
+            <param name="name">node name to find</param>
+            <returns>a found node</returns>
+        </member>
+        <member name="T:U8Xml.XmlObject">
+            <summary>Xml structual object parsed from xml file.</summary>
+            <remarks>[CAUTION] DO NOT call any methods or properties except <see cref="P:U8Xml.XmlObject.IsDisposed"/> after calling <see cref="M:U8Xml.XmlObject.Dispose"/>.</remarks>
+        </member>
+        <member name="P:U8Xml.XmlObject.IsDisposed">
+            <summary>Get whether the xml object is disposed or not.</summary>
+            <remarks>DO NOT call any other methods or properties if the property is false.</remarks>
+        </member>
+        <member name="P:U8Xml.XmlObject.Root">
+            <summary>Get th root node</summary>
+        </member>
+        <member name="P:U8Xml.XmlObject.Declaration">
+            <summary>Get xml declaration</summary>
+        </member>
+        <member name="P:U8Xml.XmlObject.DocumentType">
+            <summary>Get xml document type declaration</summary>
+        </member>
+        <member name="P:U8Xml.XmlObject.EntityTable">
+            <summary>Get xml entity table</summary>
+        </member>
+        <member name="M:U8Xml.XmlObject.Dispose">
+            <summary>Dispose the xml object and release all memoriess it has.</summary>
+        </member>
+        <member name="M:U8Xml.XmlObject.AsRawString">
+            <summary>Get whole xml string as utf-8 bytes data.</summary>
+            <returns>whole xml string</returns>
+        </member>
+        <member name="T:U8Xml.XmlParser">
+            <summary>Parser for xml file</summary>
+        </member>
+        <member name="P:U8Xml.XmlParser.Utf8BOM">
+            <summary>Byte Order Mark of utf-8</summary>
+        </member>
+        <member name="P:U8Xml.XmlParser.Utf16LEBOM">
+            <summary>Byte Order Mark of utf-16 little endian</summary>
+        </member>
+        <member name="M:U8Xml.XmlParser.Parse(System.String)">
+            <summary>Parse xml of <see langword="string"/></summary>
+            <param name="text">text of xml</param>
+            <returns>xml object</returns>
+        </member>
+        <member name="M:U8Xml.XmlParser.Parse(System.ReadOnlySpan{System.Char})">
+            <summary>Parse xml of <see cref="T:System.ReadOnlySpan`1"/> of type <see cref="T:System.Char"/> </summary>
+            <param name="text">text of xml</param>
+            <returns>xml object</returns>
+        </member>
+        <member name="M:U8Xml.XmlParser.Parse(System.ReadOnlySpan{System.Byte})">
+            <summary>Parse xml encoded as UTF8 (both with and without BOM).</summary>
+            <param name="utf8Text">utf-8 byte span data</param>
+            <returns>xml object</returns>
+        </member>
+        <member name="M:U8Xml.XmlParser.Parse(System.IO.Stream)">
+            <summary>Parse xml file encoded as UTF8 (both with and without BOM).</summary>
+            <param name="stream">stream to read</param>
+            <returns>xml object</returns>
+        </member>
+        <member name="M:U8Xml.XmlParser.Parse(System.IO.Stream,System.Int32)">
+            <summary>Parse xml file encoded as UTF8 (both with and without BOM).</summary>
+            <param name="stream">stream to read</param>
+            <param name="fileSizeHint">file size hint which is used for optimizing memory</param>
+            <returns>xml object</returns>
+        </member>
+        <member name="M:U8Xml.XmlParser.Parse(System.IO.Stream,System.Text.Encoding)">
+            <summary>Parse xml file encoded as specified encoding.</summary>
+            <param name="stream">stream to read</param>
+            <param name="encoding">encoding of <paramref name="stream"/></param>
+            <returns>xml object</returns>
+        </member>
+        <member name="M:U8Xml.XmlParser.Parse(System.IO.Stream,System.Text.Encoding,System.Int32)">
+            <summary>Parse xml file encoded as specified encoding.</summary>
+            <param name="stream">stream to read</param>
+            <param name="encoding">encoding of <paramref name="stream"/></param>
+            <param name="fileSizeHint">file size hint</param>
+            <returns>xml object</returns>
+        </member>
+        <member name="M:U8Xml.XmlParser.ParseFile(System.String)">
+            <summary>Parse xml file encoded as UTF8 (both with and without BOM).</summary>
+            <param name="filePath">file path to parse</param>
+            <returns>xml object</returns>
+        </member>
+        <member name="M:U8Xml.XmlParser.ParseFile(System.String,System.Text.Encoding)">
+            <summary>Parse xml file encoded as specified encoding.</summary>
+            <param name="filePath">file path to parse</param>
+            <param name="encoding">encoding of the file</param>
+            <returns>xml object</returns>
+        </member>
+    </members>
+</doc>
