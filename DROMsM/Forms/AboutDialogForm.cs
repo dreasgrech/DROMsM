@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using Frontend;
+using Squirrel;
 
 namespace DROMsM
 {
@@ -26,7 +27,37 @@ namespace DROMsM
 
         private void AboutDialogForm_Load(object sender, EventArgs e)
         {
+            SquirrelExecute();
+
             CheckForUpdates();
+        }
+
+        async void SquirrelExecute()
+        {
+            await SquirrelUpdateApp();
+        }
+
+        static async Task SquirrelUpdateApp()
+        {
+            using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/dreasgrech/DROMsM", "DROMsM", null, null, true))
+            {
+                // await mgr.Result.UpdateApp();
+                var updateInfo = await mgr.CheckForUpdate();
+                var v = updateInfo.CurrentlyInstalledVersion;
+                Logger.Log($"Currently Installed Version: {updateInfo.CurrentlyInstalledVersion}, Releases to apply: {updateInfo.ReleasesToApply}, FutureReleaseEntry: {updateInfo.FutureReleaseEntry}");
+
+                ReleaseEntry releaseEntry = await mgr.UpdateApp();
+                Logger.Log($"" +
+                           $"BaseUrl: {releaseEntry.BaseUrl}, " +
+                           $"EntryAsString: {releaseEntry.EntryAsString}, " +
+                           $"Filename: {releaseEntry.Filename}, " +
+                           $"Filesize: {releaseEntry.Filesize}, " +
+                           $"IsDelta: {releaseEntry.IsDelta}, " +
+                           $"PackageName: {releaseEntry.PackageName}, " +
+                           $"Query: {releaseEntry.Query}, " +
+                           $"Version: {releaseEntry.Version}, " +
+                           $"");
+            }
         }
 
         private void CheckForUpdates()
