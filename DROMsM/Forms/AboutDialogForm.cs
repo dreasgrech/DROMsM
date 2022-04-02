@@ -43,20 +43,26 @@ namespace DROMsM
             {
                 // await mgr.Result.UpdateApp();
                 var updateInfo = await mgr.CheckForUpdate();
-                var v = updateInfo.CurrentlyInstalledVersion;
                 Logger.Log($"Currently Installed Version: {updateInfo.CurrentlyInstalledVersion}, Releases to apply: {updateInfo.ReleasesToApply}, FutureReleaseEntry: {updateInfo.FutureReleaseEntry}");
 
                 ReleaseEntry releaseEntry = await mgr.UpdateApp();
-                Logger.Log($"" +
-                           $"BaseUrl: {releaseEntry.BaseUrl}, " +
-                           $"EntryAsString: {releaseEntry.EntryAsString}, " +
-                           $"Filename: {releaseEntry.Filename}, " +
-                           $"Filesize: {releaseEntry.Filesize}, " +
-                           $"IsDelta: {releaseEntry.IsDelta}, " +
-                           $"PackageName: {releaseEntry.PackageName}, " +
-                           $"Query: {releaseEntry.Query}, " +
-                           $"Version: {releaseEntry.Version}, " +
-                           $"");
+                if (releaseEntry != null)
+                {
+                    Logger.Log($"" +
+                               $"BaseUrl: {releaseEntry.BaseUrl}, " +
+                               $"EntryAsString: {releaseEntry.EntryAsString}, " +
+                               $"Filename: {releaseEntry.Filename}, " +
+                               $"Filesize: {releaseEntry.Filesize}, " +
+                               $"IsDelta: {releaseEntry.IsDelta}, " +
+                               $"PackageName: {releaseEntry.PackageName}, " +
+                               $"Query: {releaseEntry.Query}, " +
+                               $"Version: {releaseEntry.Version}, " +
+                               $"");
+                }
+                else
+                {
+                    Logger.Log($"releaseEntry is null");
+                }
             }
         }
 
