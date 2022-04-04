@@ -21,9 +21,9 @@ namespace DROMsM
 #if CLICKONCE
         private UpdateCheckInfo updateInfo;
         private ApplicationDeployment applicationDeployment;
+        private string updateCheckErrorMessage;
 #endif
         private AboutDialogUpdateStatus updateStatus;
-        private string updateCheckErrorMessage;
 
         public AboutDialogForm()
         {
@@ -60,11 +60,13 @@ namespace DROMsM
         }
 #endif
 
-        // private UpdateManager currentUpdateManager;
-
-        async void CheckForUpdates()
-            // void CheckForUpdates()
+        private async void CheckForUpdates()
         {
+            if (updateStatus == AboutDialogUpdateStatus.CheckingForUpdates)
+            {
+                return;
+            }
+
             SetUpdateStatus(AboutDialogUpdateStatus.CheckingForUpdates);
 
             using (var updateManager = await UpdateManager.GitHubUpdateManager("https://github.com/dreasgrech/DROMsM", "DROMsM", null, null, true))
@@ -82,99 +84,27 @@ namespace DROMsM
                 var wantsToUpdate = MessageBoxOperations.ShowConfirmation("An update is available. Would you like to update DROMsM now?", "Update Available");
                 if (wantsToUpdate)
                 {
+                    SetUpdateStatus(AboutDialogUpdateStatus.InstallingUpdate);
                     // Update the app
                     var releaseEntry = await updateManager.UpdateApp();
+                    //Logger.Log($"BaseUrl: {releaseEntry.BaseUrl}, " +
+                    //           $"EntryAsString: {releaseEntry.EntryAsString}, " +
+                    //           $"Filename: {releaseEntry.Filename}, " +
+                    //           $"Filesize: {releaseEntry.Filesize}, " +
+                    //           $"IsDelta: {releaseEntry.IsDelta}, " +
+                    //           $"PackageName: {releaseEntry.PackageName}, " +
+                    //           $"Query: {releaseEntry.Query}, " +
+                    //           $"Version: {releaseEntry.Version}, " +
+                    //           $"");
+
+                    SetUpdateStatus(AboutDialogUpdateStatus.UpdateInstalledWaitingForRestart);
 
                     MessageBoxOperations.ShowInformation("The application has been upgraded, and will now restart.", "DROMsM has been updated");
                     Application.Restart();
                     return;
                 }
             }
-
-            /*
-            // This will give us a Task that fetches the UpdateManager
-            var updateManagerTask = UpdateManager.GitHubUpdateManager("https://github.com/dreasgrech/DROMsM", "DROMsM", null, null, true);
-            updateManagerTask.ContinueWith(updateManagerTaskContinuationAction =>
-            {
-                // currentUpdateManager = continuationAction.Result;
-                var updateManager = updateManagerTaskContinuationAction.Result;
-
-                var checkForUpdateTask = updateManager.CheckForUpdate(false);
-                checkForUpdateTask.ContinueWith(checkForUpdateTaskContinuationTask =>
-                {
-                    var updateInfo = checkForUpdateTaskContinuationTask.Result;
-                    bool updateAvailable = updateInfo.ReleasesToApply != null && updateInfo.ReleasesToApply.Count > 0;
-                    updateStatus = updateAvailable ? AboutDialogUpdateStatus.UpdateAvailable : AboutDialogUpdateStatus.NoUpdateAvailable;
-
-                    SetUpdateStatus(updateStatus);
-                    if (updateStatus == AboutDialogUpdateStatus.UpdateAvailable)
-                    {
-                        // ReleaseEntry releaseEntry = currentUpdateManager.UpdateApp();
-                        MessageBoxOperations.ShowConfirmation("Update available", "Update available");
-                    }
-
-                    // Dispose the UpdateManager
-                    updateManager.Dispose();
-
-                }, TaskScheduler.FromCurrentSynchronizationContext()).Start();
-            });
-            */
-
-            /*
-            var task = Task.Run(async () =>
-            {
-                currentUpdateManager = await UpdateManager.GitHubUpdateManager("https://github.com/dreasgrech/DROMsM", "DROMsM", null, null, true);
-
-                var updateInfo = await currentUpdateManager.CheckForUpdate();
-                bool updateAvailable = updateInfo.ReleasesToApply != null && updateInfo.ReleasesToApply.Count > 0;
-                updateStatus = updateAvailable ? AboutDialogUpdateStatus.UpdateAvailable : AboutDialogUpdateStatus.NoUpdateAvailable;
-            });
-
-            Task uiTask = task.ContinueWith(OnAfterFinishedCheckingForUpdates, TaskScheduler.FromCurrentSynchronizationContext());
-            */
-
-            // await SquirrelUpdateApp();
         }
-
-        //private void OnAfterFinishedCheckingForUpdates(Task task)
-        //{
-        //    SetUpdateStatus(updateStatus);
-
-        //    if (updateStatus == AboutDialogUpdateStatus.UpdateAvailable)
-        //    {
-        //        ReleaseEntry releaseEntry = currentUpdateManager.UpdateApp();
-        //    }
-        //}
-        
-        //static async Task SquirrelUpdateApp()
-        //{
-        //    using (var mgr = await UpdateManager.GitHubUpdateManager("https://github.com/dreasgrech/DROMsM", "DROMsM", null, null, true))
-        //    {
-        //        // await mgr.Result.UpdateApp();
-        //        var updateInfo = await mgr.CheckForUpdate();
-        //        Logger.Log($"Currently Installed Version: {updateInfo.CurrentlyInstalledVersion}, Releases to apply: {updateInfo.ReleasesToApply}, FutureReleaseEntry: {updateInfo.FutureReleaseEntry}");
-
-        //        ReleaseEntry releaseEntry = await mgr.UpdateApp();
-        //        if (releaseEntry != null)
-        //        {
-        //            Logger.Log($"" +
-        //                       $"BaseUrl: {releaseEntry.BaseUrl}, " +
-        //                       $"EntryAsString: {releaseEntry.EntryAsString}, " +
-        //                       $"Filename: {releaseEntry.Filename}, " +
-        //                       $"Filesize: {releaseEntry.Filesize}, " +
-        //                       $"IsDelta: {releaseEntry.IsDelta}, " +
-        //                       $"PackageName: {releaseEntry.PackageName}, " +
-        //                       $"Query: {releaseEntry.Query}, " +
-        //                       $"Version: {releaseEntry.Version}, " +
-        //                       $"");
-        //        }
-        //        else
-        //        {
-        //            Logger.Log($"releaseEntry is null");
-        //        }
-        //    }
-        //}
-
 
 #if CLICKONCE
         private AboutDialogUpdateStatus IsUpdateAvailable_ClickOnce(out UpdateCheckInfo updateCheckInfo, out ApplicationDeployment ad, out string errorMessage)
@@ -304,6 +234,16 @@ namespace DROMsM
                     color = Color.Red; 
                     text = "Error checking for updates";
                 } break;
+                case AboutDialogUpdateStatus.InstallingUpdate:
+                {
+                    color = Color.Brown; 
+                    text = "Installing update...";
+                } break;
+                case AboutDialogUpdateStatus.UpdateInstalledWaitingForRestart:
+                {
+                    color = Color.DarkGreen; 
+                    text = "Update Installed!";
+                } break;
             }
 
             updatesLabel.LinkColor = color;
@@ -313,23 +253,6 @@ namespace DROMsM
         private void updatesLabel_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
         {
             CheckForUpdates();
-
-            /*
-            switch (updateStatus)
-            {
-                case AboutDialogUpdateStatus.ErrorCheckingForUpdates:
-                case AboutDialogUpdateStatus.NoUpdateAvailable:
-                {
-                    CheckForUpdates();
-                }
-                    break;
-                case AboutDialogUpdateStatus.UpdateAvailable:
-                {
-                        DownloadUpdate();
-                }
-                    break;
-            }
-            */
         }
 
         private void AboutDialogForm_KeyDown(object sender, KeyEventArgs e)
@@ -352,6 +275,8 @@ namespace DROMsM
         CheckingForUpdates,
         UpdateAvailable,
         NoUpdateAvailable,
-        ErrorCheckingForUpdates
+        ErrorCheckingForUpdates,
+        InstallingUpdate,
+        UpdateInstalledWaitingForRestart
     }
 }
