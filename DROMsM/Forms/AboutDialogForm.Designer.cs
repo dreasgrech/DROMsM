@@ -308,6 +308,7 @@
             this.KeyPreview = true;
             this.Name = "AboutDialogForm";
             this.Text = "About DROMsM";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AboutDialogForm_FormClosing);
             this.Load += new System.EventHandler(this.AboutDialogForm_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AboutDialogForm_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
