@@ -60,39 +60,35 @@ namespace DROMsM
         }
 #endif
 
-        private UpdateManager currentUpdateManager;
+        // private UpdateManager currentUpdateManager;
 
         async void CheckForUpdates()
             // void CheckForUpdates()
         {
             SetUpdateStatus(AboutDialogUpdateStatus.CheckingForUpdates);
 
-            var updateManager = await UpdateManager.GitHubUpdateManager("https://github.com/dreasgrech/DROMsM", "DROMsM", null, null, true);
-            var updateInfo = await updateManager.CheckForUpdate(false);
-            bool updateAvailable = updateInfo.ReleasesToApply != null && updateInfo.ReleasesToApply.Count > 0;
-            updateStatus = updateAvailable ? AboutDialogUpdateStatus.UpdateAvailable : AboutDialogUpdateStatus.NoUpdateAvailable;
-
-            SetUpdateStatus(updateStatus);
-            if (updateStatus != AboutDialogUpdateStatus.UpdateAvailable)
+            using (var updateManager = await UpdateManager.GitHubUpdateManager("https://github.com/dreasgrech/DROMsM", "DROMsM", null, null, true))
             {
-                // Dispose the UpdateManager
-                updateManager.Dispose();
+                var updateInfo = await updateManager.CheckForUpdate(false);
+                bool updateAvailable = updateInfo.ReleasesToApply != null && updateInfo.ReleasesToApply.Count > 0;
+                updateStatus = updateAvailable ? AboutDialogUpdateStatus.UpdateAvailable : AboutDialogUpdateStatus.NoUpdateAvailable;
 
-                return;
-            }
+                SetUpdateStatus(updateStatus);
+                if (updateStatus != AboutDialogUpdateStatus.UpdateAvailable)
+                {
+                    return;
+                }
 
-            var wantsToUpdate = MessageBoxOperations.ShowConfirmation("An update is available. Would you like to update DROMsM now?", "Update Available");
-            if (wantsToUpdate)
-            {
-                // Update the app
-                var releaseEntry = await currentUpdateManager.UpdateApp();
+                var wantsToUpdate = MessageBoxOperations.ShowConfirmation("An update is available. Would you like to update DROMsM now?", "Update Available");
+                if (wantsToUpdate)
+                {
+                    // Update the app
+                    var releaseEntry = await updateManager.UpdateApp();
 
-                // Dispose the UpdateManager since we're done with it now
-                updateManager.Dispose();
-
-                MessageBoxOperations.ShowInformation("The application has been upgraded, and will now restart.", "DROMsM has been updated");
-                Application.Restart();
-                return;
+                    MessageBoxOperations.ShowInformation("The application has been upgraded, and will now restart.", "DROMsM has been updated");
+                    Application.Restart();
+                    return;
+                }
             }
 
             /*
