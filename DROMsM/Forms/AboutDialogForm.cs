@@ -69,6 +69,8 @@ namespace DROMsM
 
             SetUpdateStatus(AboutDialogUpdateStatus.CheckingForUpdates);
 
+            bool updateInstalled = false;
+
             using (var updateManager = await UpdateManager.GitHubUpdateManager("https://github.com/dreasgrech/DROMsM", "DROMsM", null, null, true))
             {
                 var updateInfo = await updateManager.CheckForUpdate(false);
@@ -81,7 +83,11 @@ namespace DROMsM
                     return;
                 }
 
-                var wantsToUpdate = MessageBoxOperations.ShowConfirmation("An update is available. Would you like to update DROMsM now?", "Update Available");
+                // string msg = "An update is available. Would you like to update DROMsM now?";
+                string confirmationMessage = GetUpdateConfirmationMessage(updateInfo);
+
+                // var wantsToUpdate = MessageBoxOperations.ShowConfirmation("An update is available. Would you like to update DROMsM now?", "Update Available");
+                var wantsToUpdate = MessageBoxOperations.ShowConfirmation(confirmationMessage, "Update Available");
                 if (wantsToUpdate)
                 {
                     SetUpdateStatus(AboutDialogUpdateStatus.InstallingUpdate);
@@ -97,13 +103,41 @@ namespace DROMsM
                     //           $"Version: {releaseEntry.Version}, " +
                     //           $"");
 
-                    SetUpdateStatus(AboutDialogUpdateStatus.UpdateInstalledWaitingForRestart);
+                    ProjectSettingsManager.BackupSettings();
 
-                    MessageBoxOperations.ShowInformation("The application has been upgraded, and will now restart.", "DROMsM has been updated");
-                    Application.Restart();
-                    return;
+                    updateInstalled = true;
                 }
             }
+
+            if (updateInstalled)
+            {
+                SetUpdateStatus(AboutDialogUpdateStatus.UpdateInstalledWaitingForRestart);
+
+                MessageBoxOperations.ShowInformation("DROMsM has been updated and will now restart.", "Update Complete");
+                // Application.Restart();
+                UpdateManager.RestartApp();
+                return;
+            }
+        }
+
+        private static string GetUpdateConfirmationMessage(UpdateInfo updateInfo)
+        {
+            string confirmationMessage = "An update is available.";
+            var currentlyInstalledVersion = updateInfo.CurrentlyInstalledVersion;
+            if (currentlyInstalledVersion != null)
+            {
+                confirmationMessage += "\r\nCurrent version: " + currentlyInstalledVersion.Version;
+            }
+
+            var futureReleaseEntry = updateInfo.FutureReleaseEntry;
+            if (futureReleaseEntry != null)
+            {
+                confirmationMessage += "\r\nNew version: " + futureReleaseEntry.Version;
+            }
+
+            confirmationMessage += "\r\n\r\nWould you like to update DROMsM now?";
+
+            return confirmationMessage;
         }
 
 #if CLICKONCE

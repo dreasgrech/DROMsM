@@ -1,5 +1,10 @@
-﻿using DROMsM.ProgramSettings;
+﻿using System;
+using System.Configuration;
+using System.IO;
+using System.Reflection;
+using DROMsM.ProgramSettings;
 using DROMsM.Properties;
+using Frontend;
 using Newtonsoft.Json;
 
 namespace DROMsM
@@ -11,7 +16,8 @@ namespace DROMsM
 
         static ProjectSettingsManager()
         {
-            UpgradeSettingsVersion();
+            // UpgradeSettingsVersion();
+            RestoreSettings();
 
             var mainSettingsJson = Settings.Default.ProgramSettings_Main;
             MainSettings = JsonConvert.DeserializeObject<ProgramSettings_Main>(mainSettingsJson) ?? new ProgramSettings_Main();
@@ -46,6 +52,63 @@ namespace DROMsM
                 Settings.Default.Upgrade();
                 Settings.Default.UpdateSettingsVersion = false;
                 Settings.Default.Save();
+            }
+        }
+
+        /// <summary>
+        /// Make a backup of our settings.
+        /// Used to persist settings across updates.
+        /// </summary>
+        public static void BackupSettings()
+        {
+            string settingsFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
+            string destination = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\..\\last.config";
+            File.Copy(settingsFile, destination, true);
+        }
+
+        /// <summary>
+        /// Restore our settings backup if any.
+        /// Used to persist settings across updates.
+        /// </summary>
+        private static void RestoreSettings()
+        {
+            //Restore settings after application update            
+            string destFile = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.PerUserRoamingAndLocal).FilePath;
+            string sourceFile = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location) + "\\..\\last.config";
+            // Check if we have settings that we need to restore
+            if (!File.Exists(sourceFile))
+            {
+                // Nothing we need to do
+                return;
+            }
+            // Create directory as needed
+            try
+            {
+                Directory.CreateDirectory(Path.GetDirectoryName(destFile));
+            }
+            catch (Exception ex)
+            {
+                MessageBoxOperations.ShowException(ex);
+            }
+
+            // Copy our backup file in place 
+            try
+            {
+                File.Copy(sourceFile, destFile, true);
+            }
+            catch (Exception ex)
+            {
+                MessageBoxOperations.ShowException(ex);
+            }
+
+            // Delete backup file
+            try
+            {
+                File.Delete(sourceFile);
+            }
+            catch (Exception ex)
+            {
+                MessageBoxOperations.ShowException(ex);
             }
         }
     }

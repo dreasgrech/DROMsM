@@ -160,7 +160,9 @@ namespace DROMsM.Forms
             }
             catch (Exception ex)
             {
-                Logger.LogException(ex);
+                MessageBoxOperations.ShowException(ex);
+
+                QuitApplication();
             }
         }
 
