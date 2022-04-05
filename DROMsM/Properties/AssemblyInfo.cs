@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
 [assembly: AssemblyTitle("DROMsM")]
-[assembly: AssemblyDescription("DROMsM is a Windows application written in C# WinForms that exposes several helpful operations that assist you in maintaining your romset collections.")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Dreas")]
 [assembly: AssemblyProduct("DROMsM")]
@@ -35,5 +35,5 @@ using System.Runtime.InteropServices;
 // [assembly: AssemblyVersion("1.0.0.*")]
 //[assembly: AssemblyVersion("1.0.0.2")]
 //[assembly: AssemblyFileVersion("1.0.0.2")]
-[assembly: AssemblyVersion("1.0.8")]
-[assembly: AssemblyFileVersion("1.0.8")]
+[assembly: AssemblyVersion("1.0.9")]
+[assembly: AssemblyFileVersion("1.0.9")]
