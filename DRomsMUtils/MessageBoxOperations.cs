@@ -1,4 +1,5 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Windows.Forms;
 
 namespace Frontend
 {
@@ -18,6 +19,18 @@ namespace Frontend
         public static void ShowInformation(string text, string caption)
         {
             MessageBox.Show(text, caption, MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        public static void ShowException(Exception exception, string caption = null)
+        {
+            var text = $"{exception.Message}\r\n{exception.StackTrace}";
+            var innerException = exception.InnerException;
+            if (innerException != null)
+            {
+                text += $"\r\n\r\n{innerException.Message}\r\n{innerException.StackTrace}";
+            }
+
+            ShowError(text, caption ?? "An exception has been encountered while running the program");
         }
     }
 }
