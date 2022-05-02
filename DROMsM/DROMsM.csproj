@@ -171,7 +171,7 @@
     <Compile Include="ApplicationVersion.cs" />
     <Compile Include="CHDMANHandler.cs" />
     <Compile Include="CUEFileHandler.cs" />
-    <Compile Include="DATFileHandler.cs" />
+    <Compile Include="U8XMLDATFileHandler.cs" />
     <Compile Include="DATFileMachineVirtualListDataSource.cs" />
     <Compile Include="Forms\DATFileViewerFindForm.cs">
       <SubType>Form</SubType>
@@ -196,6 +196,7 @@
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
     <Compile Include="FormFileOperations.cs" />
+    <Compile Include="IDATFileHandler.cs" />
     <Compile Include="MainManager.cs" />
     <Compile Include="Forms\MainPreferencesForm.cs">
       <SubType>Form</SubType>
@@ -215,6 +216,7 @@
     <Compile Include="RomDirectory.cs" />
     <Compile Include="StopwatchManager.cs" />
     <Compile Include="TextFileReader.cs" />
+    <Compile Include="XmlReaderDATFileHandler.cs" />
     <EmbeddedResource Include="Forms\AboutDialogForm.resx">
       <DependentUpon>AboutDialogForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -311,5 +313,12 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Use NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('..\packages\squirrel.windows.2.0.1\build\squirrel.windows.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\squirrel.windows.2.0.1\build\squirrel.windows.props'))" />
+  </Target>
+  <Target Name="AfterBuild" Condition=" '$(Configuration)' == 'Release'">
+    <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
+      <Output TaskParameter="Assemblies" ItemName="myAssemblyInfo" />
+    </GetAssemblyIdentity>
+    <Exec Command="nuget pack DROMsM.nuspec -Version %(myAssemblyInfo.Version) -Properties Configuration=Release -OutputDirectory $(OutDir) -BasePath $(OutDir)" />
+    <Exec Command="squirrel --releasify $(OutDir)DROMsM.$([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)).nupkg" />
   </Target>
 </Project>

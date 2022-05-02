@@ -12,7 +12,7 @@ using U8Xml;
 
 namespace DROMsM
 {
-    public class DATFileHandler
+    public class U8XMLDATFileHandler : IDATFileHandler
     {
         public DATFile ParseDATFile(string filePath)
         {

@@ -55,7 +55,8 @@ namespace DROMsM.Forms
 
         public void ProcessDATFile(string datFilePath)
         {
-            var datFileHandler = new DATFileHandler();
+            // var datFileHandler = new U8XMLDATFileHandler();
+            var datFileHandler = new XmlReaderDATFileHandler();
             var datFile = datFileHandler.ParseDATFile(datFilePath);
 
             datFileMachineVirtualListDataSource = new DATFileMachineVirtualListDataSource(olvDatFileListView);
