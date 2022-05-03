@@ -1,4 +1,6 @@
 ﻿
+using System.Collections.Generic;
+
 public enum DATFileMachineScreenOrientation
 {
     Unknown,
@@ -25,11 +27,41 @@ public class DATFileMachine
     public string ScreenType { get; set; }
     public DATFileMachineScreenOrientation ScreenOrientation { get; set; }
     public string ScreenRefreshRate { get; set; }
-    public bool IsBIOS { get; set; }
-    public bool IsClone { get; set; }
-    public bool IsMechanical { get; set; }
-    public bool RequireCHDs { get; set; }
-    public bool RequireSamples { get; set; }
+    // public bool IsBIOS { get; set; }
+    public string IsBIOS { get; set; }
+    // public bool IsClone { get; set; }
+    public string IsClone { get; set; }
+    // public bool IsMechanical { get; set; }
+    public string IsMechanical { get; set; }
+    // public bool RequireCHDs { get; set; }
+    public string RequireCHDs { get; set; }
+
+    // public bool RequireSamples { get; set; } 
+    public string RequireSamples { get; set; } 
+
+    /*
+    public bool RequireSamples
+    {
+        get => booleanValues[DATFileMachineBooleanField.RequireSamples];
+        set => SetBooleanField(DATFileMachineBooleanField.RequireSamples, value);
+    }
+
+    public string RequireSamples_TextValue => booleanStringValues[DATFileMachineBooleanField.RequireSamples];
+
+    // TODO: This will be too much for every single machine
+    private readonly Dictionary<DATFileMachineBooleanField, bool> booleanValues = new Dictionary<DATFileMachineBooleanField, bool>(EqualityComparer<DATFileMachineBooleanField>.Default);
+    private readonly Dictionary<DATFileMachineBooleanField, string> booleanStringValues = new Dictionary<DATFileMachineBooleanField, string>(EqualityComparer<DATFileMachineBooleanField>.Default);
+
+    private void SetBooleanField(DATFileMachineBooleanField booleanField, bool value)
+    {
+        booleanValues[booleanField] = value;
+        booleanStringValues[booleanField] = value ? TrueBooleanValue : FalseBooleanValue;
+    }
+
+    private const string TrueBooleanValue = "Yes";
+    private const string FalseBooleanValue = "No";
+    */
+
     // public string ParentRom { get; set; }
 
     public int MAMESortingIndex { get; set; }
@@ -41,3 +73,8 @@ public class DATFileMachine
         return $"{Name} {Description}";
     }
 }
+
+//public enum DATFileMachineBooleanField
+//{
+//    RequireSamples
+//}

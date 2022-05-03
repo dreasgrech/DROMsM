@@ -14,6 +14,9 @@ namespace DROMsM
 {
     public class U8XMLDATFileHandler : IDATFileHandler
     {
+        private const string TrueBooleanValue = "Yes";
+        private const string FalseBooleanValue = "No";
+
         public DATFile ParseDATFile(string filePath)
         {
             var datFile = new DATFile();
@@ -83,8 +86,13 @@ namespace DROMsM
                 {
                     MAMESortingIndex = (int) index,
                     ScreenOrientation = DATFileMachineScreenOrientation.Horizontal, // By default, set the orientation to Horizontal because any machines that have no reference to orientation are categorized as Horizontal in the MAME emulator
+                    RequireSamples = FalseBooleanValue,
+                    IsMechanical = FalseBooleanValue,
+                    IsClone = FalseBooleanValue,
+                    RequireCHDs = FalseBooleanValue,
+                    IsBIOS = FalseBooleanValue,
                     IsDevice = false,
-                    XMLValue = machineNode.AsRawString().ToString()
+                    XMLValue = machineNode.AsRawString().ToString(),
                 };
 
                 if (machineNode.TryFindAttribute("name", out var nameAttribute))
@@ -96,7 +104,8 @@ namespace DROMsM
                 {
                     if (string.Equals(isBIOSAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
                     {
-                        datFileMachine.IsBIOS = true;
+                        // datFileMachine.IsBIOS = true;
+                        datFileMachine.IsBIOS = TrueBooleanValue;
                     }
                 }
 
@@ -104,13 +113,15 @@ namespace DROMsM
                 {
                     if (string.Equals(isMechanicalAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
                     {
-                        datFileMachine.IsMechanical = true;
+                        // datFileMachine.IsMechanical = true;
+                        datFileMachine.IsMechanical = TrueBooleanValue;
                     }
                 }
 
                 if (machineNode.TryFindAttribute("cloneof", out var cloneOfAttribute))
                 {
-                    datFileMachine.IsClone = true;
+                    // datFileMachine.IsClone = true;
+                    datFileMachine.IsClone = TrueBooleanValue;
                 }
 
                 if (machineNode.TryFindAttribute("isdevice", out var isDeviceAttribute))
@@ -160,12 +171,14 @@ namespace DROMsM
                             break;
                         case "disk":
                         {
-                            datFileMachine.RequireCHDs = true;
+                            // datFileMachine.RequireCHDs = true;
+                            datFileMachine.RequireCHDs = TrueBooleanValue;
                         }
                             break;
                         case "sample":
                         {
-                            datFileMachine.RequireSamples = true;
+                            // datFileMachine.RequireSamples = true;
+                            datFileMachine.RequireSamples = TrueBooleanValue;
                         }
                             break;
                         //case "dipswitch":

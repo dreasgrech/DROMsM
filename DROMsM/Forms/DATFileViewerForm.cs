@@ -46,11 +46,11 @@ namespace DROMsM.Forms
                 }
             }
 
-            olvIsCloneColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
-            olvBIOSColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
-            olvRequireCHDsColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
-            olvMechanicalColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
-            olvSamplesColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
+            // olvIsCloneColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
+            // olvBIOSColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
+            // olvRequireCHDsColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
+            // olvMechanicalColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
+            // olvSamplesColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
         }
 
         public bool ProcessDATFile(string datFilePath)
