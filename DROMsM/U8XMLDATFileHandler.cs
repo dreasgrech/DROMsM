@@ -104,7 +104,6 @@ namespace DROMsM
                 {
                     if (string.Equals(isBIOSAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
                     {
-                        // datFileMachine.IsBIOS = true;
                         datFileMachine.IsBIOS = TrueBooleanValue;
                     }
                 }
@@ -113,14 +112,12 @@ namespace DROMsM
                 {
                     if (string.Equals(isMechanicalAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
                     {
-                        // datFileMachine.IsMechanical = true;
                         datFileMachine.IsMechanical = TrueBooleanValue;
                     }
                 }
 
                 if (machineNode.TryFindAttribute("cloneof", out var cloneOfAttribute))
                 {
-                    // datFileMachine.IsClone = true;
                     datFileMachine.IsClone = TrueBooleanValue;
                 }
 
@@ -171,13 +168,11 @@ namespace DROMsM
                             break;
                         case "disk":
                         {
-                            // datFileMachine.RequireCHDs = true;
                             datFileMachine.RequireCHDs = TrueBooleanValue;
                         }
                             break;
                         case "sample":
                         {
-                            // datFileMachine.RequireSamples = true;
                             datFileMachine.RequireSamples = TrueBooleanValue;
                         }
                             break;
