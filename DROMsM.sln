@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DROMsM", "DROMsM\DROMsM.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DRomsMUtils", "DRomsMUtils\DRomsMUtils.csproj", "{33F205DB-2F27-463F-9CC3-8B75B4BC239C}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "U8XmlParser", "U8XmlParser\U8XmlParser\U8XmlParser.csproj", "{4D0E36F4-342E-4569-A4F2-6B9305F22691}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{33F205DB-2F27-463F-9CC3-8B75B4BC239C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33F205DB-2F27-463F-9CC3-8B75B4BC239C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33F205DB-2F27-463F-9CC3-8B75B4BC239C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D0E36F4-342E-4569-A4F2-6B9305F22691}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D0E36F4-342E-4569-A4F2-6B9305F22691}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D0E36F4-342E-4569-A4F2-6B9305F22691}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D0E36F4-342E-4569-A4F2-6B9305F22691}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
