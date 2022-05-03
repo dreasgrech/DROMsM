@@ -20,11 +20,17 @@ namespace DROMsM
 
             var datFileMachineCollection_threaded = new ConcurrentBag<DATFileMachine>();
 
+            /*
+             * This is a workaround I wrote to handle the issue of U8XmlParser not currently being able to handle external doctypes.
+             *
+             * Here I am trying to parse the XML file normally, and if that fails, I assume that an external doctype is being used
+             * so I then try to parse it by ignoring the external doctype.
+             */
             bool tryExternalDocType = false;
             XmlObject xml = null;
             try
             {
-                XmlParser.ContainsExternalDocType = false;
+                XmlParser.containsExternalDocType = false;
                 xml = XmlParser.ParseFile(filePath);
             }
             catch (FormatException)
@@ -34,7 +40,7 @@ namespace DROMsM
 
             if (tryExternalDocType)
             {
-                XmlParser.ContainsExternalDocType = true;
+                XmlParser.containsExternalDocType = true;
                 xml = XmlParser.ParseFile(filePath);
             }
 

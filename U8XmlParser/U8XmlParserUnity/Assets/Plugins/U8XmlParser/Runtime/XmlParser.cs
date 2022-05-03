@@ -380,7 +380,7 @@ namespace U8Xml
             }
         }
 
-        public static bool ContainsExternalDocType { get; set; }
+        public static bool containsExternalDocType;
 
         private static bool TryParseDocType(RawString data, ref int i, bool hasNode, OptionalNodeList optional, ref RawStringTable entities)
         {
@@ -402,7 +402,8 @@ namespace U8Xml
             if(SkipEmpty(data, ref i) == false) { throw NewFormatException(); }
 
             /********************/
-            if(ContainsExternalDocType) {
+            if (containsExternalDocType) 
+            {
                 SkipUntil((byte)'>', data, ref i);
                 return true;
             }
