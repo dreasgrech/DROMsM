@@ -240,8 +240,6 @@ namespace U8Xml
             }
         }
 
-        public static bool ContainsExternalDoctype { get; set; }
-
         private static void StartStateMachine(RawString data, CustomList<XmlNode_> nodes, CustomList<XmlAttribute_> attrs, OptionalNodeList optional, ref RawStringTable entities)
         {
             // Encoding assumes utf-8 without bom. Others are not supported.
@@ -400,13 +398,6 @@ namespace U8Xml
             var docType = optional.DocumentType;
             i += DocTypeStr.Length;
             if(SkipEmpty(data, ref i) == false) { throw NewFormatException(); }
-
-            /********************/
-            if(ContainsExternalDoctype) {
-                SkipUntil((byte)'>', data, ref i);
-                return true;
-            }
-            /***********************/
 
             var nameStart = i;
             SkipUntil((byte)'[', data, ref i);
