@@ -380,6 +380,8 @@ namespace U8Xml
             }
         }
 
+        public static bool ContainsExternalDocType { get; set; }
+
         private static bool TryParseDocType(RawString data, ref int i, bool hasNode, OptionalNodeList optional, ref RawStringTable entities)
         {
             // <!DOCTYPE foo[...]>
@@ -398,6 +400,13 @@ namespace U8Xml
             var docType = optional.DocumentType;
             i += DocTypeStr.Length;
             if(SkipEmpty(data, ref i) == false) { throw NewFormatException(); }
+
+            /********************/
+            if(ContainsExternalDocType) {
+                SkipUntil((byte)'>', data, ref i);
+                return true;
+            }
+            /***********************/
 
             var nameStart = i;
             SkipUntil((byte)'[', data, ref i);
