@@ -174,10 +174,10 @@
             // olvSetColumn
             // 
             this.olvSetColumn.AspectName = "Name";
-            this.olvSetColumn.MaximumWidth = 60;
             this.olvSetColumn.MinimumWidth = 60;
             this.olvSetColumn.Text = "Set";
             this.olvSetColumn.UseFiltering = false;
+            this.olvSetColumn.Width = 80;
             // 
             // olvNameColumn
             // 
