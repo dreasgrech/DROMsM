@@ -1111,9 +1111,15 @@ namespace DROMsM.Forms
                 try
                 {
 #endif
-                    datFileViewerForm.ProcessDATFile(datFilePath);
-                    datFileViewerForm.ShowDialog();
-                    wantsToOpenNewFileAfterClosingThisOne = datFileViewerForm.WantsToOpenNewFile;
+                    // Process the inputted DAT file
+                    var datFileProcessed = datFileViewerForm.ProcessDATFile(datFilePath);
+
+                    // If the DAT file was successfully processed, show the DAT File Viewer form.
+                    if (datFileProcessed)
+                    {
+                        datFileViewerForm.ShowDialog();
+                        wantsToOpenNewFileAfterClosingThisOne = datFileViewerForm.WantsToOpenNewFile;
+                    }
 #if !DEBUG
                 }
                 catch (Exception ex)

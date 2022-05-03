@@ -53,11 +53,33 @@ namespace DROMsM.Forms
             olvSamplesColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
         }
 
-        public void ProcessDATFile(string datFilePath)
+        public bool ProcessDATFile(string datFilePath)
         {
             var datFileHandler = new U8XMLDATFileHandler();
             // var datFileHandler = new XmlReaderDATFileHandler();
-            var datFile = datFileHandler.ParseDATFile(datFilePath);
+
+            DATFile datFile = null;
+            try
+            {
+                datFile = datFileHandler.ParseDATFile(datFilePath);
+            }
+            catch (Exception ex)
+            {
+                var errorMessage = $"Unable to process DAT file: {datFilePath}" +
+                                   $"{Environment.NewLine}{Environment.NewLine}" +
+                                   $"Error message for the developer:" +
+                                   $"{Environment.NewLine}" +
+                                   $"{ex.Message}";
+                                   //$"{Environment.NewLine}" +
+                                   //$"{ex.StackTrace}";
+
+                MessageBoxOperations.ShowError(errorMessage, "Unable to process DAT file");
+            }
+
+            if (datFile == null)
+            {
+                return false;
+            }
 
             datFileMachineVirtualListDataSource = new DATFileMachineVirtualListDataSource(olvDatFileListView);
             datFileMachineVirtualListDataSource.AddObjects(datFile.Machines);
@@ -72,6 +94,8 @@ namespace DROMsM.Forms
             buildLabel.Text = datFile.Build;
 
             currentDATFile = datFile;
+
+            return true;
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
