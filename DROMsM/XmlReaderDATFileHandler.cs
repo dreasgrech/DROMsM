@@ -3,6 +3,13 @@ using System.Xml.Schema;
 
 namespace DROMsM
 {
+    /// <summary>
+    /// I started writing this XML parses using the .NET parsing tools
+    /// because UNFORTUNATELY U8XmlParser does not support external doctypes!
+    /// https://github.com/ikorin24/U8XmlParser/issues/26
+    ///
+    /// Update: This class is no longer needed because I am now skipping reading external doctypes in U8XmlParser.
+    /// </summary>
     public class XmlReaderDATFileHandler : IDATFileHandler
     {
         public DATFile ParseDATFile(string filePath)
