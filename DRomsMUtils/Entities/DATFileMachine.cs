@@ -30,11 +30,12 @@ public class DATFileMachine
     public string IsMechanical { get; set; }
     public string RequireCHDs { get; set; }
     public string RequireSamples { get; set; } 
+    public string IsDevice { get; set; }
 
     // public string ParentRom { get; set; }
 
     public int MAMESortingIndex { get; set; }
-    public bool IsDevice { get; set; }
+    // public bool IsDevice { get; set; }
     public string XMLValue { get; set; }
 
     public override string ToString()

@@ -91,7 +91,8 @@ namespace DROMsM
                     IsClone = FalseBooleanValue,
                     RequireCHDs = FalseBooleanValue,
                     IsBIOS = FalseBooleanValue,
-                    IsDevice = false,
+                    // IsDevice = false,
+                    IsDevice = FalseBooleanValue,
                     XMLValue = machineNode.AsRawString().ToString(),
                 };
 
@@ -125,7 +126,8 @@ namespace DROMsM
                 {
                     if (string.Equals(isDeviceAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
                     {
-                        datFileMachine.IsDevice = true;
+                        // datFileMachine.IsDevice = true;
+                        datFileMachine.IsDevice = TrueBooleanValue;
                     }
                 }
 
@@ -133,7 +135,8 @@ namespace DROMsM
                 {
                     if (string.Equals(runnableAttribute.Value.ToString(), "no", StringComparison.OrdinalIgnoreCase))
                     {
-                        datFileMachine.IsDevice = true;
+                        // datFileMachine.IsDevice = true;
+                        datFileMachine.IsDevice = TrueBooleanValue;
                     }
                 }
 
@@ -185,11 +188,14 @@ namespace DROMsM
 
                 });
 
+                /*
                 // Add the machine to the entries list if it's not considered a DEVICE.
                 if (!datFileMachine.IsDevice)
                 {
                     datFileMachineCollection_threaded.Add(datFileMachine);
                 }
+                */
+                datFileMachineCollection_threaded.Add(datFileMachine);
             });
 
             xml.Dispose();

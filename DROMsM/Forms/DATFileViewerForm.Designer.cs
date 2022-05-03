@@ -69,6 +69,7 @@
             this.showGridLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.resetFilteringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.olvDeviceColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -127,6 +128,7 @@
             this.olvDatFileListView.AllColumns.Add(this.olvMechanicalColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvRequireCHDsColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvSamplesColumn);
+            this.olvDatFileListView.AllColumns.Add(this.olvDeviceColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvControlsColumn);
             this.olvDatFileListView.AllowColumnReorder = true;
             this.olvDatFileListView.AlternateRowBackColor = System.Drawing.Color.WhiteSmoke;
@@ -149,6 +151,7 @@
             this.olvMechanicalColumn,
             this.olvRequireCHDsColumn,
             this.olvSamplesColumn,
+            this.olvDeviceColumn,
             this.olvControlsColumn});
             this.olvDatFileListView.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvDatFileListView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -495,6 +498,15 @@
             this.resetFilteringToolStripMenuItem.Text = "Reset Filtering (WIP)";
             this.resetFilteringToolStripMenuItem.Click += new System.EventHandler(this.resetFilteringToolStripMenuItem_Click);
             // 
+            // olvDeviceColumn
+            // 
+            this.olvDeviceColumn.AspectName = "IsDevice";
+            this.olvDeviceColumn.MaximumWidth = 70;
+            this.olvDeviceColumn.MinimumWidth = 70;
+            this.olvDeviceColumn.Text = "Device";
+            this.olvDeviceColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvDeviceColumn.Width = 70;
+            // 
             // DATFileViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -566,5 +578,6 @@
         private System.Windows.Forms.ToolStripMenuItem exportToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem resetFilteringToolStripMenuItem;
+        private BrightIdeasSoftware.OLVColumn olvDeviceColumn;
     }
 }

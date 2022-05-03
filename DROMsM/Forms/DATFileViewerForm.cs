@@ -178,6 +178,7 @@ namespace DROMsM.Forms
             classMap.ToggleColumn(m => m.IsMechanical, visibleColumns.Contains(olvMechanicalColumn), olvMechanicalColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.RequireCHDs, visibleColumns.Contains(olvRequireCHDsColumn), olvRequireCHDsColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.RequireSamples, visibleColumns.Contains(olvSamplesColumn), olvSamplesColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.IsDevice, visibleColumns.Contains(olvDeviceColumn), olvDeviceColumn.DisplayIndex);
 
             var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
             var fileWritten = DATFileCSVWriter.WriteToFile(exportFilePath, filteredObjectList, classMap);
