@@ -34,15 +34,15 @@
             this.olvSetColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvYearColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvManufacturer = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvManufacturerColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvStatusColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvEmulationColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvSaveStates = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvSaveStatesColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPlayersColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCoinsColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvScreenType = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvScreenOrientation = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvScreenRefreshRate = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvScreenTypeColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvScreenOrientationColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvScreenRefreshRateColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvIsCloneColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvBIOSColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvMechanicalColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -114,15 +114,15 @@
             this.olvDatFileListView.AllColumns.Add(this.olvSetColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvNameColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvYearColumn);
-            this.olvDatFileListView.AllColumns.Add(this.olvManufacturer);
+            this.olvDatFileListView.AllColumns.Add(this.olvManufacturerColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvStatusColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvEmulationColumn);
-            this.olvDatFileListView.AllColumns.Add(this.olvSaveStates);
+            this.olvDatFileListView.AllColumns.Add(this.olvSaveStatesColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvPlayersColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvCoinsColumn);
-            this.olvDatFileListView.AllColumns.Add(this.olvScreenType);
-            this.olvDatFileListView.AllColumns.Add(this.olvScreenOrientation);
-            this.olvDatFileListView.AllColumns.Add(this.olvScreenRefreshRate);
+            this.olvDatFileListView.AllColumns.Add(this.olvScreenTypeColumn);
+            this.olvDatFileListView.AllColumns.Add(this.olvScreenOrientationColumn);
+            this.olvDatFileListView.AllColumns.Add(this.olvScreenRefreshRateColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvIsCloneColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvBIOSColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvMechanicalColumn);
@@ -137,15 +137,15 @@
             this.olvSetColumn,
             this.olvNameColumn,
             this.olvYearColumn,
-            this.olvManufacturer,
+            this.olvManufacturerColumn,
             this.olvStatusColumn,
             this.olvEmulationColumn,
-            this.olvSaveStates,
+            this.olvSaveStatesColumn,
             this.olvPlayersColumn,
             this.olvCoinsColumn,
-            this.olvScreenType,
-            this.olvScreenOrientation,
-            this.olvScreenRefreshRate,
+            this.olvScreenTypeColumn,
+            this.olvScreenOrientationColumn,
+            this.olvScreenRefreshRateColumn,
             this.olvIsCloneColumn,
             this.olvBIOSColumn,
             this.olvMechanicalColumn,
@@ -201,10 +201,10 @@
             // 
             // olvManufacturer
             // 
-            this.olvManufacturer.AspectName = "Manufacturer";
-            this.olvManufacturer.MinimumWidth = 80;
-            this.olvManufacturer.Text = "Manufacturer";
-            this.olvManufacturer.Width = 150;
+            this.olvManufacturerColumn.AspectName = "Manufacturer";
+            this.olvManufacturerColumn.MinimumWidth = 80;
+            this.olvManufacturerColumn.Text = "Manufacturer";
+            this.olvManufacturerColumn.Width = 150;
             // 
             // olvStatusColumn
             // 
@@ -224,11 +224,11 @@
             // 
             // olvSaveStates
             // 
-            this.olvSaveStates.AspectName = "SaveStates";
-            this.olvSaveStates.MinimumWidth = 100;
-            this.olvSaveStates.Text = "Save States";
-            this.olvSaveStates.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvSaveStates.Width = 100;
+            this.olvSaveStatesColumn.AspectName = "SaveStates";
+            this.olvSaveStatesColumn.MinimumWidth = 100;
+            this.olvSaveStatesColumn.Text = "Save States";
+            this.olvSaveStatesColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvSaveStatesColumn.Width = 100;
             // 
             // olvPlayersColumn
             // 
@@ -248,27 +248,27 @@
             // 
             // olvScreenType
             // 
-            this.olvScreenType.AspectName = "ScreenType";
-            this.olvScreenType.MinimumWidth = 80;
-            this.olvScreenType.Text = "Screen";
-            this.olvScreenType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvScreenType.Width = 80;
+            this.olvScreenTypeColumn.AspectName = "ScreenType";
+            this.olvScreenTypeColumn.MinimumWidth = 80;
+            this.olvScreenTypeColumn.Text = "Screen";
+            this.olvScreenTypeColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvScreenTypeColumn.Width = 80;
             // 
             // olvScreenOrientation
             // 
-            this.olvScreenOrientation.AspectName = "ScreenOrientation";
-            this.olvScreenOrientation.MinimumWidth = 100;
-            this.olvScreenOrientation.Text = "Orientation";
-            this.olvScreenOrientation.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvScreenOrientation.Width = 100;
+            this.olvScreenOrientationColumn.AspectName = "ScreenOrientation";
+            this.olvScreenOrientationColumn.MinimumWidth = 100;
+            this.olvScreenOrientationColumn.Text = "Orientation";
+            this.olvScreenOrientationColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvScreenOrientationColumn.Width = 100;
             // 
             // olvScreenRefreshRate
             // 
-            this.olvScreenRefreshRate.AspectName = "ScreenRefreshRate";
-            this.olvScreenRefreshRate.MinimumWidth = 110;
-            this.olvScreenRefreshRate.Text = "Refresh Rate";
-            this.olvScreenRefreshRate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvScreenRefreshRate.Width = 110;
+            this.olvScreenRefreshRateColumn.AspectName = "ScreenRefreshRate";
+            this.olvScreenRefreshRateColumn.MinimumWidth = 110;
+            this.olvScreenRefreshRateColumn.Text = "Refresh Rate";
+            this.olvScreenRefreshRateColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvScreenRefreshRateColumn.Width = 110;
             // 
             // olvIsCloneColumn
             // 
@@ -553,16 +553,16 @@
         private BrightIdeasSoftware.OLVColumn olvSetColumn;
         private BrightIdeasSoftware.OLVColumn olvNameColumn;
         private BrightIdeasSoftware.OLVColumn olvYearColumn;
-        private BrightIdeasSoftware.OLVColumn olvManufacturer;
+        private BrightIdeasSoftware.OLVColumn olvManufacturerColumn;
         private BrightIdeasSoftware.OLVColumn olvStatusColumn;
         private BrightIdeasSoftware.OLVColumn olvEmulationColumn;
-        private BrightIdeasSoftware.OLVColumn olvSaveStates;
+        private BrightIdeasSoftware.OLVColumn olvSaveStatesColumn;
         private BrightIdeasSoftware.OLVColumn olvPlayersColumn;
         private BrightIdeasSoftware.OLVColumn olvCoinsColumn;
         private BrightIdeasSoftware.OLVColumn olvControlsColumn;
-        private BrightIdeasSoftware.OLVColumn olvScreenType;
-        private BrightIdeasSoftware.OLVColumn olvScreenOrientation;
-        private BrightIdeasSoftware.OLVColumn olvScreenRefreshRate;
+        private BrightIdeasSoftware.OLVColumn olvScreenTypeColumn;
+        private BrightIdeasSoftware.OLVColumn olvScreenOrientationColumn;
+        private BrightIdeasSoftware.OLVColumn olvScreenRefreshRateColumn;
         private System.Windows.Forms.ToolStripMenuItem optionsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showColorsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem showGridLinesToolStripMenuItem;

@@ -1103,6 +1103,7 @@ namespace DROMsM.Forms
                 return;
             }
 
+            bool datFileProcessed;
             bool wantsToOpenNewFileAfterClosingThisOne = false;
 
             using (var datFileViewerForm = new DATFileViewerForm {StartPosition = FormStartPosition.CenterParent})
@@ -1112,7 +1113,7 @@ namespace DROMsM.Forms
                 {
 #endif
                     // Process the inputted DAT file
-                    var datFileProcessed = datFileViewerForm.ProcessDATFile(datFilePath);
+                    datFileProcessed = datFileViewerForm.ProcessDATFile(datFilePath);
 
                     // If the DAT file was successfully processed, show the DAT File Viewer form.
                     if (datFileProcessed)
@@ -1130,7 +1131,8 @@ namespace DROMsM.Forms
 #endif
             }
 
-            if (wantsToOpenNewFileAfterClosingThisOne)
+            var needToShowOpenFileDialogAgain = !datFileProcessed || wantsToOpenNewFileAfterClosingThisOne;
+            if (needToShowOpenFileDialogAgain)
             {
                 OpenDATFileViewerForm();
             }

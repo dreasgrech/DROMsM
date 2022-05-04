@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Text;
@@ -17,9 +18,34 @@ namespace DROMsM.Forms
         private DATFile currentDATFile;
         private bool showingWorkingColors;
 
+        private Dictionary<DATFileMachineField, OLVColumn> fieldColumnMappings;
+
         public DATFileViewerForm()
         {
             InitializeComponent();
+
+            fieldColumnMappings = new Dictionary<DATFileMachineField, OLVColumn>(EqualityComparer<DATFileMachineField>.Default)
+            {
+                {DATFileMachineField.Name, olvSetColumn},
+                {DATFileMachineField.Description, olvNameColumn},
+                {DATFileMachineField.Year, olvYearColumn},
+                {DATFileMachineField.Manufacturer, olvManufacturerColumn}, 
+                {DATFileMachineField.Status, olvStatusColumn},
+                {DATFileMachineField.Emulation, olvEmulationColumn},
+                {DATFileMachineField.SaveStates, olvSaveStatesColumn}, 
+                {DATFileMachineField.Players, olvPlayersColumn}, 
+                {DATFileMachineField.Coins, olvCoinsColumn}, 
+                {DATFileMachineField.Controls, olvControlsColumn}, 
+                {DATFileMachineField.ScreenType, olvScreenTypeColumn}, 
+                {DATFileMachineField.ScreenOrientation, olvScreenOrientationColumn}, 
+                {DATFileMachineField.ScreenRefreshRate, olvScreenRefreshRateColumn},  
+                {DATFileMachineField.IsBIOS, olvBIOSColumn}, 
+                {DATFileMachineField.IsClone, olvIsCloneColumn}, 
+                {DATFileMachineField.IsMechanical, olvMechanicalColumn}, 
+                {DATFileMachineField.RequireCHDs, olvRequireCHDsColumn}, 
+                {DATFileMachineField.RequireSamples, olvSamplesColumn}, 
+                {DATFileMachineField.IsDevice, olvDeviceColumn}, 
+            };
 
             var settings = ProjectSettingsManager.DATFileViewerSettings;
 
@@ -58,15 +84,18 @@ namespace DROMsM.Forms
             var datFileHandler = new U8XMLDATFileHandler();
             // var datFileHandler = new XmlReaderDATFileHandler();
 
-            DATFile datFile = null;
+            HashSet<DATFileMachineField> usedFields;
+            DATFile datFile;
             try
             {
-                datFile = datFileHandler.ParseDATFile(datFilePath);
+                datFile = datFileHandler.ParseDATFile(datFilePath, out usedFields);
             }
             catch (Exception ex)
             {
-                var errorMessage = $"Unable to process DAT file: {datFilePath}" +
+                var errorMessage = $"Unable to process file: {datFilePath}" +
                                    $"{Environment.NewLine}{Environment.NewLine}" +
+                                   $"Make sure that it's a valid DAT file." +
+                                   $"{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}{Environment.NewLine}" +
                                    $"Error message for the developer:" +
                                    $"{Environment.NewLine}" +
                                    $"{ex.Message}";
@@ -74,16 +103,36 @@ namespace DROMsM.Forms
                                    //$"{ex.StackTrace}";
 
                 MessageBoxOperations.ShowError(errorMessage, "Unable to process DAT file");
-            }
-
-            if (datFile == null)
-            {
                 return false;
             }
+
+            // If no recognized fields were found in the file, then there's nothing to show
+            if (usedFields.Count == 0)
+            {
+                MessageBoxOperations.ShowError($"No entries found in DAT file: {datFilePath}", "No entries found in file");
+                return false;
+            }
+
+            // Only show the columns which were actually parsed from the file and hide the rest
+            using (var fieldColumnMappingsEnumerator = fieldColumnMappings.GetEnumerator())
+            {
+                while (fieldColumnMappingsEnumerator.MoveNext())
+                {
+                    var current = fieldColumnMappingsEnumerator.Current;
+                    var field = current.Key;
+                    var column = current.Value;
+
+                    column.IsVisible = usedFields.Contains(field);
+                }
+            }
+
+            // Rebuild the columns since we might have hidden some of them
+            olvDatFileListView.RebuildColumns();
 
             datFileMachineVirtualListDataSource = new DATFileMachineVirtualListDataSource(olvDatFileListView);
             datFileMachineVirtualListDataSource.AddObjects(datFile.Machines);
             olvDatFileListView.VirtualListDataSource = datFileMachineVirtualListDataSource;
+
 
             // Expand the columns
             // datFileListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -163,15 +212,15 @@ namespace DROMsM.Forms
             classMap.ToggleColumn(m => m.Name, visibleColumns.Contains(olvSetColumn), olvSetColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.Description, visibleColumns.Contains(olvNameColumn), olvNameColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.Year, visibleColumns.Contains(olvYearColumn), olvYearColumn.DisplayIndex);
-            classMap.ToggleColumn(m => m.Manufacturer, visibleColumns.Contains(olvManufacturer), olvManufacturer.DisplayIndex);
+            classMap.ToggleColumn(m => m.Manufacturer, visibleColumns.Contains(olvManufacturerColumn), olvManufacturerColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.Status, visibleColumns.Contains(olvStatusColumn), olvStatusColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.Emulation, visibleColumns.Contains(olvEmulationColumn), olvEmulationColumn.DisplayIndex);
-            classMap.ToggleColumn(m => m.SaveStates, visibleColumns.Contains(olvSaveStates), olvSaveStates.DisplayIndex);
+            classMap.ToggleColumn(m => m.SaveStates, visibleColumns.Contains(olvSaveStatesColumn), olvSaveStatesColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.Players, visibleColumns.Contains(olvPlayersColumn), olvPlayersColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.Coins, visibleColumns.Contains(olvCoinsColumn), olvCoinsColumn.DisplayIndex);
-            classMap.ToggleColumn(m => m.ScreenType, visibleColumns.Contains(olvScreenType), olvScreenType.DisplayIndex);
-            classMap.ToggleColumn(m => m.ScreenOrientation, visibleColumns.Contains(olvScreenOrientation), olvScreenOrientation.DisplayIndex);
-            classMap.ToggleColumn(m => m.ScreenRefreshRate, visibleColumns.Contains(olvScreenRefreshRate), olvScreenRefreshRate.DisplayIndex);
+            classMap.ToggleColumn(m => m.ScreenType, visibleColumns.Contains(olvScreenTypeColumn), olvScreenTypeColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.ScreenOrientation, visibleColumns.Contains(olvScreenOrientationColumn), olvScreenOrientationColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.ScreenRefreshRate, visibleColumns.Contains(olvScreenRefreshRateColumn), olvScreenRefreshRateColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.Controls, visibleColumns.Contains(olvControlsColumn), olvControlsColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.IsClone, visibleColumns.Contains(olvIsCloneColumn), olvIsCloneColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.IsBIOS, visibleColumns.Contains(olvBIOSColumn), olvBIOSColumn.DisplayIndex);

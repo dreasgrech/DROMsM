@@ -1,4 +1,5 @@
-﻿using System.Xml;
+﻿using System.Collections.Generic;
+using System.Xml;
 using System.Xml.Schema;
 
 namespace DROMsM
@@ -12,8 +13,10 @@ namespace DROMsM
     /// </summary>
     public class XmlReaderDATFileHandler : IDATFileHandler
     {
-        public DATFile ParseDATFile(string filePath)
+        public DATFile ParseDATFile(string filePath, out HashSet<DATFileMachineField> usedFields)
         {
+            usedFields = new HashSet<DATFileMachineField>();
+
             var datFile = new DATFile();
 
             XmlReaderSettings settings = new XmlReaderSettings();

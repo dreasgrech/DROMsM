@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using DRomsMUtils;
 using U8Xml;
@@ -12,14 +13,41 @@ using U8Xml;
 
 namespace DROMsM
 {
+    public enum DATFileMachineField
+    {
+        Name,
+        Description,
+        Year,
+        Manufacturer,
+        Status,
+        Emulation,
+        SaveStates,
+        Players,
+        Coins,
+        Controls,
+        ScreenType,
+        ScreenOrientation,
+        ScreenRefreshRate,
+        IsBIOS,
+        IsClone,
+        IsMechanical,
+        RequireCHDs,
+        RequireSamples,
+        IsDevice,
+    }
+
     public class U8XMLDATFileHandler : IDATFileHandler
     {
         private const string TrueBooleanValue = "Yes";
         private const string FalseBooleanValue = "No";
 
-        public DATFile ParseDATFile(string filePath)
+        private static readonly DATFileMachineField[] datFileMachineFieldValues = Enum.GetValues(typeof(DATFileMachineField)).Cast<DATFileMachineField>().ToArray();
+
+        public DATFile ParseDATFile(string filePath, out HashSet<DATFileMachineField> usedFields)
         {
             var datFile = new DATFile();
+
+            var usedFieldsCollection = new bool[datFileMachineFieldValues.Length];
 
             var datFileMachineCollection_threaded = new ConcurrentBag<DATFileMachine>();
 
@@ -99,6 +127,7 @@ namespace DROMsM
                 if (machineNode.TryFindAttribute("name", out var nameAttribute))
                 {
                     datFileMachine.Name = NormalizeText(nameAttribute.Value.ToString());
+                    usedFieldsCollection[(int) DATFileMachineField.Name] = true;
                 }
 
                 if (machineNode.TryFindAttribute("isbios", out var isBIOSAttribute))
@@ -106,6 +135,7 @@ namespace DROMsM
                     if (string.Equals(isBIOSAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
                     {
                         datFileMachine.IsBIOS = TrueBooleanValue;
+                        usedFieldsCollection[(int) DATFileMachineField.IsBIOS] = true;
                     }
                 }
 
@@ -114,12 +144,14 @@ namespace DROMsM
                     if (string.Equals(isMechanicalAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
                     {
                         datFileMachine.IsMechanical = TrueBooleanValue;
+                        usedFieldsCollection[(int) DATFileMachineField.IsMechanical] = true;
                     }
                 }
 
                 if (machineNode.TryFindAttribute("cloneof", out var cloneOfAttribute))
                 {
                     datFileMachine.IsClone = TrueBooleanValue;
+                    usedFieldsCollection[(int) DATFileMachineField.IsClone] = true;
                 }
 
                 if (machineNode.TryFindAttribute("isdevice", out var isDeviceAttribute))
@@ -128,6 +160,7 @@ namespace DROMsM
                     {
                         // datFileMachine.IsDevice = true;
                         datFileMachine.IsDevice = TrueBooleanValue;
+                        usedFieldsCollection[(int) DATFileMachineField.IsDevice] = true;
                     }
                 }
 
@@ -137,6 +170,7 @@ namespace DROMsM
                     {
                         // datFileMachine.IsDevice = true;
                         datFileMachine.IsDevice = TrueBooleanValue;
+                        usedFieldsCollection[(int) DATFileMachineField.IsDevice] = true;
                     }
                 }
 
@@ -147,36 +181,41 @@ namespace DROMsM
                     {
                         case "description":
                             datFileMachine.Description = NormalizeText(machineNodeChildNode.InnerText.ToString());
+                            usedFieldsCollection[(int) DATFileMachineField.Description] = true;
                             break;
                         case "year":
                             datFileMachine.Year = NormalizeText(machineNodeChildNode.InnerText.ToString());
+                            usedFieldsCollection[(int) DATFileMachineField.Year] = true;
                             break;
                         case "manufacturer":
                             datFileMachine.Manufacturer = NormalizeText(machineNodeChildNode.InnerText.ToString());
+                            usedFieldsCollection[(int) DATFileMachineField.Manufacturer] = true;
                             break;
                         case "driver":
                         {
-                            HandleDriverNode(ref machineNodeChildNode, datFileMachine);
+                            HandleDriverNode(ref machineNodeChildNode, datFileMachine, usedFieldsCollection);
                         }
                             break;
                         case "input":
                         {
-                            HandleInputNode(ref machineNodeChildNode, datFileMachine);
+                            HandleInputNode(ref machineNodeChildNode, datFileMachine, usedFieldsCollection);
                         }
                             break;
                         case "display":
                         {
-                            HandleDisplayNode(ref machineNodeChildNode, datFileMachine);
+                            HandleDisplayNode(ref machineNodeChildNode, datFileMachine, usedFieldsCollection);
                         }
                             break;
                         case "disk":
                         {
                             datFileMachine.RequireCHDs = TrueBooleanValue;
+                            usedFieldsCollection[(int) DATFileMachineField.RequireCHDs] = true;
                         }
                             break;
                         case "sample":
                         {
                             datFileMachine.RequireSamples = TrueBooleanValue;
+                            usedFieldsCollection[(int) DATFileMachineField.RequireSamples] = true;
                         }
                             break;
                         //case "dipswitch":
@@ -207,32 +246,48 @@ namespace DROMsM
 
             datFile.SortMachines();
 
+            usedFields = new HashSet<DATFileMachineField>(EqualityComparer<DATFileMachineField>.Default);
+            // usedFields = new List<DATFileMachineField>();
+            var usedFieldsCollectionTotal = (byte) usedFieldsCollection.Length;
+            for (byte i = 0; i < usedFieldsCollectionTotal; i++)
+            {
+                var value = usedFieldsCollection[i];
+                if (value)
+                {
+                    var field = (DATFileMachineField) i;
+                    usedFields.Add(field);
+                }
+            }
+
             return datFile;
         }
 
-        private static void HandleDisplayNode(ref XmlNode displayNode, DATFileMachine datFileMachine)
+        private static void HandleDisplayNode(ref XmlNode displayNode, DATFileMachine datFileMachine, bool[] usedFieldsCollection)
         {
             if (displayNode.TryFindAttribute("type", out var typeAttribute))
             {
                 var typeValue = NormalizeTextAndCapitalizeFirstLetter(typeAttribute.Value.ToString());
                 datFileMachine.ScreenType = typeValue;
+                usedFieldsCollection[(int) DATFileMachineField.ScreenType] = true;
             }
 
             if (displayNode.TryFindAttribute("refresh", out var refreshAttribute))
             {
                 var refreshValue = refreshAttribute.Value.ToString();
                 datFileMachine.ScreenRefreshRate = refreshValue;
+                usedFieldsCollection[(int) DATFileMachineField.ScreenRefreshRate] = true;
             }
 
-            HandleRotateAttribute(displayNode, datFileMachine);
+            HandleRotateAttribute(displayNode, datFileMachine, usedFieldsCollection);
         }
 
-        private static void HandleRotateAttribute(XmlNode displayNode, DATFileMachine datFileMachine)
+        private static void HandleRotateAttribute(XmlNode displayNode, DATFileMachine datFileMachine, bool[] usedFieldsCollection)
         {
             if (!displayNode.TryFindAttribute("rotate", out var rotateAttribute))
             {
                 // datFileMachine.ScreenOrientation = DATFileMachineScreenOrientation.Unknown;
                 datFileMachine.ScreenOrientation = DATFileMachineScreenOrientation.Horizontal;
+                usedFieldsCollection[(int) DATFileMachineField.ScreenOrientation] = true;
                 return;
             }
 
@@ -241,32 +296,37 @@ namespace DROMsM
             {
                 // datFileMachine.ScreenOrientation = DATFileMachineScreenOrientation.Unknown;
                 datFileMachine.ScreenOrientation = DATFileMachineScreenOrientation.Horizontal;
+                usedFieldsCollection[(int) DATFileMachineField.ScreenOrientation] = true;
                 return;
             }
 
             if (rotateNumber == 0 || rotateNumber == 180)
             {
                 datFileMachine.ScreenOrientation = DATFileMachineScreenOrientation.Horizontal;
+                usedFieldsCollection[(int) DATFileMachineField.ScreenOrientation] = true;
                 return;
             }
 
             if (rotateNumber == 90 || rotateNumber == 270)
             {
                 datFileMachine.ScreenOrientation = DATFileMachineScreenOrientation.Vertical;
+                usedFieldsCollection[(int) DATFileMachineField.ScreenOrientation] = true;
                 return;
             }
         }
 
-        private static void HandleInputNode(ref XmlNode machineNodeChildNode, DATFileMachine datFileMachine)
+        private static void HandleInputNode(ref XmlNode machineNodeChildNode, DATFileMachine datFileMachine, bool[] usedFieldsCollection)
         {
             if (machineNodeChildNode.TryFindAttribute("players", out var playersAttribute))
             {
                 datFileMachine.Players = NormalizeText(playersAttribute.Value.ToString());
+                usedFieldsCollection[(int) DATFileMachineField.Players] = true;
             }
 
             if (machineNodeChildNode.TryFindAttribute("coins", out var coinsAttribute))
             {
                 datFileMachine.Coins = NormalizeText(coinsAttribute.Value.ToString());
+                usedFieldsCollection[(int) DATFileMachineField.Coins] = true;
             }
 
             var controlTypesList = new List<string>();
@@ -279,13 +339,16 @@ namespace DROMsM
                     {
                         controlTypesList.Add(controlTypeAttribute.Value.ToString());
                     }
+
+                    usedFieldsCollection[(int) DATFileMachineField.Controls] = true;
                 }
             }
 
             datFileMachine.Controls = string.Join(",", controlTypesList);
         }
 
-        private static void HandleDipSwitchNode(ref XmlNode dipSwitchNode, DATFileMachine datFileMachine)
+        /*
+        private static void HandleDipSwitchNode(ref XmlNode dipSwitchNode, DATFileMachine datFileMachine, bool[] usedFieldsCollection)
         {
             if (!dipSwitchNode.TryFindAttribute("name", out var dipSwitchChildNodeNameAttribute))
             {
@@ -297,13 +360,15 @@ namespace DROMsM
             {
                 case "Orientation":
                 {
-                    HandleDipSwitchOrientationNode(dipSwitchNode, datFileMachine);
+                    HandleDipSwitchOrientationNode(dipSwitchNode, datFileMachine, usedFieldsCollection);
                 }
                     break;
             }
         }
+        */
 
-        private static void HandleDipSwitchOrientationNode(XmlNode orientationNode, DATFileMachine datFileMachine)
+        /*
+        private static void HandleDipSwitchOrientationNode(XmlNode orientationNode, DATFileMachine datFileMachine, bool[] usedFieldsCollection)
         {
             var dipSwitchNodeChildren = orientationNode.Children;
             foreach (var dipSwitchNodeChild in dipSwitchNodeChildren)
@@ -330,22 +395,26 @@ namespace DROMsM
                 }
             }
         }
+        */
 
-        private static void HandleDriverNode(ref XmlNode machineNodeChildNode, DATFileMachine datFileMachine)
+        private static void HandleDriverNode(ref XmlNode machineNodeChildNode, DATFileMachine datFileMachine, bool[] usedFieldsCollection)
         {
             if (machineNodeChildNode.TryFindAttribute("status", out var statusAttribute))
             {
                 datFileMachine.Status = NormalizeTextAndCapitalizeFirstLetter(statusAttribute.Value.ToString());
+                usedFieldsCollection[(int) DATFileMachineField.Status] = true;
             }
 
             if (machineNodeChildNode.TryFindAttribute("emulation", out var emulationAttribute))
             {
                 datFileMachine.Emulation = NormalizeTextAndCapitalizeFirstLetter(emulationAttribute.Value.ToString());
+                usedFieldsCollection[(int) DATFileMachineField.Emulation] = true;
             }
 
             if (machineNodeChildNode.TryFindAttribute("savestate", out var saveStateAttribute))
             {
                 datFileMachine.SaveStates = NormalizeTextAndCapitalizeFirstLetter(saveStateAttribute.Value.ToString());
+                usedFieldsCollection[(int) DATFileMachineField.SaveStates] = true;
             }
         }
 
