@@ -1103,7 +1103,7 @@ namespace DROMsM.Forms
                 return;
             }
 
-            bool datFileProcessed;
+            bool datFileProcessed = false;
             bool wantsToOpenNewFileAfterClosingThisOne = false;
 
             using (var datFileViewerForm = new DATFileViewerForm {StartPosition = FormStartPosition.CenterParent})
