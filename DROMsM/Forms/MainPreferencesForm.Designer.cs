@@ -36,8 +36,14 @@
             this.matchUsingGamelistXMLNameCheckbox = new System.Windows.Forms.CheckBox();
             this.autoExpandAfterOperationsCheckbox = new System.Windows.Forms.CheckBox();
             this.label10 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.datFileViewer_OnlyShowUsedColumns = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.tableLayoutPanel4.SuspendLayout();
+            this.groupBox2.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
@@ -48,7 +54,7 @@
             this.groupBox1.Size = new System.Drawing.Size(382, 93);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Options";
+            this.groupBox1.Text = "Main";
             // 
             // tableLayoutPanel4
             // 
@@ -127,11 +133,60 @@
             this.label10.TabIndex = 22;
             this.label10.Text = "Auto-expand after operations";
             // 
+            // groupBox2
+            // 
+            this.groupBox2.Controls.Add(this.tableLayoutPanel1);
+            this.groupBox2.Location = new System.Drawing.Point(12, 127);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(382, 55);
+            this.groupBox2.TabIndex = 1;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "DAT File Viewer";
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tableLayoutPanel1.ColumnCount = 2;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 68.30601F));
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 31.69399F));
+            this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.datFileViewer_OnlyShowUsedColumns, 1, 0);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(6, 19);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 1;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(366, 21);
+            this.tableLayoutPanel1.TabIndex = 20;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(124, 13);
+            this.label1.TabIndex = 20;
+            this.label1.Text = "Only show used columns";
+            // 
+            // datFileViewer_OnlyShowUsedColumns
+            // 
+            this.datFileViewer_OnlyShowUsedColumns.AutoSize = true;
+            this.datFileViewer_OnlyShowUsedColumns.Location = new System.Drawing.Point(252, 3);
+            this.datFileViewer_OnlyShowUsedColumns.Name = "datFileViewer_OnlyShowUsedColumns";
+            this.datFileViewer_OnlyShowUsedColumns.Size = new System.Drawing.Size(15, 14);
+            this.datFileViewer_OnlyShowUsedColumns.TabIndex = 21;
+            this.datFileViewer_OnlyShowUsedColumns.UseVisualStyleBackColor = true;
+            // 
             // MainPreferencesForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(406, 115);
+            this.ClientSize = new System.Drawing.Size(409, 195);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
@@ -144,6 +199,9 @@
             this.groupBox1.ResumeLayout(false);
             this.tableLayoutPanel4.ResumeLayout(false);
             this.tableLayoutPanel4.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -158,5 +216,9 @@
         private System.Windows.Forms.CheckBox matchUsingGamelistXMLNameCheckbox;
         private System.Windows.Forms.CheckBox autoExpandAfterOperationsCheckbox;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox datFileViewer_OnlyShowUsedColumns;
     }
 }

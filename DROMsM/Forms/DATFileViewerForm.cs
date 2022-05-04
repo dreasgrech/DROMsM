@@ -5,6 +5,7 @@ using System.IO;
 using System.Text;
 using System.Windows.Forms;
 using BrightIdeasSoftware;
+using DROMsM.ProgramSettings;
 using DRomsMUtils;
 using Frontend;
 
@@ -18,7 +19,9 @@ namespace DROMsM.Forms
         private DATFile currentDATFile;
         private bool showingWorkingColors;
 
-        private Dictionary<DATFileMachineField, OLVColumn> fieldColumnMappings;
+        private readonly Dictionary<DATFileMachineField, OLVColumn> fieldColumnMappings;
+
+        private ProgramSettings_DATFileViewer settings;
 
         public DATFileViewerForm()
         {
@@ -47,7 +50,7 @@ namespace DROMsM.Forms
                 {DATFileMachineField.IsDevice, olvDeviceColumn}, 
             };
 
-            var settings = ProjectSettingsManager.DATFileViewerSettings;
+            settings = ProjectSettingsManager.DATFileViewerSettings;
 
             if (settings.Maximized)
             {
@@ -114,15 +117,18 @@ namespace DROMsM.Forms
             }
 
             // Only show the columns which were actually parsed from the file and hide the rest
-            using (var fieldColumnMappingsEnumerator = fieldColumnMappings.GetEnumerator())
+            if (settings.OnlyShowUsedColumns)
             {
-                while (fieldColumnMappingsEnumerator.MoveNext())
+                using (var fieldColumnMappingsEnumerator = fieldColumnMappings.GetEnumerator())
                 {
-                    var current = fieldColumnMappingsEnumerator.Current;
-                    var field = current.Key;
-                    var column = current.Value;
+                    while (fieldColumnMappingsEnumerator.MoveNext())
+                    {
+                        var current = fieldColumnMappingsEnumerator.Current;
+                        var field = current.Key;
+                        var column = current.Value;
 
-                    column.IsVisible = usedFields.Contains(field);
+                        column.IsVisible = usedFields.Contains(field);
+                    }
                 }
             }
 

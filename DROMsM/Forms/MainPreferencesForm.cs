@@ -9,15 +9,20 @@ namespace DROMsM.Forms
     public partial class MainPreferencesForm : Form
     {
         private readonly ProgramSettings_Main mainSettings;
+        private readonly ProgramSettings_DATFileViewer datFileViewerSettings;
 
         public MainPreferencesForm()
         {
             InitializeComponent();
 
             mainSettings = ProjectSettingsManager.MainSettings;
+            datFileViewerSettings = ProjectSettingsManager.DATFileViewerSettings;
+
             allowedSimilarityValueTextBox.Text = mainSettings.AllowedSimilarityValue.ToString(CultureInfo.InvariantCulture);
             matchUsingGamelistXMLNameCheckbox.Checked = mainSettings.MatchUsingGameListXMLName;
             autoExpandAfterOperationsCheckbox.Checked = mainSettings.AutoExpandTreeViewsAfterOperations;
+
+            datFileViewer_OnlyShowUsedColumns.Checked = datFileViewerSettings.OnlyShowUsedColumns;
         }
 
         private void allowedSimilarityValueTextBox_Leave(object sender, EventArgs e)
@@ -49,6 +54,8 @@ namespace DROMsM.Forms
         {
             mainSettings.MatchUsingGameListXMLName = matchUsingGamelistXMLNameCheckbox.Checked;
             mainSettings.AutoExpandTreeViewsAfterOperations = autoExpandAfterOperationsCheckbox.Checked;
+
+            datFileViewerSettings.OnlyShowUsedColumns = datFileViewer_OnlyShowUsedColumns.Checked;
 
             ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.Main);
         }
