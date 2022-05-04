@@ -9,7 +9,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>DROMsM</RootNamespace>
     <AssemblyName>DROMsM</AssemblyName>
-    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.8</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>false</Deterministic>
@@ -37,6 +37,7 @@
     <CreateDesktopShortcut>true</CreateDesktopShortcut>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -98,6 +99,9 @@
     <Reference Include="Microsoft.DirectX.AudioVideoPlayback, Version=1.0.2902.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\..\..\Windows\Microsoft.NET\DirectX for Managed Code\1.0.2902.0\Microsoft.DirectX.AudioVideoPlayback.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=12.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
     </Reference>
     <Reference Include="Mono.Cecil, Version=0.11.2.0, Culture=neutral, PublicKeyToken=50cebf1cceb9d05e, processorArchitecture=MSIL">
       <HintPath>..\packages\Mono.Cecil.0.11.2\lib\net40\Mono.Cecil.dll</HintPath>
@@ -162,6 +166,10 @@
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
+    <Reference Include="U8XmlParser, Version=1.5.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\U8XmlParser\U8XmlParser\bin\Debug\net48\U8XmlParser.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Forms\AboutDialogForm.cs">
@@ -307,10 +315,6 @@
     <ProjectReference Include="..\DRomsMUtils\DRomsMUtils.csproj">
       <Project>{33f205db-2f27-463f-9cc3-8b75b4bc239c}</Project>
       <Name>DRomsMUtils</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\U8XmlParser\U8XmlParser\U8XmlParser.csproj">
-      <Project>{4d0e36f4-342e-4569-a4f2-6b9305f22691}</Project>
-      <Name>U8XmlParser</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
