@@ -21,7 +21,9 @@ namespace DROMsM.Forms
 
         private readonly Dictionary<DATFileMachineField, OLVColumn> fieldColumnMappings;
 
-        private ProgramSettings_DATFileViewer settings;
+        private readonly ProgramSettings_DATFileViewer settings;
+
+        HashSet<DATFileMachineField> usedFields;
 
         public DATFileViewerForm()
         {
@@ -87,7 +89,6 @@ namespace DROMsM.Forms
             var datFileHandler = new U8XMLDATFileHandler();
             // var datFileHandler = new XmlReaderDATFileHandler();
 
-            HashSet<DATFileMachineField> usedFields;
             DATFile datFile;
             try
             {
@@ -119,26 +120,12 @@ namespace DROMsM.Forms
             // Only show the columns which were actually parsed from the file and hide the rest
             if (settings.OnlyShowUsedColumns)
             {
-                using (var fieldColumnMappingsEnumerator = fieldColumnMappings.GetEnumerator())
-                {
-                    while (fieldColumnMappingsEnumerator.MoveNext())
-                    {
-                        var current = fieldColumnMappingsEnumerator.Current;
-                        var field = current.Key;
-                        var column = current.Value;
-
-                        column.IsVisible = usedFields.Contains(field);
-                    }
-                }
+                HideUnusedColumns();
             }
-
-            // Rebuild the columns since we might have hidden some of them
-            olvDatFileListView.RebuildColumns();
 
             datFileMachineVirtualListDataSource = new DATFileMachineVirtualListDataSource(olvDatFileListView);
             datFileMachineVirtualListDataSource.AddObjects(datFile.Machines);
             olvDatFileListView.VirtualListDataSource = datFileMachineVirtualListDataSource;
-
 
             // Expand the columns
             // datFileListView.AutoResizeColumns(ColumnHeaderAutoResizeStyle.ColumnContent);
@@ -151,6 +138,24 @@ namespace DROMsM.Forms
             currentDATFile = datFile;
 
             return true;
+        }
+
+        private void HideUnusedColumns()
+        {
+            using (var fieldColumnMappingsEnumerator = fieldColumnMappings.GetEnumerator())
+            {
+                while (fieldColumnMappingsEnumerator.MoveNext())
+                {
+                    var current = fieldColumnMappingsEnumerator.Current;
+                    var field = current.Key;
+                    var column = current.Value;
+
+                    column.IsVisible = usedFields.Contains(field);
+                }
+            }
+
+            // Rebuild the columns since we might have hidden some of them
+            olvDatFileListView.RebuildColumns();
         }
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -378,6 +383,23 @@ namespace DROMsM.Forms
             // olvDatFileListView.Sorting = SortOrder.None;
             //olvDatFileListView.Sort(olvDatFileListView.LastSortColumn, SortOrder.None);
             //olvDatFileListView.ListViewItemSorter = new DatFileMachineComparer_MAMEIndex();
+        }
+
+        private void showAllColumnsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var columns = olvDatFileListView.AllColumns;
+            for (int i = 0; i < columns.Count; i++)
+            {
+                var column = columns[i];
+                column.IsVisible = true;
+            }
+
+            olvDatFileListView.RebuildColumns();
+        }
+
+        private void hideUnusedColumnsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            HideUnusedColumns();
         }
     }
 }

@@ -48,6 +48,7 @@
             this.olvMechanicalColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvRequireCHDsColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSamplesColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvDeviceColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvControlsColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buildLabel = new System.Windows.Forms.Label();
@@ -69,7 +70,9 @@
             this.showGridLinesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.resetFilteringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.olvDeviceColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showAllColumnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hideUnusedColumnsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -199,7 +202,7 @@
             this.olvYearColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvYearColumn.Width = 70;
             // 
-            // olvManufacturer
+            // olvManufacturerColumn
             // 
             this.olvManufacturerColumn.AspectName = "Manufacturer";
             this.olvManufacturerColumn.MinimumWidth = 80;
@@ -222,7 +225,7 @@
             this.olvEmulationColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvEmulationColumn.Width = 90;
             // 
-            // olvSaveStates
+            // olvSaveStatesColumn
             // 
             this.olvSaveStatesColumn.AspectName = "SaveStates";
             this.olvSaveStatesColumn.MinimumWidth = 100;
@@ -246,7 +249,7 @@
             this.olvCoinsColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvCoinsColumn.Width = 80;
             // 
-            // olvScreenType
+            // olvScreenTypeColumn
             // 
             this.olvScreenTypeColumn.AspectName = "ScreenType";
             this.olvScreenTypeColumn.MinimumWidth = 80;
@@ -254,7 +257,7 @@
             this.olvScreenTypeColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvScreenTypeColumn.Width = 80;
             // 
-            // olvScreenOrientation
+            // olvScreenOrientationColumn
             // 
             this.olvScreenOrientationColumn.AspectName = "ScreenOrientation";
             this.olvScreenOrientationColumn.MinimumWidth = 100;
@@ -262,7 +265,7 @@
             this.olvScreenOrientationColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvScreenOrientationColumn.Width = 100;
             // 
-            // olvScreenRefreshRate
+            // olvScreenRefreshRateColumn
             // 
             this.olvScreenRefreshRateColumn.AspectName = "ScreenRefreshRate";
             this.olvScreenRefreshRateColumn.MinimumWidth = 110;
@@ -313,6 +316,15 @@
             this.olvSamplesColumn.Text = "Samples";
             this.olvSamplesColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvSamplesColumn.Width = 80;
+            // 
+            // olvDeviceColumn
+            // 
+            this.olvDeviceColumn.AspectName = "IsDevice";
+            this.olvDeviceColumn.MaximumWidth = 70;
+            this.olvDeviceColumn.MinimumWidth = 70;
+            this.olvDeviceColumn.Text = "Device";
+            this.olvDeviceColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvDeviceColumn.Width = 70;
             // 
             // olvControlsColumn
             // 
@@ -382,7 +394,8 @@
             this.topMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem,
-            this.optionsToolStripMenuItem});
+            this.optionsToolStripMenuItem,
+            this.toolsToolStripMenuItem});
             this.topMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.topMenuStrip.Name = "topMenuStrip";
             this.topMenuStrip.Size = new System.Drawing.Size(1716, 24);
@@ -498,14 +511,28 @@
             this.resetFilteringToolStripMenuItem.Text = "Reset Filtering (WIP)";
             this.resetFilteringToolStripMenuItem.Click += new System.EventHandler(this.resetFilteringToolStripMenuItem_Click);
             // 
-            // olvDeviceColumn
+            // toolsToolStripMenuItem
             // 
-            this.olvDeviceColumn.AspectName = "IsDevice";
-            this.olvDeviceColumn.MaximumWidth = 70;
-            this.olvDeviceColumn.MinimumWidth = 70;
-            this.olvDeviceColumn.Text = "Device";
-            this.olvDeviceColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.olvDeviceColumn.Width = 70;
+            this.toolsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showAllColumnsToolStripMenuItem,
+            this.hideUnusedColumnsToolStripMenuItem});
+            this.toolsToolStripMenuItem.Name = "toolsToolStripMenuItem";
+            this.toolsToolStripMenuItem.Size = new System.Drawing.Size(46, 20);
+            this.toolsToolStripMenuItem.Text = "Tools";
+            // 
+            // showAllColumnsToolStripMenuItem
+            // 
+            this.showAllColumnsToolStripMenuItem.Name = "showAllColumnsToolStripMenuItem";
+            this.showAllColumnsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.showAllColumnsToolStripMenuItem.Text = "Show all columns";
+            this.showAllColumnsToolStripMenuItem.Click += new System.EventHandler(this.showAllColumnsToolStripMenuItem_Click);
+            // 
+            // hideUnusedColumnsToolStripMenuItem
+            // 
+            this.hideUnusedColumnsToolStripMenuItem.Name = "hideUnusedColumnsToolStripMenuItem";
+            this.hideUnusedColumnsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.hideUnusedColumnsToolStripMenuItem.Text = "Hide unused columns";
+            this.hideUnusedColumnsToolStripMenuItem.Click += new System.EventHandler(this.hideUnusedColumnsToolStripMenuItem_Click);
             // 
             // DATFileViewerForm
             // 
@@ -579,5 +606,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem resetFilteringToolStripMenuItem;
         private BrightIdeasSoftware.OLVColumn olvDeviceColumn;
+        private System.Windows.Forms.ToolStripMenuItem toolsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showAllColumnsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hideUnusedColumnsToolStripMenuItem;
     }
 }
