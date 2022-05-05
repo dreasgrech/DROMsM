@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 using Frontend;
-using U8Xml;
 
 public class DATFile
 {
+    public DATFileHeader Header { get; set; }
     public string Build { get; set; }
     public List<DATFileMachine> Machines { get; }
 

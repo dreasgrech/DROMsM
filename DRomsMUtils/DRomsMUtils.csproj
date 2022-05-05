@@ -77,6 +77,7 @@
     <Compile Include="DATFileMachineCSVClassMap.cs" />
     <Compile Include="Entities\CUEFile.cs" />
     <Compile Include="Entities\DATFile.cs" />
+    <Compile Include="Entities\DATFileHeader.cs" />
     <Compile Include="Entities\DATFileMachine.cs" />
     <Compile Include="Entities\DatFileMachineComparer_ComparisonName.cs" />
     <Compile Include="Entities\DatFileMachineComparer_MAMEIndex.cs" />

@@ -107,8 +107,43 @@ namespace DROMsM
             }
 
             var machineNodeChildren = rootNode.Children;
+            var machineNodeChildrenCount = machineNodeChildren.Count;
+            var machineNodeChildrenEnumerable = (IEnumerable<XmlNode>) machineNodeChildren;
+            // var machineNodeChildren = (IEnumerable<XmlNode>)rootNode.Children;
+            if (machineNodeChildrenCount > 0)
+            {
+                // Some dat files use the first node as a header
+                // var firstMachineNode = machineNodeChildren.First();
+                var firstMachineNode = machineNodeChildrenEnumerable.First();
+                if (string.Equals(firstMachineNode.Name.ToString(), "header", StringComparison.OrdinalIgnoreCase))
+                {
+                    var datFileHeader = new DATFileHeader();
+                    var firstMachineNodeChildren = firstMachineNode.Children;
+                    foreach (var firstMachineNodeChild in firstMachineNodeChildren)
+                    {
+                        var firstMachineNodeChildName = firstMachineNodeChild.Name.ToString().ToLowerInvariant();
+                        var firstMachineNodeChildValue = firstMachineNodeChild.InnerText.ToString();
 
-            Parallel.ForEach(machineNodeChildren, (machineNode, parallelLoopState, index) =>
+                        switch (firstMachineNodeChildName)
+                        {
+                            case "name": { datFileHeader.Name = firstMachineNodeChildValue; break; }
+                            case "description": { datFileHeader.Description = firstMachineNodeChildValue; break; }
+                            case "version": { datFileHeader.Version = firstMachineNodeChildValue; break; }
+                            case "author": { datFileHeader.Author = firstMachineNodeChildValue; break; }
+                            case "homepage": { datFileHeader.Homepage = firstMachineNodeChildValue; break; }
+                            case "url": { datFileHeader.URL = firstMachineNodeChildValue; break; }
+                        }
+                    }
+
+                    datFile.Header = datFileHeader;
+
+                    // Skip the first node since we've now already processed it and determined it's a header node
+                    machineNodeChildrenEnumerable = machineNodeChildrenEnumerable.Skip(1);
+                }
+            }
+
+            // Parallel.ForEach(machineNodeChildren, (machineNode, parallelLoopState, index) =>
+            Parallel.ForEach(machineNodeChildrenEnumerable, (machineNode, parallelLoopState, index) =>
             {
                 var datFileMachine = new DATFileMachine
                 {
@@ -119,7 +154,6 @@ namespace DROMsM
                     IsClone = FalseBooleanValue,
                     RequireCHDs = FalseBooleanValue,
                     IsBIOS = FalseBooleanValue,
-                    // IsDevice = false,
                     IsDevice = FalseBooleanValue,
                     XMLValue = machineNode.AsRawString().ToString(),
                 };
@@ -158,7 +192,6 @@ namespace DROMsM
                 {
                     if (string.Equals(isDeviceAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
                     {
-                        // datFileMachine.IsDevice = true;
                         datFileMachine.IsDevice = TrueBooleanValue;
                         usedFieldsCollection[(int) DATFileMachineField.IsDevice] = true;
                     }
@@ -168,7 +201,6 @@ namespace DROMsM
                 {
                     if (string.Equals(runnableAttribute.Value.ToString(), "no", StringComparison.OrdinalIgnoreCase))
                     {
-                        // datFileMachine.IsDevice = true;
                         datFileMachine.IsDevice = TrueBooleanValue;
                         usedFieldsCollection[(int) DATFileMachineField.IsDevice] = true;
                     }
@@ -177,7 +209,8 @@ namespace DROMsM
                 var machineNodeChildNodes = machineNode.Children;
                 Parallel.ForEach(machineNodeChildNodes, machineNodeChildNode =>
                 {
-                    switch (machineNodeChildNode.Name.ToString())
+                    var machineNodeChildNodeName = machineNodeChildNode.Name.ToString().ToLowerInvariant();
+                    switch (machineNodeChildNodeName)
                     {
                         case "description":
                             datFileMachine.Description = NormalizeText(machineNodeChildNode.InnerText.ToString());
@@ -247,7 +280,6 @@ namespace DROMsM
             datFile.SortMachines();
 
             usedFields = new HashSet<DATFileMachineField>(EqualityComparer<DATFileMachineField>.Default);
-            // usedFields = new List<DATFileMachineField>();
             var usedFieldsCollectionTotal = (byte) usedFieldsCollection.Length;
             for (byte i = 0; i < usedFieldsCollectionTotal; i++)
             {
