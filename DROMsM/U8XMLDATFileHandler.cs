@@ -139,6 +139,9 @@ namespace DROMsM
                         }
                     }
 
+                    // Save the header XML node 
+                    datFileHeader.XMLValue = firstMachineNode.AsRawString().ToString();
+
                     datFile.Header = datFileHeader;
 
                     // Skip the first node since we've now already processed it and determined it's a header node

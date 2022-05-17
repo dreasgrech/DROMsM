@@ -192,6 +192,15 @@ namespace DROMsM.Forms
             var rootNodeXMLOpeningTag = currentDATFile.GetRootNodeXMLOpeningTag();
             fullXMLFileStringBuilder.AppendLine(rootNodeXMLOpeningTag);
 
+            // If this file has a header, write the header now
+            var datFileHeader = currentDATFile.Header;
+            if (datFileHeader != null)
+            {
+                var headerXMLValue = datFileHeader.XMLValue;
+                fullXMLFileStringBuilder.Append("\t");
+                fullXMLFileStringBuilder.AppendLine(headerXMLValue);
+            }
+
             // Write all the filtered nodes
             var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
             foreach (DATFileMachine datFileMachine in filteredObjectList)
