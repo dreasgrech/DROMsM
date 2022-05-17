@@ -50,7 +50,11 @@
             this.label11 = new System.Windows.Forms.Label();
             this.linkLabel9 = new System.Windows.Forms.LinkLabel();
             this.label12 = new System.Windows.Forms.Label();
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.label13 = new System.Windows.Forms.Label();
+            this.installedVersionLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
+            this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -68,7 +72,7 @@
             this.updatesLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.updatesLabel.LinkBehavior = System.Windows.Forms.LinkBehavior.NeverUnderline;
             this.updatesLabel.LinkColor = System.Drawing.Color.Sienna;
-            this.updatesLabel.Location = new System.Drawing.Point(521, 298);
+            this.updatesLabel.Location = new System.Drawing.Point(521, 322);
             this.updatesLabel.Name = "updatesLabel";
             this.updatesLabel.Size = new System.Drawing.Size(152, 13);
             this.updatesLabel.TabIndex = 1;
@@ -96,7 +100,7 @@
             this.tableLayoutPanel1.Controls.Add(this.linkLabel5, 1, 4);
             this.tableLayoutPanel1.Controls.Add(this.linkLabel6, 1, 5);
             this.tableLayoutPanel1.Controls.Add(this.linkLabel7, 1, 6);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(15, 128);
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(3, 32);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
             this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
@@ -246,7 +250,7 @@
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(13, 98);
+            this.label9.Location = new System.Drawing.Point(0, 2);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(81, 17);
             this.label9.TabIndex = 3;
@@ -285,23 +289,51 @@
             // 
             this.label12.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(12, 298);
+            this.label12.Location = new System.Drawing.Point(12, 322);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(86, 13);
             this.label12.TabIndex = 8;
             this.label12.Text = "Written by Dreas";
             // 
+            // panel1
+            // 
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.tableLayoutPanel1);
+            this.panel1.Location = new System.Drawing.Point(12, 118);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(381, 183);
+            this.panel1.TabIndex = 9;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(13, 86);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(90, 13);
+            this.label13.TabIndex = 10;
+            this.label13.Text = "Installed Version: ";
+            // 
+            // installedVersionLabel
+            // 
+            this.installedVersionLabel.AutoSize = true;
+            this.installedVersionLabel.Location = new System.Drawing.Point(99, 86);
+            this.installedVersionLabel.Name = "installedVersionLabel";
+            this.installedVersionLabel.Size = new System.Drawing.Size(46, 13);
+            this.installedVersionLabel.TabIndex = 11;
+            this.installedVersionLabel.Text = "v0.0.0.0";
+            // 
             // AboutDialogForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(685, 320);
+            this.ClientSize = new System.Drawing.Size(685, 344);
+            this.Controls.Add(this.installedVersionLabel);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.panel1);
             this.Controls.Add(this.label12);
             this.Controls.Add(this.linkLabel9);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
-            this.Controls.Add(this.label9);
-            this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.updatesLabel);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
@@ -313,6 +345,8 @@
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.AboutDialogForm_KeyDown);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            this.panel1.ResumeLayout(false);
+            this.panel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -342,5 +376,8 @@
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.LinkLabel linkLabel9;
         private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label installedVersionLabel;
     }
 }

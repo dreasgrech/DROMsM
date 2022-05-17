@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Deployment.Application;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -28,17 +29,22 @@ namespace DROMsM
         public AboutDialogForm()
         {
             InitializeComponent();
+
+            installedVersionLabel.Text = $@"v{ApplicationVersion.ProductVersion}";
         }
 
         private void AboutDialogForm_Load(object sender, EventArgs e)
         {
-#if CLICKONCE
-            CheckForUpdates();
-#endif
+            // Only check for updates if we're not running in Visual Studio
+            var checkForUpdates = !Debugger.IsAttached;
+            if (!checkForUpdates)
+            {
+                SetUpdateStatus(AboutDialogUpdateStatus.NotCheckingForUpdates);
 
-#if SQUIRREL
+                return;
+            }
+
             CheckForUpdates();
-#endif
         }
 
 #if CLICKONCE
@@ -62,7 +68,10 @@ namespace DROMsM
 
         private async void CheckForUpdates()
         {
-            if (updateStatus == AboutDialogUpdateStatus.CheckingForUpdates)
+            if (
+                updateStatus == AboutDialogUpdateStatus.CheckingForUpdates ||
+                updateStatus == AboutDialogUpdateStatus.NotCheckingForUpdates
+                )
             {
                 return;
             }
@@ -114,7 +123,6 @@ namespace DROMsM
                 SetUpdateStatus(AboutDialogUpdateStatus.UpdateInstalledWaitingForRestart);
 
                 MessageBoxOperations.ShowInformation("DROMsM has been updated and will now restart.", "Update Complete");
-                // Application.Restart();
                 UpdateManager.RestartApp();
                 return;
             }
@@ -278,6 +286,11 @@ namespace DROMsM
                     color = Color.DarkGreen; 
                     text = "Update Installed!";
                 } break;
+                case AboutDialogUpdateStatus.NotCheckingForUpdates:
+                {
+                    color = Color.Crimson; 
+                    text = "Not checking for updates because of debugger";
+                } break;
             }
 
             updatesLabel.LinkColor = color;
@@ -311,6 +324,7 @@ namespace DROMsM
         NoUpdateAvailable,
         ErrorCheckingForUpdates,
         InstallingUpdate,
-        UpdateInstalledWaitingForRestart
+        UpdateInstalledWaitingForRestart,
+        NotCheckingForUpdates
     }
 }

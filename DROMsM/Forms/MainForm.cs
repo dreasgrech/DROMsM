@@ -143,7 +143,7 @@ namespace DROMsM.Forms
                 /*****************/
 
                 // Set the Main Form name
-                var windowTitle = $"DROMsM v{ApplicationVersion.FullVersionText} - Manage your ROM collection";
+                var windowTitle = $"DROMsM v{ApplicationVersion.ProductVersion} - Manage your ROM collection";
 #if DEBUG
                 windowTitle = $"DEBUG MODE -- {windowTitle} -- DEBUG MODE";
 #endif
