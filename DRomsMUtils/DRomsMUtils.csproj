@@ -105,11 +105,5 @@
     <None Include="app.config" />
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\U8XmlParser\U8XmlParser\U8XmlParser.csproj">
-      <Project>{4d0e36f4-342e-4569-a4f2-6b9305f22691}</Project>
-      <Name>U8XmlParser</Name>
-    </ProjectReference>
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

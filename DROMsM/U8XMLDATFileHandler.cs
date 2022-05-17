@@ -57,6 +57,7 @@ namespace DROMsM
              * Here I am trying to parse the XML file normally, and if that fails, I assume that an external doctype is being used
              * so I then try to parse it by ignoring the external doctype.
              */
+            /*
             bool tryExternalDocType = false;
             XmlObject xml = null;
             try
@@ -74,6 +75,9 @@ namespace DROMsM
                 XmlParser.containsExternalDocType = true;
                 xml = XmlParser.ParseFile(filePath);
             }
+            */
+
+            var xml = XmlParser.ParseFile(filePath);
 
             if (xml.Declaration.TryGetValue(out var xmlDeclaration))
             {
