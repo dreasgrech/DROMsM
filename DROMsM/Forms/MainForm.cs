@@ -143,7 +143,11 @@ namespace DROMsM.Forms
                 /*****************/
 
                 // Set the Main Form name
-                this.Text = $"DROMsM v{ApplicationVersion.FullVersionText} - Manage your ROM collection";
+                var windowTitle = $"DROMsM v{ApplicationVersion.FullVersionText} - Manage your ROM collection";
+#if DEBUG
+                windowTitle = $"DEBUG MODE -- {windowTitle} -- DEBUG MODE";
+#endif
+                this.Text = windowTitle;
 
                 Logger.SetListView(logsListView);
 
