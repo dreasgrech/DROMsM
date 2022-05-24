@@ -33,7 +33,16 @@ namespace DROMsM.Forms
             this.olvNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvVisibleColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvFilePathColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.showAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.hideAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.howDoesThisWorkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             ((System.ComponentModel.ISupportInitialize)(this.olvLaunchBoxPlatformsListView)).BeginInit();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // olvLaunchBoxPlatformsListView
@@ -55,11 +64,11 @@ namespace DROMsM.Forms
             this.olvLaunchBoxPlatformsListView.FullRowSelect = true;
             this.olvLaunchBoxPlatformsListView.GridLines = true;
             this.olvLaunchBoxPlatformsListView.HideSelection = false;
-            this.olvLaunchBoxPlatformsListView.Location = new System.Drawing.Point(9, 9);
+            this.olvLaunchBoxPlatformsListView.Location = new System.Drawing.Point(9, 24);
             this.olvLaunchBoxPlatformsListView.Margin = new System.Windows.Forms.Padding(0);
             this.olvLaunchBoxPlatformsListView.Name = "olvLaunchBoxPlatformsListView";
             this.olvLaunchBoxPlatformsListView.ShowGroups = false;
-            this.olvLaunchBoxPlatformsListView.Size = new System.Drawing.Size(1373, 948);
+            this.olvLaunchBoxPlatformsListView.Size = new System.Drawing.Size(1373, 933);
             this.olvLaunchBoxPlatformsListView.TabIndex = 5;
             this.olvLaunchBoxPlatformsListView.TintSortColumn = true;
             this.olvLaunchBoxPlatformsListView.UseAlternatingBackColors = true;
@@ -98,16 +107,86 @@ namespace DROMsM.Forms
             this.olvFilePathColumn.UseFiltering = false;
             this.olvFilePathColumn.Width = 80;
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fileToolStripMenuItem,
+            this.operationsToolStripMenuItem,
+            this.helpToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(1391, 24);
+            this.menuStrip1.TabIndex = 6;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // fileToolStripMenuItem
+            // 
+            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.closeToolStripMenuItem});
+            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Text = "File";
+            // 
+            // closeToolStripMenuItem
+            // 
+            this.closeToolStripMenuItem.Name = "closeToolStripMenuItem";
+            this.closeToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.closeToolStripMenuItem.Text = "Close";
+            this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
+            // 
+            // operationsToolStripMenuItem
+            // 
+            this.operationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.showAllToolStripMenuItem,
+            this.hideAllToolStripMenuItem});
+            this.operationsToolStripMenuItem.Name = "operationsToolStripMenuItem";
+            this.operationsToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
+            this.operationsToolStripMenuItem.Text = "Operations";
+            // 
+            // showAllToolStripMenuItem
+            // 
+            this.showAllToolStripMenuItem.Name = "showAllToolStripMenuItem";
+            this.showAllToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.showAllToolStripMenuItem.Text = "Show All...";
+            this.showAllToolStripMenuItem.Click += new System.EventHandler(this.showAllToolStripMenuItem_Click);
+            // 
+            // hideAllToolStripMenuItem
+            // 
+            this.hideAllToolStripMenuItem.Name = "hideAllToolStripMenuItem";
+            this.hideAllToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.hideAllToolStripMenuItem.Text = "Hide All...";
+            this.hideAllToolStripMenuItem.Click += new System.EventHandler(this.hideAllToolStripMenuItem_Click);
+            // 
+            // helpToolStripMenuItem
+            // 
+            this.helpToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.howDoesThisWorkToolStripMenuItem});
+            this.helpToolStripMenuItem.Name = "helpToolStripMenuItem";
+            this.helpToolStripMenuItem.Size = new System.Drawing.Size(44, 20);
+            this.helpToolStripMenuItem.Text = "Help";
+            // 
+            // howDoesThisWorkToolStripMenuItem
+            // 
+            this.howDoesThisWorkToolStripMenuItem.Name = "howDoesThisWorkToolStripMenuItem";
+            this.howDoesThisWorkToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
+            this.howDoesThisWorkToolStripMenuItem.Text = "How does this work?";
+            this.howDoesThisWorkToolStripMenuItem.Click += new System.EventHandler(this.howDoesThisWorkToolStripMenuItem_Click);
+            // 
             // LaunchBoxPlatformsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1391, 966);
             this.Controls.Add(this.olvLaunchBoxPlatformsListView);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "LaunchBoxPlatformsForm";
             this.Text = "Manage Platforms - LaunchBox";
             ((System.ComponentModel.ISupportInitialize)(this.olvLaunchBoxPlatformsListView)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -117,5 +196,13 @@ namespace DROMsM.Forms
         private BrightIdeasSoftware.OLVColumn olvNameColumn;
         private BrightIdeasSoftware.OLVColumn olvFilePathColumn;
         private BrightIdeasSoftware.OLVColumn olvVisibleColumn;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem operationsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem showAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem hideAllToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem howDoesThisWorkToolStripMenuItem;
     }
 }
