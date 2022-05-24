@@ -58,5 +58,17 @@ namespace DROMsM.Properties {
                 this["ProgramSettings_DATFileViewer"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("")]
+        public string ProgramSettings_LaunchBox {
+            get {
+                return ((string)(this["ProgramSettings_LaunchBox"]));
+            }
+            set {
+                this["ProgramSettings_LaunchBox"] = value;
+            }
+        }
     }
 }

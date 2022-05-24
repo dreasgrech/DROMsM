@@ -1150,5 +1150,20 @@ namespace DROMsM.Forms
                 aboutDialogForm.ShowDialog();
             }
         }
+
+        private void launchboxManagePlatformsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var launchBoxPlatformsForm = new LaunchBoxPlatformsForm(){StartPosition = FormStartPosition.Manual})
+            {
+                var initialized = launchBoxPlatformsForm.Initialize();
+                if (!initialized)
+                {
+                    return;
+                }
+
+                launchBoxPlatformsForm.Location = FormOperations.GetRelativeControlPoint(this, menuStrip1);
+                launchBoxPlatformsForm.ShowDialog();
+            }
+        }
     }
 }
