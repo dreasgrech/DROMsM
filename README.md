@@ -12,11 +12,14 @@ DROMsM is a Windows application written in C# WinForms that exposes several help
 - Given a list containing rom filenames, remove all the matching files from the romset.
 - Show or hide entire LaunchBox platforms
 
+#### Main Operations Window
+
 ![Main View](https://i.imgur.com/1k91L9r.png)
 
 #### Viewing or modifying a DAT File
 
-![DAT File Viewer](https://i.imgur.com/Lf0ehkt.png)
+![DAT File Viewer](https://user-images.githubusercontent.com/501697/170152398-8bcc2b30-13e9-48f0-9ccd-c196d96fed47.png)
+
 
 #### Showing/Hiding LaunchBox Platforms
 From `Tools -> LaunchBox -> Manage Platforms`, you can access a window which allows you to toggle the visibility of entire LaunchBox platforms.  This allows you to show or hide platforms in LaunchBox without removing them.
