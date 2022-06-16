@@ -368,7 +368,8 @@ namespace DROMsM
                 usedFieldsCollection[(int) DATFileMachineField.Coins] = true;
             }
 
-            var controlTypesList = new List<string>();
+            // Parse the controls
+            var controlTypesList = new SortedSet<string>(); // Using a SortedSet so that we don't show duplicate controls and also to have them sorted
             var inputNodeChildren = machineNodeChildNode.Children;
             foreach (var inputNodeChild in inputNodeChildren)
             {
