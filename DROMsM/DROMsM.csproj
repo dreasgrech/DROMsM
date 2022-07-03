@@ -177,6 +177,12 @@
     <Compile Include="ApplicationVersion.cs" />
     <Compile Include="CHDMANHandler.cs" />
     <Compile Include="CUEFileHandler.cs" />
+    <Compile Include="Forms\CreateMAMEIniFilesForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\CreateMAMEIniFilesForm.Designer.cs">
+      <DependentUpon>CreateMAMEIniFilesForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\LaunchBoxPlatformsForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -232,6 +238,9 @@
     <Compile Include="XmlReaderDATFileHandler.cs" />
     <EmbeddedResource Include="Forms\AboutDialogForm.resx">
       <DependentUpon>AboutDialogForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\CreateMAMEIniFilesForm.resx">
+      <DependentUpon>CreateMAMEIniFilesForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\DATFileViewerFindForm.resx">
       <DependentUpon>DATFileViewerFindForm.cs</DependentUpon>

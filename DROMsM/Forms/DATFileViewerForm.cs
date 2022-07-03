@@ -387,6 +387,8 @@ namespace DROMsM.Forms
         private void resetFilteringToolStripMenuItem_Click(object sender, EventArgs e)
         {
             // TODO: Still need to implement this
+            MessageBoxOperations.ShowInformation("Not implemented yet", "Work in Progress");
+
             // olvDatFileListView.ResetColumnFiltering();
 
             // olvDatFileListView.Sorting = SortOrder.None;
@@ -409,6 +411,24 @@ namespace DROMsM.Forms
         private void hideUnusedColumnsToolStripMenuItem_Click(object sender, EventArgs e)
         {
             HideUnusedColumns();
+        }
+
+        private void createMAMEIniFilesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            var selectedObjects = olvDatFileListView.SelectedObjects;
+            
+            // Make sure there are rom entries in the grid selected
+            if (selectedObjects.Count == 0)
+            {
+                MessageBoxOperations.ShowError("Please select the rom entries for which to create the ini files for", "No rom files are selected");
+                return;
+            }
+
+            // Show the Create MAME ini files form
+            using (var createMAMEIniFilesForm = new CreateMAMEIniFilesForm(selectedObjects))
+            {
+                createMAMEIniFilesForm.ShowDialog();
+            }
         }
     }
 }
