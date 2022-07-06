@@ -49,32 +49,6 @@ namespace DROMsM
 
             var usedFieldsCollection = new bool[datFileMachineFieldValues.Length];
 
-            /*
-             * This is a workaround I wrote to handle the issue of U8XmlParser not currently being able to handle external doctypes.
-             *
-             * Here I am trying to parse the XML file normally, and if that fails, I assume that an external doctype is being used
-             * so I then try to parse it by ignoring the external doctype.
-             */
-            /*
-            bool tryExternalDocType = false;
-            XmlObject xml = null;
-            try
-            {
-                XmlParser.containsExternalDocType = false;
-                xml = XmlParser.ParseFile(filePath);
-            }
-            catch (FormatException)
-            {
-                tryExternalDocType = true;
-            }
-
-            if (tryExternalDocType)
-            {
-                XmlParser.containsExternalDocType = true;
-                xml = XmlParser.ParseFile(filePath);
-            }
-            */
-
             var xml = XmlParser.ParseFile(filePath);
 
             if (xml.Declaration.TryGetValue(out var xmlDeclaration))
