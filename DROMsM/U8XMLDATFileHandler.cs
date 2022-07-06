@@ -144,12 +144,15 @@ namespace DROMsM
 
                     datFile.Header = datFileHeader;
 
+
+                    // Since we found a <Version> in a <Header>, use that as our build version
+                    datFile.Build = datFileHeader.Version;
+
                     // Skip the first node since we've now already processed it and determined it's a header node
                     machineNodeChildrenEnumerable = machineNodeChildrenEnumerable.Skip(1);
                 }
             }
 
-            // Parallel.ForEach(machineNodeChildren, (machineNode, parallelLoopState, index) =>
             Parallel.ForEach(machineNodeChildrenEnumerable, (machineNode, parallelLoopState, index) =>
             {
                 var datFileMachine = new DATFileMachine

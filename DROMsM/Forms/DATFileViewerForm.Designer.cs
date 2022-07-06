@@ -50,9 +50,10 @@
             this.olvSamplesColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvDeviceColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvControlsColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.buildLabel = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
+            this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
+            this.selectedSetsLabel = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.totalSetsLabel = new System.Windows.Forms.Label();
             this.topMenuStrip = new System.Windows.Forms.MenuStrip();
@@ -80,7 +81,7 @@
             this.splitContainer1.Panel2.SuspendLayout();
             this.splitContainer1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.olvDatFileListView)).BeginInit();
-            this.tableLayoutPanel1.SuspendLayout();
+            this.tableLayoutPanel2.SuspendLayout();
             this.topMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -109,7 +110,8 @@
             // 
             // splitContainer1.Panel2
             // 
-            this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel1);
+            this.splitContainer1.Panel2.Controls.Add(this.buildLabel);
+            this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel2);
             this.splitContainer1.Size = new System.Drawing.Size(1692, 969);
             this.splitContainer1.SplitterDistance = 926;
             this.splitContainer1.TabIndex = 2;
@@ -178,6 +180,7 @@
             this.olvDatFileListView.View = System.Windows.Forms.View.Details;
             this.olvDatFileListView.VirtualMode = true;
             this.olvDatFileListView.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.olvDatFileListView_FormatRow);
+            this.olvDatFileListView.SelectionChanged += new System.EventHandler(this.olvDatFileListView_SelectionChanged);
             // 
             // olvSetColumn
             // 
@@ -336,41 +339,52 @@
             this.olvControlsColumn.Text = "Controls";
             this.olvControlsColumn.Width = 201;
             // 
-            // tableLayoutPanel1
-            // 
-            this.tableLayoutPanel1.ColumnCount = 2;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.00422F));
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.99578F));
-            this.tableLayoutPanel1.Controls.Add(this.buildLabel, 1, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label3, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.totalSetsLabel, 1, 1);
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 3);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 2;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(240, 42);
-            this.tableLayoutPanel1.TabIndex = 0;
-            // 
             // buildLabel
             // 
-            this.buildLabel.AutoSize = true;
-            this.buildLabel.Location = new System.Drawing.Point(67, 0);
+            this.buildLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.buildLabel.Location = new System.Drawing.Point(1405, 3);
             this.buildLabel.Name = "buildLabel";
-            this.buildLabel.Size = new System.Drawing.Size(95, 13);
+            this.buildLabel.Size = new System.Drawing.Size(284, 13);
             this.buildLabel.TabIndex = 3;
             this.buildLabel.Text = "0.241 (mame0241)";
+            this.buildLabel.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             // 
-            // label3
+            // tableLayoutPanel2
             // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(0, 0);
-            this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(30, 13);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Build";
+            this.tableLayoutPanel2.ColumnCount = 2;
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.00422F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.99578F));
+            this.tableLayoutPanel2.Controls.Add(this.selectedSetsLabel, 1, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.totalSetsLabel, 1, 1);
+            this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
+            this.tableLayoutPanel2.Name = "tableLayoutPanel2";
+            this.tableLayoutPanel2.RowCount = 3;
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(287, 42);
+            this.tableLayoutPanel2.TabIndex = 1;
+            // 
+            // selectedSetsLabel
+            // 
+            this.selectedSetsLabel.AutoSize = true;
+            this.selectedSetsLabel.Location = new System.Drawing.Point(80, 0);
+            this.selectedSetsLabel.Name = "selectedSetsLabel";
+            this.selectedSetsLabel.Size = new System.Drawing.Size(13, 13);
+            this.selectedSetsLabel.TabIndex = 3;
+            this.selectedSetsLabel.Text = "0";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(0, 0);
+            this.label1.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(52, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Selected:";
             // 
             // label2
             // 
@@ -378,14 +392,14 @@
             this.label2.Location = new System.Drawing.Point(0, 20);
             this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(53, 13);
+            this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 0;
-            this.label2.Text = "Total sets";
+            this.label2.Text = "Total:";
             // 
             // totalSetsLabel
             // 
             this.totalSetsLabel.AutoSize = true;
-            this.totalSetsLabel.Location = new System.Drawing.Point(67, 20);
+            this.totalSetsLabel.Location = new System.Drawing.Point(80, 20);
             this.totalSetsLabel.Name = "totalSetsLabel";
             this.totalSetsLabel.Size = new System.Drawing.Size(13, 13);
             this.totalSetsLabel.TabIndex = 1;
@@ -569,8 +583,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).EndInit();
             this.splitContainer1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.olvDatFileListView)).EndInit();
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            this.tableLayoutPanel2.ResumeLayout(false);
+            this.tableLayoutPanel2.PerformLayout();
             this.topMenuStrip.ResumeLayout(false);
             this.topMenuStrip.PerformLayout();
             this.ResumeLayout(false);
@@ -587,9 +601,7 @@
         private System.Windows.Forms.ToolStripMenuItem saveAsToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
-        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         private System.Windows.Forms.Label buildLabel;
-        private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label totalSetsLabel;
         private System.Windows.Forms.Label label2;
         private BrightIdeasSoftware.FastObjectListView olvDatFileListView;
@@ -627,5 +639,8 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem createMAMEIniFilesToolStripMenuItem;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator5;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
+        private System.Windows.Forms.Label selectedSetsLabel;
+        private System.Windows.Forms.Label label1;
     }
 }

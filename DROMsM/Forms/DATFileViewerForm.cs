@@ -133,7 +133,9 @@ namespace DROMsM.Forms
             Text = $@"DAT File Viewer - {datFilePath}";
             datFilePathLabel.Text = datFilePath;
             totalSetsLabel.Text = datFile.TotalMachines.ToString();
-            buildLabel.Text = datFile.Build;
+            var build = datFile.Build;
+            // mameInfoTable.Visible = !string.IsNullOrEmpty(build);
+            buildLabel.Text = build;
 
             currentDATFile = datFile;
 
@@ -429,6 +431,17 @@ namespace DROMsM.Forms
             {
                 createMAMEIniFilesForm.ShowDialog();
             }
+        }
+
+        private void olvDatFileListView_SelectionChanged(object sender, EventArgs e)
+        {
+            var olvDatFileListViewSelectedObjects = olvDatFileListView.SelectedObjects;
+            if (olvDatFileListViewSelectedObjects == null)
+            {
+                return;
+            }
+
+            selectedSetsLabel.Text = olvDatFileListViewSelectedObjects.Count.ToString();
         }
     }
 }

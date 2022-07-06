@@ -4,14 +4,14 @@ using Frontend;
 
 public class DATFile
 {
-    public DATFileHeader Header { get; set; }
-    public string Build { get; set; }
-    public List<DATFileMachine> Machines { get; }
+    public DATFileHeader Header;// { get; set; }
+    public string Build;// { get; set; }
+    public List<DATFileMachine> Machines;// { get; }
 
-    public string XMLDeclaration { get; set; }
-    public string XMLDocType { get; set; }
-    public string XMLRootNodeName { get; set; }
-    public Dictionary<string,string> XMLRootNodeAttributes { get; set; }
+    public string XMLDeclaration;// { get; set; }
+    public string XMLDocType;// { get; set; }
+    public string XMLRootNodeName;// { get; set; }
+    public Dictionary<string, string> XMLRootNodeAttributes;// { get; set; }
 
     public int TotalMachines => Machines.Count;
 
