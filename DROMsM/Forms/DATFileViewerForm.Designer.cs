@@ -54,7 +54,9 @@
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
             this.selectedSetsLabel = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.visibleSetsLabel = new System.Windows.Forms.Label();
             this.totalSetsLabel = new System.Windows.Forms.Label();
             this.topMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -113,7 +115,7 @@
             this.splitContainer1.Panel2.Controls.Add(this.buildLabel);
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel2);
             this.splitContainer1.Size = new System.Drawing.Size(1692, 969);
-            this.splitContainer1.SplitterDistance = 926;
+            this.splitContainer1.SplitterDistance = 905;
             this.splitContainer1.TabIndex = 2;
             // 
             // olvDatFileListView
@@ -169,7 +171,7 @@
             this.olvDatFileListView.Margin = new System.Windows.Forms.Padding(0);
             this.olvDatFileListView.Name = "olvDatFileListView";
             this.olvDatFileListView.ShowGroups = false;
-            this.olvDatFileListView.Size = new System.Drawing.Size(1692, 926);
+            this.olvDatFileListView.Size = new System.Drawing.Size(1692, 905);
             this.olvDatFileListView.TabIndex = 4;
             this.olvDatFileListView.TintSortColumn = true;
             this.olvDatFileListView.UseAlternatingBackColors = true;
@@ -180,6 +182,7 @@
             this.olvDatFileListView.View = System.Windows.Forms.View.Details;
             this.olvDatFileListView.VirtualMode = true;
             this.olvDatFileListView.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.olvDatFileListView_FormatRow);
+            this.olvDatFileListView.ItemsChanged += new System.EventHandler<BrightIdeasSoftware.ItemsChangedEventArgs>(this.olvDatFileListView_ItemsChanged);
             this.olvDatFileListView.SelectionChanged += new System.EventHandler(this.olvDatFileListView_SelectionChanged);
             // 
             // olvSetColumn
@@ -342,7 +345,7 @@
             // buildLabel
             // 
             this.buildLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buildLabel.Location = new System.Drawing.Point(1405, 3);
+            this.buildLabel.Location = new System.Drawing.Point(1405, 43);
             this.buildLabel.Name = "buildLabel";
             this.buildLabel.Size = new System.Drawing.Size(284, 13);
             this.buildLabel.TabIndex = 3;
@@ -352,25 +355,27 @@
             // tableLayoutPanel2
             // 
             this.tableLayoutPanel2.ColumnCount = 2;
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 27.00422F));
-            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 72.99578F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 55F));
+            this.tableLayoutPanel2.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Absolute, 110F));
             this.tableLayoutPanel2.Controls.Add(this.selectedSetsLabel, 1, 0);
             this.tableLayoutPanel2.Controls.Add(this.label1, 0, 0);
-            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 1);
-            this.tableLayoutPanel2.Controls.Add(this.totalSetsLabel, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label3, 0, 1);
+            this.tableLayoutPanel2.Controls.Add(this.label2, 0, 2);
+            this.tableLayoutPanel2.Controls.Add(this.visibleSetsLabel, 1, 1);
+            this.tableLayoutPanel2.Controls.Add(this.totalSetsLabel, 1, 2);
             this.tableLayoutPanel2.Location = new System.Drawing.Point(3, 3);
             this.tableLayoutPanel2.Name = "tableLayoutPanel2";
             this.tableLayoutPanel2.RowCount = 3;
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel2.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.tableLayoutPanel2.Size = new System.Drawing.Size(287, 42);
+            this.tableLayoutPanel2.Size = new System.Drawing.Size(165, 57);
             this.tableLayoutPanel2.TabIndex = 1;
             // 
             // selectedSetsLabel
             // 
             this.selectedSetsLabel.AutoSize = true;
-            this.selectedSetsLabel.Location = new System.Drawing.Point(80, 0);
+            this.selectedSetsLabel.Location = new System.Drawing.Point(58, 0);
             this.selectedSetsLabel.Name = "selectedSetsLabel";
             this.selectedSetsLabel.Size = new System.Drawing.Size(13, 13);
             this.selectedSetsLabel.TabIndex = 3;
@@ -386,20 +391,39 @@
             this.label1.TabIndex = 2;
             this.label1.Text = "Selected:";
             // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(0, 20);
+            this.label3.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "Visible:";
+            // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(0, 20);
+            this.label2.Location = new System.Drawing.Point(0, 40);
             this.label2.Margin = new System.Windows.Forms.Padding(0, 0, 3, 0);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(34, 13);
             this.label2.TabIndex = 0;
             this.label2.Text = "Total:";
             // 
+            // visibleSetsLabel
+            // 
+            this.visibleSetsLabel.AutoSize = true;
+            this.visibleSetsLabel.Location = new System.Drawing.Point(58, 20);
+            this.visibleSetsLabel.Name = "visibleSetsLabel";
+            this.visibleSetsLabel.Size = new System.Drawing.Size(13, 13);
+            this.visibleSetsLabel.TabIndex = 5;
+            this.visibleSetsLabel.Text = "0";
+            // 
             // totalSetsLabel
             // 
             this.totalSetsLabel.AutoSize = true;
-            this.totalSetsLabel.Location = new System.Drawing.Point(80, 20);
+            this.totalSetsLabel.Location = new System.Drawing.Point(58, 40);
             this.totalSetsLabel.Name = "totalSetsLabel";
             this.totalSetsLabel.Size = new System.Drawing.Size(13, 13);
             this.totalSetsLabel.TabIndex = 1;
@@ -546,7 +570,7 @@
             // 
             this.resetFilteringToolStripMenuItem.Name = "resetFilteringToolStripMenuItem";
             this.resetFilteringToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.resetFilteringToolStripMenuItem.Text = "Reset Filtering (WIP)";
+            this.resetFilteringToolStripMenuItem.Text = "Reset Column Filters";
             this.resetFilteringToolStripMenuItem.Click += new System.EventHandler(this.resetFilteringToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
@@ -642,5 +666,7 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel2;
         private System.Windows.Forms.Label selectedSetsLabel;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label visibleSetsLabel;
+        private System.Windows.Forms.Label label3;
     }
 }

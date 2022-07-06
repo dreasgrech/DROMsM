@@ -133,7 +133,7 @@ namespace DROMsM.Forms
 
             Text = $@"DAT File Viewer - {datFilePath}";
             datFilePathLabel.Text = datFilePath;
-            totalSetsLabel.Text = datFile.TotalMachines.ToString();
+            totalSetsLabel.Text = StringUtilities.AddCommasToNumber(datFile.TotalMachines);
             var build = datFile.Build;
             // mameInfoTable.Visible = !string.IsNullOrEmpty(build);
             buildLabel.Text = build;
@@ -389,11 +389,10 @@ namespace DROMsM.Forms
 
         private void resetFilteringToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // TODO: Still need to implement this
-            MessageBoxOperations.ShowInformation("Not implemented yet", "Work in Progress");
+            olvDatFileListView.ResetColumnFiltering();
 
-            // olvDatFileListView.ResetColumnFiltering();
-
+            // MessageBoxOperations.ShowInformation("Not implemented yet", "Work in Progress");
+            // Reset sorting
             // olvDatFileListView.Sorting = SortOrder.None;
             //olvDatFileListView.Sort(olvDatFileListView.LastSortColumn, SortOrder.None);
             //olvDatFileListView.ListViewItemSorter = new DatFileMachineComparer_MAMEIndex();
@@ -436,13 +435,16 @@ namespace DROMsM.Forms
 
         private void olvDatFileListView_SelectionChanged(object sender, EventArgs e)
         {
+            // Update the total number of selected rom sets in the grid
             var olvDatFileListViewSelectedObjects = olvDatFileListView.SelectedObjects;
-            if (olvDatFileListViewSelectedObjects == null)
-            {
-                return;
-            }
+            selectedSetsLabel.Text = StringUtilities.AddCommasToNumber(olvDatFileListViewSelectedObjects.Count);
+        }
 
-            selectedSetsLabel.Text = olvDatFileListViewSelectedObjects.Count.ToString();
+        private void olvDatFileListView_ItemsChanged(object sender, ItemsChangedEventArgs e)
+        {
+            // Update the total number of visible rom sets in the grid
+            var olvDatFileListViewVisibleObjects = olvDatFileListView.Items;
+            visibleSetsLabel.Text = StringUtilities.AddCommasToNumber(olvDatFileListViewVisibleObjects.Count);
         }
     }
 }

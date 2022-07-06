@@ -22,5 +22,10 @@ namespace DRomsMUtils
         {
             return System.Web.HttpUtility.HtmlDecode(text);
         }
+
+        public static string AddCommasToNumber(int numberText)
+        {
+            return $"{numberText:n0}";
+        }
     }
 }
