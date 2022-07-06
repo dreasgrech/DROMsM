@@ -11,6 +11,7 @@ DROMsM is a Windows application written in C# WinForms that exposes several help
 - Combine multiple bin files into a single bin file.
 - Given a list containing rom filenames, remove all the matching files from the romset.
 - Show or hide entire LaunchBox platforms
+- Batch create MAME ini files from a filtered DAT file
 
 #### Main Operations Window
 
@@ -19,6 +20,10 @@ DROMsM is a Windows application written in C# WinForms that exposes several help
 #### Viewing or modifying a DAT File
 
 ![DAT File Viewer](https://user-images.githubusercontent.com/501697/170152398-8bcc2b30-13e9-48f0-9ccd-c196d96fed47.png)
+
+#### Batch creating MAME ini files
+
+![Create MAME ini files](https://user-images.githubusercontent.com/501697/177038137-26023957-e228-4606-83d9-e91b68aec1ac.png)
 
 
 #### Showing/Hiding LaunchBox Platforms
