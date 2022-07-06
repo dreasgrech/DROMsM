@@ -49,8 +49,6 @@ namespace DROMsM
 
             var usedFieldsCollection = new bool[datFileMachineFieldValues.Length];
 
-            var datFileMachineCollection_threaded = new ConcurrentQueue<DATFileMachine>();
-
             /*
              * This is a workaround I wrote to handle the issue of U8XmlParser not currently being able to handle external doctypes.
              *
@@ -113,11 +111,9 @@ namespace DROMsM
             var machineNodeChildren = rootNode.Children;
             var machineNodeChildrenCount = machineNodeChildren.Count;
             var machineNodeChildrenEnumerable = (IEnumerable<XmlNode>) machineNodeChildren;
-            // var machineNodeChildren = (IEnumerable<XmlNode>)rootNode.Children;
             if (machineNodeChildrenCount > 0)
             {
                 // Some dat files use the first node as a header
-                // var firstMachineNode = machineNodeChildren.First();
                 var firstMachineNode = machineNodeChildrenEnumerable.First();
                 if (string.Equals(firstMachineNode.Name.ToString(), "header", StringComparison.OrdinalIgnoreCase))
                 {
@@ -152,6 +148,8 @@ namespace DROMsM
                     machineNodeChildrenEnumerable = machineNodeChildrenEnumerable.Skip(1);
                 }
             }
+
+            var datFileMachineCollection_threaded = new ConcurrentQueue<DATFileMachine>();
 
             Parallel.ForEach(machineNodeChildrenEnumerable, (machineNode, parallelLoopState, index) =>
             {
@@ -270,13 +268,6 @@ namespace DROMsM
 
                 });
 
-                /*
-                // Add the machine to the entries list if it's not considered a DEVICE.
-                if (!datFileMachine.IsDevice)
-                {
-                    datFileMachineCollection_threaded.Add(datFileMachine);
-                }
-                */
                 datFileMachineCollection_threaded.Enqueue(datFileMachine);
             });
 
