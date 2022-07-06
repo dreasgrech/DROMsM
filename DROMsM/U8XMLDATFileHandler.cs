@@ -49,7 +49,7 @@ namespace DROMsM
 
             var usedFieldsCollection = new bool[datFileMachineFieldValues.Length];
 
-            var datFileMachineCollection_threaded = new ConcurrentBag<DATFileMachine>();
+            var datFileMachineCollection_threaded = new ConcurrentQueue<DATFileMachine>();
 
             /*
              * This is a workaround I wrote to handle the issue of U8XmlParser not currently being able to handle external doctypes.
@@ -277,7 +277,7 @@ namespace DROMsM
                     datFileMachineCollection_threaded.Add(datFileMachine);
                 }
                 */
-                datFileMachineCollection_threaded.Add(datFileMachine);
+                datFileMachineCollection_threaded.Enqueue(datFileMachine);
             });
 
             xml.Dispose();
