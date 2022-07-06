@@ -1,4 +1,5 @@
-﻿
+﻿// #define USE_STRINGS
+
 public enum DATFileMachineScreenOrientation
 {
     Unknown,
@@ -28,12 +29,36 @@ public class DATFileMachine
     public string ScreenType; // { get; set; }
     public DATFileMachineScreenOrientation ScreenOrientation; // { get; set; }
     public string ScreenRefreshRate; // { get; set; }
+#if USE_STRINGS
     public string IsBIOS; // { get; set; }
+#else
+    public bool IsBIOS; // { get; set; }
+#endif
+#if USE_STRINGS
     public string IsClone; // { get; set; }
+#else
+    public bool IsClone; // { get; set; }
+#endif
+#if USE_STRINGS
     public string IsMechanical; // { get; set; }
+#else
+    public bool IsMechanical; // { get; set; }
+#endif
+#if USE_STRINGS
     public string RequireCHDs; // { get; set; }
+#else
+    public bool RequireCHDs; // { get; set; }
+#endif
+#if USE_STRINGS
     public string RequireSamples; // { get; set; } 
+#else
+    public bool RequireSamples; // { get; set; } 
+#endif
+#if USE_STRINGS
     public string IsDevice; // { get; set; }
+#else
+    public bool IsDevice; // { get; set; }
+#endif
 
     public int MAMESortingIndex; // { get; set; }
     public string XMLValue; // { get; set; }

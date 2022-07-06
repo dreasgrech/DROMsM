@@ -1,4 +1,6 @@
-﻿using System;
+﻿// #define USE_STRINGS
+
+using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Linq;
@@ -131,12 +133,36 @@ namespace DROMsM
                 {
                     MAMESortingIndex = (int) index,
                     ScreenOrientation = DATFileMachineScreenOrientation.Horizontal, // By default, set the orientation to Horizontal because any machines that have no reference to orientation are categorized as Horizontal in the MAME emulator
+#if USE_STRINGS
                     RequireSamples = FalseBooleanValue,
+#else
+                    RequireSamples = false,
+#endif
+#if USE_STRINGS
                     IsMechanical = FalseBooleanValue,
+#else
+                    IsMechanical = false,
+#endif
+#if USE_STRINGS
                     IsClone = FalseBooleanValue,
+#else
+                    IsClone = false,
+#endif
+#if USE_STRINGS
                     RequireCHDs = FalseBooleanValue,
+#else
+                    RequireCHDs = false,
+#endif
+#if USE_STRINGS
                     IsBIOS = FalseBooleanValue,
+#else
+                    IsBIOS = false,
+#endif
+#if USE_STRINGS
                     IsDevice = FalseBooleanValue,
+#else
+                    IsDevice = false,
+#endif
                     XMLValue = machineNode.AsRawString().ToString(),
                 };
 
@@ -150,7 +176,11 @@ namespace DROMsM
                 {
                     if (string.Equals(isBIOSAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
                     {
+#if USE_STRINGS
                         datFileMachine.IsBIOS = TrueBooleanValue;
+#else
+                        datFileMachine.IsBIOS = true;
+#endif
                         usedFieldsCollection[(int) DATFileMachineField.IsBIOS] = true;
                     }
                 }
@@ -159,14 +189,22 @@ namespace DROMsM
                 {
                     if (string.Equals(isMechanicalAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
                     {
+#if USE_STRINGS
                         datFileMachine.IsMechanical = TrueBooleanValue;
+#else
+                        datFileMachine.IsMechanical = true;
+#endif
                         usedFieldsCollection[(int) DATFileMachineField.IsMechanical] = true;
                     }
                 }
 
                 if (machineNode.TryFindAttribute("cloneof", out var cloneOfAttribute))
                 {
+#if USE_STRINGS
                     datFileMachine.IsClone = TrueBooleanValue;
+#else
+                    datFileMachine.IsClone = true;
+#endif
                     usedFieldsCollection[(int) DATFileMachineField.IsClone] = true;
                 }
 
@@ -174,7 +212,11 @@ namespace DROMsM
                 {
                     if (string.Equals(isDeviceAttribute.Value.ToString(), "yes", StringComparison.OrdinalIgnoreCase))
                     {
+#if USE_STRINGS
                         datFileMachine.IsDevice = TrueBooleanValue;
+#else
+                        datFileMachine.IsDevice = true;
+#endif
                         usedFieldsCollection[(int) DATFileMachineField.IsDevice] = true;
                     }
                 }
@@ -183,7 +225,11 @@ namespace DROMsM
                 {
                     if (string.Equals(runnableAttribute.Value.ToString(), "no", StringComparison.OrdinalIgnoreCase))
                     {
+#if USE_STRINGS
                         datFileMachine.IsDevice = TrueBooleanValue;
+#else
+                        datFileMachine.IsDevice = true;
+#endif
                         usedFieldsCollection[(int) DATFileMachineField.IsDevice] = true;
                     }
                 }
@@ -223,13 +269,21 @@ namespace DROMsM
                             break;
                         case "disk":
                         {
+#if USE_STRINGS
                             datFileMachine.RequireCHDs = TrueBooleanValue;
+#else
+                            datFileMachine.RequireCHDs = true;
+#endif
                             usedFieldsCollection[(int) DATFileMachineField.RequireCHDs] = true;
                         }
                             break;
                         case "sample":
                         {
+#if USE_STRINGS
                             datFileMachine.RequireSamples = TrueBooleanValue;
+#else
+                            datFileMachine.RequireSamples = true;
+#endif
                             usedFieldsCollection[(int) DATFileMachineField.RequireSamples] = true;
                         }
                             break;
