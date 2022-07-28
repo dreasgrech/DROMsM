@@ -446,5 +446,15 @@ namespace DROMsM.Forms
             var olvDatFileListViewVisibleObjects = olvDatFileListView.Items;
             visibleSetsLabel.Text = StringUtilities.AddCommasToNumber(olvDatFileListViewVisibleObjects.Count);
         }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            olvDatFileListView.SelectAll();
+        }
+
+        private void selectNoneToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            olvDatFileListView.DeselectAll();
+        }
     }
 }

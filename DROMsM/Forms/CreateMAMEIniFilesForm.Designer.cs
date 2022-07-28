@@ -162,6 +162,7 @@ namespace DROMsM.Forms
             this.Controls.Add(this.label2);
             this.Controls.Add(this.createINIFilesButton);
             this.Controls.Add(this.totalRomsSelectedLabel);
+            this.MinimizeBox = false;
             this.Name = "CreateMAMEIniFilesForm";
             this.Text = "Create MAME ini files";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CreateMAMEIniFilesForm_FormClosing);
