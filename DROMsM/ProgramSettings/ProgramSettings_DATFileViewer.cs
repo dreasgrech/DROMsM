@@ -32,11 +32,14 @@
     {
         public string LastSelectedIniCreationPath { get; set; }
         public bool OverwriteExistingIniFiles { get; set; }
+        public bool OnlyUpdateDifferentValues{ get; set; }
+
 
         public ProgramSettings_DatFileViewer_CreateMAMEIniFiles()
         {
             LastSelectedIniCreationPath = string.Empty;
             OverwriteExistingIniFiles = false;
+            OnlyUpdateDifferentValues= false;
         }
     }
 }

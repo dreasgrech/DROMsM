@@ -1,17 +1,16 @@
-﻿using System;
+﻿// #define SINGLE_THREAD
+
+using DROMsM.ProgramSettings;
+using DRomsMUtils;
+using DROMsMUtils;
+using Frontend;
+using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using DROMsM.ProgramSettings;
-using DRomsMUtils;
-using Frontend;
 
 namespace DROMsM.Forms
 {
@@ -29,16 +28,19 @@ namespace DROMsM.Forms
             createMAMEIniFilesSettings = datFileViewerSettings.CreateMAMEIniFilesSettings;
 
             overwriteExistingIniFilesOption.Checked = createMAMEIniFilesSettings.OverwriteExistingIniFiles;
+            onlyUpdateDifferentValuesOption.Checked = createMAMEIniFilesSettings.OnlyUpdateDifferentValues;
+
+            HandleOptionsVisibility();
         }
 
-        public CreateMAMEIniFilesForm(IList datFileMachineList):this()
+        public CreateMAMEIniFilesForm(IList datFileMachineList) : this()
         {
             machinesList = datFileMachineList;
 
             totalRomsSelectedLabel.Text = $"{machinesList.Count} roms selected.";
         }
 
-        private void createINIFilesButton_Click(object sender, EventArgs e)
+        private void CreateFiles()
         {
             // Show a folder browser dialog so we can select a folder where to save the ini files to
             string chosenDirectory;
@@ -51,15 +53,29 @@ namespace DROMsM.Forms
                     return;
                 }
 
-                chosenDirectory = createMAMEIniFilesSettings.LastSelectedIniCreationPath = folderBrowserDialog.SelectedPath;
+                chosenDirectory = folderBrowserDialog.SelectedPath;
+
+                createMAMEIniFilesSettings.LastSelectedIniCreationPath = chosenDirectory;
+                ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
             }
 
             var overwriteExistingIniFiles = overwriteExistingIniFilesOption.Checked;
+            var onlyUpdateDifferentValues = onlyUpdateDifferentValuesOption.Checked;
 
             // Show a confirmation before creating any files
-            var confirmationMessage = $"Are you sure you want to create {machinesList.Count} ini files in {chosenDirectory}?{Environment.NewLine}" +
+            var confirmationMessage = $"Are you sure you want to create {machinesList.Count} ini files in {chosenDirectory}?" +
                                       $"{Environment.NewLine}" +
-                                      $"Existing files will{(!overwriteExistingIniFiles?" not":"")} be overwritten.";
+                                      $"{Environment.NewLine}" +
+                                      $"Existing files will{(!overwriteExistingIniFiles ? " not" : "")} be overwritten.";
+
+            if (onlyUpdateDifferentValues)
+            {
+                confirmationMessage = $"{confirmationMessage}" +
+                                      $"{Environment.NewLine}" +
+                                      $"{Environment.NewLine}" +
+                                      $"Only different values will be updated in existing files, comments will be ignored.";
+            }
+
             var confirmResult = MessageBoxOperations.ShowConfirmation(confirmationMessage, $"Creating {machinesList.Count} ini files");
             if (!confirmResult)
             {
@@ -67,10 +83,25 @@ namespace DROMsM.Forms
             }
 
             var contentForIniFilesText = contentForIniFiles.Text;
-            int totalFilesCreated = 0;
+
+            // Remove the newline characters
+            // https://stackoverflow.com/questions/5843495/what-does-m-character-mean-in-vim
+            // https://stackoverflow.com/questions/873043/removing-carriage-return-and-new-line-from-the-end-of-a-string-in-c-sharp
+            contentForIniFilesText = contentForIniFilesText.TrimEnd('\r', '\n');
+
+            int totalFilesCreated = 0,
+                totalFilesUpdated = 0;
+
+            var mameIniFileHandler = new MAMEIniFileHandler();
+            var contentForIniFilesLines = contentForIniFiles.Lines;
+            var contentForIniFilesLinesMAMEIniFile = mameIniFileHandler.ParseMAMEIniLines(contentForIniFilesLines);
 
             var listForParallel = machinesList.Cast<DATFileMachine>();
+#if SINGLE_THREAD
+            foreach (var datFileMachine in listForParallel)
+#else
             Parallel.ForEach(listForParallel, datFileMachine =>
+#endif
             {
                 var fileName = $"{datFileMachine.Name}.ini";
 
@@ -80,15 +111,38 @@ namespace DROMsM.Forms
                     var iniFileAlreadyExists = FileUtilities.FileExists(filePath);
                     if (iniFileAlreadyExists)
                     {
+                        // If we're not overwriting existing ini files, then don't do anything with this file
                         if (!overwriteExistingIniFiles)
                         {
                             Logger.LogError($"Skipping {fileName} because the file already exists");
-                            // continue;
+#if SINGLE_THREAD
+                            continue;
+#else
                             return;
+#endif
+                        }
+
+                        // If we're only updating values for existing ini files, then read the existing file and update the values
+                        if (onlyUpdateDifferentValues)
+                        {
+                            // Read the existing ini file data
+                            var iniFile = mameIniFileHandler.ParseMAMEIniFile(filePath);
+
+                            // Apply the changes to the existing ini file data
+                            iniFile.ApplyChanges(contentForIniFilesLinesMAMEIniFile);
+
+                            mameIniFileHandler.SaveMAMEIniFileToDisk(iniFile, filePath);
+
+                            Interlocked.Increment(ref totalFilesUpdated);
+#if SINGLE_THREAD
+                            continue;
+#else
+                            return;
+#endif
                         }
                     }
 
-                    // Create the ini file
+                    // Create the ini file and write the text in it
                     FileUtilities.WriteAllText(filePath, contentForIniFilesText);
                     Interlocked.Increment(ref totalFilesCreated);
                 }
@@ -96,26 +150,79 @@ namespace DROMsM.Forms
                 {
                     Logger.LogError($"An error has occured while trying to create the ini file: {fileName}{Environment.NewLine}{ex.Message}{Environment.NewLine}");
                 }
+#if SINGLE_THREAD
+            }
+#else
             });
+#endif
 
-            if (totalFilesCreated == 0)
+            var totalFilesTouched = totalFilesCreated + totalFilesUpdated;
+            if (totalFilesTouched == 0)
             {
-                var errorMessage = "Unable to create any ini files";
-                MessageBoxOperations.ShowError(errorMessage, "No ini files created");
+                var errorMessage = "Unable to create or update any ini files";
+                MessageBoxOperations.ShowError(errorMessage, "No ini files created or updated");
                 Logger.Log(errorMessage);
 
                 return;
             }
 
-            var successMessage = $"Successfully created {totalFilesCreated} ini files";
-            MessageBoxOperations.ShowInformation(successMessage, $"Created {totalFilesCreated} files");
+            string successMessage = string.Empty;
+            if (totalFilesCreated > 0)
+            {
+                successMessage = $"Created {totalFilesCreated} ini files{Environment.NewLine}";
+            }
+
+            if (totalFilesUpdated > 0)
+            {
+                successMessage = $"{successMessage}Updated existing {totalFilesUpdated} ini files";
+            }
+
+            MessageBoxOperations.ShowInformation(successMessage, $"Created {totalFilesCreated} files and updated {totalFilesUpdated} existing files");
             Logger.Log(successMessage);
+        }
+
+        private void HandleOptionsVisibility()
+        {
+            var overwriteExistingIniFiles = overwriteExistingIniFilesOption.Checked;
+
+            // Only have the "Only Update Different Values" option enabled if the "Overwrite Existing ini files" is enabled
+            onlyUpdateDifferentValuesOption.Enabled = overwriteExistingIniFiles;
+
+            // If we're not overwriting existing files, don't allow the "Only Update Different Values" option to be checked
+            if (!overwriteExistingIniFiles)
+            {
+                onlyUpdateDifferentValuesOption.Checked = false;
+            }
+        }
+
+        private void createINIFilesButton_Click(object sender, EventArgs e)
+        {
+            CreateFiles();
+        }
+
+        private void overwriteExistingIniFilesOption_CheckedChanged(object sender, EventArgs e)
+        {
+            HandleOptionsVisibility();
+        }
+
+        private void overwriteExistingIniFilesOptionLabel_Click(object sender, EventArgs e)
+        {
+            overwriteExistingIniFilesOption.Checked = !overwriteExistingIniFilesOption.Checked;
+        }
+
+        private void onlyUpdateDifferentValuesOptionLabel_Click(object sender, EventArgs e)
+        {
+            if (onlyUpdateDifferentValuesOption.Enabled)
+            {
+                onlyUpdateDifferentValuesOption.Checked = !onlyUpdateDifferentValuesOption.Checked;
+            }
         }
 
         private void CreateMAMEIniFilesForm_FormClosing(object sender, FormClosingEventArgs e)
         {
             // Save our options before closing
             createMAMEIniFilesSettings.OverwriteExistingIniFiles = overwriteExistingIniFilesOption.Checked;
+            createMAMEIniFilesSettings.OnlyUpdateDifferentValues = onlyUpdateDifferentValuesOption.Checked;
             ProjectSettingsManager.UpdateProgramSettings(ProgramSettingsType.DATFileViewer);
         }
     }
