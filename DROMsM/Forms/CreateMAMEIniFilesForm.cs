@@ -131,6 +131,7 @@ namespace DROMsM.Forms
                             // Apply the changes to the existing ini file data
                             iniFile.ApplyChanges(contentForIniFilesLinesMAMEIniFile);
 
+                            // Write the updated ini file to disk
                             mameIniFileHandler.SaveMAMEIniFileToDisk(iniFile, filePath);
 
                             Interlocked.Increment(ref totalFilesUpdated);
@@ -142,8 +143,9 @@ namespace DROMsM.Forms
                         }
                     }
 
-                    // Create the ini file and write the text in it
+                    // Create the ini file on the disk and write the text in it
                     FileUtilities.WriteAllText(filePath, contentForIniFilesText);
+
                     Interlocked.Increment(ref totalFilesCreated);
                 }
                 catch (Exception ex)

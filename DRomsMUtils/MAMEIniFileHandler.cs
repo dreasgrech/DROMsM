@@ -167,13 +167,15 @@ namespace DROMsMUtils
 
         public MAMEIniFile ParseMAMEIniLines(IEnumerable<string> fileLinesEnumerable)
         {
-            var fieldsDictionary_threaded = new ConcurrentDictionary<string, string>();
-            var allLines_threaded = new ConcurrentQueue<MAMEIniFileLine>();
+            // var fieldsDictionary_threaded = new ConcurrentDictionary<string, string>();
             // var totalFileCharacters = 0;
+            var allLines_threaded = new ConcurrentQueue<MAMEIniFileLine>();
 
-            Parallel.ForEach(fileLinesEnumerable, (line, _, ln) =>
+            Parallel.ForEach(fileLinesEnumerable, (line, parallelLoopState, ln) =>
             {
                 var lineNumber = (int) ln;
+
+                // Check if this is an empty line
                 if (string.IsNullOrEmpty(line))
                 {
                     allLines_threaded.Enqueue(new MAMEIniFileEmptyLine(lineNumber, line));
@@ -184,11 +186,11 @@ namespace DROMsMUtils
                 var trimmedLine = line.Trim();
                 var firstLetter = trimmedLine[0];
 
-                // Skip comment lines
                 var isComment =
                     firstLetter == CommentCharacterHash ||
                     firstLetter == CommentCharacterSemicolon;
 
+                // Check if this line is a comment
                 if (isComment)
                 {
                     allLines_threaded.Enqueue(new MAMEIniFileCommentLine(lineNumber, line));
@@ -239,9 +241,8 @@ namespace DROMsMUtils
                 // Interlocked.Add(ref totalFileCharacters, line.Length);
 
                 // Save the field data
-                fieldsDictionary_threaded[lineKey] = lineValue;
+                // fieldsDictionary_threaded[lineKey] = lineValue;
             });
-
 
             // var allLines = allLines_threaded.ToList();
 
@@ -261,7 +262,6 @@ namespace DROMsMUtils
             allLines.Sort(new MAMEIniFileLineComparer_LineNumber());
 
             var mameIniFile = new MAMEIniFile(allLines, valueLines);
-
             return mameIniFile;
         }
 
