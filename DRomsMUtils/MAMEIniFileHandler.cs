@@ -145,7 +145,8 @@ namespace DROMsMUtils
 
     public class MAMEIniFileHandler
     {
-        private const char CommentCharacter = '#';
+        private const char CommentCharacterHash = '#';
+        private const char CommentCharacterSemicolon = ';';
 
         public MAMEIniFile ParseMAMEIniText(string text)
         {
@@ -184,7 +185,10 @@ namespace DROMsMUtils
                 var firstLetter = trimmedLine[0];
 
                 // Skip comment lines
-                var isComment = firstLetter == CommentCharacter;
+                var isComment =
+                    firstLetter == CommentCharacterHash ||
+                    firstLetter == CommentCharacterSemicolon;
+
                 if (isComment)
                 {
                     allLines_threaded.Enqueue(new MAMEIniFileCommentLine(lineNumber, line));
@@ -201,8 +205,11 @@ namespace DROMsMUtils
                 {
                     var lineChar = trimmedLine[i];
                     var isCharWhiteSpace = char.IsWhiteSpace(lineChar);
+
+                    // If we haven't yet fully found the key, continue searching for it
                     if (!lineKeyFound)
                     {
+                        // If this character is a whitespace, then it means we've just fully read the key
                         if (isCharWhiteSpace)
                         {
                             lineSpacer += lineChar;
@@ -210,6 +217,7 @@ namespace DROMsMUtils
                             continue;
                         }
 
+                        // Since this character is not whitespace, then this character is part of the key
                         lineKey += lineChar;
                         continue;
                     }
@@ -221,7 +229,7 @@ namespace DROMsMUtils
                         continue;
                     }
 
-                    // If this character is not whitespace, then we've found the first character of the key
+                    // If this character is not whitespace, then we've found the first character of the value so read the rest of the line as the value
                     lineValue = trimmedLine.Substring(i);
                     break;
                 }
