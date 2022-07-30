@@ -147,6 +147,7 @@ namespace DROMsMUtils
     {
         private const char CommentCharacterHash = '#';
         private const char CommentCharacterSemicolon = ';';
+        private const char EqualityCharacter = '=';
 
         public MAMEIniFile ParseMAMEIniText(string text)
         {
@@ -206,7 +207,9 @@ namespace DROMsMUtils
                 for (int i = 0; i < trimmedLine.Length; i++)
                 {
                     var lineChar = trimmedLine[i];
-                    var isCharWhiteSpace = char.IsWhiteSpace(lineChar);
+                    var isCharWhiteSpace =
+                        char.IsWhiteSpace(lineChar) ||
+                        lineChar == EqualityCharacter;
 
                     // If we haven't yet fully found the key, continue searching for it
                     if (!lineKeyFound)
