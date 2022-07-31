@@ -15,6 +15,7 @@ namespace DROMsMUtils
     {
         public int LineNumber { get; }
         public string FullLine { get; protected set; }
+        public MAMEIniFileSectionLine SectionLine { get; set; }
 
         public MAMEIniFileLine(int lineNumber, string fullLine)
         {
@@ -68,6 +69,16 @@ namespace DROMsMUtils
         }
     }
 
+    public class MAMEIniFileSectionLine : MAMEIniFileLine
+    {
+        public string SectionName { get; }
+
+        public MAMEIniFileSectionLine(int lineNumber, string fullLine, string sectionName) : base(lineNumber, fullLine)
+        {
+            SectionName = sectionName;
+        }
+    }
+
     public class MAMEIniFile
     {
         public List<MAMEIniFileLine> AllLines; // { get; set; }
@@ -92,15 +103,20 @@ namespace DROMsMUtils
 
                 if (!ValueLines.ContainsKey(otherFileValueLineKey))
                 {
-                    var lineNumber = AllLines[AllLines.Count - 1].LineNumber + 1;
-                    var newLine = new MAMEIniFileDataLine(lineNumber, otherFileValueLineKey, otherFileValueLine.Value, otherFileValueLine.Spacer, otherFileValueLine.FullLine);
+                    var lastLine = AllLines[AllLines.Count - 1];
+                    var newLineNumber = lastLine.LineNumber + 1;
+                    var newLine = new MAMEIniFileDataLine(newLineNumber, otherFileValueLineKey, otherFileValueLine.Value, otherFileValueLine.Spacer, otherFileValueLine.FullLine)
+                    {
+                        // SectionLine = otherFileValueLine.SectionLine
+                        SectionLine = lastLine.SectionLine // Use the section from the previous line
+                    };
+
                     AllLines.Add(newLine);
                     ValueLines.Add(otherFileValueLineKey, newLine);
                 }
                 else
                 {
                     var valueLine = ValueLines[otherFileValueLineKey];
-                    // valueLine.Value = otherFileValueLine.Value;
                     valueLine.UpdateValue(otherFileValueLine.Value);
                     ValueLines[otherFileValueLineKey] = valueLine;
                 }
@@ -112,30 +128,6 @@ namespace DROMsMUtils
             var sb = new StringBuilder();
             foreach (var line in AllLines)
             {
-                /*
-                if (line is MAMEIniFileEmptyLine)
-                {
-                    sb.AppendLine();
-                    continue;
-                }
-
-                if (line is MAMEIniFileCommentLine commentLine)
-                {
-                    sb.AppendLine(commentLine.FullLine);
-                    continue;
-                }
-
-                if (line is MAMEIniFileDataLine dataLine)
-                {
-                    var key = dataLine.Key;
-                    var spacer = dataLine.Spacer;
-                    // var value = dataLine.Value;
-                    // var value = Values[key]; // Make sure to get the value from the Values collection since that contains the fresh values
-                    var value = dataLine.Value;
-                    sb.AppendLine($"{key}{spacer}{value}");
-                }
-                */
-
                 sb.AppendLine(line.FullLine);
             }
 
@@ -148,6 +140,8 @@ namespace DROMsMUtils
         private const char CommentCharacterHash = '#';
         private const char CommentCharacterSemicolon = ';';
         private const char EqualityCharacter = '=';
+        private const char SectionStartCharacter = '[';
+        private const char SectionEndCharacter = ']';
 
         public MAMEIniFile ParseMAMEIniText(string text)
         {
@@ -180,6 +174,7 @@ namespace DROMsMUtils
                 if (string.IsNullOrEmpty(line))
                 {
                     allLines_threaded.Enqueue(new MAMEIniFileEmptyLine(lineNumber, line));
+
                     // Interlocked.Increment(ref totalFileCharacters);
                     return;
                 }
@@ -195,6 +190,19 @@ namespace DROMsMUtils
                 if (isComment)
                 {
                     allLines_threaded.Enqueue(new MAMEIniFileCommentLine(lineNumber, line));
+
+                    // Interlocked.Add(ref totalFileCharacters, line.Length);
+                    return;
+                }
+
+                // Check if this line is a [Section]
+                var isSection = firstLetter == SectionStartCharacter;
+                if (isSection)
+                {
+                    var sectionName = trimmedLine.Substring(1, trimmedLine.IndexOf(SectionEndCharacter) - 1);
+                    var sectionLine = new MAMEIniFileSectionLine(lineNumber, line, sectionName);
+                    allLines_threaded.Enqueue(sectionLine);
+
                     // Interlocked.Add(ref totalFileCharacters, line.Length);
                     return;
                 }
@@ -247,22 +255,47 @@ namespace DROMsMUtils
                 // fieldsDictionary_threaded[lineKey] = lineValue;
             });
 
-            // var allLines = allLines_threaded.ToList();
-
             var allLines = new List<MAMEIniFileLine>(allLines_threaded.Count);
             var valueLines = new Dictionary<string, MAMEIniFileDataLine>(allLines_threaded.Count, EqualityComparer<string>.Default);
 
+            // Go through the unsorted collection of lines and start adding them to our list which will be sorted after
             while (allLines_threaded.TryDequeue(out MAMEIniFileLine line))
             {
                 allLines.Add(line);
 
                 if (line is MAMEIniFileDataLine valueLine)
                 {
-                    valueLines[valueLine.Key] = valueLine;
+                    var key = valueLine.Key;
+
+                    // Make sure we don't have duplicate keys
+                    if (valueLines.TryGetValue(key, out var existingValueLine))
+                    {
+                        var errorMessage = $"Duplicate keys are not supported.{Environment.NewLine}" +
+                                           $"{Environment.NewLine}" +
+                                           $"Key '{key}' found on lines {existingValueLine.LineNumber} and {valueLine.LineNumber}";
+                        MessageBoxOperations.ShowError(errorMessage, "Keys need to be unique");
+                        return null;
+                    }
+
+                    valueLines[key] = valueLine;
                 }
             }
 
+            // Sort the lines according to their line number
             allLines.Sort(new MAMEIniFileLineComparer_LineNumber());
+
+            // Set the sections to the lines
+            MAMEIniFileSectionLine currentSectionLine = null;
+            foreach (var line in allLines)
+            {
+                if (line is MAMEIniFileSectionLine sectionLine)
+                {
+                    currentSectionLine = sectionLine;
+                    continue;
+                }
+
+                line.SectionLine = currentSectionLine;
+            }
 
             var mameIniFile = new MAMEIniFile(allLines, valueLines);
             return mameIniFile;

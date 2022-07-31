@@ -63,17 +63,16 @@ namespace DROMsM.Forms
             var onlyUpdateDifferentValues = onlyUpdateDifferentValuesOption.Checked;
 
             // Show a confirmation before creating any files
-            var confirmationMessage = $"Are you sure you want to create {machinesList.Count} ini files in {chosenDirectory}?" +
-                                      $"{Environment.NewLine}" +
+            var confirmationMessage = $"Are you sure you want to create {machinesList.Count} ini files in {chosenDirectory}?" + $"{Environment.NewLine}" +
                                       $"{Environment.NewLine}" +
                                       $"Existing files will{(!overwriteExistingIniFiles ? " not" : "")} be overwritten.";
 
             if (onlyUpdateDifferentValues)
             {
-                confirmationMessage = $"{confirmationMessage}" +
+                confirmationMessage = $"{confirmationMessage}" + $"{Environment.NewLine}" +
                                       $"{Environment.NewLine}" +
-                                      $"{Environment.NewLine}" +
-                                      $"Only different values will be updated in existing files, comments will be ignored.";
+                                      $"Only different values will be updated in existing files.{Environment.NewLine}" +
+                                      "# and ; comments and [Section]s will be ignored from your inputted text.";
             }
 
             var confirmResult = MessageBoxOperations.ShowConfirmation(confirmationMessage, $"Creating {machinesList.Count} ini files");
@@ -95,6 +94,10 @@ namespace DROMsM.Forms
             var mameIniFileHandler = new MAMEIniFileHandler();
             var contentForIniFilesLines = contentForIniFiles.Lines;
             var contentForIniFilesLinesMAMEIniFile = mameIniFileHandler.ParseMAMEIniLines(contentForIniFilesLines);
+            if (contentForIniFilesLinesMAMEIniFile == null)
+            {
+                return;
+            }
 
             var listForParallel = machinesList.Cast<DATFileMachine>();
 #if SINGLE_THREAD
