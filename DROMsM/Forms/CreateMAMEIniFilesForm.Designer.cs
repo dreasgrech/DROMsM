@@ -59,7 +59,7 @@ namespace DROMsM.Forms
             this.createINIFilesButton.Name = "createINIFilesButton";
             this.createINIFilesButton.Size = new System.Drawing.Size(117, 23);
             this.createINIFilesButton.TabIndex = 2;
-            this.createINIFilesButton.Text = "Create ini files";
+            this.createINIFilesButton.Text = "Create ini files...";
             this.createINIFilesButton.UseVisualStyleBackColor = true;
             this.createINIFilesButton.Click += new System.EventHandler(this.createINIFilesButton_Click);
             // 
