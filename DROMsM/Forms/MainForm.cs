@@ -11,11 +11,6 @@ using Frontend;
 
 namespace DROMsM.Forms
 {
-    public enum TreeViewROMDirectoryDisplayNameType
-    {
-        FullPath
-    }
-
     public partial class MainForm : Form
     {
         /// <summary>
