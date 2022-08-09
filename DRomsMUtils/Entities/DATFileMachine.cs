@@ -29,6 +29,10 @@ public class DATFileMachine
     public string ScreenType; // { get; set; }
     public DATFileMachineScreenOrientation ScreenOrientation; // { get; set; }
     public string ScreenRefreshRate; // { get; set; }
+    // public string ScreenWidth; // { get; set; }
+    public int ScreenWidth; // { get; set; } // This is set as an int so that it gets correctly sorted in the grid
+    // public string ScreenHeight; // { get; set; }
+    public int ScreenHeight; // { get; set; } // This is set as an int so that it gets correctly sorted in the grid
 #if USE_STRINGS
     public string IsBIOS; // { get; set; }
 #else

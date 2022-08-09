@@ -81,6 +81,8 @@
             this.resetFilteringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createMAMEIniFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.olvScreenWidth = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvScreenHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -134,6 +136,8 @@
             this.olvDatFileListView.AllColumns.Add(this.olvPlayersColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvCoinsColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvScreenTypeColumn);
+            this.olvDatFileListView.AllColumns.Add(this.olvScreenWidth);
+            this.olvDatFileListView.AllColumns.Add(this.olvScreenHeight);
             this.olvDatFileListView.AllColumns.Add(this.olvScreenOrientationColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvScreenRefreshRateColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvIsCloneColumn);
@@ -157,6 +161,8 @@
             this.olvPlayersColumn,
             this.olvCoinsColumn,
             this.olvScreenTypeColumn,
+            this.olvScreenWidth,
+            this.olvScreenHeight,
             this.olvScreenOrientationColumn,
             this.olvScreenRefreshRateColumn,
             this.olvIsCloneColumn,
@@ -614,6 +620,20 @@
             this.createMAMEIniFilesToolStripMenuItem.Text = "Create MAME ini files...";
             this.createMAMEIniFilesToolStripMenuItem.Click += new System.EventHandler(this.createMAMEIniFilesToolStripMenuItem_Click);
             // 
+            // olvScreenWidth
+            // 
+            this.olvScreenWidth.AspectName = "ScreenWidth";
+            this.olvScreenWidth.MinimumWidth = 80;
+            this.olvScreenWidth.Text = "Width";
+            this.olvScreenWidth.Width = 80;
+            // 
+            // olvScreenHeight
+            // 
+            this.olvScreenHeight.AspectName = "ScreenHeight";
+            this.olvScreenHeight.MinimumWidth = 80;
+            this.olvScreenHeight.Text = "Height";
+            this.olvScreenHeight.Width = 80;
+            // 
             // DATFileViewerForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -698,5 +718,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem selectNoneToolStripMenuItem;
+        private BrightIdeasSoftware.OLVColumn olvScreenWidth;
+        private BrightIdeasSoftware.OLVColumn olvScreenHeight;
     }
 }

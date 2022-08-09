@@ -25,6 +25,8 @@ namespace DROMsM
         ScreenType,
         ScreenOrientation,
         ScreenRefreshRate,
+        ScreenWidth,
+        ScreenHeight,
         IsBIOS,
         IsClone,
         IsMechanical,
@@ -322,16 +324,32 @@ namespace DROMsM
         {
             if (displayNode.TryFindAttribute("type", out var typeAttribute))
             {
-                var typeValue = NormalizeTextAndCapitalizeFirstLetter(typeAttribute.Value.ToString());
-                datFileMachine.ScreenType = typeValue;
+                var value = NormalizeTextAndCapitalizeFirstLetter(typeAttribute.Value.ToString());
+                datFileMachine.ScreenType = value;
                 usedFieldsCollection[(int) DATFileMachineField.ScreenType] = true;
             }
 
             if (displayNode.TryFindAttribute("refresh", out var refreshAttribute))
             {
-                var refreshValue = refreshAttribute.Value.ToString();
-                datFileMachine.ScreenRefreshRate = refreshValue;
+                var value = refreshAttribute.Value.ToString();
+                datFileMachine.ScreenRefreshRate = value;
                 usedFieldsCollection[(int) DATFileMachineField.ScreenRefreshRate] = true;
+            }
+
+            if (displayNode.TryFindAttribute("width", out var widthAttribute))
+            {
+                var value = widthAttribute.Value.ToString();
+                // datFileMachine.ScreenWidth = value;
+                datFileMachine.ScreenWidth = int.Parse(value);
+                usedFieldsCollection[(int) DATFileMachineField.ScreenWidth] = true;
+            }
+
+            if (displayNode.TryFindAttribute("height", out var heightAttribute))
+            {
+                var value = heightAttribute.Value.ToString();
+                // datFileMachine.ScreenHeight = value;
+                datFileMachine.ScreenHeight = int.Parse(value);
+                usedFieldsCollection[(int) DATFileMachineField.ScreenHeight] = true;
             }
 
             HandleRotateAttribute(displayNode, datFileMachine, usedFieldsCollection);
