@@ -41,7 +41,10 @@ namespace DROMsM.Forms
                 {DATFileMachineField.Players, olvPlayersColumn}, 
                 {DATFileMachineField.Coins, olvCoinsColumn}, 
                 {DATFileMachineField.Controls, olvControlsColumn}, 
+                {DATFileMachineField.JoystickWay, olvJoystickWays}, 
                 {DATFileMachineField.ScreenType, olvScreenTypeColumn}, 
+                {DATFileMachineField.ScreenWidth, olvScreenWidth}, 
+                {DATFileMachineField.ScreenHeight, olvScreenHeight}, 
                 {DATFileMachineField.ScreenOrientation, olvScreenOrientationColumn}, 
                 {DATFileMachineField.ScreenRefreshRate, olvScreenRefreshRateColumn},  
                 {DATFileMachineField.IsBIOS, olvBIOSColumn}, 
@@ -86,18 +89,33 @@ namespace DROMsM.Forms
             olvDeviceColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
             olvPlayersColumn.AspectToStringConverter = cellValue =>
             {
+                if (cellValue == null)
+                {
+                    return null;
+                }
+
                 var cv = cellValue.ToString();
-                return cv == "0" ? "" : cv;
+                return cv == "0" ? null : cv;
             };
             olvScreenWidth.AspectToStringConverter = cellValue =>
             {
+                if (cellValue == null)
+                {
+                    return null;
+                }
+
                 var cv = cellValue.ToString();
-                return cv == "0" ? "" : cv;
+                return cv == "0" ? null : cv;
             };
             olvScreenHeight.AspectToStringConverter = cellValue =>
             {
+                if (cellValue == null)
+                {
+                    return null;
+                }
+
                 var cv = cellValue.ToString();
-                return cv == "0" ? "" : cv;
+                return cv == "0" ? null : cv;
             };
         }
 
@@ -258,17 +276,18 @@ namespace DROMsM.Forms
             classMap.ToggleColumn(m => m.Players, visibleColumns.Contains(olvPlayersColumn), olvPlayersColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.Coins, visibleColumns.Contains(olvCoinsColumn), olvCoinsColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.ScreenType, visibleColumns.Contains(olvScreenTypeColumn), olvScreenTypeColumn.DisplayIndex);
-            classMap.ToggleColumn(m => m.ScreenOrientation, visibleColumns.Contains(olvScreenOrientationColumn), olvScreenOrientationColumn.DisplayIndex);
-            classMap.ToggleColumn(m => m.ScreenRefreshRate, visibleColumns.Contains(olvScreenRefreshRateColumn), olvScreenRefreshRateColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.ScreenWidth, visibleColumns.Contains(olvScreenWidth), olvScreenWidth.DisplayIndex);
             classMap.ToggleColumn(m => m.ScreenHeight, visibleColumns.Contains(olvScreenHeight), olvScreenHeight.DisplayIndex);
-            classMap.ToggleColumn(m => m.Controls, visibleColumns.Contains(olvControlsColumn), olvControlsColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.ScreenOrientation, visibleColumns.Contains(olvScreenOrientationColumn), olvScreenOrientationColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.ScreenRefreshRate, visibleColumns.Contains(olvScreenRefreshRateColumn), olvScreenRefreshRateColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.IsClone, visibleColumns.Contains(olvIsCloneColumn), olvIsCloneColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.IsBIOS, visibleColumns.Contains(olvBIOSColumn), olvBIOSColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.IsMechanical, visibleColumns.Contains(olvMechanicalColumn), olvMechanicalColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.RequireCHDs, visibleColumns.Contains(olvRequireCHDsColumn), olvRequireCHDsColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.RequireSamples, visibleColumns.Contains(olvSamplesColumn), olvSamplesColumn.DisplayIndex);
             classMap.ToggleColumn(m => m.IsDevice, visibleColumns.Contains(olvDeviceColumn), olvDeviceColumn.DisplayIndex);
+            classMap.ToggleColumn(m => m.JoystickWays, visibleColumns.Contains(olvJoystickWays), olvJoystickWays.DisplayIndex);
+            classMap.ToggleColumn(m => m.Controls, visibleColumns.Contains(olvControlsColumn), olvControlsColumn.DisplayIndex);
 
             var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
             var fileWritten = DATFileCSVWriter.WriteToFile(exportFilePath, filteredObjectList, classMap);

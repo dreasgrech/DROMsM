@@ -22,6 +22,7 @@ namespace DROMsM
         Players,
         Coins,
         Controls,
+        JoystickWay,
         ScreenType,
         ScreenOrientation,
         ScreenRefreshRate,
@@ -405,6 +406,7 @@ namespace DROMsM
 
             // Parse the controls
             var controlTypesList = new SortedSet<string>(); // Using a SortedSet so that we don't show duplicate controls and also to have them sorted
+            var controlJoystickWaysList = new SortedSet<string>(); // Using a SortedSet so that we don't show duplicate controls and also to have them sorted
             var inputNodeChildren = machineNodeChildNode.Children;
             foreach (var inputNodeChild in inputNodeChildren)
             {
@@ -413,13 +415,22 @@ namespace DROMsM
                     if (inputNodeChild.TryFindAttribute("type", out var controlTypeAttribute))
                     {
                         controlTypesList.Add(controlTypeAttribute.Value.ToString());
+
+                        usedFieldsCollection[(int) DATFileMachineField.Controls] = true;
                     }
 
-                    usedFieldsCollection[(int) DATFileMachineField.Controls] = true;
+                    if (inputNodeChild.TryFindAttribute("ways", out var controlJoystickWayAttribute))
+                    {
+                        controlJoystickWaysList.Add(controlJoystickWayAttribute.Value.ToString());
+
+                        usedFieldsCollection[(int) DATFileMachineField.JoystickWay] = true;
+                    }
+
                 }
             }
 
             datFileMachine.Controls = string.Join(",", controlTypesList);
+            datFileMachine.JoystickWays = string.Join(",", controlJoystickWaysList);
         }
 
         /*

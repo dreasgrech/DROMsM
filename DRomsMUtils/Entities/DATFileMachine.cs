@@ -26,6 +26,7 @@ public class DATFileMachine
     public string Players; // { get; set; }
     public string Coins; // { get; set; }
     public string Controls; // { get; set; }
+    public string JoystickWays; // { get; set; }
     public string ScreenType; // { get; set; }
     public DATFileMachineScreenOrientation ScreenOrientation; // { get; set; }
     public string ScreenRefreshRate; // { get; set; }

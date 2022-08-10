@@ -51,6 +51,7 @@
             this.olvRequireCHDsColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSamplesColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvDeviceColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvJoystickWays = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvControlsColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.buildLabel = new System.Windows.Forms.Label();
             this.tableLayoutPanel2 = new System.Windows.Forms.TableLayoutPanel();
@@ -120,7 +121,7 @@
             // 
             this.splitContainer1.Panel2.Controls.Add(this.buildLabel);
             this.splitContainer1.Panel2.Controls.Add(this.tableLayoutPanel2);
-            this.splitContainer1.Size = new System.Drawing.Size(1692, 969);
+            this.splitContainer1.Size = new System.Drawing.Size(2255, 969);
             this.splitContainer1.SplitterDistance = 905;
             this.splitContainer1.TabIndex = 2;
             // 
@@ -146,6 +147,7 @@
             this.olvDatFileListView.AllColumns.Add(this.olvRequireCHDsColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvSamplesColumn);
             this.olvDatFileListView.AllColumns.Add(this.olvDeviceColumn);
+            this.olvDatFileListView.AllColumns.Add(this.olvJoystickWays);
             this.olvDatFileListView.AllColumns.Add(this.olvControlsColumn);
             this.olvDatFileListView.AllowColumnReorder = true;
             this.olvDatFileListView.AlternateRowBackColor = System.Drawing.Color.WhiteSmoke;
@@ -171,6 +173,7 @@
             this.olvRequireCHDsColumn,
             this.olvSamplesColumn,
             this.olvDeviceColumn,
+            this.olvJoystickWays,
             this.olvControlsColumn});
             this.olvDatFileListView.Cursor = System.Windows.Forms.Cursors.Default;
             this.olvDatFileListView.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -181,7 +184,7 @@
             this.olvDatFileListView.Margin = new System.Windows.Forms.Padding(0);
             this.olvDatFileListView.Name = "olvDatFileListView";
             this.olvDatFileListView.ShowGroups = false;
-            this.olvDatFileListView.Size = new System.Drawing.Size(1692, 905);
+            this.olvDatFileListView.Size = new System.Drawing.Size(2255, 905);
             this.olvDatFileListView.TabIndex = 4;
             this.olvDatFileListView.TintSortColumn = true;
             this.olvDatFileListView.UseAlternatingBackColors = true;
@@ -358,6 +361,14 @@
             this.olvDeviceColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvDeviceColumn.Width = 70;
             // 
+            // olvJoystickWays
+            // 
+            this.olvJoystickWays.AspectName = "JoystickWays";
+            this.olvJoystickWays.MinimumWidth = 100;
+            this.olvJoystickWays.Text = "Joystick Ways";
+            this.olvJoystickWays.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvJoystickWays.Width = 100;
+            // 
             // olvControlsColumn
             // 
             this.olvControlsColumn.AspectName = "Controls";
@@ -369,7 +380,7 @@
             // buildLabel
             // 
             this.buildLabel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.buildLabel.Location = new System.Drawing.Point(1405, 43);
+            this.buildLabel.Location = new System.Drawing.Point(1968, 43);
             this.buildLabel.Name = "buildLabel";
             this.buildLabel.Size = new System.Drawing.Size(284, 13);
             this.buildLabel.TabIndex = 3;
@@ -462,7 +473,7 @@
             this.toolsToolStripMenuItem});
             this.topMenuStrip.Location = new System.Drawing.Point(0, 0);
             this.topMenuStrip.Name = "topMenuStrip";
-            this.topMenuStrip.Size = new System.Drawing.Size(1716, 24);
+            this.topMenuStrip.Size = new System.Drawing.Size(2279, 24);
             this.topMenuStrip.TabIndex = 3;
             this.topMenuStrip.Text = "menuStrip1";
             // 
@@ -535,26 +546,26 @@
             // 
             this.findToolStripMenuItem.Name = "findToolStripMenuItem";
             this.findToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
-            this.findToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.findToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.findToolStripMenuItem.Text = "Find...";
             this.findToolStripMenuItem.Click += new System.EventHandler(this.findToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(143, 6);
             // 
             // selectAllToolStripMenuItem
             // 
             this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
-            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.selectAllToolStripMenuItem.Text = "Select All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
             // 
             // selectNoneToolStripMenuItem
             // 
             this.selectNoneToolStripMenuItem.Name = "selectNoneToolStripMenuItem";
-            this.selectNoneToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.selectNoneToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
             this.selectNoneToolStripMenuItem.Text = "Deselect All";
             this.selectNoneToolStripMenuItem.Click += new System.EventHandler(this.selectNoneToolStripMenuItem_Click);
             // 
@@ -638,7 +649,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1716, 1030);
+            this.ClientSize = new System.Drawing.Size(2279, 1030);
             this.Controls.Add(this.datFilePathLabel);
             this.Controls.Add(this.splitContainer1);
             this.Controls.Add(this.topMenuStrip);
@@ -720,5 +731,6 @@
         private System.Windows.Forms.ToolStripMenuItem selectNoneToolStripMenuItem;
         private BrightIdeasSoftware.OLVColumn olvScreenWidth;
         private BrightIdeasSoftware.OLVColumn olvScreenHeight;
+        private BrightIdeasSoftware.OLVColumn olvJoystickWays;
     }
 }
