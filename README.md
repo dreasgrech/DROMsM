@@ -19,7 +19,7 @@ DROMsM is a Windows application written in C# WinForms that exposes several help
 
 #### Viewing or modifying a DAT File
 
-![DAT File Viewer](https://user-images.githubusercontent.com/501697/170152398-8bcc2b30-13e9-48f0-9ccd-c196d96fed47.png)
+![DAT File Viewer](https://user-images.githubusercontent.com/501697/183796259-b9e62a79-1194-4f95-91a9-acea7a8a38ff.png)
 
 #### Batch creating MAME ini files
 
