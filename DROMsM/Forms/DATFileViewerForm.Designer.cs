@@ -283,6 +283,7 @@
             this.olvScreenWidth.AspectName = "ScreenWidth";
             this.olvScreenWidth.MinimumWidth = 80;
             this.olvScreenWidth.Text = "Width";
+            this.olvScreenWidth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvScreenWidth.Width = 80;
             // 
             // olvScreenHeight
@@ -290,6 +291,7 @@
             this.olvScreenHeight.AspectName = "ScreenHeight";
             this.olvScreenHeight.MinimumWidth = 80;
             this.olvScreenHeight.Text = "Height";
+            this.olvScreenHeight.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvScreenHeight.Width = 80;
             // 
             // olvScreenOrientationColumn
