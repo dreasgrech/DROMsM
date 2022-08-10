@@ -41,6 +41,8 @@
             this.olvPlayersColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvCoinsColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvScreenTypeColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvScreenWidth = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvScreenHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvScreenOrientationColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvScreenRefreshRateColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvIsCloneColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -81,8 +83,6 @@
             this.resetFilteringToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.createMAMEIniFilesToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.olvScreenWidth = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvScreenHeight = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer1)).BeginInit();
             this.splitContainer1.Panel1.SuspendLayout();
             this.splitContainer1.Panel2.SuspendLayout();
@@ -274,6 +274,20 @@
             this.olvScreenTypeColumn.Text = "Screen";
             this.olvScreenTypeColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.olvScreenTypeColumn.Width = 80;
+            // 
+            // olvScreenWidth
+            // 
+            this.olvScreenWidth.AspectName = "ScreenWidth";
+            this.olvScreenWidth.MinimumWidth = 80;
+            this.olvScreenWidth.Text = "Width";
+            this.olvScreenWidth.Width = 80;
+            // 
+            // olvScreenHeight
+            // 
+            this.olvScreenHeight.AspectName = "ScreenHeight";
+            this.olvScreenHeight.MinimumWidth = 80;
+            this.olvScreenHeight.Text = "Height";
+            this.olvScreenHeight.Width = 80;
             // 
             // olvScreenOrientationColumn
             // 
@@ -562,47 +576,47 @@
             // 
             this.showColorsToolStripMenuItem.CheckOnClick = true;
             this.showColorsToolStripMenuItem.Name = "showColorsToolStripMenuItem";
-            this.showColorsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.showColorsToolStripMenuItem.Text = "Show Colors";
+            this.showColorsToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.showColorsToolStripMenuItem.Text = "Show MAME Status colors";
             this.showColorsToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showColorsToolStripMenuItem_CheckedChanged);
             // 
             // showGridLinesToolStripMenuItem
             // 
             this.showGridLinesToolStripMenuItem.CheckOnClick = true;
             this.showGridLinesToolStripMenuItem.Name = "showGridLinesToolStripMenuItem";
-            this.showGridLinesToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.showGridLinesToolStripMenuItem.Text = "Show Grid Lines";
+            this.showGridLinesToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.showGridLinesToolStripMenuItem.Text = "Show grid lines";
             this.showGridLinesToolStripMenuItem.CheckedChanged += new System.EventHandler(this.showGridLinesToolStripMenuItem_CheckedChanged);
             // 
             // toolStripSeparator4
             // 
             this.toolStripSeparator4.Name = "toolStripSeparator4";
-            this.toolStripSeparator4.Size = new System.Drawing.Size(187, 6);
+            this.toolStripSeparator4.Size = new System.Drawing.Size(209, 6);
             // 
             // showAllColumnsToolStripMenuItem
             // 
             this.showAllColumnsToolStripMenuItem.Name = "showAllColumnsToolStripMenuItem";
-            this.showAllColumnsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.showAllColumnsToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.showAllColumnsToolStripMenuItem.Text = "Show all columns";
             this.showAllColumnsToolStripMenuItem.Click += new System.EventHandler(this.showAllColumnsToolStripMenuItem_Click);
             // 
             // hideUnusedColumnsToolStripMenuItem
             // 
             this.hideUnusedColumnsToolStripMenuItem.Name = "hideUnusedColumnsToolStripMenuItem";
-            this.hideUnusedColumnsToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
+            this.hideUnusedColumnsToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
             this.hideUnusedColumnsToolStripMenuItem.Text = "Hide unused columns";
             this.hideUnusedColumnsToolStripMenuItem.Click += new System.EventHandler(this.hideUnusedColumnsToolStripMenuItem_Click);
             // 
             // toolStripSeparator5
             // 
             this.toolStripSeparator5.Name = "toolStripSeparator5";
-            this.toolStripSeparator5.Size = new System.Drawing.Size(187, 6);
+            this.toolStripSeparator5.Size = new System.Drawing.Size(209, 6);
             // 
             // resetFilteringToolStripMenuItem
             // 
             this.resetFilteringToolStripMenuItem.Name = "resetFilteringToolStripMenuItem";
-            this.resetFilteringToolStripMenuItem.Size = new System.Drawing.Size(190, 22);
-            this.resetFilteringToolStripMenuItem.Text = "Reset Column Filters";
+            this.resetFilteringToolStripMenuItem.Size = new System.Drawing.Size(212, 22);
+            this.resetFilteringToolStripMenuItem.Text = "Reset column filters";
             this.resetFilteringToolStripMenuItem.Click += new System.EventHandler(this.resetFilteringToolStripMenuItem_Click);
             // 
             // toolsToolStripMenuItem
@@ -619,20 +633,6 @@
             this.createMAMEIniFilesToolStripMenuItem.Size = new System.Drawing.Size(196, 22);
             this.createMAMEIniFilesToolStripMenuItem.Text = "Create MAME ini files...";
             this.createMAMEIniFilesToolStripMenuItem.Click += new System.EventHandler(this.createMAMEIniFilesToolStripMenuItem_Click);
-            // 
-            // olvScreenWidth
-            // 
-            this.olvScreenWidth.AspectName = "ScreenWidth";
-            this.olvScreenWidth.MinimumWidth = 80;
-            this.olvScreenWidth.Text = "Width";
-            this.olvScreenWidth.Width = 80;
-            // 
-            // olvScreenHeight
-            // 
-            this.olvScreenHeight.AspectName = "ScreenHeight";
-            this.olvScreenHeight.MinimumWidth = 80;
-            this.olvScreenHeight.Text = "Height";
-            this.olvScreenHeight.Width = 80;
             // 
             // DATFileViewerForm
             // 

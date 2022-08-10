@@ -83,6 +83,22 @@ namespace DROMsM.Forms
             olvMechanicalColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
             olvSamplesColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
             olvDeviceColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
+            olvDeviceColumn.AspectToStringConverter = cellValue => (bool) cellValue ? "Yes" : "No";
+            olvPlayersColumn.AspectToStringConverter = cellValue =>
+            {
+                var cv = cellValue.ToString();
+                return cv == "0" ? "" : cv;
+            };
+            olvScreenWidth.AspectToStringConverter = cellValue =>
+            {
+                var cv = cellValue.ToString();
+                return cv == "0" ? "" : cv;
+            };
+            olvScreenHeight.AspectToStringConverter = cellValue =>
+            {
+                var cv = cellValue.ToString();
+                return cv == "0" ? "" : cv;
+            };
         }
 
         public bool ProcessDATFile(string datFilePath)
