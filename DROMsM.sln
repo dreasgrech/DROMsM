@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DROMsM", "DROMsM\DROMsM.csp
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DRomsMUtils", "DRomsMUtils\DRomsMUtils.csproj", "{33F205DB-2F27-463F-9CC3-8B75B4BC239C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DIOUtils", "DIOUtils\DIOUtils.csproj", "{D1CB2022-6540-4675-8A72-CB96E645397E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{33F205DB-2F27-463F-9CC3-8B75B4BC239C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{33F205DB-2F27-463F-9CC3-8B75B4BC239C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{33F205DB-2F27-463F-9CC3-8B75B4BC239C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1CB2022-6540-4675-8A72-CB96E645397E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1CB2022-6540-4675-8A72-CB96E645397E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1CB2022-6540-4675-8A72-CB96E645397E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1CB2022-6540-4675-8A72-CB96E645397E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

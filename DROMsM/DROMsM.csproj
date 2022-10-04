@@ -311,6 +311,10 @@
     </COMReference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\DIOUtils\DIOUtils.csproj">
+      <Project>{D1CB2022-6540-4675-8A72-CB96E645397E}</Project>
+      <Name>DIOUtils</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DRomsMUtils\DRomsMUtils.csproj">
       <Project>{33f205db-2f27-463f-9cc3-8b75b4bc239c}</Project>
       <Name>DRomsMUtils</Name>

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using Alphaleonis.Win32.Filesystem;
 using Opulos.Core.IO;
 
-namespace DRomsMUtils
+namespace DIOUtils
 {
     public static class FileUtilities
     {

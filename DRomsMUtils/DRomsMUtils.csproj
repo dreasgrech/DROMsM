@@ -117,8 +117,6 @@
     <Compile Include="Entities\SingleGameROMGroup.cs" />
     <Compile Include="Entities\SingleGameROMGroupSet.cs" />
     <Compile Include="Comparers\SingleROMEntryComparer_ComparisonName.cs" />
-    <Compile Include="FastFileInfo.cs" />
-    <Compile Include="FileUtilities.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="MessageBoxOperations.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -132,6 +130,12 @@
   <ItemGroup>
     <None Include="app.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DIOUtils\DIOUtils.csproj">
+      <Project>{d1cb2022-6540-4675-8a72-cb96e645397e}</Project>
+      <Name>DIOUtils</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
