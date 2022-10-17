@@ -204,6 +204,16 @@ namespace DROMsM.Forms
                 return;
             }
 
+            var filteredObjectList = olvDatFileListView.SelectedObjects;
+            var totalFilteredObjects = filteredObjectList.Count;
+            if (totalFilteredObjects == 0)
+            {
+                var errorMessage = "Please select at least one entry in the grid";
+                Logger.LogError(errorMessage);
+                MessageBoxOperations.ShowError(errorMessage, "No entries selected");
+                return;
+            }
+
             var saveAsFilePath = FormFileOperations.ShowSaveFileDialog(FormFileOperations.SaveDialog_DATFilesFilter);
             if (string.IsNullOrEmpty(saveAsFilePath))
             {
@@ -240,7 +250,8 @@ namespace DROMsM.Forms
             }
 
             // Write all the filtered nodes
-            var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
+            // var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
+            // Write all the selected nodes
             foreach (DATFileMachine datFileMachine in filteredObjectList)
             {
                 var xmlValue = datFileMachine.XMLValue;
@@ -252,13 +263,27 @@ namespace DROMsM.Forms
             var rootNodeXMLClosingTag = currentDATFile.GetRootNodeXMLClosingTag();
             fullXMLFileStringBuilder.AppendLine(rootNodeXMLClosingTag);
 
+            // Write the generated text to file
             var full = fullXMLFileStringBuilder.ToString();
             FileUtilities.WriteAllText(saveAsFilePath, full);
-            MessageBoxOperations.ShowInformation($"File successfully saved to {saveAsFilePath}", "DAT File saved");
+
+            // MessageBoxOperations.ShowInformation($"File successfully saved to {saveAsFilePath}", "DAT File saved");
+            MessageBoxOperations.ShowInformation($"Export with {StringUtilities.AddCommasToNumber(totalFilteredObjects)} entries successfully saved to {saveAsFilePath}", "DAT File saved");
         }
 
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            // Make sure there's at least one entry currently selected in the grid
+            var filteredObjectList = olvDatFileListView.SelectedObjects;
+            var totalFilteredObjects = filteredObjectList.Count;
+            if (totalFilteredObjects == 0)
+            {
+                var errorMessage = "Please select at least one entry in the grid";
+                Logger.LogError(errorMessage);
+                MessageBoxOperations.ShowError(errorMessage, "No entries selected");
+                return;
+            }
+
             var exportFilePath = FormFileOperations.ShowSaveFileDialog(FormFileOperations.SaveDialog_CSVFilesFilter);
             if (string.IsNullOrEmpty(exportFilePath))
             {
@@ -290,7 +315,7 @@ namespace DROMsM.Forms
             classMap.ToggleColumn(m => m.JoystickWays, visibleColumns.Contains(olvJoystickWays), olvJoystickWays.DisplayIndex);
             classMap.ToggleColumn(m => m.Controls, visibleColumns.Contains(olvControlsColumn), olvControlsColumn.DisplayIndex);
 
-            var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
+            // var filteredObjectList = datFileMachineVirtualListDataSource.FilteredObjectList;
             var fileWritten = DATFileCSVWriter.WriteToFile(exportFilePath, filteredObjectList, classMap);
             if (!fileWritten)
             {
@@ -298,7 +323,8 @@ namespace DROMsM.Forms
                 return;
             }
 
-            MessageBoxOperations.ShowInformation($"File successfully written to {exportFilePath}", "File exported");
+            // MessageBoxOperations.ShowInformation($"File successfully written to {exportFilePath}", "File exported");
+            MessageBoxOperations.ShowInformation($"File with {StringUtilities.AddCommasToNumber(totalFilteredObjects)} entries successfully saved to {exportFilePath}", "File exported");
         }
 
         private void olvDatFileListView_FormatRow(object sender, FormatRowEventArgs e)

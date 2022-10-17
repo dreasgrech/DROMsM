@@ -1,22 +1,18 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using CsvHelper;
+﻿using CsvHelper;
 using CsvHelper.Configuration;
 using Frontend;
+using System;
+using System.Collections;
+using System.Globalization;
+using System.IO;
+using System.Text;
 
 namespace DRomsMUtils
 {
     public static class DATFileCSVWriter
     {
-        public static bool WriteToFile(string filePath, ArrayList datFileMachinesArrayList, DATFileMachineCSVClassMap classMap)
+        // public static bool WriteToFile(string filePath, ArrayList datFileMachinesArrayList, DATFileMachineCSVClassMap classMap)
+        public static bool WriteToFile(string filePath, IList datFileMachinesList, DATFileMachineCSVClassMap classMap)
         {
             try
             {
@@ -37,7 +33,7 @@ namespace DRomsMUtils
                     csv.WriteHeader<DATFileMachine>();
                     csv.NextRecord();
 
-                    foreach (var datFileMachineElement in datFileMachinesArrayList)
+                    foreach (var datFileMachineElement in datFileMachinesList)
                     {
                         var datFileMachine = (DATFileMachine) datFileMachineElement;
                         csv.WriteRecord(datFileMachine);
