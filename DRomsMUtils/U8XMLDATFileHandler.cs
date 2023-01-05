@@ -38,8 +38,10 @@ namespace DROMsM
 
     public class U8XMLDATFileHandler : IDATFileHandler
     {
+#if USE_STRINGS
         private const string TrueBooleanValue = "Yes";
         private const string FalseBooleanValue = "No";
+#endif
 
         private static readonly DATFileMachineField[] datFileMachineFieldValues = Enum.GetValues(typeof(DATFileMachineField)).Cast<DATFileMachineField>().ToArray();
 
