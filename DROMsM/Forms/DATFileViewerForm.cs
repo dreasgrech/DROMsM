@@ -118,6 +118,29 @@ namespace DROMsM.Forms
                 var cv = cellValue.ToString();
                 return cv == "0" ? null : cv;
             };
+
+            olvSetColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.Name;
+            olvNameColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.Description;
+            olvYearColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.Year;
+            olvManufacturerColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.Manufacturer;
+            olvStatusColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.Status;
+            olvEmulationColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.Emulation;
+            olvSaveStatesColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.SaveStates;
+            olvPlayersColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.Players;
+            olvCoinsColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.Coins;
+            olvControlsColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.Controls;
+            olvJoystickWays.AspectGetter = rowObject => (rowObject as DATFileMachine)?.JoystickWays;
+            olvScreenTypeColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.ScreenType;
+            olvScreenWidth.AspectGetter = rowObject => (rowObject as DATFileMachine)?.ScreenWidth;
+            olvScreenHeight.AspectGetter = rowObject => (rowObject as DATFileMachine)?.ScreenHeight;
+            olvScreenOrientationColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.ScreenOrientation;
+            olvScreenRefreshRateColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.ScreenRefreshRate;
+            olvBIOSColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.IsBIOS;
+            olvIsCloneColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.IsClone;
+            olvMechanicalColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.IsMechanical;
+            olvRequireCHDsColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.RequireCHDs;
+            olvSamplesColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.RequireSamples;
+            olvDeviceColumn.AspectGetter = rowObject => (rowObject as DATFileMachine)?.IsDevice;
         }
 
         public bool ProcessDATFile(string datFilePath)
