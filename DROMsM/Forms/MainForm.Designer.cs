@@ -142,6 +142,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.launchboxManageViewMAMESetMetadataToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -1349,27 +1350,28 @@
             // viewDATFileToolStripMenuItem
             // 
             this.viewDATFileToolStripMenuItem.Name = "viewDATFileToolStripMenuItem";
-            this.viewDATFileToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.viewDATFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewDATFileToolStripMenuItem.Text = "View DAT File";
             this.viewDATFileToolStripMenuItem.Click += new System.EventHandler(this.viewDATFileToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // launchBoxToolStripMenuItem
             // 
             this.launchBoxToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.launchboxManagePlatformsToolStripMenuItem});
+            this.launchboxManagePlatformsToolStripMenuItem,
+            this.launchboxManageViewMAMESetMetadataToolStripMenuItem});
             this.launchBoxToolStripMenuItem.Name = "launchBoxToolStripMenuItem";
-            this.launchBoxToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.launchBoxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.launchBoxToolStripMenuItem.Text = "LaunchBox";
             // 
             // launchboxManagePlatformsToolStripMenuItem
             // 
             this.launchboxManagePlatformsToolStripMenuItem.Name = "launchboxManagePlatformsToolStripMenuItem";
-            this.launchboxManagePlatformsToolStripMenuItem.Size = new System.Drawing.Size(171, 22);
+            this.launchboxManagePlatformsToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
             this.launchboxManagePlatformsToolStripMenuItem.Text = "Manage Platforms";
             this.launchboxManagePlatformsToolStripMenuItem.Click += new System.EventHandler(this.launchboxManagePlatformsToolStripMenuItem_Click);
             // 
@@ -1393,6 +1395,13 @@
             this.newItemToolStripMenuItem.Name = "newItemToolStripMenuItem";
             this.newItemToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.newItemToolStripMenuItem.Text = "NewItem";
+            // 
+            // launchboxManageViewMAMESetMetadataToolStripMenuItem
+            // 
+            this.launchboxManageViewMAMESetMetadataToolStripMenuItem.Name = "launchboxManageViewMAMESetMetadataToolStripMenuItem";
+            this.launchboxManageViewMAMESetMetadataToolStripMenuItem.Size = new System.Drawing.Size(209, 22);
+            this.launchboxManageViewMAMESetMetadataToolStripMenuItem.Text = "View MAME set metadata";
+            this.launchboxManageViewMAMESetMetadataToolStripMenuItem.Click += new System.EventHandler(this.launchboxManageViewMAMESetMetadataToolStripMenuItem_Click);
             // 
             // MainForm
             // 
@@ -1570,6 +1579,7 @@
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator3;
         private System.Windows.Forms.ToolStripMenuItem launchBoxToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem launchboxManagePlatformsToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem launchboxManageViewMAMESetMetadataToolStripMenuItem;
     }
 }
 

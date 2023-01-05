@@ -81,7 +81,7 @@ namespace DROMsM
 
             if (rootNode.TryFindAttribute("build", out var buildAttribute))
             {
-                datFile.Build = NormalizeText(buildAttribute.Value.ToString());
+                datFile.Build = XMLFileOperations.NormalizeText(buildAttribute.Value.ToString());
             }
 
             var machineNodeChildren = rootNode.Children;
@@ -168,7 +168,7 @@ namespace DROMsM
 
                 if (machineNode.TryFindAttribute("name", out var nameAttribute))
                 {
-                    datFileMachine.Name = NormalizeText(nameAttribute.Value.ToString());
+                    datFileMachine.Name = XMLFileOperations.NormalizeText(nameAttribute.Value.ToString());
                     usedFieldsCollection[(int) DATFileMachineField.Name] = true;
                 }
 
@@ -241,15 +241,15 @@ namespace DROMsM
                     switch (machineNodeChildNodeName)
                     {
                         case "description":
-                            datFileMachine.Description = NormalizeText(machineNodeChildNode.InnerText.ToString());
+                            datFileMachine.Description = XMLFileOperations.NormalizeText(machineNodeChildNode.InnerText.ToString());
                             usedFieldsCollection[(int) DATFileMachineField.Description] = true;
                             break;
                         case "year":
-                            datFileMachine.Year = NormalizeText(machineNodeChildNode.InnerText.ToString());
+                            datFileMachine.Year = XMLFileOperations.NormalizeText(machineNodeChildNode.InnerText.ToString());
                             usedFieldsCollection[(int) DATFileMachineField.Year] = true;
                             break;
                         case "manufacturer":
-                            datFileMachine.Manufacturer = NormalizeText(machineNodeChildNode.InnerText.ToString());
+                            datFileMachine.Manufacturer = XMLFileOperations.NormalizeText(machineNodeChildNode.InnerText.ToString());
                             usedFieldsCollection[(int) DATFileMachineField.Manufacturer] = true;
                             break;
                         case "driver":
@@ -327,7 +327,7 @@ namespace DROMsM
         {
             if (displayNode.TryFindAttribute("type", out var typeAttribute))
             {
-                var value = NormalizeTextAndCapitalizeFirstLetter(typeAttribute.Value.ToString());
+                var value = XMLFileOperations.NormalizeTextAndCapitalizeFirstLetter(typeAttribute.Value.ToString());
                 datFileMachine.ScreenType = value;
                 usedFieldsCollection[(int) DATFileMachineField.ScreenType] = true;
             }
@@ -396,13 +396,13 @@ namespace DROMsM
         {
             if (machineNodeChildNode.TryFindAttribute("players", out var playersAttribute))
             {
-                datFileMachine.Players = NormalizeText(playersAttribute.Value.ToString());
+                datFileMachine.Players = XMLFileOperations.NormalizeText(playersAttribute.Value.ToString());
                 usedFieldsCollection[(int) DATFileMachineField.Players] = true;
             }
 
             if (machineNodeChildNode.TryFindAttribute("coins", out var coinsAttribute))
             {
-                datFileMachine.Coins = NormalizeText(coinsAttribute.Value.ToString());
+                datFileMachine.Coins = XMLFileOperations.NormalizeText(coinsAttribute.Value.ToString());
                 usedFieldsCollection[(int) DATFileMachineField.Coins] = true;
             }
 
@@ -489,34 +489,22 @@ namespace DROMsM
         {
             if (machineNodeChildNode.TryFindAttribute("status", out var statusAttribute))
             {
-                datFileMachine.Status = NormalizeTextAndCapitalizeFirstLetter(statusAttribute.Value.ToString());
+                datFileMachine.Status = XMLFileOperations.NormalizeTextAndCapitalizeFirstLetter(statusAttribute.Value.ToString());
                 usedFieldsCollection[(int) DATFileMachineField.Status] = true;
             }
 
             if (machineNodeChildNode.TryFindAttribute("emulation", out var emulationAttribute))
             {
-                datFileMachine.Emulation = NormalizeTextAndCapitalizeFirstLetter(emulationAttribute.Value.ToString());
+                datFileMachine.Emulation = XMLFileOperations.NormalizeTextAndCapitalizeFirstLetter(emulationAttribute.Value.ToString());
                 usedFieldsCollection[(int) DATFileMachineField.Emulation] = true;
             }
 
             if (machineNodeChildNode.TryFindAttribute("savestate", out var saveStateAttribute))
             {
-                datFileMachine.SaveStates = NormalizeTextAndCapitalizeFirstLetter(saveStateAttribute.Value.ToString());
+                datFileMachine.SaveStates = XMLFileOperations.NormalizeTextAndCapitalizeFirstLetter(saveStateAttribute.Value.ToString());
                 usedFieldsCollection[(int) DATFileMachineField.SaveStates] = true;
             }
         }
 
-        private static string NormalizeTextAndCapitalizeFirstLetter(string text)
-        {
-            var normalizedText = NormalizeText(text);
-            normalizedText = StringUtilities.CapitalizeFirstLetter(normalizedText);
-
-            return normalizedText;
-        }
-
-        private static string NormalizeText(string text)
-        {
-            return StringUtilities.ReplaceHTMLEncoding(text);
-        }
     }
 }

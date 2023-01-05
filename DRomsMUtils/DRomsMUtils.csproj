@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CHDMANHandler.cs" />
+    <Compile Include="Comparers\LaunchBoxMAMEMetadataFileEntryComparer_FileName.cs" />
     <Compile Include="Comparers\MAMEIniFileLineComparer_LineNumber.cs" />
     <Compile Include="CUEFileHandler.cs" />
     <Compile Include="DATFileCSVWriter.cs" />
@@ -91,6 +92,7 @@
     <Compile Include="Entities\DATFileMachine.cs" />
     <Compile Include="Comparers\DatFileMachineComparer_ComparisonName.cs" />
     <Compile Include="Comparers\DatFileMachineComparer_MAMEIndex.cs" />
+    <Compile Include="Entities\LaunchBoxMAMEMetadataFileEntry.cs" />
     <Compile Include="FastDirectoryEnumerator.cs" />
     <Compile Include="FloatExtensions.cs" />
     <Compile Include="FormFileOperations.cs" />
@@ -125,6 +127,7 @@
     <Compile Include="TextFileReader.cs" />
     <Compile Include="TreeViewROMDirectoryDisplayNameType.cs" />
     <Compile Include="U8XMLDATFileHandler.cs" />
+    <Compile Include="XMLFileOperations.cs" />
     <Compile Include="XmlReaderDATFileHandler.cs" />
   </ItemGroup>
   <ItemGroup>
