@@ -33,7 +33,6 @@ namespace DROMsM.Forms
             this.olvFileNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvStatusColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvDeveloperColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPublisherColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvYearColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvIsMechanicalColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -61,6 +60,10 @@ namespace DROMsM.Forms
             this.hideAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.howDoesThisWorkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.olvCloneOfColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvVersionColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvSeriesColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvRegionColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.olvLaunchBoxPlatformsListView)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -69,10 +72,12 @@ namespace DROMsM.Forms
             // 
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvFileNameColumn);
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvNameColumn);
+            this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvCloneOfColumn);
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvStatusColumn);
-            this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvDeveloperColumn);
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvPublisherColumn);
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvYearColumn);
+            this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvVersionColumn);
+            this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvRegionColumn);
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvIsMechanicalColumn);
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvIsBootlegColumn);
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvIsPrototypeColumn);
@@ -87,6 +92,7 @@ namespace DROMsM.Forms
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvIsMahjongColumn);
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvIsNonArcadeColumn);
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvGenreColumn);
+            this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvSeriesColumn);
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvPlayModeColumn);
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvLanguageColumn);
             this.olvLaunchBoxPlatformsListView.AllColumns.Add(this.olvSourceColumn);
@@ -99,10 +105,12 @@ namespace DROMsM.Forms
             this.olvLaunchBoxPlatformsListView.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.olvFileNameColumn,
             this.olvNameColumn,
+            this.olvCloneOfColumn,
             this.olvStatusColumn,
-            this.olvDeveloperColumn,
             this.olvPublisherColumn,
             this.olvYearColumn,
+            this.olvVersionColumn,
+            this.olvRegionColumn,
             this.olvIsMechanicalColumn,
             this.olvIsBootlegColumn,
             this.olvIsPrototypeColumn,
@@ -117,6 +125,7 @@ namespace DROMsM.Forms
             this.olvIsMahjongColumn,
             this.olvIsNonArcadeColumn,
             this.olvGenreColumn,
+            this.olvSeriesColumn,
             this.olvPlayModeColumn,
             this.olvLanguageColumn,
             this.olvSourceColumn});
@@ -143,39 +152,46 @@ namespace DROMsM.Forms
             // olvFileNameColumn
             // 
             this.olvFileNameColumn.AspectName = "";
-            this.olvFileNameColumn.MinimumWidth = 341;
+            this.olvFileNameColumn.Groupable = false;
+            this.olvFileNameColumn.IsEditable = false;
             this.olvFileNameColumn.Text = "FileName";
-            this.olvFileNameColumn.Width = 341;
+            this.olvFileNameColumn.Width = 101;
             // 
             // olvNameColumn
             // 
             this.olvNameColumn.AspectName = "";
+            this.olvNameColumn.Groupable = false;
+            this.olvNameColumn.IsEditable = false;
             this.olvNameColumn.Text = "Name";
+            this.olvNameColumn.Width = 195;
             // 
             // olvStatusColumn
             // 
             this.olvStatusColumn.AspectName = "";
+            this.olvStatusColumn.Groupable = false;
+            this.olvStatusColumn.IsEditable = false;
             this.olvStatusColumn.Text = "Status";
-            // 
-            // olvDeveloperColumn
-            // 
-            this.olvDeveloperColumn.AspectName = "";
-            this.olvDeveloperColumn.Text = "Developer";
-            this.olvDeveloperColumn.Width = 71;
+            this.olvStatusColumn.Width = 104;
             // 
             // olvPublisherColumn
             // 
             this.olvPublisherColumn.AspectName = "";
+            this.olvPublisherColumn.Groupable = false;
+            this.olvPublisherColumn.IsEditable = false;
             this.olvPublisherColumn.Text = "Publisher";
             // 
             // olvYearColumn
             // 
             this.olvYearColumn.AspectName = "";
+            this.olvYearColumn.Groupable = false;
+            this.olvYearColumn.IsEditable = false;
             this.olvYearColumn.Text = "Year";
             // 
             // olvIsMechanicalColumn
             // 
             this.olvIsMechanicalColumn.AspectName = "";
+            this.olvIsMechanicalColumn.Groupable = false;
+            this.olvIsMechanicalColumn.IsEditable = false;
             this.olvIsMechanicalColumn.MaximumWidth = 90;
             this.olvIsMechanicalColumn.MinimumWidth = 42;
             this.olvIsMechanicalColumn.Text = "Mechanical";
@@ -185,93 +201,128 @@ namespace DROMsM.Forms
             // olvIsBootlegColumn
             // 
             this.olvIsBootlegColumn.AspectName = "";
+            this.olvIsBootlegColumn.Groupable = false;
+            this.olvIsBootlegColumn.IsEditable = false;
             this.olvIsBootlegColumn.Text = "Bootleg";
             this.olvIsBootlegColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvIsPrototypeColumn
             // 
             this.olvIsPrototypeColumn.AspectName = "";
+            this.olvIsPrototypeColumn.Groupable = false;
+            this.olvIsPrototypeColumn.IsEditable = false;
             this.olvIsPrototypeColumn.Text = "Prototype";
             this.olvIsPrototypeColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvIsHackColumn
             // 
             this.olvIsHackColumn.AspectName = "";
+            this.olvIsHackColumn.Groupable = false;
+            this.olvIsHackColumn.IsEditable = false;
             this.olvIsHackColumn.Text = "Hack";
             this.olvIsHackColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvIsMatureColumn
             // 
             this.olvIsMatureColumn.AspectName = "";
+            this.olvIsMatureColumn.Groupable = false;
+            this.olvIsMatureColumn.IsEditable = false;
             this.olvIsMatureColumn.Text = "Mature";
             this.olvIsMatureColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvIsQuizColumn
             // 
             this.olvIsQuizColumn.AspectName = "";
+            this.olvIsQuizColumn.Groupable = false;
+            this.olvIsQuizColumn.IsEditable = false;
             this.olvIsQuizColumn.Text = "Quiz";
             this.olvIsQuizColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvIsFruitColumn
             // 
             this.olvIsFruitColumn.AspectName = "";
+            this.olvIsFruitColumn.Groupable = false;
+            this.olvIsFruitColumn.IsEditable = false;
             this.olvIsFruitColumn.Text = "Fruit";
             this.olvIsFruitColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvIsCasinoColumn
             // 
             this.olvIsCasinoColumn.AspectName = "";
+            this.olvIsCasinoColumn.Groupable = false;
+            this.olvIsCasinoColumn.IsEditable = false;
             this.olvIsCasinoColumn.Text = "Casino";
             this.olvIsCasinoColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvIsRhythmColumn
             // 
             this.olvIsRhythmColumn.AspectName = "";
+            this.olvIsRhythmColumn.Groupable = false;
+            this.olvIsRhythmColumn.IsEditable = false;
             this.olvIsRhythmColumn.Text = "Rhythm";
             this.olvIsRhythmColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvIsTableTopColumn
             // 
             this.olvIsTableTopColumn.AspectName = "";
+            this.olvIsTableTopColumn.Groupable = false;
+            this.olvIsTableTopColumn.IsEditable = false;
             this.olvIsTableTopColumn.Text = "TableTop";
             this.olvIsTableTopColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvIsPlayChoiceColumn
             // 
             this.olvIsPlayChoiceColumn.AspectName = "";
+            this.olvIsPlayChoiceColumn.Groupable = false;
+            this.olvIsPlayChoiceColumn.IsEditable = false;
             this.olvIsPlayChoiceColumn.Text = "PlayChoice";
             this.olvIsPlayChoiceColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvIsPlayChoiceColumn.Width = 80;
             // 
             // olvIsMahjongColumn
             // 
             this.olvIsMahjongColumn.AspectName = "";
+            this.olvIsMahjongColumn.Groupable = false;
+            this.olvIsMahjongColumn.IsEditable = false;
             this.olvIsMahjongColumn.Text = "Mahjong";
             this.olvIsMahjongColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // olvIsNonArcadeColumn
             // 
             this.olvIsNonArcadeColumn.AspectName = "";
+            this.olvIsNonArcadeColumn.Groupable = false;
+            this.olvIsNonArcadeColumn.IsEditable = false;
             this.olvIsNonArcadeColumn.Text = "Non-Arcade";
             this.olvIsNonArcadeColumn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.olvIsNonArcadeColumn.Width = 78;
             // 
             // olvGenreColumn
             // 
             this.olvGenreColumn.AspectName = "";
+            this.olvGenreColumn.Groupable = false;
+            this.olvGenreColumn.IsEditable = false;
             this.olvGenreColumn.Text = "Genre";
             // 
             // olvPlayModeColumn
             // 
             this.olvPlayModeColumn.AspectName = "";
+            this.olvPlayModeColumn.Groupable = false;
+            this.olvPlayModeColumn.IsEditable = false;
             this.olvPlayModeColumn.Text = "Play Mode";
+            this.olvPlayModeColumn.Width = 79;
             // 
             // olvLanguageColumn
             // 
             this.olvLanguageColumn.AspectName = "";
+            this.olvLanguageColumn.Groupable = false;
+            this.olvLanguageColumn.IsEditable = false;
             this.olvLanguageColumn.Text = "Language";
             // 
             // olvSourceColumn
             // 
             this.olvSourceColumn.AspectName = "";
+            this.olvSourceColumn.Groupable = false;
+            this.olvSourceColumn.IsEditable = false;
             this.olvSourceColumn.Text = "Source";
             // 
             // menuStrip1
@@ -339,6 +390,30 @@ namespace DROMsM.Forms
             this.howDoesThisWorkToolStripMenuItem.Text = "How does this work?";
             this.howDoesThisWorkToolStripMenuItem.Click += new System.EventHandler(this.howDoesThisWorkToolStripMenuItem_Click);
             // 
+            // olvCloneOfColumn
+            // 
+            this.olvCloneOfColumn.Groupable = false;
+            this.olvCloneOfColumn.IsEditable = false;
+            this.olvCloneOfColumn.Text = "Clone";
+            // 
+            // olvVersionColumn
+            // 
+            this.olvVersionColumn.Groupable = false;
+            this.olvVersionColumn.IsEditable = false;
+            this.olvVersionColumn.Text = "Version";
+            // 
+            // olvSeriesColumn
+            // 
+            this.olvSeriesColumn.Groupable = false;
+            this.olvSeriesColumn.IsEditable = false;
+            this.olvSeriesColumn.Text = "Series";
+            // 
+            // olvRegionColumn
+            // 
+            this.olvRegionColumn.Groupable = false;
+            this.olvRegionColumn.IsEditable = false;
+            this.olvRegionColumn.Text = "Region";
+            // 
             // LaunchBoxMameMetadataForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -372,7 +447,6 @@ namespace DROMsM.Forms
         private System.Windows.Forms.ToolStripMenuItem howDoesThisWorkToolStripMenuItem;
         private BrightIdeasSoftware.OLVColumn olvNameColumn;
         private BrightIdeasSoftware.OLVColumn olvStatusColumn;
-        private BrightIdeasSoftware.OLVColumn olvDeveloperColumn;
         private BrightIdeasSoftware.OLVColumn olvPublisherColumn;
         private BrightIdeasSoftware.OLVColumn olvYearColumn;
         private BrightIdeasSoftware.OLVColumn olvIsBootlegColumn;
@@ -391,5 +465,9 @@ namespace DROMsM.Forms
         private BrightIdeasSoftware.OLVColumn olvPlayModeColumn;
         private BrightIdeasSoftware.OLVColumn olvLanguageColumn;
         private BrightIdeasSoftware.OLVColumn olvSourceColumn;
+        private BrightIdeasSoftware.OLVColumn olvCloneOfColumn;
+        private BrightIdeasSoftware.OLVColumn olvVersionColumn;
+        private BrightIdeasSoftware.OLVColumn olvSeriesColumn;
+        private BrightIdeasSoftware.OLVColumn olvRegionColumn;
     }
 }

@@ -7,10 +7,13 @@
     {
         public string FileName; // { get; set; }
         public string Name; // { get; set; }
+        public string CloneOf; // { get; set; }
         public string Status; // { get; set; }
-        public string Developer; // { get; set; }
+        // public string Developer; // { get; set; }
         public string Publisher; // { get; set; }
         public string Year; // { get; set; }
+        public string Version; // { get; set; }
+        public string Region; // { get; set; }
         public bool IsMechanical; // { get; set; }
         public bool IsBootleg; // { get; set; }
         public bool IsPrototype; // { get; set; }
@@ -25,6 +28,7 @@
         public bool IsMahjong; // { get; set; }
         public bool IsNonArcade; // { get; set; }
         public string Genre; // { get; set; }
+        public string Series; // { get; set; }
         public string Playmode; // { get; set; }
         public string Language; // { get; set; }
         public string Source; // { get; set; }

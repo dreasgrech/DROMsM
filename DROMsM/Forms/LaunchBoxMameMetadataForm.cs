@@ -20,10 +20,13 @@ namespace DROMsM.Forms
 
             olvFileNameColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.FileName;
             olvNameColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Name;
+            olvCloneOfColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.CloneOf;
             olvStatusColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Status;
-            olvDeveloperColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Developer;
+            // olvDeveloperColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Developer;
             olvPublisherColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Publisher;
             olvYearColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Year;
+            olvVersionColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Version;
+            olvRegionColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Region;
             olvIsMechanicalColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.IsMechanical;
             olvIsBootlegColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.IsBootleg;
             olvIsPrototypeColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.IsPrototype;
@@ -38,6 +41,7 @@ namespace DROMsM.Forms
             olvIsMahjongColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.IsMahjong;
             olvIsNonArcadeColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.IsNonArcade;
             olvGenreColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Genre;
+            olvSeriesColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Series;
             olvPlayModeColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Playmode;
             olvLanguageColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Language;
             olvSourceColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Source;

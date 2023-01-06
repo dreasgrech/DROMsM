@@ -121,17 +121,26 @@ namespace DROMsM.Forms
                         case "name":
                             mameMetadataFileEntry.Name = XMLFileOperations.NormalizeText(mameFileNodeChildNodeInnerText);
                             break;
+                        case "cloneof":
+                            mameMetadataFileEntry.CloneOf = XMLFileOperations.NormalizeText(mameFileNodeChildNodeInnerText);
+                            break;
                         case "status":
                             mameMetadataFileEntry.Status = XMLFileOperations.NormalizeText(mameFileNodeChildNodeInnerText);
                             break;
-                        case "developer":
-                            mameMetadataFileEntry.Developer = XMLFileOperations.NormalizeText(mameFileNodeChildNodeInnerText);
-                            break;
+                        //case "developer":
+                        //    mameMetadataFileEntry.Developer = XMLFileOperations.NormalizeText(mameFileNodeChildNodeInnerText);
+                        //    break;
                         case "publisher":
                             mameMetadataFileEntry.Publisher = XMLFileOperations.NormalizeText(mameFileNodeChildNodeInnerText);
                             break;
                         case "year":
                             mameMetadataFileEntry.Year = XMLFileOperations.NormalizeText(mameFileNodeChildNodeInnerText);
+                            break;
+                        case "version":
+                            mameMetadataFileEntry.Version = XMLFileOperations.NormalizeText(mameFileNodeChildNodeInnerText);
+                            break;
+                        case "region":
+                            mameMetadataFileEntry.Region = XMLFileOperations.NormalizeText(mameFileNodeChildNodeInnerText);
                             break;
                         case "ismechanical":
                             mameMetadataFileEntry.IsMechanical = ParseBooleanValue(mameFileNodeChildNodeInnerText);
@@ -174,6 +183,9 @@ namespace DROMsM.Forms
                             break;
                         case "genre":
                             mameMetadataFileEntry.Genre = XMLFileOperations.NormalizeText(mameFileNodeChildNodeInnerText);
+                            break;
+                        case "series":
+                            mameMetadataFileEntry.Series = XMLFileOperations.NormalizeText(mameFileNodeChildNodeInnerText);
                             break;
                         case "playmode":
                             mameMetadataFileEntry.Playmode = XMLFileOperations.NormalizeText(mameFileNodeChildNodeInnerText);
