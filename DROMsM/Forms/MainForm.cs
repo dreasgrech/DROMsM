@@ -187,7 +187,11 @@ namespace DROMsM.Forms
             }
             catch (Exception ex)
             {
+#if DEBUG
+                throw;
+#else
                 Logger.LogException(ex);
+#endif
             }
         }
 
