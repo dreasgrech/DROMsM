@@ -1,13 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29806.167
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33205.214
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DROMsM", "DROMsM\DROMsM.csproj", "{63F2BDBD-654F-47B1-9EC4-442DCCE8AD31}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DRomsMUtils", "DRomsMUtils\DRomsMUtils.csproj", "{33F205DB-2F27-463F-9CC3-8B75B4BC239C}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DIOUtils", "DIOUtils\DIOUtils.csproj", "{D1CB2022-6540-4675-8A72-CB96E645397E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ScrollingTreeViewControl", "ThirdParty\SyncScrollTreeView-master\ScrollingTreeViewControl\ScrollingTreeViewControl.csproj", "{A0F31ED6-32E7-43B3-B780-DDE93F7A6373}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -27,6 +29,10 @@ Global
 		{D1CB2022-6540-4675-8A72-CB96E645397E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D1CB2022-6540-4675-8A72-CB96E645397E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D1CB2022-6540-4675-8A72-CB96E645397E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0F31ED6-32E7-43B3-B780-DDE93F7A6373}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0F31ED6-32E7-43B3-B780-DDE93F7A6373}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0F31ED6-32E7-43B3-B780-DDE93F7A6373}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0F31ED6-32E7-43B3-B780-DDE93F7A6373}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
