@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DROMsM.ProgramSettings;
+using System;
 using System.Windows.Forms;
 
 namespace DROMsM.Forms
@@ -8,14 +9,16 @@ namespace DROMsM.Forms
         public string SearchTerm { get; private set; }
         public bool UseRegularExpressions { get; private set; }
 
-        public DATFileViewerFindForm()
+        public DATFileViewerFindForm(string windowTitle, FindDialogSettings existingSettings)
         {
             InitializeComponent();
 
+            Text = windowTitle;
+
             // Load the previous form's state
-            var settings = ProjectSettingsManager.DATFileViewerSettings.FindDialogSettings;
-            searchTermTextBox.Text = settings.SearchTerm;
-            useRegularExpressionsCheckbox.Checked = settings.UseRegularExpressions;
+            // var settings = ProjectSettingsManager.DATFileViewerSettings.FindDialogSettings;
+            searchTermTextBox.Text = existingSettings.SearchTerm;
+            useRegularExpressionsCheckbox.Checked = existingSettings.UseRegularExpressions;
         }
 
         private void findButton_Click(object sender, EventArgs e)

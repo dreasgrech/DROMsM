@@ -32,9 +32,12 @@ namespace DROMsM.Forms
             this.olvLaunchBoxPlatformsListView = new BrightIdeasSoftware.FastObjectListView();
             this.olvFileNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvNameColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvCloneOfColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvStatusColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPublisherColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvYearColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvVersionColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvRegionColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvIsMechanicalColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvIsBootlegColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvIsPrototypeColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
@@ -49,23 +52,19 @@ namespace DROMsM.Forms
             this.olvIsMahjongColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvIsNonArcadeColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvGenreColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
+            this.olvSeriesColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvPlayModeColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvLanguageColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             this.olvSourceColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.topMenuStrip = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.closeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.operationsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.showAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.hideAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.findToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.howDoesThisWorkToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.olvCloneOfColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvVersionColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvSeriesColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
-            this.olvRegionColumn = ((BrightIdeasSoftware.OLVColumn)(new BrightIdeasSoftware.OLVColumn()));
             ((System.ComponentModel.ISupportInitialize)(this.olvLaunchBoxPlatformsListView)).BeginInit();
-            this.menuStrip1.SuspendLayout();
+            this.topMenuStrip.SuspendLayout();
             this.SuspendLayout();
             // 
             // olvLaunchBoxPlatformsListView
@@ -147,7 +146,7 @@ namespace DROMsM.Forms
             this.olvLaunchBoxPlatformsListView.UseHotControls = false;
             this.olvLaunchBoxPlatformsListView.View = System.Windows.Forms.View.Details;
             this.olvLaunchBoxPlatformsListView.VirtualMode = true;
-            this.olvLaunchBoxPlatformsListView.SubItemChecking += new System.EventHandler<BrightIdeasSoftware.SubItemCheckingEventArgs>(this.olvLaunchBoxPlatformsListView_SubItemChecking);
+            this.olvLaunchBoxPlatformsListView.FormatRow += new System.EventHandler<BrightIdeasSoftware.FormatRowEventArgs>(this.olvLaunchBoxPlatformsListView_FormatRow);
             // 
             // olvFileNameColumn
             // 
@@ -164,6 +163,12 @@ namespace DROMsM.Forms
             this.olvNameColumn.IsEditable = false;
             this.olvNameColumn.Text = "Name";
             this.olvNameColumn.Width = 195;
+            // 
+            // olvCloneOfColumn
+            // 
+            this.olvCloneOfColumn.Groupable = false;
+            this.olvCloneOfColumn.IsEditable = false;
+            this.olvCloneOfColumn.Text = "Clone";
             // 
             // olvStatusColumn
             // 
@@ -186,6 +191,18 @@ namespace DROMsM.Forms
             this.olvYearColumn.Groupable = false;
             this.olvYearColumn.IsEditable = false;
             this.olvYearColumn.Text = "Year";
+            // 
+            // olvVersionColumn
+            // 
+            this.olvVersionColumn.Groupable = false;
+            this.olvVersionColumn.IsEditable = false;
+            this.olvVersionColumn.Text = "Version";
+            // 
+            // olvRegionColumn
+            // 
+            this.olvRegionColumn.Groupable = false;
+            this.olvRegionColumn.IsEditable = false;
+            this.olvRegionColumn.Text = "Region";
             // 
             // olvIsMechanicalColumn
             // 
@@ -303,6 +320,12 @@ namespace DROMsM.Forms
             this.olvGenreColumn.IsEditable = false;
             this.olvGenreColumn.Text = "Genre";
             // 
+            // olvSeriesColumn
+            // 
+            this.olvSeriesColumn.Groupable = false;
+            this.olvSeriesColumn.IsEditable = false;
+            this.olvSeriesColumn.Text = "Series";
+            // 
             // olvPlayModeColumn
             // 
             this.olvPlayModeColumn.AspectName = "";
@@ -325,17 +348,17 @@ namespace DROMsM.Forms
             this.olvSourceColumn.IsEditable = false;
             this.olvSourceColumn.Text = "Source";
             // 
-            // menuStrip1
+            // topMenuStrip
             // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.topMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.operationsToolStripMenuItem,
+            this.editToolStripMenuItem,
             this.helpToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(1761, 24);
-            this.menuStrip1.TabIndex = 6;
-            this.menuStrip1.Text = "menuStrip1";
+            this.topMenuStrip.Location = new System.Drawing.Point(0, 0);
+            this.topMenuStrip.Name = "topMenuStrip";
+            this.topMenuStrip.Size = new System.Drawing.Size(1761, 24);
+            this.topMenuStrip.TabIndex = 6;
+            this.topMenuStrip.Text = "menuStrip1";
             // 
             // fileToolStripMenuItem
             // 
@@ -352,28 +375,21 @@ namespace DROMsM.Forms
             this.closeToolStripMenuItem.Text = "Close";
             this.closeToolStripMenuItem.Click += new System.EventHandler(this.closeToolStripMenuItem_Click);
             // 
-            // operationsToolStripMenuItem
+            // editToolStripMenuItem
             // 
-            this.operationsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.showAllToolStripMenuItem,
-            this.hideAllToolStripMenuItem});
-            this.operationsToolStripMenuItem.Name = "operationsToolStripMenuItem";
-            this.operationsToolStripMenuItem.Size = new System.Drawing.Size(77, 20);
-            this.operationsToolStripMenuItem.Text = "Operations";
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.findToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
             // 
-            // showAllToolStripMenuItem
+            // findToolStripMenuItem
             // 
-            this.showAllToolStripMenuItem.Name = "showAllToolStripMenuItem";
-            this.showAllToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.showAllToolStripMenuItem.Text = "Show All...";
-            this.showAllToolStripMenuItem.Click += new System.EventHandler(this.showAllToolStripMenuItem_Click);
-            // 
-            // hideAllToolStripMenuItem
-            // 
-            this.hideAllToolStripMenuItem.Name = "hideAllToolStripMenuItem";
-            this.hideAllToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
-            this.hideAllToolStripMenuItem.Text = "Hide All...";
-            this.hideAllToolStripMenuItem.Click += new System.EventHandler(this.hideAllToolStripMenuItem_Click);
+            this.findToolStripMenuItem.Name = "findToolStripMenuItem";
+            this.findToolStripMenuItem.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F)));
+            this.findToolStripMenuItem.Size = new System.Drawing.Size(146, 22);
+            this.findToolStripMenuItem.Text = "Find...";
+            this.findToolStripMenuItem.Click += new System.EventHandler(this.findToolStripMenuItem_Click);
             // 
             // helpToolStripMenuItem
             // 
@@ -386,33 +402,9 @@ namespace DROMsM.Forms
             // howDoesThisWorkToolStripMenuItem
             // 
             this.howDoesThisWorkToolStripMenuItem.Name = "howDoesThisWorkToolStripMenuItem";
-            this.howDoesThisWorkToolStripMenuItem.Size = new System.Drawing.Size(183, 22);
-            this.howDoesThisWorkToolStripMenuItem.Text = "How does this work?";
+            this.howDoesThisWorkToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.howDoesThisWorkToolStripMenuItem.Text = "What is this?";
             this.howDoesThisWorkToolStripMenuItem.Click += new System.EventHandler(this.howDoesThisWorkToolStripMenuItem_Click);
-            // 
-            // olvCloneOfColumn
-            // 
-            this.olvCloneOfColumn.Groupable = false;
-            this.olvCloneOfColumn.IsEditable = false;
-            this.olvCloneOfColumn.Text = "Clone";
-            // 
-            // olvVersionColumn
-            // 
-            this.olvVersionColumn.Groupable = false;
-            this.olvVersionColumn.IsEditable = false;
-            this.olvVersionColumn.Text = "Version";
-            // 
-            // olvSeriesColumn
-            // 
-            this.olvSeriesColumn.Groupable = false;
-            this.olvSeriesColumn.IsEditable = false;
-            this.olvSeriesColumn.Text = "Series";
-            // 
-            // olvRegionColumn
-            // 
-            this.olvRegionColumn.Groupable = false;
-            this.olvRegionColumn.IsEditable = false;
-            this.olvRegionColumn.Text = "Region";
             // 
             // LaunchBoxMameMetadataForm
             // 
@@ -420,13 +412,13 @@ namespace DROMsM.Forms
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1761, 966);
             this.Controls.Add(this.olvLaunchBoxPlatformsListView);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.topMenuStrip);
+            this.MainMenuStrip = this.topMenuStrip;
             this.Name = "LaunchBoxMameMetadataForm";
             this.Text = "View MAME Metadata - LaunchBox";
             ((System.ComponentModel.ISupportInitialize)(this.olvLaunchBoxPlatformsListView)).EndInit();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.topMenuStrip.ResumeLayout(false);
+            this.topMenuStrip.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -437,12 +429,9 @@ namespace DROMsM.Forms
         private BrightIdeasSoftware.FastObjectListView olvLaunchBoxPlatformsListView;
         private BrightIdeasSoftware.OLVColumn olvFileNameColumn;
         private BrightIdeasSoftware.OLVColumn olvIsMechanicalColumn;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip topMenuStrip;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem closeToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem operationsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem showAllToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem hideAllToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem howDoesThisWorkToolStripMenuItem;
         private BrightIdeasSoftware.OLVColumn olvNameColumn;
@@ -469,5 +458,7 @@ namespace DROMsM.Forms
         private BrightIdeasSoftware.OLVColumn olvVersionColumn;
         private BrightIdeasSoftware.OLVColumn olvSeriesColumn;
         private BrightIdeasSoftware.OLVColumn olvRegionColumn;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem findToolStripMenuItem;
     }
 }

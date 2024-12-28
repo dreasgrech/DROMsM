@@ -143,6 +143,7 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newItemToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.splitContainer2)).BeginInit();
             this.splitContainer2.Panel1.SuspendLayout();
@@ -1350,22 +1351,23 @@
             // viewDATFileToolStripMenuItem
             // 
             this.viewDATFileToolStripMenuItem.Name = "viewDATFileToolStripMenuItem";
-            this.viewDATFileToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.viewDATFileToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.viewDATFileToolStripMenuItem.Text = "View DAT File";
             this.viewDATFileToolStripMenuItem.Click += new System.EventHandler(this.viewDATFileToolStripMenuItem_Click);
             // 
             // toolStripSeparator3
             // 
             this.toolStripSeparator3.Name = "toolStripSeparator3";
-            this.toolStripSeparator3.Size = new System.Drawing.Size(141, 6);
+            this.toolStripSeparator3.Size = new System.Drawing.Size(177, 6);
             // 
             // launchBoxToolStripMenuItem
             // 
             this.launchBoxToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.launchboxManagePlatformsToolStripMenuItem,
+            this.toolStripSeparator4,
             this.launchboxManageViewMAMESetMetadataToolStripMenuItem});
             this.launchBoxToolStripMenuItem.Name = "launchBoxToolStripMenuItem";
-            this.launchBoxToolStripMenuItem.Size = new System.Drawing.Size(144, 22);
+            this.launchBoxToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
             this.launchBoxToolStripMenuItem.Text = "LaunchBox";
             // 
             // launchboxManagePlatformsToolStripMenuItem
@@ -1402,6 +1404,11 @@
             this.newItemToolStripMenuItem.Name = "newItemToolStripMenuItem";
             this.newItemToolStripMenuItem.Size = new System.Drawing.Size(67, 20);
             this.newItemToolStripMenuItem.Text = "NewItem";
+            // 
+            // toolStripSeparator4
+            // 
+            this.toolStripSeparator4.Name = "toolStripSeparator4";
+            this.toolStripSeparator4.Size = new System.Drawing.Size(206, 6);
             // 
             // MainForm
             // 
@@ -1580,6 +1587,7 @@
         private System.Windows.Forms.ToolStripMenuItem launchBoxToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem launchboxManagePlatformsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem launchboxManageViewMAMESetMetadataToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
     }
 }
 

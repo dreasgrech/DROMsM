@@ -1,7 +1,6 @@
-﻿using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Drawing;
 using System.Windows.Forms;
+using BrightIdeasSoftware;
 using Frontend;
 
 namespace DROMsM.Forms
@@ -46,31 +45,19 @@ namespace DROMsM.Forms
             olvLanguageColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Language;
             olvSourceColumn.AspectGetter = rowObject => (rowObject as LaunchBoxMAMEMetadataFileEntry)?.Source;
 
-            /*
-            olvFileNameColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).FileName;
-            olvNameColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).Name;
-            olvStatusColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).Status;
-            olvDeveloperColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).Developer;
-            olvPublisherColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).Publisher;
-            olvYearColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).Year;
-            olvIsMechanicalColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).IsMechanical;
-            olvIsBootlegColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).IsBootleg;
-            olvIsPrototypeColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).IsPrototype;
-            olvIsHackColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).IsHack;
-            olvIsMatureColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).IsMature;
-            olvIsQuizColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).IsQuiz;
-            olvIsFruitColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).IsFruit;
-            olvIsCasinoColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).IsCasino;
-            olvIsRhythmColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).IsRhythm;
-            olvIsTableTopColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).IsTableTop;
-            olvIsPlayChoiceColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).IsPlayChoice;
-            olvIsMahjongColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).IsMahjong;
-            olvIsNonArcadeColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).IsNonArcade;
-            olvGenreColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).Genre;
-            olvPlayModeColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).Playmode;
-            olvLanguageColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).Language;
-            olvSourceColumn.AspectGetter = rowObject => ((LaunchBoxMAMEMetadataFileEntry) rowObject).Source;
-            */
+            olvIsMechanicalColumn.AspectToStringConverter = BooleanAspectToStringConverter;
+            olvIsBootlegColumn.AspectToStringConverter = BooleanAspectToStringConverter;
+            olvIsPrototypeColumn.AspectToStringConverter = BooleanAspectToStringConverter;
+            olvIsHackColumn.AspectToStringConverter = BooleanAspectToStringConverter;
+            olvIsMatureColumn.AspectToStringConverter = BooleanAspectToStringConverter;
+            olvIsQuizColumn.AspectToStringConverter = BooleanAspectToStringConverter;
+            olvIsFruitColumn.AspectToStringConverter = BooleanAspectToStringConverter;
+            olvIsCasinoColumn.AspectToStringConverter = BooleanAspectToStringConverter;
+            olvIsRhythmColumn.AspectToStringConverter = BooleanAspectToStringConverter;
+            olvIsTableTopColumn.AspectToStringConverter = BooleanAspectToStringConverter;
+            olvIsPlayChoiceColumn.AspectToStringConverter = BooleanAspectToStringConverter;
+            olvIsMahjongColumn.AspectToStringConverter = BooleanAspectToStringConverter;
+            olvIsNonArcadeColumn.AspectToStringConverter = BooleanAspectToStringConverter;
         }
 
         public bool Initialize()
@@ -103,83 +90,6 @@ namespace DROMsM.Forms
             return true;
         }
 
-        private void olvLaunchBoxPlatformsListView_SubItemChecking(object sender, BrightIdeasSoftware.SubItemCheckingEventArgs e)
-        {
-            var listViewItem = e.ListViewItem;
-            var platform = (LaunchBoxPlatform) listViewItem.RowObject;
-            var newVisibilityValue = e.NewValue == CheckState.Checked;
-
-            // Change the platform's visibility
-            var platformVisibilityChanged = SetPlatformVisibility(platform, newVisibilityValue);
-
-            // If we weren't able to successfully change the visibility of a platform, leave the list view item checkbox unchanged
-            if (!platformVisibilityChanged)
-            {
-                e.Canceled = true;
-                return;
-            }
-
-            // Refresh the model in the list view since it's now been updated
-            olvLaunchBoxPlatformsListView.RefreshObject(platform);
-        }
-
-        private void SetAllPlatformsVisibility(bool newVisibility)
-        {
-            /*
-            var totalPlatforms = launchBoxPlatforms.Count;
-            var visibleVerb = GetVisibilityVerb(newVisibility);
-            var confirmResult = MessageBoxOperations.ShowConfirmation($"Are you sure you want set the visibility of all {totalPlatforms} platforms to {visibleVerb}?", $"Setting {totalPlatforms} platforms to {visibleVerb}");
-            if (!confirmResult)
-            {
-                return;
-            }
-
-            int totalPlatformsSet = 0;
-            Parallel.ForEach(launchBoxPlatforms, platform =>
-            {
-                var platformVisibilityChanged = SetPlatformVisibility(platform, newVisibility);
-                if (platformVisibilityChanged)
-                {
-                    Interlocked.Increment(ref totalPlatformsSet);
-                }
-            });
-
-            olvLaunchBoxPlatformsListView.RefreshObjects(launchBoxPlatforms);
-
-            Logger.Log($"Set the visibility of {totalPlatformsSet} LaunchBox platforms to {visibleVerb}.");
-            */
-        }
-
-        private bool SetPlatformVisibility(LaunchBoxPlatform platform, bool visibility)
-        {
-            var platformVisibilityChanged = launchBoxManager.SetPlatformVisibility(platform, visibility);
-            if (platformVisibilityChanged)
-            {
-                Logger.Log($"Changed LaunchBox platform {platform.Name}'s visibility to {GetVisibilityVerb(visibility)}.");
-                return true;
-            }
-
-
-            Logger.LogError($"Unable to change LaunchBox platform {platform.Name}'s visibility to {GetVisibilityVerb(visibility)}");
-
-            return false;
-        }
-
-        private void showAllToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            // SetAllPlatformsVisibility(true);
-        }
-
-        private void hideAllToolStripMenuItem_Click(object sender, System.EventArgs e)
-        {
-            // SetAllPlatformsVisibility(false);
-        }
-
-        private static string GetVisibilityVerb(bool visibility)
-        {
-            return visibility ? "visible" : "hidden";
-        }
-
         private void closeToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
             Close();
@@ -187,11 +97,79 @@ namespace DROMsM.Forms
 
         private void howDoesThisWorkToolStripMenuItem_Click(object sender, System.EventArgs e)
         {
-            var text = @"Launchbox keeps a record of your platforms in XML files in the Data\Platforms directory.
+            using (var form = new LaunchBoxMameMetadataAboutForm())
+            {
+                // Open the form at the top left of our form
+                form.StartPosition = FormStartPosition.Manual;
+                form.Location = FormOperations.GetRelativeControlPoint(this, topMenuStrip);
+                form.ShowDialog();
+            }
+        }
 
-By changing the file extension of these individual files, we can hide or show platforms in LaunchBox and that's what this tool does.";
+        private void findToolStripMenuItem_Click(object sender, System.EventArgs e)
+        {
+            using (var findForm = new DATFileViewerFindForm("Search", ProjectSettingsManager.DATFileViewerSettings.FindDialogSettings))
+            {
+                // Open the form at the top left of our form
+                findForm.StartPosition = FormStartPosition.Manual;
+                findForm.Location = FormOperations.GetRelativeControlPoint(this, topMenuStrip);
+                findForm.ShowDialog();
 
-            MessageBoxOperations.ShowInformation(text, "How are the LaunchBox platforms changing visibility?");
+                var searchTerm = findForm.SearchTerm;
+                var useRegularExpressions = findForm.UseRegularExpressions;
+
+                var filter = useRegularExpressions ? TextMatchFilter.Regex(olvLaunchBoxPlatformsListView, searchTerm) : TextMatchFilter.Contains(olvLaunchBoxPlatformsListView, searchTerm);
+                // filter.Columns = olvDatFileListView.AllColumns.ToArray();
+                olvLaunchBoxPlatformsListView.AdditionalFilter = filter;
+            }
+        }
+
+        private void olvLaunchBoxPlatformsListView_FormatRow(object sender, FormatRowEventArgs e)
+        {
+            //if (!showingWorkingColors)
+            //{
+            //    return;
+            //}
+
+            var launchBoxMAMEMetadataFileEntry = e.Model as LaunchBoxMAMEMetadataFileEntry;
+            if (launchBoxMAMEMetadataFileEntry == null)
+            {
+                return;
+            }
+
+            var status = launchBoxMAMEMetadataFileEntry.Status;
+            if (string.IsNullOrEmpty(status))
+            {
+                return;
+            }
+
+            var olvListItem = e.Item;
+            // var statusString = status.ToLowerInvariant();
+            var statusString = status;
+            switch (statusString)
+            {
+                case "good":
+                {
+                    olvListItem.BackColor = Color.LightGreen;
+                }
+                    break;
+                case "preliminary":
+                {
+                    olvListItem.BackColor = Color.LightCoral;
+                }
+                    break;
+                case "imperfect":
+                case "protection":
+                {
+                    olvListItem.BackColor = Color.LightYellow;
+                }
+                    break;
+            }
+        }
+
+        private string BooleanAspectToStringConverter(object cellValue)
+        {
+            return (bool)cellValue ? "Yes" : string.Empty;
         }
     }
 }

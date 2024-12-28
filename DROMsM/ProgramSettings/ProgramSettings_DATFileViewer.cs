@@ -7,7 +7,7 @@
         public byte[] SavedState { get; set; }
         public bool Maximized { get; set; }
         public bool OnlyShowUsedColumns { get; set; }
-        public ProgramSettings_DatFileViewer_FindDialog FindDialogSettings { get; set; }
+        public FindDialogSettings FindDialogSettings { get; set; }
         public ProgramSettings_DatFileViewer_CreateMAMEIniFiles CreateMAMEIniFilesSettings { get; set; }
 
         public ProgramSettings_DATFileViewer()
@@ -16,13 +16,13 @@
             ShowColors = true;
             ShowGridLines = true;
             Maximized = false;
-            FindDialogSettings = new ProgramSettings_DatFileViewer_FindDialog();
+            FindDialogSettings = new FindDialogSettings();
             CreateMAMEIniFilesSettings = new ProgramSettings_DatFileViewer_CreateMAMEIniFiles();
             OnlyShowUsedColumns = true;
         }
     }
 
-    public class ProgramSettings_DatFileViewer_FindDialog
+    public class FindDialogSettings
     {
         public string SearchTerm;
         public bool UseRegularExpressions;

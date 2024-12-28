@@ -435,7 +435,7 @@ namespace DROMsM.Forms
 
         private void OpenFindDialog()
         {
-            using (var findForm = new DATFileViewerFindForm())
+            using (var findForm = new DATFileViewerFindForm("Search in DAT file", ProjectSettingsManager.DATFileViewerSettings.FindDialogSettings))
             {
                 // Open the form at the top left of our DAT File Viewer form
                 findForm.StartPosition = FormStartPosition.Manual;

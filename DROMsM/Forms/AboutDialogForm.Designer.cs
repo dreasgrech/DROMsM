@@ -336,8 +336,10 @@
             this.Controls.Add(this.label10);
             this.Controls.Add(this.updatesLabel);
             this.Controls.Add(this.label1);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.KeyPreview = true;
+            this.MaximizeBox = false;
+            this.MinimizeBox = false;
             this.Name = "AboutDialogForm";
             this.Text = "About DROMsM";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AboutDialogForm_FormClosing);
