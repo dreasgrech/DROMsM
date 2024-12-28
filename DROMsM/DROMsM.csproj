@@ -345,8 +345,8 @@
     <GetAssemblyIdentity AssemblyFiles="$(TargetPath)">
       <Output TaskParameter="Assemblies" ItemName="myAssemblyInfo" />
     </GetAssemblyIdentity>
-    <Exec Command="nuget pack DROMsM.nuspec -Version %(myAssemblyInfo.Version) -Properties Configuration=Release -OutputDirectory $(OutDir) -BasePath $(OutDir)" />
-    <Exec Command="squirrel --releasify $(OutDir)DROMsM.$([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)).nupkg" />
+    <Exec Command="&quot;$(MSBuildProjectDirectory)\..\packages\NuGet.CommandLine.6.12.2\tools\NuGet.exe&quot; pack DROMsM.nuspec -Version %(myAssemblyInfo.Version) -Properties Configuration=Release -OutputDirectory $(OutDir) -BasePath $(OutDir)" />
+    <Exec Command="&quot;$(MSBuildProjectDirectory)\..\packages\squirrel.windows.2.0.1\tools\Squirrel.exe&quot; --releasify $(OutDir)DROMsM.$([System.Version]::Parse(%(myAssemblyInfo.Version)).ToString(3)).nupkg" />
   </Target>
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>
