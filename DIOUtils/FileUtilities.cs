@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Alphaleonis.Win32.Filesystem;
-using Opulos.Core.IO;
 
 namespace DIOUtils
 {
@@ -219,9 +213,9 @@ namespace DIOUtils
             return Alphaleonis.Win32.Filesystem.Directory.Exists(path);
         }
 
-        public static IList<FastFileInfo> GetFiles(string directory, string searchPattern, System.IO.SearchOption directoryOptions)
+        public static IList<Opulos.Core.IO.FastFileInfo> GetFiles(string directory, string searchPattern, System.IO.SearchOption directoryOptions)
         {
-            return FastFileInfo.GetFiles(directory, searchPattern, directoryOptions);
+            return Opulos.Core.IO.FastFileInfo.GetFiles(directory, searchPattern, directoryOptions);
         }
 
         public static void DeleteDirectory(string path)
@@ -270,12 +264,12 @@ namespace DIOUtils
 
         public static string[] ReadAllLines(string filePath)
         {
-            return Alphaleonis.Win32.Filesystem.File.ReadAllLines(filePath, PathFormat.FullPath);
+            return Alphaleonis.Win32.Filesystem.File.ReadAllLines(filePath, Alphaleonis.Win32.Filesystem.PathFormat.FullPath);
         }
 
         public static IEnumerable<string> ReadLines(string filePath)
         {
-            return Alphaleonis.Win32.Filesystem.File.ReadLines(filePath, PathFormat.FullPath);
+            return Alphaleonis.Win32.Filesystem.File.ReadLines(filePath, Alphaleonis.Win32.Filesystem.PathFormat.FullPath);
         }
 
         public static bool PathExceedsWindowsMaxFilePathLength(string filePath)
