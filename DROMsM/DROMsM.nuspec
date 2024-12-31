@@ -13,5 +13,8 @@
   </metadata>
   <files>
     <file src="*.*" target="lib\net45\" exclude="*.pdb;*.nupkg;*.vshost.*"/>
+    <file src="chdman\*.*" target="lib\net45\chdman\" exclude="*.pdb;*.nupkg;*.vshost.*"/>
+    <file src="x86\*.*" target="lib\net45\x86\" exclude="*.pdb;*.nupkg;*.vshost.*"/>
+    <file src="x64\*.*" target="lib\net45\x64\" exclude="*.pdb;*.nupkg;*.vshost.*"/>
   </files>
 </package>
