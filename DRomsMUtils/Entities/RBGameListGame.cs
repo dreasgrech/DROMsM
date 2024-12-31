@@ -7,7 +7,8 @@
         public string Hash { get; set; }
         public string LastPlayed { get; set; }
         public int PlayCount { get; set; }
-        public int Region { get; set; }
+        // public int Region { get; set; }
+        public string Region { get; set; }
         public int GenreID { get; set; }
         public string Genre { get; set; }
         public string Publisher { get; set; }

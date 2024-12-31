@@ -100,7 +100,8 @@ namespace DROMsM
                     case "hash": rbGameListGame.Hash = nodeValue; break;
                     case "lastplayed": rbGameListGame.LastPlayed = nodeValue; break;
                     case "playcount": rbGameListGame.PlayCount = Convert.ToInt32(nodeValue); break;
-                    case "region": rbGameListGame.Region = Convert.ToInt32(nodeValue); break;
+                    // case "region": rbGameListGame.Region = Convert.ToInt32(nodeValue); break;
+                    case "region": rbGameListGame.Region = nodeValue; break;
                     case "genreid": rbGameListGame.GenreID = Convert.ToInt32(nodeValue); break;
                     case "genre": rbGameListGame.Genre = nodeValue; break;
                     case "publisher": rbGameListGame.Publisher = nodeValue; break;
